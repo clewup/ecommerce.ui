@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { ILogin } from "../types/ILogin";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { apiUrls } from "../enums/apiUrls";
 import { apiEndpoints } from "../enums/apiEndpoints";
+import { IUser } from "../types/IUser";
 
 const PostLogin = (login: ILogin) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState<IUser>();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<AxiosError | null>(null);
 
   useEffect(() => {
     setLoading(true);

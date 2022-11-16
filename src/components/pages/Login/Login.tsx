@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useLogin from "../../../hooks/useLogin";
 
 interface ILogin {
   email: string;
@@ -9,7 +10,7 @@ interface ILogin {
 const Login = () => {
   const [login, setLogin] = useState<ILogin>({ email: "", password: "" });
 
-  useEffect(() => {}, [login]);
+  const { loading, error } = useLogin(login);
 
   const handleSubmit = (values: ILogin) => {
     setLogin(values);
@@ -22,6 +23,9 @@ const Login = () => {
     },
     onSubmit: (values) => handleSubmit(values),
   });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div id={"login"}>
