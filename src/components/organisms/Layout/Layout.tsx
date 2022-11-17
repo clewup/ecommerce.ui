@@ -9,7 +9,7 @@ const Layout: React.FC<IProps> = ({ children }) => {
   return (
     <>
       <Header />
-      {children}
+      <div id={"ecommerce-page-root"}>{children}</div>
       <Footer />
     </>
   );

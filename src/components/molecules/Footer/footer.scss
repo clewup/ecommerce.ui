@@ -1,0 +1,22 @@
+#footer {
+  display: flex;
+  padding: 1rem 0;
+  justify-content: space-around;
+  height: 8vh;
+  background-color: black;
+  color: white;
+
+  .footer-group {
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      margin: 0;
+      padding: 0;
+    }
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

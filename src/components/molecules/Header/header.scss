@@ -1,0 +1,13 @@
+#header {
+  height: 4vh;
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+
+  .header-group {
+    display: flex;
+    gap: 1rem;
+  }
+}

@@ -11,12 +11,14 @@ const PostLogin = (login: ILogin) => {
   const [error, setError] = useState<AxiosError | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .post(`${apiUrls.AUTH}${apiEndpoints.LOGIN}`, login)
-      .then((res) => setData(res.data))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
+    if (login && Object.values(login)) {
+      setLoading(true);
+      axios
+        .post(`${apiUrls.AUTH}${apiEndpoints.LOGIN}`, login)
+        .then((res) => setData(res.data))
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false));
+    }
   }, [login]);
 
   return { data, loading, error };
