@@ -5,6 +5,7 @@ import Home from "./components/pages/Home/Home";
 import { UserContext } from "./contexts/User";
 import Login from "./components/pages/Login/Login";
 import Store from "./components/pages/Store/Store";
+import Cart from "./components/pages/Cart/Cart";
 
 const App = () => {
   /*const { isAuthenticated } = useContext(UserContext);
@@ -19,6 +20,7 @@ const App = () => {
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"store"} element={<Store />} />
+          <Route path={"cart"} element={<Cart />} />
         </Routes>
       </Layout>
     </section>

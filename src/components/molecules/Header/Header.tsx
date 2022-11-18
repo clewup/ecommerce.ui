@@ -18,6 +18,9 @@ const Header = () => {
       <div className={"header-group"}>
         <p>Account</p>
         <p>Login</p>
+        <Link to={"cart"}>
+          <p>Basket</p>
+        </Link>
       </div>
     </div>
   );
