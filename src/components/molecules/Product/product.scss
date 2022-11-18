@@ -1,0 +1,21 @@
+#product {
+  width: 270px;
+  background-color: #ccc;
+  border-radius: 1rem;
+  height: 300px;
+  text-align: center;
+
+  .product-title {
+    padding: 1rem 0;
+
+  }
+  .product-image {
+    img {
+      width: 270px;
+    }
+  }
+  .product-info {
+    padding: 1rem 0;
+
+  }
+}

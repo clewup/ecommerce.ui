@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/pages/Home/Home";
 import { UserContext } from "./contexts/User";
 import Login from "./components/pages/Login/Login";
+import Store from "./components/pages/Store/Store";
 
 const App = () => {
   /*const { isAuthenticated } = useContext(UserContext);
@@ -17,6 +18,7 @@ const App = () => {
       <Layout>
         <Routes>
           <Route path={"/"} element={<Home />} />
+          <Route path={"store"} element={<Store />} />
         </Routes>
       </Layout>
     </section>

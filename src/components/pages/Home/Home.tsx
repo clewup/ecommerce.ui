@@ -3,7 +3,7 @@ import FeaturedProducts from "../../organisms/FeaturedProducts/FeaturedProducts"
 
 const Home = () => {
   return (
-    <div>
+    <div id={"home"}>
       <Hero />
       <FeaturedProducts />
     </div>
