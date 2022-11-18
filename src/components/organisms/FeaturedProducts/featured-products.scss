@@ -1,7 +1,11 @@
 #featured-products {
   min-height: 50vh;
 
-  .featured-products-list {
-
+  .featured-products {
+    padding: 2rem 12vw;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
   }
 }
