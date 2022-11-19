@@ -1,0 +1,11 @@
+#add-product-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #ccc;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
