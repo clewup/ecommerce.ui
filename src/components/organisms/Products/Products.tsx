@@ -1,15 +1,19 @@
 import Product from "../../molecules/Product/Product";
 import "./products.scss";
+import GetProducts from "../../../api/getProducts";
+import { IProduct } from "../../../types/IProduct";
 
 const Products = () => {
+  const { data: products, loading, error } = GetProducts();
+
+  if (!products || loading) return <p>Loading...</p>;
+  if (error) return <p>ERROR: {error.message}</p>;
+
   return (
     <div id={"products"}>
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
+      {products.map((product: IProduct) => {
+        return <Product product={product} />;
+      })}
     </div>
   );
 };

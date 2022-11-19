@@ -1,22 +1,21 @@
 import { useState } from "react";
-import { ILogin } from "../types/ILogin";
 import axios, { AxiosError } from "axios";
 import { apiUrls } from "../enums/apiUrls";
 import { apiEndpoints } from "../enums/apiEndpoints";
-import { IUser } from "../types/IUser";
+import { IProduct } from "../types/IProduct";
 
-const PostLogin = (login: ILogin) => {
-  const [data, setData] = useState<IUser>();
+const PostProduct = (product: IProduct) => {
+  const [data, setData] = useState<IProduct>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
   setLoading(true);
   axios
-    .post(`${apiUrls.AUTH}${apiEndpoints.LOGIN}`, login)
+    .post(`${apiUrls.ECOMMERCE}${apiEndpoints.PRODUCT}`, product)
     .then((res) => setData(res.data))
     .catch((err) => setError(err))
     .finally(() => setLoading(false));
 
   return { data, loading, error };
 };
-export default PostLogin;
+export default PostProduct;

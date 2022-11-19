@@ -1,12 +1,21 @@
 import "./add-product-form.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormikValues, useFormik } from "formik";
 import { createGuid } from "../../../utils/CreateGuid";
+import PostProduct from "../../../api/postProduct";
+import { IProduct, IStock } from "../../../types/IProduct";
 
 const AddProductForm = () => {
   const [variant, setVariant] = useState("");
   const [count, setCount] = useState("0");
-  const [stock, setStock] = useState<object[]>([]);
+  const [stock, setStock] = useState<IStock[]>([]);
+  const [product, setProduct] = useState<IProduct>();
+
+  useEffect(() => {
+    if (product) {
+      PostProduct(product);
+    }
+  }, [product]);
 
   const handleSubmit = (values: FormikValues) => {
     const payload = {
@@ -18,11 +27,11 @@ const AddProductForm = () => {
       isDiscounted: parseFloat(values.discount) > 0 ? true : false,
       discount: parseFloat(values.discount),
     };
-    console.log(payload);
+    setProduct(payload);
   };
 
   const addStock = () => {
-    setStock((prev: object[]) => {
+    setStock((prev: IStock[]) => {
       return [
         ...prev,
         {
