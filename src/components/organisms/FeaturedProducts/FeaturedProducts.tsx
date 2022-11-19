@@ -1,7 +1,6 @@
 import Subheading from "../../atoms/Subheading/Subheading";
 import Product from "../../molecules/Product/Product";
 import "./featured-products.scss";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
 const FeaturedProducts = () => {
   return (
