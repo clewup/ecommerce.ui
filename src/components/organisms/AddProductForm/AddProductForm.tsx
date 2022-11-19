@@ -24,7 +24,7 @@ const AddProductForm = () => {
       description: values.description,
       stock: stock,
       pricePerUnit: parseFloat(values.pricePerUnit),
-      isDiscounted: parseFloat(values.discount) > 0 ? true : false,
+      isDiscounted: parseFloat(values.discount) > 0,
       discount: parseFloat(values.discount),
     };
     setProduct(payload);
