@@ -1,4 +1,4 @@
-// noinspection SpellCheckingInspection
+// noinspection SpellCheckingInspection,SuspiciousTypeOfGuard
 
 import { ReportHandler } from "web-vitals";
 
