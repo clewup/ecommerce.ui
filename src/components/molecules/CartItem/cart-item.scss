@@ -1,0 +1,22 @@
+#cart-item {
+  background-color: #ccc;
+  border-radius: 1rem;
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+
+  .cart-item-image {
+    height: 5rem;
+    width: 5rem;
+
+    img {
+      height: inherit;
+      width: inherit;
+      object-fit: cover;
+    }
+  }
+
+  .cart-item-info {
+
+  }
+}
