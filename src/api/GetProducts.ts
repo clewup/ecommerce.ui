@@ -12,7 +12,7 @@ const GetProducts = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .post(`${apiUrls.ECOMMERCE}${apiEndpoints.PRODUCT}`)
+      .get(`${apiUrls.ECOMMERCE}${apiEndpoints.PRODUCT}`)
       .then((res) => setData(res.data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));

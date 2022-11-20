@@ -1,7 +1,7 @@
 import Subheading from "../../atoms/Subheading/Subheading";
 import Product from "../../molecules/Product/Product";
 import "./featured-products.scss";
-import GetProducts from "../../../api/getProducts";
+import GetProducts from "../../../api/GetProducts";
 import { IProduct } from "../../../types/IProduct";
 
 const FeaturedProducts = () => {

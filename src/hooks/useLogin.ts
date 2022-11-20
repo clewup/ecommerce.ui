@@ -1,5 +1,5 @@
 import { ILogin } from "../types/ILogin";
-import postLogin from "../api/postLogin";
+import postLogin from "../api/PostLogin";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/User";
 

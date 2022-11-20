@@ -1,6 +1,6 @@
 import Product from "../../molecules/Product/Product";
 import "./products.scss";
-import GetProducts from "../../../api/getProducts";
+import GetProducts from "../../../api/GetProducts";
 import { IProduct } from "../../../types/IProduct";
 
 const Products = () => {
