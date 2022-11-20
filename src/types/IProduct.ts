@@ -9,6 +9,7 @@ export interface IProduct {
   id: Guid;
   name: string;
   description: string;
+  category: string;
   stock: IStock[];
   pricePerUnit: number;
   isDiscounted: boolean;

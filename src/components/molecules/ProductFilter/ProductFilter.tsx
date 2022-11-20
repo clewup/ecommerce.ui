@@ -1,11 +1,14 @@
 import "./product-filter.scss";
 import { useContext } from "react";
 import { ProductContext } from "../../../contexts/Product";
+import useProductFilter from "../../../hooks/useProductFilter";
 
 const ProductFilter = () => {
   const {
     searchQuery,
     setSearchQuery,
+    categoryQuery,
+    setCategoryQuery,
     variantQuery,
     setVariantQuery,
     priceQuery,
@@ -15,6 +18,11 @@ const ProductFilter = () => {
     saleQuery,
     setSaleQuery,
   } = useContext(ProductContext);
+
+  const { categories, variants, loading, error } = useProductFilter();
+
+  if (!categories || !variants || loading) return <p>Loading...</p>;
+  if (error) return <p>ERROR: {error.message}</p>;
 
   return (
     <div id={"product-filter"}>
@@ -28,14 +36,35 @@ const ProductFilter = () => {
         />
       </div>
       <div className={"product-filter-group"}>
+        <label>Category</label>
+        <select
+          value={categoryQuery}
+          onChange={(e) => setCategoryQuery(e.target.value)}
+        >
+          <option value={"all"}>All</option>
+          {categories.map((category: string) => {
+            return (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <div className={"product-filter-group"}>
         <label>Variant</label>
         <select
           value={variantQuery}
           onChange={(e) => setVariantQuery(e.target.value)}
         >
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
+          <option value={"all"}>All</option>
+          {variants.map((variant: string) => {
+            return (
+              <option key={variant} value={variant}>
+                {variant}
+              </option>
+            );
+          })}
         </select>
       </div>
       <div className={"product-filter-group"}>

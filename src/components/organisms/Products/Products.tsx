@@ -8,8 +8,14 @@ import { ProductContext } from "../../../contexts/Product";
 const Products = () => {
   const { data: products, loading, error } = GetProducts();
 
-  const { searchQuery, variantQuery, priceQuery, stockQuery, saleQuery } =
-    useContext(ProductContext);
+  const {
+    searchQuery,
+    categoryQuery,
+    variantQuery,
+    priceQuery,
+    stockQuery,
+    saleQuery,
+  } = useContext(ProductContext);
 
   if (!products || loading) return <p>Loading...</p>;
   if (error) return <p>ERROR: {error.message}</p>;
@@ -30,8 +36,21 @@ const Products = () => {
     );
   }
 
+  // Category Query
+  if (categoryQuery && categoryQuery !== "all") {
+    return (
+      <div id={"products"}>
+        {products
+          .filter((product: IProduct) => product.category === categoryQuery)
+          .map((product: IProduct) => {
+            return <Product product={product} />;
+          })}
+      </div>
+    );
+  }
+
   // Variant Query
-  if (variantQuery) {
+  if (variantQuery && variantQuery !== "all") {
     return (
       <div id={"products"}>
         {products
