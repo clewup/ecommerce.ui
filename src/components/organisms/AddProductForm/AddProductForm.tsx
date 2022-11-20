@@ -1,6 +1,7 @@
 import "./add-product-form.scss";
 import { useFormik } from "formik";
 import useProduct from "../../../hooks/useProduct";
+import { IStock } from "../../../types/IProduct";
 
 const AddProductForm = () => {
   const {
@@ -39,6 +40,15 @@ const AddProductForm = () => {
           onChange={formik.handleChange}
         />
 
+        <label>Category</label>
+        <input
+          type={"text"}
+          id={"category"}
+          name={"category"}
+          value={formik.values.category}
+          onChange={formik.handleChange}
+        />
+
         <label>Price Per Unit</label>
         <input
           type={"text"}
@@ -58,6 +68,15 @@ const AddProductForm = () => {
         />
 
         <div className={"stock"}>
+          {stock.map((stock: IStock) => {
+            return (
+              <div>
+                <p>{stock.variant}</p>
+                <p>{stock.count}</p>
+              </div>
+            );
+          })}
+
           <label>Variant</label>
           <input
             type={"text"}

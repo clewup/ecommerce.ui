@@ -15,6 +15,7 @@ const useProduct = () => {
   const initialValues = {
     name: "",
     description: "",
+    category: "",
     pricePerUnit: "",
     discount: 0,
   };
@@ -40,6 +41,7 @@ const useProduct = () => {
       id: createGuid(),
       name: values.name,
       description: values.description,
+      category: values.category,
       stock: stock,
       pricePerUnit: parseFloat(values.pricePerUnit),
       isDiscounted: parseFloat(values.discount) > 0,

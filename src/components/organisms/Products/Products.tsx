@@ -113,6 +113,7 @@ const Products = () => {
     );
   }
 
+  // All Products
   return (
     <div id={"products"}>
       {products.map((product: IProduct) => {
