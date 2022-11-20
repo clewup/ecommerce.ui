@@ -12,6 +12,8 @@ const ProductFilter = () => {
     setPriceQuery,
     stockQuery,
     setStockQuery,
+    saleQuery,
+    setSaleQuery,
   } = useContext(ProductContext);
 
   return (
@@ -54,6 +56,13 @@ const ProductFilter = () => {
           onClick={() =>
             stockQuery ? setStockQuery(false) : setStockQuery(true)
           }
+        />
+      </div>
+      <div className={"product-filter-group"}>
+        <label>On sale</label>
+        <input
+          type={"checkbox"}
+          onClick={() => (saleQuery ? setSaleQuery(false) : setSaleQuery(true))}
         />
       </div>
     </div>
