@@ -1,12 +1,18 @@
 import "./product.scss";
 import { IProduct } from "../../../types/IProduct";
-import React from "react";
+import React, { useState } from "react";
+import useCart from "../../../hooks/useCart";
 
 interface IProps {
   product: IProduct;
 }
 
 const Product: React.FC<IProps> = ({ product }) => {
+  const [quantity, setQuantity] = useState(1);
+  const [variant, setVariant] = useState("");
+
+  const { addToCart } = useCart();
+
   return (
     <div id={"product"}>
       <div className={"product-title"}>{product.name}</div>
@@ -19,7 +25,25 @@ const Product: React.FC<IProps> = ({ product }) => {
         />
       </div>
       <div className={"product-info"}>
+        <select value={variant} onChange={(e) => setVariant(e.target.value)}>
+          {product.stock.map((stock) => {
+            return (
+              <option key={stock.variant} value={stock.variant}>
+                {stock.variant}
+              </option>
+            );
+          })}
+        </select>
         <p>{product.description}</p>
+      </div>
+      <div className={"product-actions"}>
+        <input
+          value={quantity}
+          onChange={(e) => setQuantity(parseInt(e.target.value))}
+        />
+        <button onClick={() => addToCart(product, quantity, variant)}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );

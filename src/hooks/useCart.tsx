@@ -1,6 +1,6 @@
 import { ICartItem } from "../types/ICartItem";
-import { useEffect, useState } from "react";
 import { ICart } from "../types/ICart";
+import { IProduct } from "../types/IProduct";
 
 const useCart = () => {
   const getCart = () => {
@@ -13,10 +13,12 @@ const useCart = () => {
     }
   };
 
-  const addToCart = (addedCartItem: ICartItem) => {
+  const addToCart = (product: IProduct, quantity: number, variant: string) => {
     let cart = getCart();
 
-    if (cart) {
+    const addedCartItem = convertToCartItem(product, quantity, variant);
+
+    if (cart && addedCartItem) {
       //Add item to the cart.
       cart.cartItems.push(addedCartItem);
 
@@ -64,6 +66,23 @@ const useCart = () => {
       //Update local storage.
       localStorage.setItem("cart", JSON.stringify(cart));
     }
+  };
+
+  const convertToCartItem = (
+    product: IProduct,
+    quantity: number,
+    variant: string
+  ) => {
+    const cartItem: ICartItem = {
+      id: product.id,
+      name: product.name,
+      variant: variant,
+      quantity: quantity,
+      pricePerUnit: product.pricePerUnit,
+      isDiscounted: product.isDiscounted,
+      discount: product.discount,
+    };
+    return cartItem;
   };
 
   return { getCart, addToCart, removeFromCart };
