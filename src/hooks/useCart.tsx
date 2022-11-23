@@ -49,7 +49,7 @@ const useCart = () => {
     if (cart) {
       //Remove item from the cart.
       const updatedCartItems = cart.cartItems.filter(
-        (cartItem: ICartItem) => cartItem !== removedCartItem
+        (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
       );
       cart = {
         cartItems: updatedCartItems,

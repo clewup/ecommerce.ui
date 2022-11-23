@@ -26,9 +26,19 @@ a {
   text-decoration: none;
 }
 
-input, select {
+input, select, option {
   outline: none;
   border: none;
   height: 2vh;
+  font-size: 1rem;
+  text-align: center;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: black;
+  color: white;
+  padding: 0.2rem 1rem;
   font-size: 1rem;
 }

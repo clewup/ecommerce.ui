@@ -4,6 +4,7 @@
   display: flex;
   padding: 1rem;
   gap: 1rem;
+  justify-content: space-around;
 
   .cart-item-image {
     height: 5rem;
@@ -18,5 +19,9 @@
 
   .cart-item-info {
 
+  }
+
+  .cart-remove-item {
+    cursor: pointer;
   }
 }

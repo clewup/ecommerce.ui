@@ -41,6 +41,7 @@ const Product: React.FC<IProps> = ({ product }) => {
           value={quantity}
           onChange={(e) => setQuantity(parseInt(e.target.value))}
         />
+
         <button onClick={() => addToCart(product, quantity, variant)}>
           Add to Cart
         </button>
