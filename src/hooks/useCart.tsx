@@ -26,6 +26,7 @@ const useCart = () => {
       let total = 0;
       cart.cartItems.map((cartItem: ICartItem) => {
         total = total + cartItem.pricePerUnit * cartItem.quantity;
+        return null;
       });
       cart.total = total;
 
@@ -60,6 +61,7 @@ const useCart = () => {
       let total = 0;
       cart.cartItems.map((cartItem: ICartItem) => {
         total = total + cartItem.pricePerUnit * cartItem.quantity;
+        return null;
       });
       cart.total = total;
 

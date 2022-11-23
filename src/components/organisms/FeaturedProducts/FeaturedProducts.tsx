@@ -15,7 +15,7 @@ const FeaturedProducts = () => {
       <Subheading>Featured Products</Subheading>
       <div className={"featured-products"}>
         {products.map((product: IProduct) => {
-          return <Product product={product} />;
+          return <Product product={product} key={product.name} />;
         })}
       </div>
     </div>

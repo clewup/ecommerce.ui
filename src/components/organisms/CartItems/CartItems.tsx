@@ -13,9 +13,9 @@ const CartItems = () => {
     <div id={"cart-items"}>
       <Subheading>Cart</Subheading>
       {cart?.cartItems.map((cartItem: ICartItem) => {
-        return <CartItem cartItem={cartItem} />;
+        return <CartItem cartItem={cartItem} key={cartItem.name} />;
       })}
-      <div className={"cart-total"}>£{cart?.total}</div>
+      <div className={"cart-total"}>Cart Total: £{cart?.total}</div>
     </div>
   );
 };
