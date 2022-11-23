@@ -1,8 +1,11 @@
 import { ICartItem } from "../types/ICartItem";
 import { ICart } from "../types/ICart";
 import { IProduct } from "../types/IProduct";
+import { useState } from "react";
 
 const useCart = () => {
+  const [cartUpdated, setCartUpdated] = useState(false);
+
   const getCart = () => {
     const cartString = localStorage.getItem("cart");
     if (cartString) {
@@ -67,6 +70,8 @@ const useCart = () => {
 
       //Update local storage.
       localStorage.setItem("cart", JSON.stringify(cart));
+
+      setCartUpdated(true);
     }
   };
 
@@ -87,6 +92,6 @@ const useCart = () => {
     return cartItem;
   };
 
-  return { getCart, addToCart, removeFromCart };
+  return { cartUpdated, getCart, addToCart, removeFromCart };
 };
 export default useCart;

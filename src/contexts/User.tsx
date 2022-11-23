@@ -6,8 +6,6 @@ interface IProps {
 }
 
 interface UserContextProps {
-  isAuthenticated?: boolean;
-  setAuthenticated?: Dispatch<SetStateAction<boolean>>;
   user?: IUser;
   setUser?: Dispatch<SetStateAction<IUser | undefined>>;
 }
@@ -15,13 +13,10 @@ interface UserContextProps {
 const UserContext = createContext<UserContextProps>({});
 
 const UserProvider = ({ children }: IProps) => {
-  const [isAuthenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState<IUser>();
 
   return (
-    <UserContext.Provider
-      value={{ isAuthenticated, setAuthenticated, user, setUser }}
-    >
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

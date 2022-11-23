@@ -1,7 +1,11 @@
 import "./header.scss";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../contexts/Auth";
 
 const Header = () => {
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <div id={"header"}>
       <div className={"header-group"}>
@@ -16,8 +20,13 @@ const Header = () => {
         </Link>
       </div>
       <div className={"header-group"}>
-        <p>Account</p>
-        <p>Login</p>
+        {!isAuthenticated ? (
+          <Link to={"login"}>
+            <p>Login</p>
+          </Link>
+        ) : (
+          <p>Account</p>
+        )}
         <Link to={"cart"}>
           <p>Basket</p>
         </Link>
