@@ -25,7 +25,9 @@ const Header = () => {
             <p>Login</p>
           </Link>
         ) : (
-          <p>Account</p>
+          <Link to={"account"}>
+            <p>Account</p>
+          </Link>
         )}
         <Link to={"cart"}>
           <p>Basket</p>
