@@ -21,6 +21,6 @@ const useLogin = (login?: ILogin) => {
     //eslint-disable-next-line
   }, [data]);
 
-  return { loading, error };
+  return { isLoading: loading, error };
 };
 export default useLogin;

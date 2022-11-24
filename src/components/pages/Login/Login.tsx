@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik";
 import React, { useContext, useState } from "react";
 import useLogin from "../../../hooks/useLogin";
 import "./login.scss";
+import { LoadingButton } from "@mui/lab";
 import { AuthContext } from "../../../contexts/Auth";
 import { Link, useNavigate } from "react-router-dom";
 import Subheading from "../../atoms/Subheading/Subheading";
@@ -12,7 +13,7 @@ import { ILogin, initialLoginValues } from "../../../types/ILogin";
 const Login = () => {
   const [login, setLogin] = useState<ILogin>();
 
-  const { loading, error } = useLogin(login);
+  const { isLoading, error } = useLogin(login);
   const { isAuthenticated } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -43,9 +44,14 @@ const Login = () => {
                 isPassword={true}
               />
               <div className={"login-action-buttons"}>
-                <Button type={"submit"} variant={"contained"} color={"success"}>
+                <LoadingButton
+                  type={"submit"}
+                  variant={"contained"}
+                  color={"success"}
+                  loading={isLoading}
+                >
                   Login
-                </Button>
+                </LoadingButton>
                 <Button
                   type={"submit"}
                   color={"info"}

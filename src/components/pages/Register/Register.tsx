@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import React, { useContext, useState } from "react";
-import useLogin from "../../../hooks/useLogin";
+import { LoadingButton } from "@mui/lab";
 import "./register.scss";
 import { AuthContext } from "../../../contexts/Auth";
 import { Link, useNavigate } from "react-router-dom";
@@ -57,9 +57,14 @@ const Register = () => {
                 isPassword={true}
               />
               <div className={"register-action-buttons"}>
-                <Button type={"submit"} variant={"contained"} color={"success"}>
+                <LoadingButton
+                  type={"submit"}
+                  variant={"contained"}
+                  color={"success"}
+                  loading={isLoading}
+                >
                   Register
-                </Button>
+                </LoadingButton>
                 <Button
                   type={"submit"}
                   color={"info"}
