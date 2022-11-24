@@ -7,6 +7,7 @@ import Cart from "./components/pages/Cart/Cart";
 import Admin from "./components/pages/Admin/Admin";
 import Login from "./components/pages/Login/Login";
 import Account from "./components/pages/Account/Account";
+import Register from "./components/pages/Register/Register";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path={"cart"} element={<Cart />} />
           <Route path={"admin"} element={<Admin />} />
           <Route path={"login"} element={<Login />} />
+          <Route path={"register"} element={<Register />} />
           <Route path={"account"} element={<Account />} />
         </Routes>
       </Layout>

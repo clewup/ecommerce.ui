@@ -1,0 +1,10 @@
+#account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+}

@@ -3,7 +3,7 @@ import { Guid } from "guid-typescript";
 export const apiEndpoints = {
   // AUTH
   LOGIN: "auth/login",
-  REGISTER: "register",
+  USER: "user",
 
   // ECOMMERCE
   PRODUCT: "product",

@@ -1,24 +1,25 @@
 import { Field, Form, Formik } from "formik";
 import React, { useContext, useState } from "react";
 import useLogin from "../../../hooks/useLogin";
-import "./login.scss";
+import "./register.scss";
 import { AuthContext } from "../../../contexts/Auth";
 import { Link, useNavigate } from "react-router-dom";
 import Subheading from "../../atoms/Subheading/Subheading";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
-import { ILogin, initialLoginValues } from "../../../types/ILogin";
+import { initialRegisterValues, IRegister } from "../../../types/IRegister";
+import useRegister from "../../../hooks/useRegister";
 
-const Login = () => {
-  const [login, setLogin] = useState<ILogin>();
+const Register = () => {
+  const [register, setRegister] = useState<IRegister>();
 
-  const { loading, error } = useLogin(login);
+  const { isLoading, error } = useRegister(register);
   const { isAuthenticated } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
-  const loginUser = (values: ILogin) => {
-    setLogin(values);
+  const registerUser = (values: IRegister) => {
+    setRegister(values);
   };
 
   if (isAuthenticated) {
@@ -26,15 +27,22 @@ const Login = () => {
   }
 
   return (
-    <div id={"login"}>
+    <div id={"register"}>
       <Formik
-        initialValues={initialLoginValues}
-        onSubmit={(values) => loginUser(values)}
+        initialValues={initialRegisterValues}
+        onSubmit={(values) => registerUser(values)}
       >
         {(formik) => {
           return (
-            <Form className={"login-form"}>
+            <Form className={"register-form"}>
               <Subheading>Login</Subheading>
+              <Field
+                name={"firstName"}
+                component={Input}
+                label={"First Name"}
+              />
+              <Field name={"lastName"} component={Input} label={"Last Name"} />
+
               <Field name={"email"} component={Input} label={"Email"} />
               <Field
                 name={"password"}
@@ -42,16 +50,22 @@ const Login = () => {
                 label={"Password"}
                 isPassword={true}
               />
-              <div className={"login-action-buttons"}>
+              <Field
+                name={"confirmPassword"}
+                component={Input}
+                label={"Confirm Password"}
+                isPassword={true}
+              />
+              <div className={"register-action-buttons"}>
                 <Button type={"submit"} variant={"contained"} color={"success"}>
-                  Login
+                  Register
                 </Button>
                 <Button
                   type={"submit"}
                   color={"info"}
-                  onClick={() => navigate("/register")}
+                  onClick={() => navigate("/login")}
                 >
-                  Register
+                  Login
                 </Button>
               </div>
             </Form>
@@ -61,4 +75,4 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default Register;

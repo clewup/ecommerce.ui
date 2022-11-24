@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/User";
 import { AuthContext } from "../contexts/Auth";
 
-const useLogin = (login: ILogin) => {
+const useLogin = (login?: ILogin) => {
   const { setUser } = useContext(UserContext);
   const { setAuthenticated, setAccessToken } = useContext(AuthContext);
   const { data, loading, error } = postLogin(login);
