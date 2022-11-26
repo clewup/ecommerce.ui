@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { FieldAttributes, FormikFormProps } from "formik";
+import { FieldAttributes } from "formik";
 
 interface IProps {
   field?: FieldAttributes<any>;
@@ -26,7 +26,11 @@ const Input: React.FC<IProps> = ({
       disabled={disabled}
       value={value ?? value}
       onChange={onChange ?? onChange}
-      sx={{ m: 1, backgroundColor: "white", textAlign: "center" }}
+      sx={{
+        m: 1,
+        backgroundColor: "white",
+        textAlign: "center",
+      }}
     />
   );
 };

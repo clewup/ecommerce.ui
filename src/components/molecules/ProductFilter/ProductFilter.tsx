@@ -28,58 +28,44 @@ const ProductFilter = () => {
 
   return (
     <div id={"product-filter"}>
-      <div className={"product-filter-group"}>
-        <label>Search</label>
-        <Input
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
-      <div className={"product-filter-group"}>
-        <label>Category</label>
-        <SelectInput
-          value={categoryQuery}
-          onChange={(e) => setCategoryQuery(e.target.value)}
-          options={categories}
-          showAll={true}
-        />
-      </div>
-      <div className={"product-filter-group"}>
-        <label>Variant</label>
-        <SelectInput
-          value={variantQuery}
-          onChange={(e) => setVariantQuery(e.target.value)}
-          options={variants}
-          showAll={true}
-        />
-      </div>
-      <div className={"product-filter-group"}>
-        <label>Price</label>
-        <SelectInput
-          value={priceQuery}
-          onChange={(e) => setPriceQuery(e.target.value)}
-          options={null}
-          showAll={true}
-        />
-      </div>
-      <div className={"product-filter-group"}>
-        <label>In stock</label>
-        <Checkbox
-          value={stockQuery}
-          onChange={() =>
-            stockQuery ? setStockQuery(false) : setStockQuery(true)
-          }
-        />
-      </div>
-      <div className={"product-filter-group"}>
-        <label>On sale</label>
-        <Checkbox
-          value={saleQuery}
-          onChange={() =>
-            saleQuery ? setSaleQuery(false) : setSaleQuery(true)
-          }
-        />
-      </div>
+      <Input
+        label={"Search"}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <SelectInput
+        label={"Category"}
+        value={categoryQuery}
+        onChange={(e) => setCategoryQuery(e.target.value)}
+        options={categories}
+        showAll={true}
+      />
+      <SelectInput
+        label={"Variant"}
+        value={variantQuery}
+        onChange={(e) => setVariantQuery(e.target.value)}
+        options={variants}
+        showAll={true}
+      />
+      <SelectInput
+        label={"Price"}
+        value={priceQuery}
+        onChange={(e) => setPriceQuery(e.target.value)}
+        options={null}
+        showAll={true}
+      />
+      <Checkbox
+        label={"In Stock"}
+        value={stockQuery}
+        onChange={() =>
+          stockQuery ? setStockQuery(false) : setStockQuery(true)
+        }
+      />
+      <Checkbox
+        label={"On Sale"}
+        value={saleQuery}
+        onChange={() => (saleQuery ? setSaleQuery(false) : setSaleQuery(true))}
+      />
     </div>
   );
 };

@@ -1,77 +1,65 @@
 import { ICartItem } from "../types/ICartItem";
 import { ICart } from "../types/ICart";
 import { IProduct } from "../types/IProduct";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "../contexts/Cart";
 
 const useCart = () => {
-  const [cartUpdated, setCartUpdated] = useState(false);
+  const { cart, setCart } = useContext(CartContext);
 
-  const getCart = () => {
-    const cartString = localStorage.getItem("cart");
-    if (cartString) {
-      const cartJson = JSON.parse(cartString) as ICart;
-      return cartJson;
-    } else {
-      return null;
-    }
-  };
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (product: IProduct, quantity: number, variant: string) => {
-    let cart = getCart();
-
     const addedCartItem = convertToCartItem(product, quantity, variant);
 
     if (cart && addedCartItem) {
       //Add item to the cart.
-      cart.cartItems.push(addedCartItem);
+      const updatedCart: ICart = {
+        cartItems: [...cart.cartItems, addedCartItem],
+        total: 0,
+      };
 
       //Calculate total price.
       let total = 0;
-      cart.cartItems.map((cartItem: ICartItem) => {
+      updatedCart.cartItems.map((cartItem: ICartItem) => {
         total = total + cartItem.pricePerUnit * cartItem.quantity;
         return null;
       });
-      cart.total = total;
+      updatedCart.total = total;
 
-      //Update local storage.
-      localStorage.setItem("cart", JSON.stringify(cart));
+      setCart?.(updatedCart);
     } else {
       //Create the cart.
-      cart = {
+      const createdCart = {
         cartItems: [addedCartItem],
         total: addedCartItem.pricePerUnit * addedCartItem.quantity,
       };
 
-      //Set the local storage.
-      localStorage.setItem("cart", JSON.stringify(cart));
+      setCart?.(createdCart);
     }
   };
 
   const removeFromCart = (removedCartItem: ICartItem) => {
-    let cart = getCart();
-
     if (cart) {
       //Remove item from the cart.
       const updatedCartItems = cart.cartItems.filter(
         (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
       );
-      cart = {
+      const updatedCart = {
         cartItems: updatedCartItems,
         total: 0,
       };
 
       //Calculate total price.
       let total = 0;
-      cart.cartItems.map((cartItem: ICartItem) => {
+      updatedCart.cartItems.map((cartItem: ICartItem) => {
         total = total + cartItem.pricePerUnit * cartItem.quantity;
-        return null;
       });
-      cart.total = total;
+      updatedCart.total = total;
 
-      //Update local storage.
-      localStorage.setItem("cart", JSON.stringify(cart));
-
-      setCartUpdated(true);
+      setCart?.(updatedCart);
     }
   };
 
@@ -92,6 +80,6 @@ const useCart = () => {
     return cartItem;
   };
 
-  return { cartUpdated, getCart, addToCart, removeFromCart };
+  return { cart, addToCart, removeFromCart };
 };
 export default useCart;

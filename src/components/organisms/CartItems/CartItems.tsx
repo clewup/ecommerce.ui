@@ -5,9 +5,7 @@ import useCart from "../../../hooks/useCart";
 import { ICartItem } from "../../../types/ICartItem";
 
 const CartItems = () => {
-  const { getCart } = useCart();
-
-  const cart = getCart();
+  const { cart } = useCart();
 
   return (
     <div id={"cart-items"}>

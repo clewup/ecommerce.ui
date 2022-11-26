@@ -1,5 +1,5 @@
 import { FieldAttributes, FormikFormProps } from "formik";
-import { Checkbox as CheckboxInput } from "@mui/material";
+import { Checkbox as CheckboxInput, InputLabel } from "@mui/material";
 
 interface IProps {
   field?: FieldAttributes<any>;
@@ -17,14 +17,16 @@ const Checkbox: React.FC<IProps> = ({
   onChange,
 }) => {
   return (
-    <CheckboxInput
-      {...field}
-      label={label}
-      disabled={disabled}
-      checked={value ?? value}
-      onChange={onChange ?? onChange}
-      inputProps={{ "aria-label": "controlled" }}
-    />
+    <>
+      <InputLabel>{label}</InputLabel>
+      <CheckboxInput
+        {...field}
+        disabled={disabled}
+        checked={value ?? value}
+        onChange={onChange ?? onChange}
+        inputProps={{ "aria-label": "controlled" }}
+      />
+    </>
   );
 };
 export default Checkbox;
