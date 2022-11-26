@@ -1,32 +1,30 @@
-import { TextField } from "@mui/material";
 import { FieldAttributes, FormikFormProps } from "formik";
+import { Checkbox as CheckboxInput } from "@mui/material";
 
 interface IProps {
   field?: FieldAttributes<any>;
   label?: string;
-  isPassword?: boolean;
   disabled?: boolean;
   value?: unknown;
   onChange?: (e: any) => void;
 }
 
-const Input: React.FC<IProps> = ({
+const Checkbox: React.FC<IProps> = ({
   field,
   label,
-  isPassword,
   disabled = false,
   value,
   onChange,
 }) => {
   return (
-    <TextField
+    <CheckboxInput
       {...field}
       label={label}
-      type={isPassword ? "password" : "text"}
       disabled={disabled}
-      value={value ?? value}
+      checked={value ?? value}
       onChange={onChange ?? onChange}
+      inputProps={{ "aria-label": "controlled" }}
     />
   );
 };
-export default Input;
+export default Checkbox;

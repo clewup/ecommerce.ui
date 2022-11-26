@@ -4,6 +4,7 @@ import GetProducts from "../../../api/GetProducts";
 import { IProduct, IStock } from "../../../types/IProduct";
 import { useContext } from "react";
 import { ProductContext } from "../../../contexts/Product";
+import Loader from "../../atoms/Loader/Loader";
 
 const Products = () => {
   const { data: products, loading, error } = GetProducts();
@@ -17,7 +18,7 @@ const Products = () => {
     saleQuery,
   } = useContext(ProductContext);
 
-  if (!products || loading) return <p>Loading...</p>;
+  if (!products || loading) return <Loader />;
   if (error) return <p>ERROR: {error.message}</p>;
 
   // Search Query

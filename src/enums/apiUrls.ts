@@ -1,4 +1,4 @@
 export const apiUrls = {
-  AUTH: "https://localhost:7097/",
-  ECOMMERCE: "https://localhost:7220/",
+  AUTH: "https://clewup-authorisation.herokuapp.com/",
+  ECOMMERCE: "https://clewup-ecommerce.herokuapp.com/",
 };
