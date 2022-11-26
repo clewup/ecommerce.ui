@@ -25,8 +25,6 @@ const Product: React.FC<IProps> = ({ product }) => {
     });
   }, []);
 
-  console.log(variants);
-
   return (
     <div id={"product"}>
       <div className={"product-title"}>{product.name}</div>

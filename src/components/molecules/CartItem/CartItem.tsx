@@ -24,7 +24,8 @@ const CartItem: React.FC<IProps> = ({ cartItem }) => {
         <p>{cartItem.name}</p>
         <p>{cartItem.variant}</p>
         <p>
-          {cartItem.quantity} - £{cartItem.quantity * cartItem.pricePerUnit}
+          x{cartItem.quantity} - £
+          {(cartItem.quantity * cartItem.pricePerUnit).toFixed(2)}
         </p>
       </div>
       <div className={"cart-remove-item"}>
