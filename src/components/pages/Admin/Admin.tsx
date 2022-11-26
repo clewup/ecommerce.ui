@@ -1,6 +1,10 @@
 import AddProductForm from "../../organisms/AddProductForm/AddProductForm";
 
 const Admin = () => {
-  return <AddProductForm />;
+  return (
+    <div id={"admin"}>
+      <AddProductForm />
+    </div>
+  );
 };
 export default Admin;
