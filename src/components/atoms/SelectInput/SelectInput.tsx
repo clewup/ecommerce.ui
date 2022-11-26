@@ -8,6 +8,7 @@ interface IProps {
   value?: unknown;
   onChange?: (e: any) => void;
   options: any;
+  showAll?: boolean;
 }
 
 const SelectInput: React.FC<IProps> = ({
@@ -17,6 +18,7 @@ const SelectInput: React.FC<IProps> = ({
   value,
   onChange,
   options,
+  showAll,
 }) => {
   return (
     <Select
@@ -25,9 +27,9 @@ const SelectInput: React.FC<IProps> = ({
       disabled={disabled}
       value={value ?? value}
       onChange={onChange ?? onChange}
-      sx={{ m: 1, minWidth: 170 }}
+      sx={{ m: 1, minWidth: 170, backgroundColor: "white" }}
     >
-      <MenuItem value={"all"}>All</MenuItem>
+      {showAll && <MenuItem value={"all"}>All</MenuItem>}
       {options?.map((option: string) => {
         return (
           <MenuItem key={option} value={option}>

@@ -26,7 +26,7 @@ const ProductProvider: React.FC<IProps> = ({ children }) => {
   const [categoryQuery, setCategoryQuery] = useState("all");
   const [variantQuery, setVariantQuery] = useState("all");
   const [priceQuery, setPriceQuery] = useState("");
-  const [stockQuery, setStockQuery] = useState(false);
+  const [stockQuery, setStockQuery] = useState(true);
   const [saleQuery, setSaleQuery] = useState(false);
 
   return (

@@ -1,7 +1,10 @@
 import "./product.scss";
 import { IProduct } from "../../../types/IProduct";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useCart from "../../../hooks/useCart";
+import SelectInput from "../../atoms/SelectInput/SelectInput";
+import Input from "../../atoms/Input/Input";
+import { Button } from "@mui/material";
 
 interface IProps {
   product: IProduct;
@@ -9,9 +12,20 @@ interface IProps {
 
 const Product: React.FC<IProps> = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
-  const [variant, setVariant] = useState("");
+  const [variants, setVariants] = useState<string[]>([]);
+  const [variant, setVariant] = useState<string>(product.stock[0].variant);
 
   const { addToCart } = useCart();
+
+  useEffect(() => {
+    product.stock.forEach((stock) => {
+      setVariants((prevState) => {
+        return [...prevState, stock.variant];
+      });
+    });
+  }, []);
+
+  console.log(variants);
 
   return (
     <div id={"product"}>
@@ -25,26 +39,27 @@ const Product: React.FC<IProps> = ({ product }) => {
         />
       </div>
       <div className={"product-info"}>
-        <select value={variant} onChange={(e) => setVariant(e.target.value)}>
-          {product.stock.map((stock) => {
-            return (
-              <option key={stock.variant} value={stock.variant}>
-                {stock.variant}
-              </option>
-            );
-          })}
-        </select>
+        <SelectInput
+          value={variant}
+          onChange={(e) => setVariant(e.target.value)}
+          options={variants}
+        />
         <p>{product.description}</p>
       </div>
       <div className={"product-actions"}>
-        <input
+        <Input
           value={quantity}
           onChange={(e) => setQuantity(parseInt(e.target.value))}
         />
-
-        <button onClick={() => addToCart(product, quantity, variant)}>
+        <Button
+          type={"button"}
+          color={"info"}
+          variant={"contained"}
+          onClick={() => addToCart(product, quantity, variant)}
+          disabled={!quantity || !variant}
+        >
           Add to Cart
-        </button>
+        </Button>
       </div>
     </div>
   );

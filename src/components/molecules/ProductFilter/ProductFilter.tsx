@@ -41,6 +41,7 @@ const ProductFilter = () => {
           value={categoryQuery}
           onChange={(e) => setCategoryQuery(e.target.value)}
           options={categories}
+          showAll={true}
         />
       </div>
       <div className={"product-filter-group"}>
@@ -49,6 +50,7 @@ const ProductFilter = () => {
           value={variantQuery}
           onChange={(e) => setVariantQuery(e.target.value)}
           options={variants}
+          showAll={true}
         />
       </div>
       <div className={"product-filter-group"}>
@@ -57,6 +59,7 @@ const ProductFilter = () => {
           value={priceQuery}
           onChange={(e) => setPriceQuery(e.target.value)}
           options={null}
+          showAll={true}
         />
       </div>
       <div className={"product-filter-group"}>

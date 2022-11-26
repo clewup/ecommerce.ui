@@ -26,6 +26,7 @@ const Input: React.FC<IProps> = ({
       disabled={disabled}
       value={value ?? value}
       onChange={onChange ?? onChange}
+      sx={{ m: 1, backgroundColor: "white", textAlign: "center" }}
     />
   );
 };

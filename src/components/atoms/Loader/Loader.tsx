@@ -4,7 +4,12 @@ import "./loader.scss";
 const Loader = () => {
   return (
     <div id={"loader"}>
-      <HashLoader loading={true} size={150} data-testid="loader" />
+      <HashLoader
+        color={"#ccc"}
+        loading={true}
+        size={100}
+        data-testid="loader"
+      />
     </div>
   );
 };
