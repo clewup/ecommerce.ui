@@ -36,12 +36,18 @@ const Login = () => {
           return (
             <Form className={"login-form"}>
               <Subheading>Login</Subheading>
-              <Field name={"email"} component={Input} label={"Email"} />
+              <Field
+                name={"email"}
+                component={Input}
+                label={"Email"}
+                onChange={formik.handleChange}
+              />
               <Field
                 name={"password"}
                 component={Input}
                 label={"Password"}
                 isPassword={true}
+                onChange={formik.handleChange}
               />
               <div className={"login-action-buttons"}>
                 <LoadingButton

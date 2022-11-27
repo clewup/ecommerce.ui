@@ -43,6 +43,7 @@ const Product: React.FC<IProps> = ({ product }) => {
           options={variants}
         />
         <p>{product.description}</p>
+        <p>£{product.pricePerUnit}</p>
       </div>
       <div className={"product-actions"}>
         <Input

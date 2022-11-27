@@ -8,7 +8,9 @@ const useCart = () => {
   const { cart, setCart } = useContext(CartContext);
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    if (cart) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   }, [cart]);
 
   const convertToCartItem = (

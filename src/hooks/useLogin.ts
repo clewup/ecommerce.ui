@@ -9,6 +9,8 @@ const useLogin = (login?: ILogin) => {
   const { setAuthenticated, setAccessToken } = useContext(AuthContext);
   const { data, loading, error } = postLogin(login);
 
+  console.log(login);
+
   useEffect(() => {
     if (data && Object.keys(data)) {
       setUser?.(data.user);

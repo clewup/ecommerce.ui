@@ -1,10 +1,11 @@
 import "./add-product-form.scss";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import useProduct from "../../../hooks/useProduct";
 import { IStock } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import Subheading from "../../atoms/Subheading/Subheading";
+import React from "react";
 
 const AddProductForm = () => {
   const {
@@ -28,29 +29,34 @@ const AddProductForm = () => {
           <div id={"add-product-form"}>
             <Form>
               <Subheading>Add Product</Subheading>
-              <Input
+              <Field
+                name={"name"}
+                component={Input}
                 label={"Name"}
-                value={formik.values.name}
                 onChange={formik.handleChange}
               />
-              <Input
+              <Field
+                name={"description"}
+                component={Input}
                 label={"Description"}
-                value={formik.values.description}
                 onChange={formik.handleChange}
               />
-              <Input
+              <Field
+                name={"category"}
+                component={Input}
                 label={"Category"}
-                value={formik.values.category}
                 onChange={formik.handleChange}
               />
-              <Input
+              <Field
+                name={"pricePerUnit"}
+                component={Input}
                 label={"Price"}
-                value={formik.values.pricePerUnit}
                 onChange={formik.handleChange}
               />
-              <Input
+              <Field
+                name={"discount"}
+                component={Input}
                 label={"Discount"}
-                value={formik.values.discount}
                 onChange={formik.handleChange}
               />
               <div className={"stock"}>
