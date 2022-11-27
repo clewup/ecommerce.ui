@@ -35,6 +35,13 @@ const useProductFilter = () => {
     }
   }, [categoriesError, variantsError]);
 
-  return { categories, variants, loading, error };
+  return {
+    // @ts-ignore
+    categories: [...new Set(categories)],
+    // @ts-ignore
+    variants: [...new Set(variants)],
+    loading,
+    error,
+  };
 };
 export default useProductFilter;

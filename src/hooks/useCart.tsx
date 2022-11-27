@@ -89,41 +89,16 @@ const useCart = () => {
 
   const removeFromCart = (removedCartItem: ICartItem) => {
     if (cart) {
-      //If quantity is more than 1, update the quantity.
-      if (
-        cart.cartItems.find((cartItem) => cartItem.id === removedCartItem.id)!
-          .quantity > 1
-      ) {
-        const currentCartItem: ICartItem = cart.cartItems.find(
-          (cartItem) => cartItem.id === removedCartItem.id
-        )!;
-        currentCartItem.quantity = currentCartItem.quantity - 1;
+      const updatedCartItems = cart.cartItems.filter(
+        (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
+      );
+      const updatedCart = {
+        cartItems: updatedCartItems,
+        total: 0,
+      };
 
-        const updatedCart: ICart = {
-          cartItems: [
-            ...cart.cartItems.filter(
-              (cartItem) => cartItem.id !== removedCartItem.id
-            ),
-            currentCartItem,
-          ],
-          total: 0,
-        };
-        const totalledCart = calculateTotal(updatedCart);
-        setCart?.(totalledCart);
-      }
-      // If quantity is 1, remove it from the array.
-      else {
-        const updatedCartItems = cart.cartItems.filter(
-          (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
-        );
-        const updatedCart = {
-          cartItems: updatedCartItems,
-          total: 0,
-        };
-
-        const totalledCart = calculateTotal(updatedCart);
-        setCart?.(totalledCart);
-      }
+      const totalledCart = calculateTotal(updatedCart);
+      setCart?.(totalledCart);
     }
   };
 
