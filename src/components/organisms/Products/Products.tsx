@@ -1,8 +1,6 @@
 import Product from "../../molecules/Product/Product";
 import "./products.scss";
-import { IProduct, IStock } from "../../../types/IProduct";
-import { useContext, useEffect } from "react";
-import { ProductContext } from "../../../contexts/Product";
+import { IProduct } from "../../../types/IProduct";
 import Loader from "../../atoms/Loader/Loader";
 import useProductFilter from "../../../hooks/useProductFilter";
 

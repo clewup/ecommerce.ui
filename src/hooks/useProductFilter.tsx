@@ -106,6 +106,7 @@ const useProductFilter = () => {
     //joinedFilter = filterByStock(joinedFilter);
     joinedFilter = filterBySale(joinedFilter);
     setFilteredProducts(joinedFilter);
+    // eslint-disable-next-line
   }, [
     searchQuery,
     categoryQuery,

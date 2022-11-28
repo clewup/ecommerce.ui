@@ -15,7 +15,6 @@ const ProductFilter = () => {
     setCategoryQuery,
     variantQuery,
     setVariantQuery,
-    priceQuery,
     setPriceQuery,
     stockQuery,
     setStockQuery,

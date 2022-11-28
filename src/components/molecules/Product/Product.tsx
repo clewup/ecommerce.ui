@@ -5,6 +5,7 @@ import useCart from "../../../hooks/useCart";
 import SelectInput from "../../atoms/SelectInput/SelectInput";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
+import { ShoppingCart as AddToCartIcon } from "@mui/icons-material";
 
 interface IProps {
   product: IProduct;
@@ -51,13 +52,13 @@ const Product: React.FC<IProps> = ({ product }) => {
           onChange={(e) => setQuantity(parseInt(e.target.value))}
         />
         <Button
+          color="success"
           type={"button"}
-          color={"info"}
           variant={"contained"}
           onClick={() => addToCart(product, quantity, variant)}
           disabled={!quantity || !variant}
         >
-          Add to Cart
+          <AddToCartIcon />
         </Button>
       </div>
     </div>

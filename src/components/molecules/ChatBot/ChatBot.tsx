@@ -1,9 +1,10 @@
 import "./chat-bot.scss";
+import ChatIcon from "@mui/icons-material/Chat";
 
 const ChatBot = () => {
   return (
     <div id={"chat-bot"}>
-      <p>?</p>
+      <ChatIcon />
     </div>
   );
 };

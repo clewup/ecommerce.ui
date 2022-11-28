@@ -1,17 +1,19 @@
 import "./add-product-form.scss";
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, FormikProps, FormikValues } from "formik";
 import useProduct from "../../../hooks/useProduct";
 import { IProduct, IStock } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import Subheading from "../../atoms/Subheading/Subheading";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const AddProductForm = () => {
   const [product, setProduct] = useState<IProduct>();
+  const formRef = useRef<FormikProps<FormikValues> | null>(null);
 
   const {
     initialValues,
+    uploadImage,
     variant,
     setVariant,
     count,
@@ -21,16 +23,31 @@ const AddProductForm = () => {
     formatProduct,
   } = useProduct(product);
 
+  const handleSubmit = (values: FormikValues) => {
+    setProduct(formatProduct(values));
+    formRef.current?.resetForm({ values: formRef.current?.initialValues });
+  };
+
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => setProduct(formatProduct(values))}
+      onSubmit={(values, { setSubmitting }) => handleSubmit(values)}
+      innerRef={formRef}
     >
       {(formik) => {
         return (
           <div id={"add-product-form"}>
             <Form>
               <Subheading>Add Product</Subheading>
+              <Button variant="contained" component="label">
+                Upload File
+                <input
+                  type="file"
+                  hidden
+                  accept={"image/*"}
+                  onChange={(e) => e.target.files && uploadImage(e)}
+                />
+              </Button>
               <Field
                 name={"name"}
                 component={Input}
@@ -87,6 +104,7 @@ const AddProductForm = () => {
                     type={"button"}
                     variant={"contained"}
                     onClick={addStock}
+                    disabled={formik.isSubmitting}
                   >
                     Add Stock
                   </Button>
@@ -97,7 +115,7 @@ const AddProductForm = () => {
                 type={"submit"}
                 variant={"contained"}
                 color={"success"}
-                disabled={stock.length === 0}
+                disabled={stock.length === 0 || formik.isSubmitting}
               >
                 Add Product
               </Button>
