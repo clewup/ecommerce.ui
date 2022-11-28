@@ -23,7 +23,7 @@ const Product: React.FC<IProps> = ({ product }) => {
         return [...prevState, stock.variant];
       });
     });
-  }, []);
+  }, [product.stock]);
 
   return (
     <div id={"product"}>

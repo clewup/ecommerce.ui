@@ -106,7 +106,7 @@ const Products = () => {
     return (
       <div id={"products"}>
         {products
-          .filter((product: IProduct) => product.isDiscounted === true)
+          .filter((product: IProduct) => product.isDiscounted)
           .map((product: IProduct) => {
             return <Product product={product} />;
           })}

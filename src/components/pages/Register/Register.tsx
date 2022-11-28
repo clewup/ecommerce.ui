@@ -36,21 +36,34 @@ const Register = () => {
                 name={"firstName"}
                 component={Input}
                 label={"First Name"}
+                onChange={formik.handleChange}
               />
-              <Field name={"lastName"} component={Input} label={"Last Name"} />
+              <Field
+                name={"lastName"}
+                component={Input}
+                label={"Last Name"}
+                onChange={formik.handleChange}
+              />
 
-              <Field name={"email"} component={Input} label={"Email"} />
+              <Field
+                name={"email"}
+                component={Input}
+                label={"Email"}
+                onChange={formik.handleChange}
+              />
               <Field
                 name={"password"}
                 component={Input}
                 label={"Password"}
                 isPassword={true}
+                onChange={formik.handleChange}
               />
               <Field
                 name={"confirmPassword"}
                 component={Input}
                 label={"Confirm Password"}
                 isPassword={true}
+                onChange={formik.handleChange}
               />
 
               {error && <p>{error.message}</p>}

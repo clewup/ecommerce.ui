@@ -2,6 +2,7 @@ import "./cart-item.scss";
 import { ICartItem } from "../../../types/ICartItem";
 import ClearIcon from "@mui/icons-material/Clear";
 import useCart from "../../../hooks/useCart";
+import React from "react";
 
 interface IProps {
   cartItem: ICartItem;

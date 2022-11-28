@@ -1,7 +1,7 @@
 import { ICartItem } from "../types/ICartItem";
 import { ICart } from "../types/ICart";
 import { IProduct } from "../types/IProduct";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { CartContext } from "../contexts/Cart";
 
 const useCart = () => {
