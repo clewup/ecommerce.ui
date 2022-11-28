@@ -50,14 +50,6 @@ const useProduct = (product?: IProduct) => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    getProducts()
-      .then((res) => setProducts(res.data))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
     if (product) {
       setLoading(true);
       postProduct(product)
