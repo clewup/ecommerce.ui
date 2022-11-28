@@ -5,53 +5,46 @@ import { IRegister } from "../types/IRegister";
 import postRegister from "../api/PostRegister";
 import postLogin from "../api/PostLogin";
 import { ILogin } from "../types/ILogin";
+import { AxiosError, AxiosResponse } from "axios";
+import { IAccessToken } from "../types/IAccessToken";
 
 const useRegister = (register?: IRegister) => {
   const [login, setLogin] = useState<ILogin>();
   const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<AxiosError | null>(null);
 
   const { setUser } = useContext(UserContext);
   const { setAuthenticated, setAccessToken } = useContext(AuthContext);
-  const {
-    data: registerData,
-    loading: registerLoading,
-    error: registerError,
-  } = postRegister(register);
-  const {
-    data: loginData,
-    loading: loginLoading,
-    error: loginError,
-  } = postLogin(login);
 
   useEffect(() => {
-    if (registerData && register) {
-      setLogin({
-        email: register.email,
-        password: register.password,
-      });
+    if (register) {
+      postRegister(register)
+        .then(() => {
+          setLogin({
+            email: register.email,
+            password: register.password,
+          });
+        })
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false));
     }
-  }, [registerData]);
+  }, [register]);
 
   useEffect(() => {
-    if (loginData && Object.keys(loginData)) {
-      setUser?.(loginData.user);
-      setAuthenticated?.(true);
-      setAccessToken?.(loginData.accessToken);
-
-      // Set access token in local storage.
-      localStorage.setItem("AT", loginData.accessToken);
+    if (login) {
+      setLoading(true);
+      postLogin(login)
+        .then((res: AxiosResponse<IAccessToken>) => {
+          setUser?.(res.data.user);
+          setAccessToken?.(res.data.accessToken);
+          setAuthenticated?.(true);
+          localStorage.setItem("AT", res.data.accessToken);
+        })
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false));
     }
     //eslint-disable-next-line
-  }, [loginData]);
-
-  useEffect(() => {
-    if (registerLoading || loginLoading) {
-      setLoading(true);
-    } else {
-      setLoading(false);
-    }
-  }, [registerLoading, loginLoading]);
+  }, [login]);
 
   return { isLoading, error };
 };

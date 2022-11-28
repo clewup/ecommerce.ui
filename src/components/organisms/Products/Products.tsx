@@ -1,13 +1,13 @@
 import Product from "../../molecules/Product/Product";
 import "./products.scss";
-import GetProducts from "../../../api/GetProducts";
 import { IProduct, IStock } from "../../../types/IProduct";
 import { useContext } from "react";
 import { ProductContext } from "../../../contexts/Product";
 import Loader from "../../atoms/Loader/Loader";
+import useProduct from "../../../hooks/useProduct";
 
 const Products = () => {
-  const { data: products, loading, error } = GetProducts();
+  const { products, isLoading, error } = useProduct();
 
   const {
     searchQuery,
@@ -18,7 +18,7 @@ const Products = () => {
     saleQuery,
   } = useContext(ProductContext);
 
-  if (!products || loading) return <Loader />;
+  if (!products || isLoading) return <Loader />;
   if (error) return <p>ERROR: {error.message}</p>;
 
   // Search Query

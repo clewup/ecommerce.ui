@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import "./register.scss";
 import { AuthContext } from "../../../contexts/Auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Subheading from "../../atoms/Subheading/Subheading";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
@@ -18,10 +18,6 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const registerUser = (values: IRegister) => {
-    setRegister(values);
-  };
-
   if (isAuthenticated) {
     navigate("/");
   }
@@ -30,7 +26,7 @@ const Register = () => {
     <div id={"register"}>
       <Formik
         initialValues={initialRegisterValues}
-        onSubmit={(values) => registerUser(values)}
+        onSubmit={(values) => setRegister(values)}
       >
         {(formik) => {
           return (
@@ -56,6 +52,9 @@ const Register = () => {
                 label={"Confirm Password"}
                 isPassword={true}
               />
+
+              {error && <p>{error.message}</p>}
+
               <div className={"register-action-buttons"}>
                 <LoadingButton
                   type={"submit"}

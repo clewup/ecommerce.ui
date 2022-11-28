@@ -1,13 +1,15 @@
 import "./add-product-form.scss";
 import { Field, Form, Formik } from "formik";
 import useProduct from "../../../hooks/useProduct";
-import { IStock } from "../../../types/IProduct";
+import { IProduct, IStock } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import Subheading from "../../atoms/Subheading/Subheading";
-import React from "react";
+import React, { useState } from "react";
 
 const AddProductForm = () => {
+  const [product, setProduct] = useState<IProduct>();
+
   const {
     initialValues,
     variant,
@@ -16,13 +18,13 @@ const AddProductForm = () => {
     setCount,
     stock,
     addStock,
-    createProduct,
-  } = useProduct();
+    formatProduct,
+  } = useProduct(product);
 
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => createProduct(values)}
+      onSubmit={(values) => setProduct(formatProduct(values))}
     >
       {(formik) => {
         return (

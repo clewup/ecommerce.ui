@@ -22,7 +22,7 @@ const ProductFilter = () => {
     setSaleQuery,
   } = useContext(ProductContext);
 
-  const { categories, variants, loading, error } = useProductFilter();
+  const { categories, variants, error } = useProductFilter();
 
   if (error) return <p>ERROR: {error.message}</p>;
 

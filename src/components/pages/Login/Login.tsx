@@ -4,7 +4,7 @@ import useLogin from "../../../hooks/useLogin";
 import "./login.scss";
 import { LoadingButton } from "@mui/lab";
 import { AuthContext } from "../../../contexts/Auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Subheading from "../../atoms/Subheading/Subheading";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
@@ -18,10 +18,6 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const loginUser = (values: ILogin) => {
-    setLogin(values);
-  };
-
   if (isAuthenticated) {
     navigate("/");
   }
@@ -30,7 +26,7 @@ const Login = () => {
     <div id={"login"}>
       <Formik
         initialValues={initialLoginValues}
-        onSubmit={(values) => loginUser(values)}
+        onSubmit={(values) => setLogin(values)}
       >
         {(formik) => {
           return (
@@ -49,6 +45,9 @@ const Login = () => {
                 isPassword={true}
                 onChange={formik.handleChange}
               />
+
+              {error && <p>{error.message}</p>}
+
               <div className={"login-action-buttons"}>
                 <LoadingButton
                   type={"submit"}
