@@ -1,10 +1,11 @@
 import "./product-filter.scss";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { ProductContext } from "../../../contexts/Product";
 import useProductFilter from "../../../hooks/useProductFilter";
 import Input from "../../atoms/Input/Input";
 import SelectInput from "../../atoms/SelectInput/SelectInput";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
+import { InputLabel, Slider } from "@mui/material";
 
 const ProductFilter = () => {
   const {
@@ -47,12 +48,16 @@ const ProductFilter = () => {
         options={variants}
         showAll={true}
       />
-      <SelectInput
-        label={"Price"}
-        value={priceQuery}
-        onChange={(e) => setPriceQuery(e.target.value)}
-        options={null}
-        showAll={true}
+      <InputLabel>Price</InputLabel>
+      <Slider
+        getAriaLabel={() => "Price"}
+        defaultValue={[0, 2000]}
+        min={0}
+        max={2000}
+        step={100}
+        onChange={(e, value) => setPriceQuery(value as number[])}
+        valueLabelDisplay="auto"
+        sx={{ width: 180 }}
       />
       <Checkbox
         label={"In Stock"}

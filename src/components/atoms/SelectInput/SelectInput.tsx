@@ -29,7 +29,7 @@ const SelectInput: React.FC<IProps> = ({
         disabled={disabled}
         value={value ?? value}
         onChange={onChange ?? onChange}
-        sx={{ m: 1, minWidth: 170, backgroundColor: "white" }}
+        sx={{ m: 1, minWidth: 200, backgroundColor: "white" }}
       >
         {showAll && <MenuItem value={"all"}>All</MenuItem>}
         {options?.map((option: string) => {

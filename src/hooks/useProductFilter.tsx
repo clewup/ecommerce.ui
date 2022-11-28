@@ -75,7 +75,17 @@ const useProductFilter = () => {
     }
   };
 
-  // TODO: Add price query
+  const filterByPrice = (joinedFilter: any[]) => {
+    if (priceQuery) {
+      return joinedFilter.filter(
+        (product: IProduct) =>
+          product.pricePerUnit >= priceQuery[0] &&
+          product.pricePerUnit <= priceQuery[1]
+      );
+    } else {
+      return joinedFilter;
+    }
+  };
 
   // TODO: Add stock query
 
@@ -92,7 +102,7 @@ const useProductFilter = () => {
     joinedFilter = filterBySearch(joinedFilter);
     joinedFilter = filterByCategory(joinedFilter);
     joinedFilter = filterByVariant(joinedFilter);
-    //joinedFilter = filterByPrice(joinedFilter);
+    joinedFilter = filterByPrice(joinedFilter);
     //joinedFilter = filterByStock(joinedFilter);
     joinedFilter = filterBySale(joinedFilter);
     setFilteredProducts(joinedFilter);
@@ -100,7 +110,7 @@ const useProductFilter = () => {
     searchQuery,
     categoryQuery,
     variantQuery,
-    //priceQuery,
+    priceQuery,
     //stockQuery,
     saleQuery,
   ]);
