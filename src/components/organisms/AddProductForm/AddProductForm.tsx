@@ -1,6 +1,6 @@
 import "./add-product-form.scss";
 import { Field, Form, Formik, FormikProps, FormikValues } from "formik";
-import useProduct from "../../../hooks/useProduct";
+import useAddProduct from "../../../hooks/useAddProduct";
 import { IProduct, IStock } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
@@ -21,7 +21,7 @@ const AddProductForm = () => {
     stock,
     addStock,
     formatProduct,
-  } = useProduct(product);
+  } = useAddProduct(product);
 
   const handleSubmit = (values: FormikValues) => {
     setProduct(formatProduct(values));

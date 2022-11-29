@@ -7,7 +7,7 @@ import postProduct from "../api/PostProduct";
 import { IImage } from "../types/IImage";
 import postImage from "../api/PostImage";
 
-const useProduct = (product?: IProduct) => {
+const useAddProduct = (product?: IProduct) => {
   const [variant, setVariant] = useState("");
   const [count, setCount] = useState("0");
   const [stock, setStock] = useState<IStock[]>([]);
@@ -61,8 +61,8 @@ const useProduct = (product?: IProduct) => {
 
       convertToBase64(file)
         .then((result) => {
-          setNewImage({ base64: result });
-          /* s */
+          console.log(result);
+          setNewImage({ base64: result, url: "" });
         })
         .catch((err) => {
           setError(err);
@@ -121,4 +121,4 @@ const useProduct = (product?: IProduct) => {
     formatProduct,
   };
 };
-export default useProduct;
+export default useAddProduct;
