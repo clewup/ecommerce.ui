@@ -1,4 +1,7 @@
 export interface IImage {
-  base64: string;
-  url?: string;
+  url: string;
+  file: File;
+  description: string;
+  timestamp: Date;
+  id: string;
 }

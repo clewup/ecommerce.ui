@@ -6,6 +6,7 @@ import { createGuid } from "../utils/CreateGuid";
 import postProduct from "../api/PostProduct";
 import { IImage } from "../types/IImage";
 import postImage from "../api/PostImage";
+import { Guid } from "guid-typescript";
 
 const useAddProduct = (product?: IProduct) => {
   const [variant, setVariant] = useState("");
@@ -39,41 +40,19 @@ const useAddProduct = (product?: IProduct) => {
     };
   };
 
-  const convertToBase64 = (image: Blob) => {
-    return new Promise<string>((resolve) => {
-      let baseURL = "";
-      let reader = new FileReader();
-
-      reader.readAsDataURL(image);
-
-      reader.onload = () => {
-        baseURL = reader.result! as string;
-        resolve(baseURL);
-      };
-    });
-  };
-
   const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      let file: File;
-
-      file = e.target.files[0];
-
-      convertToBase64(file)
-        .then((result) => {
-          console.log(result);
-          setNewImage({ base64: result, url: "" });
-        })
-        .catch((err) => {
-          setError(err);
-        });
-    }
-  };
-
-  useEffect(() => {
-    if (newImage) {
+      const file: IImage = {
+        url: "",
+        file: e.target.files[0],
+        description: "",
+        timestamp: new Date(),
+        id: Guid.create().toString(),
+      };
+      console.log(file);
+      setNewImage(file);
       setLoading(true);
-      postImage(newImage)
+      postImage(newImage!)
         .then((res) => {
           setImages((prev: IImage[]) => {
             return [...prev, res.data];
@@ -82,7 +61,7 @@ const useAddProduct = (product?: IProduct) => {
         .catch((err) => setError(err))
         .finally(() => setLoading(false));
     }
-  }, [newImage]);
+  };
 
   const addStock = () => {
     setStock((prev: IStock[]) => {
