@@ -8,6 +8,7 @@ import Admin from "./components/pages/Admin/Admin";
 import Login from "./components/pages/Login/Login";
 import Account from "./components/pages/Account/Account";
 import Register from "./components/pages/Register/Register";
+import Product from "./components/pages/Product/Product";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"store"} element={<Store />} />
+          <Route path={"product/:id"} element={<Product />} />
           <Route path={"cart"} element={<Cart />} />
           <Route path={"admin"} element={<Admin />} />
           <Route path={"login"} element={<Login />} />
