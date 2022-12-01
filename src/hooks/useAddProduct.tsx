@@ -54,6 +54,7 @@ const useAddProduct = (product?: IProduct) => {
       setLoading(true);
       postImage(newImage!)
         .then((res) => {
+          console.log(res);
           setImages((prev: IImage[]) => {
             return [...prev, res.data];
           });

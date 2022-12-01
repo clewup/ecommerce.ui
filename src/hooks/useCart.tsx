@@ -1,11 +1,14 @@
 import { ICartItem } from "../types/ICartItem";
 import { ICart } from "../types/ICart";
 import { IProduct } from "../types/IProduct";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../contexts/Cart";
+import { IDiscountCode } from "../types/IDiscountCode";
 
 const useCart = () => {
   const { cart, setCart } = useContext(CartContext);
+  const [appliedDiscountCode, setAppliedDiscountCode] =
+    useState<IDiscountCode>();
 
   useEffect(() => {
     if (cart) {
@@ -30,6 +33,35 @@ const useCart = () => {
     return cartItem;
   };
 
+  const DISCOUNT_CODES: IDiscountCode[] = [
+    {
+      code: "50OFF",
+      percentOff: 50,
+    },
+    {
+      code: "25OFF",
+      percentOff: 25,
+    },
+    {
+      code: "10OFF",
+      percentOff: 10,
+    },
+  ];
+
+  const applyDiscountCode = (discountCode: string) => {
+    // Looks for a matching discount.
+    const foundDiscountCode = DISCOUNT_CODES.find(
+      (discount) => discount.code === discountCode
+    );
+
+    if (foundDiscountCode && cart) {
+      setAppliedDiscountCode(foundDiscountCode);
+      const discountedCart = cart;
+      discountedCart.total = (foundDiscountCode.percentOff / 100) * cart.total;
+      setCart?.(discountedCart);
+    }
+  };
+
   const calculateTotal = (cart: ICart) => {
     let totalledCart = cart;
     let total = 0;
@@ -39,7 +71,9 @@ const useCart = () => {
       total = total + cartItem.pricePerUnit * cartItem.quantity;
       return null;
     });
-    totalledCart.total = total;
+    totalledCart.total = appliedDiscountCode
+      ? (appliedDiscountCode.percentOff / 100) * total
+      : total;
     return totalledCart;
   };
 
@@ -104,6 +138,12 @@ const useCart = () => {
     }
   };
 
-  return { cart, addToCart, removeFromCart };
+  return {
+    cart,
+    addToCart,
+    removeFromCart,
+    appliedDiscountCode,
+    applyDiscountCode,
+  };
 };
 export default useCart;
