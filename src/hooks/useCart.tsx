@@ -54,11 +54,13 @@ const useCart = () => {
       (discount) => discount.code === discountCode
     );
 
-    if (foundDiscountCode && cart) {
+    if (cart && !cart.discountCode && foundDiscountCode) {
       setAppliedDiscountCode(foundDiscountCode);
       const discountedCart = cart;
+      discountedCart.discountCode = foundDiscountCode;
       discountedCart.total = (foundDiscountCode.percentOff / 100) * cart.total;
       setCart?.(discountedCart);
+      localStorage.setItem("cart", JSON.stringify(discountedCart));
     }
   };
 
@@ -128,6 +130,7 @@ const useCart = () => {
       const updatedCartItems = cart.cartItems.filter(
         (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
       );
+
       const updatedCart = {
         cartItems: updatedCartItems,
         total: 0,

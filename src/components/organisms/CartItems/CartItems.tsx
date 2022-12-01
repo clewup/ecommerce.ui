@@ -12,6 +12,8 @@ const CartItems = () => {
 
   const { cart, appliedDiscountCode, applyDiscountCode } = useCart();
 
+  console.log(cart);
+
   return (
     <div id={"cart-items"}>
       <Subheading>Cart</Subheading>
@@ -29,16 +31,18 @@ const CartItems = () => {
         <div className={"discount-input"}>
           <Input
             label={"Discount"}
-            value={discountCode}
+            value={
+              cart?.discountCode ? cart.discountCode.code : appliedDiscountCode
+            }
             onChange={(e) => setDiscountCode(e.target.value)}
-            disabled={appliedDiscountCode ? true : false}
+            disabled={cart?.discountCode ? true : false}
           />
           <Button
             type={"button"}
             variant={"contained"}
             color={"success"}
             onClick={() => applyDiscountCode(discountCode)}
-            disabled={appliedDiscountCode ? true : false}
+            disabled={cart?.discountCode ? true : false}
           >
             APPLY
           </Button>
