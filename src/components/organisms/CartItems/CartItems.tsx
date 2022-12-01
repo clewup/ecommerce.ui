@@ -32,7 +32,9 @@ const CartItems = () => {
           <Input
             label={"Discount"}
             value={
-              cart?.discountCode ? cart.discountCode.code : appliedDiscountCode
+              cart?.discountCode
+                ? cart.discountCode.code
+                : appliedDiscountCode?.code
             }
             onChange={(e) => setDiscountCode(e.target.value)}
             disabled={cart?.discountCode ? true : false}

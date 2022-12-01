@@ -73,10 +73,17 @@ const useCart = () => {
       total = total + cartItem.pricePerUnit * cartItem.quantity;
       return null;
     });
-    totalledCart.total = appliedDiscountCode
-      ? (appliedDiscountCode.percentOff / 100) * total
-      : total;
-    return totalledCart;
+
+    if (cart.discountCode) {
+      totalledCart.total = (cart.discountCode.percentOff / 100) * total;
+      return totalledCart;
+    } else if (appliedDiscountCode) {
+      totalledCart.total = (appliedDiscountCode.percentOff / 100) * total;
+      return totalledCart;
+    } else {
+      totalledCart.total = total;
+      return totalledCart;
+    }
   };
 
   const addToCart = (product: IProduct, quantity: number, variant: string) => {
@@ -100,6 +107,7 @@ const useCart = () => {
             ),
             currentCartItem,
           ],
+          discountCode: cart.discountCode,
           total: 0,
         };
         const totalledCart = calculateTotal(updatedCart);
@@ -109,6 +117,7 @@ const useCart = () => {
       else {
         const updatedCart: ICart = {
           cartItems: [...cart.cartItems, addedCartItem],
+          discountCode: cart.discountCode,
           total: 0,
         };
         const totalledCart = calculateTotal(updatedCart);
@@ -116,7 +125,7 @@ const useCart = () => {
       }
     } else {
       //Create the cart.
-      const createdCart = {
+      const createdCart: ICart = {
         cartItems: [addedCartItem],
         total: addedCartItem.pricePerUnit * addedCartItem.quantity,
       };
@@ -131,8 +140,9 @@ const useCart = () => {
         (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
       );
 
-      const updatedCart = {
+      const updatedCart: ICart = {
         cartItems: updatedCartItems,
+        discountCode: cart.discountCode,
         total: 0,
       };
 
