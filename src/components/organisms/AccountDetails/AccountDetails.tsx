@@ -4,7 +4,7 @@ import React from "react";
 import "./account-details.scss";
 
 import Input from "../../atoms/Input/Input";
-import Subheading from "../../atoms/Subheading/Subheading";
+import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 
 interface IProps {
   user: IUser;
@@ -21,7 +21,9 @@ const AccountDetails: React.FC<IProps> = ({ user, isEditing }) => {
           <div id={"account-details"}>
             <Form>
               <div className={"contact-info"}>
-                <Subheading>Contact Info</Subheading>
+                <Subheading size={subheadingSize.SMALL}>
+                  Contact Info
+                </Subheading>
                 <Field
                   name={"firstName"}
                   component={Input}
@@ -49,7 +51,7 @@ const AccountDetails: React.FC<IProps> = ({ user, isEditing }) => {
               </div>
 
               <div className={"address-info"}>
-                <Subheading>Address</Subheading>
+                <Subheading size={subheadingSize.SMALL}>Address</Subheading>
                 <Field
                   name={"lineOne"}
                   component={Input}

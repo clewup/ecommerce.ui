@@ -55,6 +55,7 @@ const Product: React.FC<IProps> = ({ product }) => {
         <Input
           value={quantity}
           onChange={(e) => setQuantity(parseInt(e.target.value))}
+          width={"3rem"}
         />
         <Button
           color="success"

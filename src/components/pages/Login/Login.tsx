@@ -5,7 +5,7 @@ import "./login.scss";
 import { LoadingButton } from "@mui/lab";
 import { AuthContext } from "../../../contexts/Auth";
 import { useNavigate } from "react-router-dom";
-import Subheading from "../../atoms/Subheading/Subheading";
+import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import { ILogin, initialLoginValues } from "../../../types/ILogin";
@@ -31,7 +31,7 @@ const Login = () => {
         {(formik) => {
           return (
             <Form className={"login-form"}>
-              <Subheading>Login</Subheading>
+              <Subheading size={subheadingSize.MEDIUM}>Login</Subheading>
               <Field
                 name={"email"}
                 component={Input}

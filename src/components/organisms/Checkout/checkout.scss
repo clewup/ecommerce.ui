@@ -2,4 +2,15 @@
   background-color: #ccc;
   padding: 1rem;
   width: 30rem;
+
+  .checkout-form-group {
+    display: flex;
+  }
+
+  .billing-address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }

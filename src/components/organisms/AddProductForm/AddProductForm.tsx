@@ -4,7 +4,7 @@ import useAddProduct from "../../../hooks/useAddProduct";
 import { IProduct, IStock } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
-import Subheading from "../../atoms/Subheading/Subheading";
+import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import React, { useRef, useState } from "react";
 
 const AddProductForm = () => {
@@ -38,7 +38,7 @@ const AddProductForm = () => {
         return (
           <div id={"add-product-form"}>
             <Form>
-              <Subheading>Add Product</Subheading>
+              <Subheading size={subheadingSize.MEDIUM}>Add Product</Subheading>
               <Button variant="contained" component="label">
                 Upload File
                 <input

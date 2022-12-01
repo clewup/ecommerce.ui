@@ -20,6 +20,7 @@
     "@types/react-dom": "^18.0.0",
     "add": "^2.0.6",
     "axios": "^1.1.3",
+    "classnames": "^2.3.2",
     "formik": "^2.2.9",
     "guid-typescript": "^1.0.9",
     "react": "^18.2.0",

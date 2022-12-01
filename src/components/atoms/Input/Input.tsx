@@ -9,6 +9,7 @@ interface IProps {
   disabled?: boolean;
   value?: unknown;
   onChange?: (e: any) => void;
+  width?: string;
 }
 
 const Input: React.FC<IProps> = ({
@@ -18,6 +19,7 @@ const Input: React.FC<IProps> = ({
   disabled = false,
   value,
   onChange,
+  width,
 }) => {
   return (
     <TextField
@@ -31,6 +33,7 @@ const Input: React.FC<IProps> = ({
         m: 1,
         backgroundColor: "white",
         textAlign: "center",
+        width: width ?? "100%",
       }}
     />
   );
