@@ -64,6 +64,18 @@ const useCart = () => {
     }
   };
 
+  const removeDiscountCode = () => {
+    if (cart) {
+      const undiscountedCart: ICart = {
+        cartItems: cart.cartItems,
+        total: 0,
+      };
+      const totalledCart = calculateTotal(undiscountedCart);
+      setCart?.(totalledCart);
+      localStorage.setItem("cart", JSON.stringify(totalledCart));
+    }
+  };
+
   const calculateTotal = (cart: ICart) => {
     let totalledCart = cart;
     let total = 0;
@@ -157,6 +169,7 @@ const useCart = () => {
     removeFromCart,
     appliedDiscountCode,
     applyDiscountCode,
+    removeDiscountCode,
   };
 };
 export default useCart;

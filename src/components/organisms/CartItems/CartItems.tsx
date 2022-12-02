@@ -10,7 +10,8 @@ import React, { useState } from "react";
 const CartItems = () => {
   const [discountCode, setDiscountCode] = useState("");
 
-  const { cart, appliedDiscountCode, applyDiscountCode } = useCart();
+  const { cart, appliedDiscountCode, applyDiscountCode, removeDiscountCode } =
+    useCart();
 
   console.log(cart);
 
@@ -36,18 +37,30 @@ const CartItems = () => {
                 ? cart.discountCode.code
                 : appliedDiscountCode?.code
             }
-            onChange={(e) => setDiscountCode(e.target.value)}
+            onChange={() => removeDiscountCode()}
             disabled={cart?.discountCode ? true : false}
           />
-          <Button
-            type={"button"}
-            variant={"contained"}
-            color={"success"}
-            onClick={() => applyDiscountCode(discountCode)}
-            disabled={cart?.discountCode ? true : false}
-          >
-            APPLY
-          </Button>
+          {cart?.discountCode ? (
+            <Button
+              type={"button"}
+              variant={"contained"}
+              color={"success"}
+              onClick={() => applyDiscountCode(discountCode)}
+              disabled={cart?.discountCode ? false : true}
+            >
+              REMOVE
+            </Button>
+          ) : (
+            <Button
+              type={"button"}
+              variant={"contained"}
+              color={"success"}
+              onClick={() => applyDiscountCode(discountCode)}
+              disabled={cart?.discountCode ? true : false}
+            >
+              APPLY
+            </Button>
+          )}
         </div>
       </div>
       <div className={"cart-total"}>
