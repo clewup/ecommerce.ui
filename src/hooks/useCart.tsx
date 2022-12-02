@@ -66,13 +66,22 @@ const useCart = () => {
 
   const removeDiscountCode = () => {
     if (cart) {
+      let total = 0;
+      let totalledCart = cart;
+
+      totalledCart.cartItems.map((cartItem: ICartItem) => {
+        total = total + cartItem.pricePerUnit * cartItem.quantity;
+        return null;
+      });
+
       const undiscountedCart: ICart = {
         cartItems: cart.cartItems,
-        total: 0,
+        total: total,
       };
-      const totalledCart = calculateTotal(undiscountedCart);
-      setCart?.(totalledCart);
-      localStorage.setItem("cart", JSON.stringify(totalledCart));
+
+      setAppliedDiscountCode(undefined);
+      setCart?.(undiscountedCart);
+      localStorage.setItem("cart", JSON.stringify(undiscountedCart));
     }
   };
 

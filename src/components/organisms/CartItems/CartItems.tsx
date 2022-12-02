@@ -37,7 +37,7 @@ const CartItems = () => {
                 ? cart.discountCode.code
                 : appliedDiscountCode?.code
             }
-            onChange={() => removeDiscountCode()}
+            onChange={(e) => setDiscountCode(e.target.value)}
             disabled={cart?.discountCode ? true : false}
           />
           {cart?.discountCode ? (
@@ -45,7 +45,7 @@ const CartItems = () => {
               type={"button"}
               variant={"contained"}
               color={"success"}
-              onClick={() => applyDiscountCode(discountCode)}
+              onClick={() => removeDiscountCode()}
               disabled={cart?.discountCode ? false : true}
             >
               REMOVE
