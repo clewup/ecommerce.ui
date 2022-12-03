@@ -10,10 +10,7 @@ import React, { useState } from "react";
 const CartItems = () => {
   const [discountCode, setDiscountCode] = useState("");
 
-  const { cart, appliedDiscountCode, applyDiscountCode, removeDiscountCode } =
-    useCart();
-
-  console.log(cart);
+  const { cart, applyDiscountCode, removeDiscountCode } = useCart();
 
   return (
     <div id={"cart-items"}>
@@ -32,11 +29,6 @@ const CartItems = () => {
         <div className={"discount-input"}>
           <Input
             label={"Discount"}
-            value={
-              cart?.discountCode
-                ? cart.discountCode.code
-                : appliedDiscountCode?.code
-            }
             onChange={(e) => setDiscountCode(e.target.value)}
             disabled={cart?.discountCode ? true : false}
           />

@@ -11,5 +11,7 @@ export const apiEndpoints = {
   PRODUCT_VARIANTS: "product/variants",
   PRODUCT_BY_ID: (id: Guid) => `product/${id}`,
   IMAGE_UPLOAD: "upload/image",
+  CART: "cart",
+  CART_BY_ID: (userId: Guid) => `cart/${userId}`,
   ORDER: "order",
 };

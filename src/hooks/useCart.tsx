@@ -4,17 +4,26 @@ import { IProduct } from "../types/IProduct";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../contexts/Cart";
 import { IDiscountCode } from "../types/IDiscountCode";
+import { UserContext } from "../contexts/User";
+import getCart from "../api/GetCart";
+import { AxiosError } from "axios";
+import putCart from "../api/PutCart";
+import postCart from "../api/PostCart";
 
 const useCart = () => {
   const { cart, setCart } = useContext(CartContext);
-  const [appliedDiscountCode, setAppliedDiscountCode] =
-    useState<IDiscountCode>();
+  const { user } = useContext(UserContext);
+
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState<AxiosError | null>(null);
 
   useEffect(() => {
-    if (cart) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-  }, [cart]);
+    setLoading(true);
+    getCart(user?.id!)
+      .then((res) => setCart?.(res.data))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  }, []);
 
   const convertToCartItem = (
     product: IProduct,
@@ -54,129 +63,85 @@ const useCart = () => {
       (discount) => discount.code === discountCode
     );
 
-    if (cart && !cart.discountCode && foundDiscountCode) {
-      setAppliedDiscountCode(foundDiscountCode);
+    if (cart && foundDiscountCode) {
       const discountedCart = cart;
+
       discountedCart.discountCode = foundDiscountCode;
-      discountedCart.total = (foundDiscountCode.percentOff / 100) * cart.total;
-      setCart?.(discountedCart);
-      localStorage.setItem("cart", JSON.stringify(discountedCart));
+      discountedCart.discountedTotal = 0;
+
+      setLoading(true);
+      putCart(discountedCart)
+        .then((res) => setCart?.(res.data))
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false));
     }
   };
 
   const removeDiscountCode = () => {
     if (cart) {
-      let total = 0;
-      let totalledCart = cart;
+      const discountedCart: ICart = cart;
 
-      totalledCart.cartItems.map((cartItem: ICartItem) => {
-        total = total + cartItem.pricePerUnit * cartItem.quantity;
-        return null;
-      });
+      discountedCart.discountCode = null;
+      discountedCart.discountedTotal = null;
 
-      const undiscountedCart: ICart = {
-        cartItems: cart.cartItems,
-        total: total,
-      };
-
-      setAppliedDiscountCode(undefined);
-      setCart?.(undiscountedCart);
-      localStorage.setItem("cart", JSON.stringify(undiscountedCart));
-    }
-  };
-
-  const calculateTotal = (cart: ICart) => {
-    let totalledCart = cart;
-    let total = 0;
-
-    //Calculate total price.
-    totalledCart.cartItems.map((cartItem: ICartItem) => {
-      total = total + cartItem.pricePerUnit * cartItem.quantity;
-      return null;
-    });
-
-    if (cart.discountCode) {
-      totalledCart.total = (cart.discountCode.percentOff / 100) * total;
-      return totalledCart;
-    } else if (appliedDiscountCode) {
-      totalledCart.total = (appliedDiscountCode.percentOff / 100) * total;
-      return totalledCart;
-    } else {
-      totalledCart.total = total;
-      return totalledCart;
+      setLoading(true);
+      putCart(discountedCart)
+        .then((res) => setCart?.(res.data))
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false));
     }
   };
 
   const addToCart = (product: IProduct, quantity: number, variant: string) => {
-    const addedCartItem = convertToCartItem(product, quantity, variant);
+    const cartItem = convertToCartItem(product, quantity, variant);
 
-    if (cart && addedCartItem) {
-      //Add item to the cart.
+    if (cart) {
+      const updatedCart: ICart = cart;
+      updatedCart?.cartItems.push(cartItem);
 
-      //If already in the basket, update the quantity.
-      if (cart.cartItems.some((cartItem) => cartItem.id === addedCartItem.id)) {
-        const currentCartItem: ICartItem = cart.cartItems.find(
-          (cartItem) => cartItem.id === addedCartItem.id
-        )!;
-        currentCartItem.quantity =
-          currentCartItem.quantity + addedCartItem.quantity;
-
-        const updatedCart: ICart = {
-          cartItems: [
-            ...cart.cartItems.filter(
-              (cartItem) => cartItem.id !== addedCartItem.id
-            ),
-            currentCartItem,
-          ],
-          discountCode: cart.discountCode,
-          total: 0,
-        };
-        const totalledCart = calculateTotal(updatedCart);
-        setCart?.(totalledCart);
-      }
-      //If not already in the basket, add to the array,
-      else {
-        const updatedCart: ICart = {
-          cartItems: [...cart.cartItems, addedCartItem],
-          discountCode: cart.discountCode,
-          total: 0,
-        };
-        const totalledCart = calculateTotal(updatedCart);
-        setCart?.(totalledCart);
-      }
+      setLoading(true);
+      putCart(updatedCart)
+        .then((res) => setCart?.(res.data))
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false));
     } else {
-      //Create the cart.
       const createdCart: ICart = {
-        cartItems: [addedCartItem],
-        total: addedCartItem.pricePerUnit * addedCartItem.quantity,
+        userId: user?.id!,
+        cartItems: [cartItem],
+        total: 0,
+        discountCode: null,
+        discountedTotal: null,
       };
 
-      setCart?.(createdCart);
+      setLoading(true);
+      postCart(createdCart)
+        .then((res) => setCart?.(res.data))
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false));
     }
   };
 
-  const removeFromCart = (removedCartItem: ICartItem) => {
+  const removeFromCart = (cartItem: ICartItem) => {
     if (cart) {
-      const updatedCartItems = cart.cartItems.filter(
-        (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
+      const updatedCart = cart;
+      updatedCart.cartItems.filter(
+        (cartItem: ICartItem) => cartItem.id !== cartItem.id
       );
 
-      const updatedCart: ICart = {
-        cartItems: updatedCartItems,
-        discountCode: cart.discountCode,
-        total: 0,
-      };
-
-      const totalledCart = calculateTotal(updatedCart);
-      setCart?.(totalledCart);
+      setLoading(true);
+      putCart(updatedCart)
+        .then((res) => setCart?.(res.data))
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false));
     }
   };
 
   return {
     cart,
+    isLoading,
+    error,
     addToCart,
     removeFromCart,
-    appliedDiscountCode,
     applyDiscountCode,
     removeDiscountCode,
   };
