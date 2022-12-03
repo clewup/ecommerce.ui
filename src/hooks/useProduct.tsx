@@ -17,6 +17,7 @@ const useProduct = (id: Guid) => {
         .catch((err) => setError(err))
         .finally(() => setLoading(false));
     }
+    // eslint-disable-next-line
   }, [id]);
 
   return { product, isLoading, error };

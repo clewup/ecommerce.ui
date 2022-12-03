@@ -7,23 +7,6 @@ import React from "react";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
 import { Button } from "@mui/material";
 
-interface CheckoutFormValues {
-  firstName: string;
-  lastName: string;
-  email: string;
-  lineOne: string;
-  lineTwo: string;
-  lineThree: string;
-  postcode: string;
-  city: string;
-  county: string;
-  country: string;
-  cardNumber: string;
-  expiryMonth: string;
-  expiryYear: string;
-  cvc: string;
-}
-
 const Checkout = () => {
   const { initialValues } = useCheckout();
 

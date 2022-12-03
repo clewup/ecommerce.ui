@@ -20,7 +20,7 @@ const useProductFilter = () => {
     categoryQuery,
     variantQuery,
     priceQuery,
-    stockQuery,
+    //stockQuery,
     saleQuery,
   } = useContext(ProductContext);
 

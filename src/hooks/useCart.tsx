@@ -26,7 +26,8 @@ const useCart = () => {
         .catch((err) => setError(err))
         .finally(() => setLoading(false));
     }
-  }, [user]);
+    // eslint-disable-next-line
+  }, []);
 
   const convertToCartItem = (
     product: IProduct,
@@ -125,11 +126,11 @@ const useCart = () => {
     }
   };
 
-  const removeFromCart = (cartItem: ICartItem) => {
+  const removeFromCart = (removedCartItem: ICartItem) => {
     if (cart) {
       const updatedCart = cart;
       updatedCart.cartItems.filter(
-        (cartItem: ICartItem) => cartItem.id !== cartItem.id
+        (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
       );
 
       setLoading(true);
