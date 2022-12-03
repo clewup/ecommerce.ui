@@ -97,11 +97,29 @@ const useCart = () => {
   };
 
   const addToCart = (product: IProduct, quantity: number, variant: string) => {
-    const cartItem = convertToCartItem(product, quantity, variant);
+    const newCartItem = convertToCartItem(product, quantity, variant);
 
     if (cart) {
       const updatedCart: ICart = cart;
-      updatedCart?.cartItems.push(cartItem);
+
+      if (
+        updatedCart.cartItems.some((cartItem) => cartItem.id === newCartItem.id)
+      ) {
+        const currentCartItem: ICartItem = cart.cartItems.find(
+          (cartItem) => cartItem.id === newCartItem.id
+        )!;
+        currentCartItem.quantity =
+          currentCartItem.quantity + newCartItem.quantity;
+
+        updatedCart.cartItems = [
+          ...cart.cartItems.filter(
+            (cartItem) => cartItem.id !== newCartItem.id
+          ),
+          currentCartItem,
+        ];
+      } else {
+        updatedCart?.cartItems.push(newCartItem);
+      }
 
       setLoading(true);
       putCart(updatedCart)
@@ -112,7 +130,7 @@ const useCart = () => {
       const createdCart: ICart = {
         id: createGuid(),
         userId: user?.id!,
-        cartItems: [cartItem],
+        cartItems: [newCartItem],
         total: 0,
         discountCode: null,
         discountedTotal: null,
@@ -129,9 +147,10 @@ const useCart = () => {
   const removeFromCart = (removedCartItem: ICartItem) => {
     if (cart) {
       const updatedCart = cart;
-      updatedCart.cartItems.filter(
+      const updatedCartItems = cart.cartItems.filter(
         (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
       );
+      updatedCart.cartItems = updatedCartItems;
 
       setLoading(true);
       putCart(updatedCart)
