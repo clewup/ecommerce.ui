@@ -9,6 +9,7 @@ import getCart from "../api/GetCart";
 import { AxiosError } from "axios";
 import putCart from "../api/PutCart";
 import postCart from "../api/PostCart";
+import { createGuid } from "../utils/CreateGuid";
 
 const useCart = () => {
   const { cart, setCart } = useContext(CartContext);
@@ -18,12 +19,14 @@ const useCart = () => {
   const [error, setError] = useState<AxiosError | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    getCart(user?.id!)
-      .then((res) => setCart?.(res.data))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
-  }, []);
+    if (user) {
+      setLoading(true);
+      getCart(user?.id!)
+        .then((res) => setCart?.(res.data))
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false));
+    }
+  }, [user]);
 
   const convertToCartItem = (
     product: IProduct,
@@ -106,6 +109,7 @@ const useCart = () => {
         .finally(() => setLoading(false));
     } else {
       const createdCart: ICart = {
+        id: createGuid(),
         userId: user?.id!,
         cartItems: [cartItem],
         total: 0,

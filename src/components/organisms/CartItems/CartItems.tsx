@@ -30,6 +30,7 @@ const CartItems = () => {
           <Input
             label={"Discount"}
             onChange={(e) => setDiscountCode(e.target.value)}
+            value={cart?.discountCode ? cart.discountCode.code : discountCode}
             disabled={cart?.discountCode ? true : false}
           />
           {cart?.discountCode ? (
@@ -56,7 +57,12 @@ const CartItems = () => {
         </div>
       </div>
       <div className={"cart-total"}>
-        <p>Cart Total: £{cart?.total.toFixed(2) || "0"}</p>
+        <p>
+          Cart Total: £
+          {cart?.discountedTotal
+            ? cart?.discountedTotal.toFixed(2)
+            : cart?.total.toFixed(2) || "0"}
+        </p>
       </div>
     </div>
   );

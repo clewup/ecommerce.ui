@@ -1,12 +1,14 @@
 import "./product.scss";
 import { IProduct } from "../../../types/IProduct";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useCart from "../../../hooks/useCart";
 import SelectInput from "../../atoms/SelectInput/SelectInput";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import { ShoppingCart as AddToCartIcon } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../contexts/User";
+import { AuthContext } from "../../../contexts/Auth";
 
 interface IProps {
   product: IProduct;
@@ -16,6 +18,8 @@ const Product: React.FC<IProps> = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [variants, setVariants] = useState<string[]>([]);
   const [variant, setVariant] = useState<string>(product.stock[0].variant);
+  const { user } = useContext(UserContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
   const { addToCart } = useCart();
   const navigate = useNavigate();
@@ -61,7 +65,11 @@ const Product: React.FC<IProps> = ({ product }) => {
           color="success"
           type={"button"}
           variant={"contained"}
-          onClick={() => addToCart(product, quantity, variant)}
+          onClick={() => {
+            !user && !isAuthenticated
+              ? navigate("/login")
+              : addToCart(product, quantity, variant);
+          }}
           disabled={!quantity || !variant}
         >
           <AddToCartIcon />
