@@ -5,6 +5,7 @@ import useCheckout from "../../../hooks/useCheckout";
 import Input from "../../atoms/Input/Input";
 import React from "react";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
+import { Button } from "@mui/material";
 
 interface CheckoutFormValues {
   firstName: string;
@@ -178,6 +179,17 @@ const Checkout = () => {
                   label={"Billing address is the same as shipping address."}
                   value={true}
                 />
+              </div>
+
+              <div className={"checkout-action-buttons"}>
+                <Button
+                  type={"submit"}
+                  variant={"contained"}
+                  color={"success"}
+                  disabled={!formik.isValid || formik.isSubmitting}
+                >
+                  CHECKOUT
+                </Button>
               </div>
             </Form>
           );
