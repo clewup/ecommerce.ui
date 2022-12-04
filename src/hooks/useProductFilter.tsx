@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { AxiosError } from "axios";
-import getProductVariants from "../api/GetProductVariants";
 import getProductCategories from "../api/GetProductCategories";
 import { ProductContext } from "../contexts/Product";
-import { IProduct, IStock } from "../types/IProduct";
+import { IProduct } from "../types/IProduct";
 import getProducts from "../api/GetProducts";
 
 const useProductFilter = () => {
@@ -13,12 +12,10 @@ const useProductFilter = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [categories, setCategories] = useState();
-  const [variants, setVariants] = useState();
 
   const {
     searchQuery,
     categoryQuery,
-    variantQuery,
     priceQuery,
     //stockQuery,
     saleQuery,
@@ -40,10 +37,6 @@ const useProductFilter = () => {
     getProductCategories()
       .then((res) => setCategories(res.data))
       .catch((err) => setError(err));
-    getProductVariants()
-      .then((res) => setVariants(res.data))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
   }, []);
 
   const filterBySearch = (joinedFilter: any[]) => {
@@ -56,19 +49,6 @@ const useProductFilter = () => {
     if (categoryQuery && categoryQuery !== "all") {
       return joinedFilter.filter(
         (product: IProduct) => product.category === categoryQuery
-      );
-    } else {
-      return joinedFilter;
-    }
-  };
-
-  const filterByVariant = (joinedFilter: any[]) => {
-    if (variantQuery && variantQuery !== "all") {
-      return joinedFilter.filter((product: IProduct) =>
-        product.stock
-          .map((stock: IStock) => stock.variant)
-          .filter((variant: string) => variant)
-          .includes(variantQuery)
       );
     } else {
       return joinedFilter;
@@ -91,7 +71,7 @@ const useProductFilter = () => {
 
   const filterBySale = (joinedFilter: any[]) => {
     if (saleQuery) {
-      return joinedFilter.filter((product: IProduct) => product.isDiscounted);
+      return joinedFilter.filter((product: IProduct) => product.discount);
     } else {
       return joinedFilter;
     }
@@ -101,7 +81,6 @@ const useProductFilter = () => {
     let joinedFilter = products;
     joinedFilter = filterBySearch(joinedFilter);
     joinedFilter = filterByCategory(joinedFilter);
-    joinedFilter = filterByVariant(joinedFilter);
     joinedFilter = filterByPrice(joinedFilter);
     //joinedFilter = filterByStock(joinedFilter);
     joinedFilter = filterBySale(joinedFilter);
@@ -110,7 +89,6 @@ const useProductFilter = () => {
   }, [
     searchQuery,
     categoryQuery,
-    variantQuery,
     priceQuery,
     //stockQuery,
     saleQuery,
@@ -122,7 +100,6 @@ const useProductFilter = () => {
     // @ts-ignore
     categories: [...new Set(categories)], // Removes duplicates from the array.
     // @ts-ignore
-    variants: [...new Set(variants)], // Removes duplicates from the array.
     isLoading,
     error,
   };

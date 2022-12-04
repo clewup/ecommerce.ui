@@ -29,18 +29,15 @@ const useCart = () => {
     // eslint-disable-next-line
   }, []);
 
-  const convertToCartItem = (
-    product: IProduct,
-    quantity: number,
-    variant: string
-  ) => {
+  const convertToCartItem = (product: IProduct, quantity: number) => {
     const cartItem: ICartItem = {
       id: product.id,
+      images: product.images,
       name: product.name,
-      variant: variant,
+      description: product.description,
+      category: product.category,
       quantity: quantity,
       pricePerUnit: product.pricePerUnit,
-      isDiscounted: product.isDiscounted,
       discount: product.discount,
     };
     return cartItem;
@@ -96,8 +93,8 @@ const useCart = () => {
     }
   };
 
-  const addToCart = (product: IProduct, quantity: number, variant: string) => {
-    const newCartItem = convertToCartItem(product, quantity, variant);
+  const addToCart = (product: IProduct, quantity: number) => {
+    const newCartItem = convertToCartItem(product, quantity);
 
     if (cart) {
       const updatedCart: ICart = cart;
@@ -147,10 +144,9 @@ const useCart = () => {
   const removeFromCart = (removedCartItem: ICartItem) => {
     if (cart) {
       const updatedCart = cart;
-      const updatedCartItems = cart.cartItems.filter(
+      updatedCart.cartItems = cart.cartItems.filter(
         (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
       );
-      updatedCart.cartItems = updatedCartItems;
 
       setLoading(true);
       putCart(updatedCart)

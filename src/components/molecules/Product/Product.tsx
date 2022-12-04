@@ -1,8 +1,7 @@
 import "./product.scss";
 import { IProduct } from "../../../types/IProduct";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import useCart from "../../../hooks/useCart";
-import SelectInput from "../../atoms/SelectInput/SelectInput";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import { ShoppingCart as AddToCartIcon } from "@mui/icons-material";
@@ -16,21 +15,11 @@ interface IProps {
 
 const Product: React.FC<IProps> = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
-  const [variants, setVariants] = useState<string[]>([]);
-  const [variant, setVariant] = useState<string>(product.stock[0].variant);
   const { user } = useContext(UserContext);
   const { isAuthenticated } = useContext(AuthContext);
 
   const { addToCart } = useCart();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    product.stock.forEach((stock) => {
-      setVariants((prevState) => {
-        return [...prevState, stock.variant];
-      });
-    });
-  }, [product.stock]);
 
   return (
     <div id={"product"}>
@@ -47,11 +36,6 @@ const Product: React.FC<IProps> = ({ product }) => {
         />
       </div>
       <div className={"product-info"}>
-        <SelectInput
-          value={variant}
-          onChange={(e) => setVariant(e.target.value)}
-          options={variants}
-        />
         <p>{product.description}</p>
         <p>£{product.pricePerUnit}</p>
       </div>
@@ -68,9 +52,9 @@ const Product: React.FC<IProps> = ({ product }) => {
           onClick={() => {
             !user && !isAuthenticated
               ? navigate("/login")
-              : addToCart(product, quantity, variant);
+              : addToCart(product, quantity);
           }}
-          disabled={!quantity || !variant}
+          disabled={!quantity}
         >
           <AddToCartIcon />
         </Button>

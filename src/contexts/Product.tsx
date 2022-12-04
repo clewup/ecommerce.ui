@@ -9,8 +9,6 @@ export interface ProductContextProps {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   categoryQuery: string;
   setCategoryQuery: React.Dispatch<React.SetStateAction<string>>;
-  variantQuery: string;
-  setVariantQuery: React.Dispatch<React.SetStateAction<string>>;
   priceQuery: number[] | undefined;
   setPriceQuery: React.Dispatch<React.SetStateAction<number[] | undefined>>;
   stockQuery: boolean;
@@ -24,7 +22,6 @@ const ProductContext = createContext({} as ProductContextProps);
 const ProductProvider: React.FC<IProps> = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryQuery, setCategoryQuery] = useState("all");
-  const [variantQuery, setVariantQuery] = useState("all");
   const [priceQuery, setPriceQuery] = useState<number[]>();
   const [stockQuery, setStockQuery] = useState(true);
   const [saleQuery, setSaleQuery] = useState(false);
@@ -36,8 +33,6 @@ const ProductProvider: React.FC<IProps> = ({ children }) => {
         setSearchQuery,
         categoryQuery,
         setCategoryQuery,
-        variantQuery,
-        setVariantQuery,
         priceQuery,
         setPriceQuery,
         stockQuery,

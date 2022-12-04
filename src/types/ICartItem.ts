@@ -1,11 +1,13 @@
 import { Guid } from "guid-typescript";
+import { IImage } from "./IImage";
 
 export interface ICartItem {
   id: Guid;
+  images: IImage[];
   name: string;
-  variant: string;
+  description: string;
+  category: string;
   quantity: number;
   pricePerUnit: number;
-  isDiscounted: boolean;
   discount: number;
 }

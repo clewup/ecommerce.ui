@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IProduct, IStock } from "../types/IProduct";
+import { IProduct } from "../types/IProduct";
 import { AxiosError } from "axios";
 import { FormikValues } from "formik";
 import { createGuid } from "../utils/CreateGuid";
@@ -9,9 +9,6 @@ import postImage from "../api/PostImage";
 import { Guid } from "guid-typescript";
 
 const useAddProduct = (product?: IProduct) => {
-  const [variant, setVariant] = useState("");
-  const [count, setCount] = useState("0");
-  const [stock, setStock] = useState<IStock[]>([]);
   const [newImage, setNewImage] = useState<IImage>();
   const [images, setImages] = useState<IImage[]>([]);
 
@@ -22,6 +19,7 @@ const useAddProduct = (product?: IProduct) => {
     name: "",
     description: "",
     category: "",
+    stockCount: 0,
     pricePerUnit: "",
     discount: 0,
   };
@@ -33,11 +31,11 @@ const useAddProduct = (product?: IProduct) => {
       name: values.name,
       description: values.description,
       category: values.category,
-      stock: stock,
+      stockCount: values.stockCount,
       pricePerUnit: parseFloat(values.pricePerUnit),
       isDiscounted: parseFloat(values.discount) > 0,
       discount: parseFloat(values.discount),
-    };
+    } as IProduct;
   };
 
   const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,18 +62,6 @@ const useAddProduct = (product?: IProduct) => {
     }
   };
 
-  const addStock = () => {
-    setStock((prev: IStock[]) => {
-      return [
-        ...prev,
-        {
-          variant,
-          count: parseInt(count),
-        },
-      ];
-    });
-  };
-
   useEffect(() => {
     if (product) {
       setLoading(true);
@@ -92,12 +78,6 @@ const useAddProduct = (product?: IProduct) => {
     uploadImage,
     images,
     setImages,
-    variant,
-    setVariant,
-    count,
-    setCount,
-    stock,
-    addStock,
     formatProduct,
   };
 };

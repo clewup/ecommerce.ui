@@ -31,7 +31,7 @@ const CartItems = () => {
             label={"Discount"}
             onChange={(e) => setDiscountCode(e.target.value)}
             value={cart?.discountCode ? cart.discountCode.code : discountCode}
-            disabled={cart?.discountCode ? true : false}
+            disabled={!!cart?.discountCode}
           />
           {cart?.discountCode ? (
             <Button
@@ -39,7 +39,7 @@ const CartItems = () => {
               variant={"contained"}
               color={"success"}
               onClick={() => removeDiscountCode()}
-              disabled={cart?.discountCode ? false : true}
+              disabled={!cart?.discountCode}
             >
               REMOVE
             </Button>
@@ -49,7 +49,7 @@ const CartItems = () => {
               variant={"contained"}
               color={"success"}
               onClick={() => applyDiscountCode(discountCode)}
-              disabled={cart?.discountCode ? true : false}
+              disabled={!!cart?.discountCode}
             >
               APPLY
             </Button>

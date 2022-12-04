@@ -1,7 +1,7 @@
 import "./add-product-form.scss";
 import { Field, Form, Formik, FormikProps, FormikValues } from "formik";
 import useAddProduct from "../../../hooks/useAddProduct";
-import { IProduct, IStock } from "../../../types/IProduct";
+import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
@@ -11,17 +11,7 @@ const AddProductForm = () => {
   const [product, setProduct] = useState<IProduct>();
   const formRef = useRef<FormikProps<FormikValues> | null>(null);
 
-  const {
-    initialValues,
-    uploadImage,
-    variant,
-    setVariant,
-    count,
-    setCount,
-    stock,
-    addStock,
-    formatProduct,
-  } = useAddProduct(product);
+  const { initialValues, uploadImage, formatProduct } = useAddProduct(product);
 
   const handleSubmit = (values: FormikValues) => {
     setProduct(formatProduct(values));
@@ -67,6 +57,12 @@ const AddProductForm = () => {
                 onChange={formik.handleChange}
               />
               <Field
+                name={"stockCount"}
+                component={Input}
+                label={"Stock Count"}
+                onChange={formik.handleChange}
+              />
+              <Field
                 name={"pricePerUnit"}
                 component={Input}
                 label={"Price"}
@@ -78,44 +74,13 @@ const AddProductForm = () => {
                 label={"Discount"}
                 onChange={formik.handleChange}
               />
-              <div className={"stock"}>
-                <div className={"stock-display"}>
-                  {stock.map((stock: IStock) => {
-                    return (
-                      <div key={stock.variant} className={"added-stock"}>
-                        <p>{stock.variant}</p>
-                        <p>{stock.count}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={"add-stock"}>
-                  <Input
-                    label={"Variant"}
-                    value={variant}
-                    onChange={(e) => setVariant(e.target.value)}
-                  />
-                  <Input
-                    label={"Count"}
-                    value={count}
-                    onChange={(e) => setCount(e.target.value)}
-                  />
-                  <Button
-                    type={"button"}
-                    variant={"contained"}
-                    onClick={addStock}
-                    disabled={formik.isSubmitting}
-                  >
-                    Add Stock
-                  </Button>
-                </div>
-              </div>
-
               <Button
                 type={"submit"}
                 variant={"contained"}
                 color={"success"}
-                disabled={stock.length === 0 || formik.isSubmitting}
+                disabled={
+                  formik.values.stockCount.length === 0 || formik.isSubmitting
+                }
               >
                 Add Product
               </Button>

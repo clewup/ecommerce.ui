@@ -13,8 +13,6 @@ const ProductFilter = () => {
     setSearchQuery,
     categoryQuery,
     setCategoryQuery,
-    variantQuery,
-    setVariantQuery,
     setPriceQuery,
     stockQuery,
     setStockQuery,
@@ -22,7 +20,7 @@ const ProductFilter = () => {
     setSaleQuery,
   } = useContext(ProductContext);
 
-  const { categories, variants, error } = useProductFilter();
+  const { categories, error } = useProductFilter();
 
   if (error) return <p>ERROR: {error.message}</p>;
 
@@ -38,13 +36,6 @@ const ProductFilter = () => {
         value={categoryQuery}
         onChange={(e) => setCategoryQuery(e.target.value)}
         options={categories}
-        showAll={true}
-      />
-      <SelectInput
-        label={"Variant"}
-        value={variantQuery}
-        onChange={(e) => setVariantQuery(e.target.value)}
-        options={variants}
         showAll={true}
       />
       <InputLabel>Price</InputLabel>

@@ -166,6 +166,7 @@ const Checkout = () => {
 
               <div className={"checkout-action-buttons"}>
                 <Button
+                  size={"large"}
                   type={"submit"}
                   variant={"contained"}
                   color={"success"}

@@ -8,7 +8,6 @@ export const apiEndpoints = {
   // ECOMMERCE
   PRODUCT: "product",
   PRODUCT_CATEGORIES: "product/categories",
-  PRODUCT_VARIANTS: "product/variants",
   PRODUCT_BY_ID: (id: Guid) => `product/${id}`,
   IMAGE_UPLOAD: "upload/image",
   CART: "cart",
