@@ -21,6 +21,7 @@
     "add": "^2.0.6",
     "axios": "^1.1.3",
     "classnames": "^2.3.2",
+    "env-cmd": "^10.1.0",
     "formik": "^2.2.9",
     "guid-typescript": "^1.0.9",
     "react": "^18.2.0",
@@ -38,8 +39,9 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start.dev": "env-cmd -f .env.development react-scripts start",
+    "start.local": "env-cmd -f .env.development.local react-scripts start",
+    "build": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

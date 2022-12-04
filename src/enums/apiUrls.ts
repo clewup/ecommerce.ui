@@ -1,4 +1,4 @@
 export const apiUrls = {
-  AUTH: "https://clewup-authorisation.herokuapp.com/",
-  ECOMMERCE: "https://clewup-ecommerce.herokuapp.com/",
+  AUTH: process.env.REACT_APP_AUTH_API,
+  ECOMMERCE: process.env.REACT_APP_ECOMMERCE_API,
 };
