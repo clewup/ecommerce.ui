@@ -3,6 +3,7 @@ import { IImage } from "./IImage";
 
 export interface ICartItem {
   id: Guid;
+  productId: Guid;
   images: IImage[];
   name: string;
   description: string;

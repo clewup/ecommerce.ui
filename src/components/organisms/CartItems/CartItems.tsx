@@ -15,7 +15,7 @@ const CartItems = () => {
   return (
     <div id={"cart-items"}>
       <Subheading size={subheadingSize.SMALL}>Cart</Subheading>
-      {cart?.cartItems.map((cartItem: ICartItem) => {
+      {cart?.cartItems?.map((cartItem: ICartItem) => {
         return <CartItem cartItem={cartItem} key={cartItem.name} />;
       })}
       <div className={"cart-shipping"}>
@@ -30,39 +30,20 @@ const CartItems = () => {
           <Input
             label={"Discount"}
             onChange={(e) => setDiscountCode(e.target.value)}
-            value={cart?.discountCode ? cart.discountCode.code : discountCode}
-            disabled={!!cart?.discountCode}
+            value={discountCode}
           />
-          {cart?.discountCode ? (
-            <Button
-              type={"button"}
-              variant={"contained"}
-              color={"success"}
-              onClick={() => removeDiscountCode()}
-              disabled={!cart?.discountCode}
-            >
-              REMOVE
-            </Button>
-          ) : (
-            <Button
-              type={"button"}
-              variant={"contained"}
-              color={"success"}
-              onClick={() => applyDiscountCode(discountCode)}
-              disabled={!!cart?.discountCode}
-            >
-              APPLY
-            </Button>
-          )}
+          <Button
+            type={"button"}
+            variant={"contained"}
+            color={"success"}
+            onClick={() => applyDiscountCode(discountCode)}
+          >
+            APPLY
+          </Button>
         </div>
       </div>
       <div className={"cart-total"}>
-        <p>
-          Cart Total: £
-          {cart?.discountedTotal
-            ? cart?.discountedTotal.toFixed(2)
-            : cart?.total.toFixed(2) || "0"}
-        </p>
+        <p>Cart Total: £{cart?.total.toFixed(2) || "0"}</p>
       </div>
     </div>
   );

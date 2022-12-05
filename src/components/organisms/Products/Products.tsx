@@ -13,7 +13,11 @@ const Products = () => {
   return (
     <div id={"products"}>
       {filteredProducts.map((product: IProduct) => {
-        return <Product product={product} />;
+        return (
+          <div key={"product"}>
+            <Product product={product} />
+          </div>
+        );
       })}
     </div>
   );

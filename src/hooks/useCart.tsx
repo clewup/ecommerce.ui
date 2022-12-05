@@ -31,7 +31,8 @@ const useCart = () => {
 
   const convertToCartItem = (product: IProduct, quantity: number) => {
     const cartItem: ICartItem = {
-      id: product.id,
+      id: createGuid(),
+      productId: product.id,
       images: product.images,
       name: product.name,
       description: product.description,
@@ -67,9 +68,6 @@ const useCart = () => {
     if (cart && foundDiscountCode) {
       const discountedCart = cart;
 
-      discountedCart.discountCode = foundDiscountCode;
-      discountedCart.discountedTotal = 0;
-
       setLoading(true);
       putCart(discountedCart)
         .then((res) => setCart?.(res.data))
@@ -81,9 +79,6 @@ const useCart = () => {
   const removeDiscountCode = () => {
     if (cart) {
       const discountedCart: ICart = cart;
-
-      discountedCart.discountCode = null;
-      discountedCart.discountedTotal = null;
 
       setLoading(true);
       putCart(discountedCart)
@@ -129,9 +124,8 @@ const useCart = () => {
         userId: user?.id!,
         cartItems: [newCartItem],
         total: 0,
-        discountCode: null,
-        discountedTotal: null,
       };
+      console.log(createdCart);
 
       setLoading(true);
       postCart(createdCart)
