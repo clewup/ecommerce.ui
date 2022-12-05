@@ -13,6 +13,7 @@ const Cart = () => {
 
   useEffect(() => {
     if (!isAuthenticated && !user) navigate("/login");
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -1,163 +1,85 @@
-import { ICartItem } from "../types/ICartItem";
 import { ICart } from "../types/ICart";
 import { IProduct } from "../types/IProduct";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../contexts/Cart";
-import { IDiscountCode } from "../types/IDiscountCode";
 import { UserContext } from "../contexts/User";
-import getCart from "../api/GetCart";
+import getCartByUserId from "../api/GetCartByUserId";
 import { AxiosError } from "axios";
 import putCart from "../api/PutCart";
 import postCart from "../api/PostCart";
 import { createGuid } from "../utils/CreateGuid";
 
 const useCart = () => {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart, setLoading } = useContext(CartContext);
   const { user } = useContext(UserContext);
 
-  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
-  useEffect(() => {
+  const getCart = () => {
     if (user) {
       setLoading(true);
-      getCart(user?.id!)
-        .then((res) => setCart?.(res.data))
-        .catch((err) => setError(err))
-        .finally(() => setLoading(false));
-    }
-    // eslint-disable-next-line
-  }, []);
-
-  const convertToCartItem = (product: IProduct, quantity: number) => {
-    const cartItem: ICartItem = {
-      id: createGuid(),
-      productId: product.id,
-      images: product.images,
-      name: product.name,
-      description: product.description,
-      category: product.category,
-      quantity: quantity,
-      pricePerUnit: product.pricePerUnit,
-      discount: product.discount,
-    };
-    return cartItem;
-  };
-
-  const DISCOUNT_CODES: IDiscountCode[] = [
-    {
-      code: "50OFF",
-      percentOff: 50,
-    },
-    {
-      code: "25OFF",
-      percentOff: 25,
-    },
-    {
-      code: "10OFF",
-      percentOff: 10,
-    },
-  ];
-
-  const applyDiscountCode = (discountCode: string) => {
-    // Looks for a matching discount.
-    const foundDiscountCode = DISCOUNT_CODES.find(
-      (discount) => discount.code === discountCode
-    );
-
-    if (cart && foundDiscountCode) {
-      const discountedCart = cart;
-
-      setLoading(true);
-      putCart(discountedCart)
-        .then((res) => setCart?.(res.data))
+      getCartByUserId(user?.id!)
+        .then((res) => setCart(res.data))
         .catch((err) => setError(err))
         .finally(() => setLoading(false));
     }
   };
 
-  const removeDiscountCode = () => {
-    if (cart) {
-      const discountedCart: ICart = cart;
-
-      setLoading(true);
-      putCart(discountedCart)
-        .then((res) => setCart?.(res.data))
-        .catch((err) => setError(err))
-        .finally(() => setLoading(false));
-    }
-  };
-
-  const addToCart = (product: IProduct, quantity: number) => {
-    const newCartItem = convertToCartItem(product, quantity);
-
+  const addToCart = (product: IProduct) => {
     if (cart) {
       const updatedCart: ICart = cart;
-
-      if (
-        updatedCart.cartItems.some((cartItem) => cartItem.id === newCartItem.id)
-      ) {
-        const currentCartItem: ICartItem = cart.cartItems.find(
-          (cartItem) => cartItem.id === newCartItem.id
+      if (updatedCart.products.some((prod) => prod.id === product.id)) {
+        // Update the cart.
+        const existingProduct: IProduct = cart.products.find(
+          (prod) => prod.id === product.id
         )!;
-        currentCartItem.quantity =
-          currentCartItem.quantity + newCartItem.quantity;
-
-        updatedCart.cartItems = [
-          ...cart.cartItems.filter(
-            (cartItem) => cartItem.id !== newCartItem.id
-          ),
-          currentCartItem,
+        updatedCart.products = [
+          ...cart.products.filter((prod) => prod.id !== product.id),
+          existingProduct,
         ];
       } else {
-        updatedCart?.cartItems.push(newCartItem);
+        updatedCart?.products.push(product);
       }
-
       setLoading(true);
       putCart(updatedCart)
-        .then((res) => setCart?.(res.data))
+        .then((res) => setCart(res.data))
         .catch((err) => setError(err))
         .finally(() => setLoading(false));
     } else {
+      // Create the cart.
       const createdCart: ICart = {
         id: createGuid(),
         userId: user?.id!,
-        cartItems: [newCartItem],
+        products: [product],
         total: 0,
       };
-      console.log(createdCart);
-
       setLoading(true);
       postCart(createdCart)
-        .then((res) => setCart?.(res.data))
+        .then((res) => setCart(res.data))
         .catch((err) => setError(err))
         .finally(() => setLoading(false));
     }
   };
 
-  const removeFromCart = (removedCartItem: ICartItem) => {
+  const removeFromCart = (product: IProduct) => {
     if (cart) {
       const updatedCart = cart;
-      updatedCart.cartItems = cart.cartItems.filter(
-        (cartItem: ICartItem) => cartItem.id !== removedCartItem.id
+      updatedCart.products = cart.products.filter(
+        (prod) => prod.id !== product.id
       );
-
       setLoading(true);
       putCart(updatedCart)
-        .then((res) => setCart?.(res.data))
+        .then((res) => setCart(res.data))
         .catch((err) => setError(err))
         .finally(() => setLoading(false));
     }
   };
 
   return {
-    cart,
-    isLoading,
-    error,
+    getCart,
     addToCart,
     removeFromCart,
-    applyDiscountCode,
-    removeDiscountCode,
+    error,
   };
 };
 export default useCart;

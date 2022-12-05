@@ -1,29 +1,39 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, Dispatch, useState } from "react";
 
 interface IProps {
   children: JSX.Element;
 }
 
-export interface ProductContextProps {
+export interface IProductContextProps {
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  categoryQuery: string;
-  setCategoryQuery: React.Dispatch<React.SetStateAction<string>>;
-  priceQuery: number[] | undefined;
-  setPriceQuery: React.Dispatch<React.SetStateAction<number[] | undefined>>;
-  stockQuery: boolean;
-  setStockQuery: React.Dispatch<React.SetStateAction<boolean>>;
+  categoryQuery: string | null;
+  setCategoryQuery: React.Dispatch<React.SetStateAction<string | null>>;
+  priceQuery: number[] | null;
+  setPriceQuery: React.Dispatch<React.SetStateAction<number[] | null>>;
   saleQuery: boolean;
   setSaleQuery: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ProductContext = createContext({} as ProductContextProps);
+const initialProductContextProps: IProductContextProps = {
+  searchQuery: "",
+  setSearchQuery: (() => undefined) as Dispatch<any>,
+  categoryQuery: null,
+  setCategoryQuery: (() => undefined) as Dispatch<any>,
+  priceQuery: null,
+  setPriceQuery: (() => undefined) as Dispatch<any>,
+  saleQuery: false,
+  setSaleQuery: (() => undefined) as Dispatch<any>,
+};
+
+const ProductContext = createContext<IProductContextProps>(
+  initialProductContextProps
+);
 
 const ProductProvider: React.FC<IProps> = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [categoryQuery, setCategoryQuery] = useState("all");
-  const [priceQuery, setPriceQuery] = useState<number[]>();
-  const [stockQuery, setStockQuery] = useState(true);
+  const [categoryQuery, setCategoryQuery] = useState<string | null>(null);
+  const [priceQuery, setPriceQuery] = useState<number[] | null>(null);
   const [saleQuery, setSaleQuery] = useState(false);
 
   return (
@@ -35,8 +45,6 @@ const ProductProvider: React.FC<IProps> = ({ children }) => {
         setCategoryQuery,
         priceQuery,
         setPriceQuery,
-        stockQuery,
-        setStockQuery,
         saleQuery,
         setSaleQuery,
       }}

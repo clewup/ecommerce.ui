@@ -1,11 +1,11 @@
 import "./cart-item.scss";
-import { ICartItem } from "../../../types/ICartItem";
 import ClearIcon from "@mui/icons-material/Clear";
 import useCart from "../../../hooks/useCart";
 import React from "react";
+import { IProduct } from "../../../types/IProduct";
 
 interface IProps {
-  cartItem: ICartItem;
+  cartItem: IProduct;
 }
 
 const CartItem: React.FC<IProps> = ({ cartItem }) => {
@@ -23,10 +23,7 @@ const CartItem: React.FC<IProps> = ({ cartItem }) => {
       </div>
       <div className={"cart-item-info"}>
         <p>{cartItem.name}</p>
-        <p>
-          x{cartItem.quantity} - £
-          {(cartItem.quantity * cartItem.pricePerUnit).toFixed(2)}
-        </p>
+        <p>£{cartItem.pricePerUnit.toFixed(2)}</p>
       </div>
       <div className={"cart-remove-item"}>
         <ClearIcon onClick={() => removeFromCart(cartItem)} />

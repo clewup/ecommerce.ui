@@ -7,7 +7,6 @@ export interface IProduct {
   name: string;
   description: string;
   category: string;
-  stockCount: number;
   pricePerUnit: number;
   discount: number;
 }

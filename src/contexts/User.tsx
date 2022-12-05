@@ -5,15 +5,20 @@ interface IProps {
   children: JSX.Element;
 }
 
-interface UserContextProps {
-  user?: IUser;
-  setUser?: Dispatch<SetStateAction<IUser | undefined>>;
+interface IUserContextProps {
+  user: IUser | null;
+  setUser: Dispatch<SetStateAction<IUser | null>>;
 }
 
-const UserContext = createContext<UserContextProps>({});
+const initialUserContextProps: IUserContextProps = {
+  user: null,
+  setUser: (() => undefined) as Dispatch<any>,
+};
+
+const UserContext = createContext<IUserContextProps>(initialUserContextProps);
 
 const UserProvider = ({ children }: IProps) => {
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState<IUser | null>(null);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

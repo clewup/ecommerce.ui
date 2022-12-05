@@ -2,21 +2,27 @@ import "./cart-items.scss";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import CartItem from "../../molecules/CartItem/CartItem";
 import useCart from "../../../hooks/useCart";
-import { ICartItem } from "../../../types/ICartItem";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { CartContext } from "../../../contexts/Cart";
 
 const CartItems = () => {
   const [discountCode, setDiscountCode] = useState("");
 
-  const { cart, applyDiscountCode, removeDiscountCode } = useCart();
+  const { cart } = useContext(CartContext);
+  const { getCart } = useCart();
+
+  useEffect(() => {
+    getCart();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div id={"cart-items"}>
       <Subheading size={subheadingSize.SMALL}>Cart</Subheading>
-      {cart?.cartItems?.map((cartItem: ICartItem) => {
-        return <CartItem cartItem={cartItem} key={cartItem.name} />;
+      {cart?.products?.map((product) => {
+        return <CartItem cartItem={product} key={product.name} />;
       })}
       <div className={"cart-shipping"}>
         <hr />
@@ -32,12 +38,7 @@ const CartItems = () => {
             onChange={(e) => setDiscountCode(e.target.value)}
             value={discountCode}
           />
-          <Button
-            type={"button"}
-            variant={"contained"}
-            color={"success"}
-            onClick={() => applyDiscountCode(discountCode)}
-          >
+          <Button type={"button"} variant={"contained"} color={"success"}>
             APPLY
           </Button>
         </div>

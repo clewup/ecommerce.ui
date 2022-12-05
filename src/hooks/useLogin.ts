@@ -17,9 +17,9 @@ const useLogin = (login?: ILogin) => {
       setLoading(true);
       postLogin(login)
         .then((res: AxiosResponse<IAccessToken>) => {
-          setUser?.(res.data.user);
-          setAccessToken?.(res.data.accessToken);
-          setAuthenticated?.(true);
+          setUser(res.data.user);
+          setAccessToken(res.data.accessToken);
+          setAuthenticated(true);
           localStorage.setItem("AT", res.data.accessToken);
         })
         .catch((err) => setError(err))

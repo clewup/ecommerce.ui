@@ -14,8 +14,6 @@ const ProductFilter = () => {
     categoryQuery,
     setCategoryQuery,
     setPriceQuery,
-    stockQuery,
-    setStockQuery,
     saleQuery,
     setSaleQuery,
   } = useContext(ProductContext);
@@ -48,13 +46,6 @@ const ProductFilter = () => {
         onChange={(e, value) => setPriceQuery(value as number[])}
         valueLabelDisplay="auto"
         sx={{ width: 180 }}
-      />
-      <Checkbox
-        label={"In Stock"}
-        value={stockQuery}
-        onChange={() =>
-          stockQuery ? setStockQuery(false) : setStockQuery(true)
-        }
       />
       <Checkbox
         label={"On Sale"}
