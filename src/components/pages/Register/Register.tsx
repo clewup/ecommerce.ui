@@ -9,6 +9,7 @@ import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import { initialRegisterValues, IRegister } from "../../../types/IRegister";
 import useRegister from "../../../hooks/useRegister";
+import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Register = () => {
   const [register, setRegister] = useState<IRegister>();
@@ -23,7 +24,7 @@ const Register = () => {
   }
 
   return (
-    <div id={"register"}>
+    <Wrapper id={"register"}>
       <Formik
         initialValues={initialRegisterValues}
         onSubmit={(values) => setRegister(values)}
@@ -31,19 +32,21 @@ const Register = () => {
         {(formik) => {
           return (
             <Form className={"register-form"}>
-              <Subheading size={subheadingSize.MEDIUM}>Login</Subheading>
-              <Field
-                name={"firstName"}
-                component={Input}
-                label={"First Name"}
-                onChange={formik.handleChange}
-              />
-              <Field
-                name={"lastName"}
-                component={Input}
-                label={"Last Name"}
-                onChange={formik.handleChange}
-              />
+              <Subheading size={subheadingSize.MEDIUM}>Register</Subheading>
+              <div className={"register-form-group"}>
+                <Field
+                  name={"firstName"}
+                  component={Input}
+                  label={"First Name"}
+                  onChange={formik.handleChange}
+                />
+                <Field
+                  name={"lastName"}
+                  component={Input}
+                  label={"Last Name"}
+                  onChange={formik.handleChange}
+                />
+              </div>
 
               <Field
                 name={"email"}
@@ -89,7 +92,7 @@ const Register = () => {
           );
         }}
       </Formik>
-    </div>
+    </Wrapper>
   );
 };
 export default Register;

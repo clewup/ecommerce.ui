@@ -2,13 +2,14 @@ import "./store.scss";
 
 import Products from "../../organisms/Products/Products";
 import ProductFilter from "../../molecules/ProductFilter/ProductFilter";
+import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Store = () => {
   return (
-    <div id={"store"}>
+    <Wrapper id={"store"}>
       <ProductFilter />
       <Products />
-    </div>
+    </Wrapper>
   );
 };
 export default Store;

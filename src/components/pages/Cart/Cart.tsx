@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/Auth";
 import { UserContext } from "../../../contexts/User";
+import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -17,10 +18,10 @@ const Cart = () => {
   }, []);
 
   return (
-    <div id={"cart"}>
+    <Wrapper id={"cart"}>
       <CartItems />
       <Checkout />
-    </div>
+    </Wrapper>
   );
 };
 export default Cart;

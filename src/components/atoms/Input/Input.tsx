@@ -30,7 +30,8 @@ const Input: React.FC<IProps> = ({
       value={value ?? value}
       onChange={onChange ?? onChange}
       sx={{
-        m: 1,
+        marginTop: 1,
+        marginBottom: 1,
         backgroundColor: "white",
         textAlign: "center",
         width: width ?? "100%",

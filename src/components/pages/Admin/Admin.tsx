@@ -1,10 +1,11 @@
 import AddProductForm from "../../organisms/AddProductForm/AddProductForm";
+import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Admin = () => {
   return (
-    <div id={"admin"}>
+    <Wrapper id={"admin"}>
       <AddProductForm />
-    </div>
+    </Wrapper>
   );
 };
 export default Admin;

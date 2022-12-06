@@ -38,7 +38,12 @@ const CartItems = () => {
             onChange={(e) => setDiscountCode(e.target.value)}
             value={discountCode}
           />
-          <Button type={"button"} variant={"contained"} color={"success"}>
+          <Button
+            type={"button"}
+            variant={"contained"}
+            color={"success"}
+            size={"large"}
+          >
             APPLY
           </Button>
         </div>

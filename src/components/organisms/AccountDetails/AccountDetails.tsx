@@ -5,6 +5,7 @@ import "./account-details.scss";
 
 import Input from "../../atoms/Input/Input";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Heading from "../../atoms/Heading/Heading";
 
 interface IProps {
   user: IUser;
@@ -19,6 +20,9 @@ const AccountDetails: React.FC<IProps> = ({ user, isEditing }) => {
       {(formik) => {
         return (
           <div id={"account-details"}>
+            <Heading>
+              {user?.firstName} {user?.lastName}
+            </Heading>
             <Form>
               <div className={"contact-info"}>
                 <Subheading size={subheadingSize.SMALL}>

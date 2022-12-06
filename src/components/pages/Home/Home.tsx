@@ -1,12 +1,13 @@
 import Hero from "../../molecules/Hero/Hero";
 import FeaturedProducts from "../../organisms/FeaturedProducts/FeaturedProducts";
+import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Home = () => {
   return (
-    <div id={"home"}>
+    <Wrapper id={"home"}>
       <Hero />
       <FeaturedProducts />
-    </div>
+    </Wrapper>
   );
 };
 export default Home;

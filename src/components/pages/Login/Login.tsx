@@ -9,6 +9,7 @@ import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import { ILogin, initialLoginValues } from "../../../types/ILogin";
+import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Login = () => {
   const [login, setLogin] = useState<ILogin>();
@@ -23,7 +24,7 @@ const Login = () => {
   }
 
   return (
-    <div id={"login"}>
+    <Wrapper id={"login"}>
       <Formik
         initialValues={initialLoginValues}
         onSubmit={(values) => setLogin(values)}
@@ -69,7 +70,7 @@ const Login = () => {
           );
         }}
       </Formik>
-    </div>
+    </Wrapper>
   );
 };
 export default Login;
