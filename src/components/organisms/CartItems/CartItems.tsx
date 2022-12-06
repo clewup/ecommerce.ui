@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
 const CartItems = () => {
   const [discountCode, setDiscountCode] = useState("");
@@ -23,6 +24,13 @@ const CartItems = () => {
   return (
     <div id={"cart-items"}>
       <Subheading size={subheadingSize.SMALL}>Cart</Subheading>
+
+      {cart?.products?.length === 0 && (
+        <p className={"empty-cart"}>
+          Your cart is empty. <RemoveShoppingCartIcon />
+        </p>
+      )}
+
       {cart?.products?.map((product) => {
         return <CartItem cartItem={product} key={product.name} />;
       })}
@@ -59,6 +67,7 @@ const CartItems = () => {
           variant={"contained"}
           color={"success"}
           onClick={() => navigate("/checkout")}
+          disabled={cart?.products?.length === 0}
         >
           CHECKOUT
         </Button>

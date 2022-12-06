@@ -7,6 +7,14 @@
   gap: 1rem;
   width: 30rem;
 
+  .empty-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
   .cart-shipping {
     text-align: center;
     font-size: 1rem;
