@@ -6,10 +6,12 @@ import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../contexts/Cart";
+import { useNavigate } from "react-router-dom";
 
 const CartItems = () => {
   const [discountCode, setDiscountCode] = useState("");
 
+  const navigate = useNavigate();
   const { cart } = useContext(CartContext);
   const { getCart } = useCart();
 
@@ -24,13 +26,8 @@ const CartItems = () => {
       {cart?.products?.map((product) => {
         return <CartItem cartItem={product} key={product.name} />;
       })}
-      <div className={"cart-shipping"}>
-        <hr />
-        <p>Estimated shipping costs</p>
-        <p className={"shipping-price"}>£5.00</p>
-      </div>
+
       <div className={"cart-discount"}>
-        <hr />
         <p>Discount Code</p>
         <div className={"discount-input"}>
           <Input
@@ -48,8 +45,23 @@ const CartItems = () => {
           </Button>
         </div>
       </div>
+      {/*<div className={"cart-shipping"}>
+        <p>Estimated shipping costs</p>
+        <p className={"shipping-price"}>£5.00</p>
+      </div>*/}
       <div className={"cart-total"}>
         <p>Cart Total: £{cart?.total.toFixed(2) || "0"}</p>
+      </div>
+      <div className={"cart-action-buttons"}>
+        <Button
+          size={"large"}
+          type={"submit"}
+          variant={"contained"}
+          color={"success"}
+          onClick={() => navigate("/checkout")}
+        >
+          CHECKOUT
+        </Button>
       </div>
     </div>
   );

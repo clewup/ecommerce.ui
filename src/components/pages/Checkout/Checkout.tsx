@@ -1,13 +1,12 @@
-import "./cart.scss";
-import CheckoutForm from "../../organisms/CheckoutForm/CheckoutForm";
-import CartItems from "../../organisms/CartItems/CartItems";
-import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../../../contexts/Auth";
-import { UserContext } from "../../../contexts/User";
+import "./checkout.scss";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
+import CheckoutForm from "../../organisms/CheckoutForm/CheckoutForm";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../contexts/User";
+import { AuthContext } from "../../../contexts/Auth";
 
-const Cart = () => {
+const Checkout = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const { isAuthenticated } = useContext(AuthContext);
@@ -18,9 +17,9 @@ const Cart = () => {
   }, []);
 
   return (
-    <Wrapper id={"cart"}>
-      <CartItems />
+    <Wrapper id={"checkout"}>
+      <CheckoutForm />
     </Wrapper>
   );
 };
-export default Cart;
+export default Checkout;

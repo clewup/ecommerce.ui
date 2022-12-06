@@ -1,6 +1,6 @@
-#checkout {
+#checkout-form {
   background-color: #ccc;
-  padding: 1rem;
+  padding: 1rem 2rem;
   border-radius: 1rem;
   width: 30rem;
   display: flex;
@@ -14,6 +14,7 @@
 
   .billing-address {
     display: flex;
+    padding: 1rem 0;
     flex-direction: column;
     align-items: center;
     justify-content: center;

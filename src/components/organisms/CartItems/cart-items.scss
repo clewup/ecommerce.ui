@@ -1,6 +1,6 @@
 #cart-items {
   padding: 1rem 2rem;
-  border: 0.2rem solid black;
+  background-color: #ccc;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -36,6 +36,13 @@
   .cart-total {
     text-align: center;
     font-size: 1.5rem;
-    padding: 2rem 0;
+    padding: 1rem 0;
+  }
+
+  .cart-action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
   }
 }
