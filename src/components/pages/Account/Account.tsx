@@ -22,7 +22,13 @@ const Account = () => {
   console.log(user);
 
   return (
-    <Formik initialValues={user} onSubmit={(values) => updateUser(values)}>
+    <Formik
+      initialValues={user}
+      onSubmit={(values) => {
+        updateUser(values);
+        setEditing(false);
+      }}
+    >
       {(formik) => {
         return (
           <Wrapper id={"account"}>

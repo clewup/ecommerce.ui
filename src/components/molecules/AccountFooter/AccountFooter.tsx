@@ -23,6 +23,7 @@ const AccountFooter: React.FC<IProps> = ({ isEditing, setEditing }) => {
         variant={"contained"}
         color={"success"}
         size={"large"}
+        disabled={!isEditing}
       >
         Save
       </Button>
