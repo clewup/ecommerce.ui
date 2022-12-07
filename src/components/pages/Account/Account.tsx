@@ -19,8 +19,6 @@ const Account = () => {
     );
   }
 
-  console.log(user);
-
   return (
     <Formik
       initialValues={user}
