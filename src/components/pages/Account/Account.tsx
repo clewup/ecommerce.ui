@@ -5,10 +5,13 @@ import AccountDetails from "../../organisms/AccountDetails/AccountDetails";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 import AccountFooter from "../../molecules/AccountFooter/AccountFooter";
 import ErrorMessage from "../../molecules/ErrorMessage/ErrorMessage";
+import { Form, Formik } from "formik";
+import useUser from "../../../hooks/useUser";
 
 const Account = () => {
   const { user } = useContext(UserContext);
   const [isEditing, setEditing] = useState(false);
+  const { updateUser } = useUser();
 
   if (!user) {
     return (
@@ -16,11 +19,25 @@ const Account = () => {
     );
   }
 
+  console.log(user);
+
   return (
-    <Wrapper id={"account"}>
-      <AccountDetails user={user} isEditing={isEditing} />
-      <AccountFooter isEditing={isEditing} setEditing={setEditing} />
-    </Wrapper>
+    <Formik initialValues={user} onSubmit={(values) => updateUser(values)}>
+      {(formik) => {
+        return (
+          <Wrapper id={"account"}>
+            <Form>
+              <AccountDetails
+                formik={formik}
+                user={user}
+                isEditing={isEditing}
+              />
+              <AccountFooter isEditing={isEditing} setEditing={setEditing} />
+            </Form>
+          </Wrapper>
+        );
+      }}
+    </Formik>
   );
 };
 export default Account;

@@ -18,7 +18,12 @@ const AccountFooter: React.FC<IProps> = ({ isEditing, setEditing }) => {
       >
         Edit
       </Button>
-      <Button variant={"contained"} color={"success"} size={"large"}>
+      <Button
+        type={"submit"}
+        variant={"contained"}
+        color={"success"}
+        size={"large"}
+      >
         Save
       </Button>
     </div>
