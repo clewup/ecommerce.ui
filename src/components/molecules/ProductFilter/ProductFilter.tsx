@@ -6,6 +6,7 @@ import Input from "../../atoms/Input/Input";
 import SelectInput from "../../atoms/SelectInput/SelectInput";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
 import { InputLabel, Slider } from "@mui/material";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const ProductFilter = () => {
   const {
@@ -20,7 +21,7 @@ const ProductFilter = () => {
 
   const { categories, error } = useProductFilter();
 
-  if (error) return <p>ERROR: {error.message}</p>;
+  if (error) return <ErrorMessage message={error.message} />;
 
   return (
     <div id={"product-filter"}>
