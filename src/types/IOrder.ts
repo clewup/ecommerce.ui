@@ -7,5 +7,4 @@ export interface IOrder {
   user: IUser;
   cart: ICart;
   orderDate: Date;
-  shippedDate?: Date;
 }

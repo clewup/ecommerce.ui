@@ -109,7 +109,7 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
       <div className={"checkout-action-buttons"}>
         <Button
           size={"large"}
-          type={"submit"}
+          type={"button"}
           variant={"contained"}
           color={"success"}
           onClick={() => setTabIndex(1)}
