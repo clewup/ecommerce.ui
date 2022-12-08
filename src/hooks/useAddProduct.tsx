@@ -1,32 +1,33 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IProduct } from "../types/IProduct";
 import { AxiosError } from "axios";
-import { createGuid } from "../utils/CreateGuid";
 import postProduct from "../api/PostProduct";
+import { IImage } from "../types/IImage";
 
 interface IUseAddProductProps {
   initialValues: IProduct;
   isLoading: boolean;
   error: AxiosError | null;
-  formatProduct: (values: IProduct) => IProduct;
+  addProduct: (product: IProduct, images: IImage[]) => void;
 }
 
-const useAddProduct = (product?: IProduct): IUseAddProductProps => {
+const useAddProduct = (): IUseAddProductProps => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
   const initialValues: IProduct = {
     name: "",
+    images: [],
     description: "",
     category: "",
     pricePerUnit: 0,
     discount: 0,
   };
 
-  const formatProduct = (values: IProduct) => {
+  const formatProduct = (values: IProduct, images: IImage[]) => {
     return {
-      id: createGuid(),
       name: values.name,
+      images: images,
       description: values.description,
       category: values.category,
       pricePerUnit: values.pricePerUnit,
@@ -34,20 +35,20 @@ const useAddProduct = (product?: IProduct): IUseAddProductProps => {
     } as IProduct;
   };
 
-  useEffect(() => {
-    if (product) {
-      setLoading(true);
-      postProduct(product)
-        .catch((err) => setError(err))
-        .finally(() => setLoading(false));
-    }
-  }, [product]);
+  const addProduct = (product: IProduct, images: IImage[]) => {
+    const formattedProduct = formatProduct(product, images);
+
+    setLoading(true);
+    postProduct(formattedProduct)
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
 
   return {
     initialValues,
     isLoading,
     error,
-    formatProduct,
+    addProduct,
   };
 };
 export default useAddProduct;

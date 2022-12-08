@@ -5,23 +5,33 @@ import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import useImageUpload from "../../../hooks/useImageUpload";
 import ErrorMessage from "../../molecules/ErrorMessage/ErrorMessage";
 
 const AddProductForm = () => {
-  const [product, setProduct] = useState<IProduct>();
   const formRef = useRef<FormikProps<IProduct> | null>(null);
 
-  const { initialValues, formatProduct } = useAddProduct(product);
-  const { images, isLoading, error, uploadImages } = useImageUpload();
+  const {
+    initialValues,
+    isLoading: productLoading,
+    error: productError,
+    addProduct,
+  } = useAddProduct();
+  const {
+    images,
+    isLoading: imagesLoading,
+    error: imagesError,
+    uploadImages,
+  } = useImageUpload();
 
   const handleSubmit = (values: IProduct) => {
-    setProduct(formatProduct(values));
+    addProduct(values, images);
     formRef.current?.resetForm({ values: formRef.current?.initialValues });
   };
 
-  if (error) return <ErrorMessage error={error} />;
+  if (productError || imagesError)
+    return <ErrorMessage error={productError || imagesError!} />;
 
   return (
     <Formik
@@ -36,14 +46,14 @@ const AddProductForm = () => {
               <Subheading size={subheadingSize.MEDIUM}>Add Product</Subheading>
               <div className={"product-images"}>
                 {images.map((image) => {
-                  return <img src={image.url} alt={image.id} />;
+                  return <img src={image.url} alt={image.url} />;
                 })}
               </div>
 
               <Button
                 variant="contained"
                 component="label"
-                disabled={isLoading}
+                disabled={imagesLoading}
               >
                 Upload File
                 <input
@@ -51,11 +61,12 @@ const AddProductForm = () => {
                   hidden
                   accept={"image/*"}
                   multiple
-                  onChange={(e) =>
-                    e.target.files && uploadImages(e.target.files)
-                  }
+                  onChange={(e) => {
+                    e.target.files && uploadImages(e.target.files);
+                  }}
                 />
               </Button>
+
               <Field
                 name={"name"}
                 component={Input}
@@ -75,12 +86,6 @@ const AddProductForm = () => {
                 onChange={formik.handleChange}
               />
               <Field
-                name={"stockCount"}
-                component={Input}
-                label={"Stock Count"}
-                onChange={formik.handleChange}
-              />
-              <Field
                 name={"pricePerUnit"}
                 component={Input}
                 label={"Price"}
@@ -96,7 +101,7 @@ const AddProductForm = () => {
                 type={"submit"}
                 variant={"contained"}
                 color={"success"}
-                disabled={formik.isSubmitting}
+                disabled={formik.isSubmitting || productLoading}
               >
                 Add Product
               </Button>

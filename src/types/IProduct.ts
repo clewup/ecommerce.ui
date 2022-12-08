@@ -4,6 +4,7 @@ import { IImage } from "./IImage";
 export interface IProduct {
   id?: Guid;
   name: string;
+  images: IImage[];
   description: string;
   category: string;
   pricePerUnit: number;
