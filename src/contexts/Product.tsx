@@ -7,8 +7,8 @@ interface IProps {
 export interface IProductContextProps {
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  categoryQuery: string | null;
-  setCategoryQuery: React.Dispatch<React.SetStateAction<string | null>>;
+  categoryQuery: string;
+  setCategoryQuery: React.Dispatch<React.SetStateAction<string>>;
   priceQuery: number[] | null;
   setPriceQuery: React.Dispatch<React.SetStateAction<number[] | null>>;
   saleQuery: boolean;
@@ -18,7 +18,7 @@ export interface IProductContextProps {
 const initialProductContextProps: IProductContextProps = {
   searchQuery: "",
   setSearchQuery: (() => undefined) as Dispatch<any>,
-  categoryQuery: null,
+  categoryQuery: "all",
   setCategoryQuery: (() => undefined) as Dispatch<any>,
   priceQuery: null,
   setPriceQuery: (() => undefined) as Dispatch<any>,
@@ -32,7 +32,7 @@ const ProductContext = createContext<IProductContextProps>(
 
 const ProductProvider: React.FC<IProps> = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [categoryQuery, setCategoryQuery] = useState<string | null>(null);
+  const [categoryQuery, setCategoryQuery] = useState<string>("all");
   const [priceQuery, setPriceQuery] = useState<number[] | null>(null);
   const [saleQuery, setSaleQuery] = useState(false);
 

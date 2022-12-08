@@ -1,19 +1,21 @@
 import Subheading, {
   subheadingSize,
 } from "../../../atoms/Subheading/Subheading";
-import { Field, FormikProps, FormikValues } from "formik";
+import "./delivery-details.scss";
+import { Field, FormikProps } from "formik";
 import Input from "../../../atoms/Input/Input";
 import React from "react";
 import { Button } from "@mui/material";
+import { ICheckoutFormValues } from "../../../../types/IOrder";
 
 interface IProps {
-  formik: FormikProps<FormikValues>;
+  formik: FormikProps<ICheckoutFormValues>;
   setTabIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
   return (
-    <>
+    <div id={"delivery-details"}>
       <Subheading size={subheadingSize.SMALL}>Delivery Details</Subheading>
       <div className={"checkout-form-group"}>
         <Field
@@ -21,7 +23,7 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
           component={Input}
           label={"First Name"}
           onChange={formik.handleChange}
-          value={formik.values.lineOne}
+          value={formik.values.firstName}
         />
         <Field
           name={"lastName"}
@@ -105,7 +107,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
           value={formik.values.country}
         />
       </div>
-
       <div className={"checkout-action-buttons"}>
         <Button
           size={"large"}
@@ -117,7 +118,7 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
           CONTINUE
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 export default DeliveryDetails;

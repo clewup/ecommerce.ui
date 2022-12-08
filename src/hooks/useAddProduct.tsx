@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IProduct } from "../types/IProduct";
 import { AxiosError } from "axios";
-import { FormikValues } from "formik";
 import { createGuid } from "../utils/CreateGuid";
 import postProduct from "../api/PostProduct";
 import { IImage } from "../types/IImage";
@@ -15,26 +14,24 @@ const useAddProduct = (product?: IProduct) => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
-  const initialValues = {
+  const initialValues: IProduct = {
     name: "",
+    images: [],
     description: "",
     category: "",
-    stockCount: 0,
-    pricePerUnit: "",
+    pricePerUnit: 0,
     discount: 0,
   };
 
-  const formatProduct = (values: FormikValues) => {
+  const formatProduct = (values: IProduct) => {
     return {
       id: createGuid(),
       images: images,
       name: values.name,
       description: values.description,
       category: values.category,
-      stockCount: values.stockCount,
-      pricePerUnit: parseFloat(values.pricePerUnit),
-      isDiscounted: parseFloat(values.discount) > 0,
-      discount: parseFloat(values.discount),
+      pricePerUnit: values.pricePerUnit,
+      discount: values.discount,
     } as IProduct;
   };
 

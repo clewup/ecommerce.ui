@@ -1,15 +1,13 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
-import { IOrder } from "../types/IOrder";
+import { ICheckoutFormValues, IOrder } from "../types/IOrder";
 import postOrder from "../api/PostOrder";
 import { AxiosError } from "axios";
-import { FormikValues } from "formik";
-import { createGuid } from "../utils/CreateGuid";
 import { CartContext } from "../contexts/Cart";
 
 interface ICheckoutProps {
-  initialValues: object;
-  submitCheckout: (values: FormikValues) => void;
+  initialValues: ICheckoutFormValues;
+  submitCheckout: (values: ICheckoutFormValues) => void;
   order: IOrder | null;
   isLoading: boolean;
   error: AxiosError | null;
@@ -22,7 +20,7 @@ const useCheckout = (): ICheckoutProps => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
-  const initialValues = {
+  const initialValues: ICheckoutFormValues = {
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
     email: user?.email || "",
@@ -39,14 +37,13 @@ const useCheckout = (): ICheckoutProps => {
     cvc: "567",
   };
 
-  const submitCheckout = (values: FormikValues) => {
+  const submitCheckout = (values: ICheckoutFormValues) => {
     const order: IOrder = {
-      id: createGuid(),
-      user: {
-        id: user?.id!,
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
+      userId: user?.id!,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      deliveryAddress: {
         lineOne: values.lineOne,
         lineTwo: values.lineTwo,
         lineThree: values.lineThree,

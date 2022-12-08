@@ -1,0 +1,24 @@
+#order-item {
+  background-color: #ccc;
+  border-radius: 1rem;
+  display: flex;
+  padding: 1rem 1rem;
+  gap: 2rem;
+  background-color: white;
+
+  .order-item-image {
+    height: 5rem;
+    width: 5rem;
+
+    img {
+      height: inherit;
+      width: inherit;
+      object-fit: cover;
+    }
+  }
+
+  .order-item-info {
+    width: 10rem;
+
+  }
+}

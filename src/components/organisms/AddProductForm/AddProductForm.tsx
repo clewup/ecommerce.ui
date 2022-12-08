@@ -1,5 +1,5 @@
 import "./add-product-form.scss";
-import { Field, Form, Formik, FormikProps, FormikValues } from "formik";
+import { Field, Form, Formik, FormikProps } from "formik";
 import useAddProduct from "../../../hooks/useAddProduct";
 import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
@@ -9,11 +9,11 @@ import React, { useRef, useState } from "react";
 
 const AddProductForm = () => {
   const [product, setProduct] = useState<IProduct>();
-  const formRef = useRef<FormikProps<FormikValues> | null>(null);
+  const formRef = useRef<FormikProps<IProduct> | null>(null);
 
   const { initialValues, uploadImage, formatProduct } = useAddProduct(product);
 
-  const handleSubmit = (values: FormikValues) => {
+  const handleSubmit = (values: IProduct) => {
     setProduct(formatProduct(values));
     formRef.current?.resetForm({ values: formRef.current?.initialValues });
   };
@@ -24,7 +24,7 @@ const AddProductForm = () => {
       onSubmit={(values, { setSubmitting }) => handleSubmit(values)}
       innerRef={formRef}
     >
-      {(formik) => {
+      {(formik: FormikProps<IProduct>) => {
         return (
           <div id={"add-product-form"}>
             <Form>
@@ -78,9 +78,7 @@ const AddProductForm = () => {
                 type={"submit"}
                 variant={"contained"}
                 color={"success"}
-                disabled={
-                  formik.values.stockCount.length === 0 || formik.isSubmitting
-                }
+                disabled={formik.isSubmitting}
               >
                 Add Product
               </Button>

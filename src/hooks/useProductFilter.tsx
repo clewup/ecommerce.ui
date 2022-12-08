@@ -11,7 +11,7 @@ const useProductFilter = () => {
 
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState<string[]>([]);
 
   const {
     searchQuery,

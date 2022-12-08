@@ -1,5 +1,5 @@
 import "./checkout-form.scss";
-import { Form, Formik, FormikProps, FormikValues } from "formik";
+import { Form, Formik, FormikProps } from "formik";
 import useCheckout from "../../../hooks/useCheckout";
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "@mui/material";
@@ -7,6 +7,7 @@ import DeliveryDetails from "./DeliveryDetails/DeliveryDetails";
 import BillingDetails from "./BillingDetails/BillingDetails";
 import PurchaseComplete from "./PurchaseComplete/PurchaseComplete";
 import ErrorMessage from "../../molecules/ErrorMessage/ErrorMessage";
+import { ICheckoutFormValues } from "../../../types/IOrder";
 
 const CheckoutForm = () => {
   const { initialValues, submitCheckout, order, isLoading, error } =
@@ -38,7 +39,7 @@ const CheckoutForm = () => {
           submitCheckout(values);
         }}
       >
-        {(formik: FormikProps<FormikValues>) => {
+        {(formik: FormikProps<ICheckoutFormValues>) => {
           return (
             <Form>
               {tabIndex === 0 && (
@@ -47,7 +48,9 @@ const CheckoutForm = () => {
               {tabIndex === 1 && (
                 <BillingDetails formik={formik} setTabIndex={setTabIndex} />
               )}
-              {tabIndex === 2 && <PurchaseComplete order={order} />}
+              {tabIndex === 2 && (
+                <PurchaseComplete order={order} isLoading={isLoading} />
+              )}
             </Form>
           );
         }}

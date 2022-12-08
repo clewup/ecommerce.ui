@@ -7,7 +7,9 @@ import Wrapper from "../../atoms/Wrapper/Wrapper";
 const Store = () => {
   return (
     <Wrapper id={"store"}>
-      <ProductFilter />
+      <div>
+        <ProductFilter />
+      </div>
       <Products />
     </Wrapper>
   );
