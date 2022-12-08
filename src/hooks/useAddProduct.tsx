@@ -36,10 +36,10 @@ const useAddProduct = (product?: IProduct) => {
   };
 
   const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
+    if (e.target.files && e.target.files.length > 0) {
       const file: IImage = {
         url: "",
-        file: e.target.files[0],
+        file: e.target.files[0]!,
         description: "",
         timestamp: new Date(),
         id: Guid.create().toString(),

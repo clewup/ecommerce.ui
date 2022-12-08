@@ -56,11 +56,11 @@ const useProductFilter = () => {
   };
 
   const filterByPrice = (joinedFilter: any[]) => {
-    if (priceQuery) {
+    if (priceQuery && priceQuery.length === 2) {
       return joinedFilter.filter(
         (product: IProduct) =>
-          product.pricePerUnit >= priceQuery[0] &&
-          product.pricePerUnit <= priceQuery[1]
+          product.pricePerUnit >= priceQuery[0]! &&
+          product.pricePerUnit <= priceQuery[1]!
       );
     } else {
       return joinedFilter;

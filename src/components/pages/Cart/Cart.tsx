@@ -1,5 +1,4 @@
 import "./cart.scss";
-import CheckoutForm from "../../organisms/CheckoutForm/CheckoutForm";
 import CartItems from "../../organisms/CartItems/CartItems";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";

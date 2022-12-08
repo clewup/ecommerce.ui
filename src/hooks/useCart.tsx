@@ -19,7 +19,10 @@ const useCart = () => {
     if (user) {
       setLoading(true);
       getCartByUserId(user?.id!)
-        .then((res) => setCart(res.data))
+        .then((res) => {
+          if (res.status === 204) setCart(null);
+          else setCart(res.data);
+        })
         .catch((err) => setError(err))
         .finally(() => setLoading(false));
     }

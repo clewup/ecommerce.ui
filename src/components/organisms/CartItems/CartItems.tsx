@@ -25,11 +25,12 @@ const CartItems = () => {
     <div id={"cart-items"}>
       <Subheading size={subheadingSize.SMALL}>Cart</Subheading>
 
-      {cart?.products?.length === 0 && (
-        <p className={"empty-cart"}>
-          Your cart is empty. <RemoveShoppingCartIcon />
-        </p>
-      )}
+      {cart?.products?.length === 0 ||
+        (cart == null && (
+          <p className={"empty-cart"}>
+            Your cart is empty. <RemoveShoppingCartIcon />
+          </p>
+        ))}
 
       {cart?.products?.map((product) => {
         return <CartItem cartItem={product} key={product.name} />;
@@ -58,7 +59,7 @@ const CartItems = () => {
         <p className={"shipping-price"}>£5.00</p>
       </div>*/}
       <div className={"cart-total"}>
-        <p>Cart Total: £{cart?.total.toFixed(2) || "0"}</p>
+        <p>Cart Total: £{cart?.total?.toFixed(2) || "0"}</p>
       </div>
       <div className={"cart-action-buttons"}>
         <Button
