@@ -24,24 +24,26 @@ const AccountOrders = () => {
   return (
     <div id={"account-orders"}>
       <Subheading size={subheadingSize.SMALL}>Your Orders</Subheading>
-      {orders.map((order) => {
-        return (
-          <div className={`order order-${order.id}`}>
-            <div className={"order-info"}>
-              <p className={"order-id"}>{order.id!.toString()}</p>
-              <p>{new Date(order.orderDate).toDateString()}</p>
-              <p>Total: {order.cart.total}</p>
+      <div className={"orders"}>
+        {orders.map((order) => {
+          return (
+            <div className={`order order-${order.id}`}>
+              <div className={"order-info"}>
+                <p className={"order-id"}>{order.id!.toString()}</p>
+                <p>{new Date(order.orderDate).toDateString()}</p>
+                <p>Total: {order.cart.total}</p>
+              </div>
+              {order.cart.products.map((orderItem) => {
+                return (
+                  <div className={"order-items"}>
+                    <OrderItem orderItem={orderItem} />
+                  </div>
+                );
+              })}
             </div>
-            {order.cart.products.map((orderItem) => {
-              return (
-                <div className={"order-items"}>
-                  <OrderItem orderItem={orderItem} />
-                </div>
-              );
-            })}
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

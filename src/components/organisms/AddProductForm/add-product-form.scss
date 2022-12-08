@@ -4,11 +4,26 @@
   background-color: #ccc;
   border-radius: 1rem;
 
-  form {
+  Form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
 
+
+    .product-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      place-items: center;
+
+      img {
+        width: 20vw;
+        height: 20vw;
+        object-fit: cover;
+      }
+    }
   }
 }

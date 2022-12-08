@@ -5,7 +5,6 @@ import "./account-details.scss";
 
 import Input from "../../atoms/Input/Input";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
-import Heading from "../../atoms/Heading/Heading";
 
 interface IProps {
   formik: FormikProps<IUser>;
