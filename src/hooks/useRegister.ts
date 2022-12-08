@@ -8,7 +8,12 @@ import { ILogin } from "../types/ILogin";
 import { AxiosError, AxiosResponse } from "axios";
 import { IAccessToken } from "../types/IAccessToken";
 
-const useRegister = (register?: IRegister) => {
+interface IUseRegisterProps {
+  isLoading: boolean;
+  error: AxiosError | null;
+}
+
+const useRegister = (register?: IRegister): IUseRegisterProps => {
   const [login, setLogin] = useState<ILogin>();
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);

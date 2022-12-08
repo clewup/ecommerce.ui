@@ -11,7 +11,7 @@ const AddProductForm = () => {
   const [product, setProduct] = useState<IProduct>();
   const formRef = useRef<FormikProps<IProduct> | null>(null);
 
-  const { initialValues, uploadImage, formatProduct } = useAddProduct(product);
+  const { initialValues, formatProduct } = useAddProduct(product);
 
   const handleSubmit = (values: IProduct) => {
     setProduct(formatProduct(values));
@@ -29,15 +29,6 @@ const AddProductForm = () => {
           <div id={"add-product-form"}>
             <Form>
               <Subheading size={subheadingSize.MEDIUM}>Add Product</Subheading>
-              <Button variant="contained" component="label">
-                Upload File
-                <input
-                  type="file"
-                  hidden
-                  accept={"image/*"}
-                  onChange={(e) => e.target.files && uploadImage(e)}
-                />
-              </Button>
               <Field
                 name={"name"}
                 component={Input}

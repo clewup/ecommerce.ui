@@ -5,7 +5,7 @@ import postOrder from "../api/PostOrder";
 import { AxiosError } from "axios";
 import { CartContext } from "../contexts/Cart";
 
-interface ICheckoutProps {
+interface IUseCheckoutProps {
   initialValues: ICheckoutFormValues;
   submitCheckout: (values: ICheckoutFormValues) => void;
   order: IOrder | null;
@@ -13,7 +13,7 @@ interface ICheckoutProps {
   error: AxiosError | null;
 }
 
-const useCheckout = (): ICheckoutProps => {
+const useCheckout = (): IUseCheckoutProps => {
   const { user } = useContext(UserContext);
   const { cart } = useContext(CartContext);
   const [order, setOrder] = useState<IOrder | null>(null);

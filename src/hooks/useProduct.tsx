@@ -4,8 +4,14 @@ import { Guid } from "guid-typescript";
 import getProductById from "../api/GetProductById";
 import { AxiosError } from "axios";
 
-const useProduct = (id: Guid) => {
-  const [product, setProduct] = useState<IProduct>();
+interface IUseProductProps {
+  product: IProduct | null;
+  isLoading: boolean;
+  error: AxiosError | null;
+}
+
+const useProduct = (id: Guid): IUseProductProps => {
+  const [product, setProduct] = useState<IProduct | null>(null);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 

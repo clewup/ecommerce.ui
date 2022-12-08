@@ -24,7 +24,7 @@ const CheckoutForm = () => {
     }
   }, [order]);
 
-  if (error) return <ErrorMessage message={error.message} />;
+  if (error) return <ErrorMessage error={error} />;
 
   return (
     <div id={"checkout-form"}>

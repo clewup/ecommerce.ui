@@ -3,7 +3,6 @@ import { IImage } from "./IImage";
 
 export interface IProduct {
   id?: Guid;
-  images: IImage[];
   name: string;
   description: string;
   category: string;

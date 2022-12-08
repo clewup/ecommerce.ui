@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IProduct } from "../types/IProduct";
 import { AxiosError } from "axios";
 import { createGuid } from "../utils/CreateGuid";
 import postProduct from "../api/PostProduct";
-import { IImage } from "../types/IImage";
-import postImage from "../api/PostImage";
-import { Guid } from "guid-typescript";
 
-const useAddProduct = (product?: IProduct) => {
-  const [newImage, setNewImage] = useState<IImage>();
-  const [images, setImages] = useState<IImage[]>([]);
+interface IUseAddProductProps {
+  initialValues: IProduct;
+  isLoading: boolean;
+  error: AxiosError | null;
+  formatProduct: (values: IProduct) => IProduct;
+}
 
+const useAddProduct = (product?: IProduct): IUseAddProductProps => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
   const initialValues: IProduct = {
     name: "",
-    images: [],
     description: "",
     category: "",
     pricePerUnit: 0,
@@ -26,37 +26,12 @@ const useAddProduct = (product?: IProduct) => {
   const formatProduct = (values: IProduct) => {
     return {
       id: createGuid(),
-      images: images,
       name: values.name,
       description: values.description,
       category: values.category,
       pricePerUnit: values.pricePerUnit,
       discount: values.discount,
     } as IProduct;
-  };
-
-  const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file: IImage = {
-        url: "",
-        file: e.target.files[0]!,
-        description: "",
-        timestamp: new Date(),
-        id: Guid.create().toString(),
-      };
-      console.log(file);
-      setNewImage(file);
-      setLoading(true);
-      postImage(newImage!)
-        .then((res) => {
-          console.log(res);
-          setImages((prev: IImage[]) => {
-            return [...prev, res.data];
-          });
-        })
-        .catch((err) => setError(err))
-        .finally(() => setLoading(false));
-    }
   };
 
   useEffect(() => {
@@ -72,9 +47,6 @@ const useAddProduct = (product?: IProduct) => {
     initialValues,
     isLoading,
     error,
-    uploadImage,
-    images,
-    setImages,
     formatProduct,
   };
 };

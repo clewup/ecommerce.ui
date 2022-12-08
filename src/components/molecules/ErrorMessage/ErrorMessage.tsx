@@ -4,17 +4,21 @@ import React from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 interface IProps {
-  message: string;
+  error: {
+    code?: string;
+    message?: string;
+  };
 }
 
-const ErrorMessage: React.FC<IProps> = ({ message }) => {
+const ErrorMessage: React.FC<IProps> = ({ error }) => {
   return (
     <Wrapper id={"error"}>
       <div className={"error-message"}>
         <div className={"error-icon"}>
           <ErrorOutlineIcon fontSize={"inherit"} />
         </div>
-        <p>{message}</p>
+        <p>{error.code}</p>
+        <p>{error.message}</p>
       </div>
     </Wrapper>
   );

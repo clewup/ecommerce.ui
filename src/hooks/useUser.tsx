@@ -4,7 +4,13 @@ import { UserContext } from "../contexts/User";
 import { AxiosError } from "axios";
 import putUser from "../api/PutUser";
 
-const useUser = () => {
+interface IUseUserProps {
+  isLoading: boolean;
+  error: AxiosError | null;
+  updateUser: (user: IUser) => void;
+}
+
+const useUser = (): IUseUserProps => {
   const { setUser } = useContext(UserContext);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);

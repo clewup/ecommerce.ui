@@ -11,7 +11,7 @@ const Product = () => {
   const { product, isLoading, error } = useProduct(Guid.parse(id!));
 
   if (!product || isLoading) return <Loader />;
-  if (error) return <ErrorMessage message={error.message} />;
+  if (error) return <ErrorMessage error={error} />;
 
   return <Wrapper id={"product"}>{product.name}</Wrapper>;
 };

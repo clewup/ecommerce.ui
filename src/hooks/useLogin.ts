@@ -6,7 +6,12 @@ import { AuthContext } from "../contexts/Auth";
 import { AxiosError, AxiosResponse } from "axios";
 import { IAccessToken } from "../types/IAccessToken";
 
-const useLogin = (login?: ILogin) => {
+interface IUseLoginProps {
+  isLoading: boolean;
+  error: AxiosError | null;
+}
+
+const useLogin = (login?: ILogin): IUseLoginProps => {
   const { setUser } = useContext(UserContext);
   const { setAuthenticated, setAccessToken } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(false);

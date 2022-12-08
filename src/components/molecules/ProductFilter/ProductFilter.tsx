@@ -21,7 +21,7 @@ const ProductFilter = () => {
 
   const { categories, error } = useProductFilter();
 
-  if (error) return <ErrorMessage message={error.message} />;
+  if (error) return <ErrorMessage error={error} />;
 
   return (
     <div id={"product-filter"}>

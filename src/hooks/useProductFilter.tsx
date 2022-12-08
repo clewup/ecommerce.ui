@@ -5,7 +5,15 @@ import { ProductContext } from "../contexts/Product";
 import { IProduct } from "../types/IProduct";
 import getProducts from "../api/GetProducts";
 
-const useProductFilter = () => {
+interface IUseProductFilterProps {
+  products: IProduct[];
+  filteredProducts: IProduct[];
+  categories: string[];
+  isLoading: boolean;
+  error: AxiosError | null;
+}
+
+const useProductFilter = (): IUseProductFilterProps => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
@@ -99,7 +107,6 @@ const useProductFilter = () => {
     filteredProducts,
     // @ts-ignore
     categories: [...new Set(categories)], // Removes duplicates from the array.
-    // @ts-ignore
     isLoading,
     error,
   };

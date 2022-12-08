@@ -13,4 +13,5 @@ export const apiEndpoints = {
   CART: "cart",
   CART_BY_USER_ID: (userId: Guid) => `cart/user/${userId}`,
   ORDER: "order",
+  ORDER_BY_USER_ID: (userId: Guid) => `order/user/${userId}`,
 };

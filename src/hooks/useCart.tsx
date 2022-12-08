@@ -9,7 +9,14 @@ import putCart from "../api/PutCart";
 import postCart from "../api/PostCart";
 import { createGuid } from "../utils/CreateGuid";
 
-const useCart = () => {
+interface IUseCartProps {
+  getCart: () => void;
+  addToCart: (product: IProduct) => void;
+  removeFromCart: (product: IProduct) => void;
+  error: AxiosError | null;
+}
+
+const useCart = (): IUseCartProps => {
   const { cart, setCart, setLoading } = useContext(CartContext);
   const { user } = useContext(UserContext);
 

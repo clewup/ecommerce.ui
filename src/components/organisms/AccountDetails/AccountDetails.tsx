@@ -16,9 +16,6 @@ interface IProps {
 const AccountDetails: React.FC<IProps> = ({ formik, user, isEditing }) => {
   return (
     <div id={"account-details"}>
-      <Heading>
-        {user?.firstName} {user?.lastName}
-      </Heading>
       <div className={"contact-info"}>
         <Subheading size={subheadingSize.SMALL}>Contact Info</Subheading>
         <Field
