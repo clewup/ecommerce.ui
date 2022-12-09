@@ -12,7 +12,9 @@ const OrderItem: React.FC<IProps> = ({ orderItem }) => {
       <div className={"order-item-image"}>
         <img
           src={
-            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80"
+            orderItem.images.length > 0
+              ? orderItem.images![0]!.url!
+              : "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80"
           }
           alt={orderItem.name}
         />
