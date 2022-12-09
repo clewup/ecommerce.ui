@@ -25,12 +25,11 @@ const CartItems = () => {
     <div id={"cart-items"}>
       <Subheading size={subheadingSize.SMALL}>Cart</Subheading>
 
-      {cart?.products?.length === 0 ||
-        (cart == null && (
-          <p className={"empty-cart"}>
-            Your cart is empty. <RemoveShoppingCartIcon />
-          </p>
-        ))}
+      {cart?.products?.length === 0 || cart == null || !cart.products ? (
+        <p className={"empty-cart"}>
+          Your cart is empty. <RemoveShoppingCartIcon />
+        </p>
+      ) : null}
 
       {cart?.products?.map((product) => {
         return <CartItem cartItem={product} key={product.name} />;
