@@ -1,6 +1,6 @@
 import { ILogin } from "../types/ILogin";
 import postLogin from "../api/PostLogin";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
 import { AuthContext } from "../contexts/Auth";
 import { AxiosError, AxiosResponse } from "axios";
@@ -9,30 +9,28 @@ import { IAccessToken } from "../types/IAccessToken";
 interface IUseLoginProps {
   isLoading: boolean;
   error: AxiosError | null;
+  loginUser: (login: ILogin) => void;
 }
 
-const useLogin = (login?: ILogin): IUseLoginProps => {
+const useLogin = (): IUseLoginProps => {
   const { setUser } = useContext(UserContext);
   const { setAuthenticated, setAccessToken } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
-  useEffect(() => {
-    if (login) {
-      setLoading(true);
-      postLogin(login)
-        .then((res: AxiosResponse<IAccessToken>) => {
-          setUser(res.data.user);
-          setAccessToken(res.data.accessToken);
-          setAuthenticated(true);
-          localStorage.setItem("AT", res.data.accessToken);
-        })
-        .catch((err) => setError(err))
-        .finally(() => setLoading(false));
-    }
-    //eslint-disable-next-line
-  }, [login]);
+  const loginUser = (login: ILogin) => {
+    setLoading(true);
+    postLogin(login)
+      .then((res: AxiosResponse<IAccessToken>) => {
+        setUser(res.data.user);
+        setAccessToken(res.data.accessToken);
+        setAuthenticated(true);
+        localStorage.setItem("AT", res.data.accessToken);
+      })
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
 
-  return { isLoading, error };
+  return { isLoading, error, loginUser };
 };
 export default useLogin;

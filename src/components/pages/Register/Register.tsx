@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { LoadingButton } from "@mui/lab";
 import "./register.scss";
 import { AuthContext } from "../../../contexts/Auth";
@@ -7,14 +7,12 @@ import { useNavigate } from "react-router-dom";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
-import { initialRegisterValues, IRegister } from "../../../types/IRegister";
+import { initialRegisterValues } from "../../../types/IRegister";
 import useRegister from "../../../hooks/useRegister";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Register = () => {
-  const [register, setRegister] = useState<IRegister>();
-
-  const { isLoading, error } = useRegister(register);
+  const { isLoading, error, registerUser } = useRegister();
   const { isAuthenticated } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -27,7 +25,7 @@ const Register = () => {
     <Wrapper id={"register"}>
       <Formik
         initialValues={initialRegisterValues}
-        onSubmit={(values) => setRegister(values)}
+        onSubmit={(values) => registerUser(values)}
       >
         {(formik) => {
           return (

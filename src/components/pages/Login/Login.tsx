@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import useLogin from "../../../hooks/useLogin";
 import "./login.scss";
 import { LoadingButton } from "@mui/lab";
@@ -8,26 +8,24 @@ import { useNavigate } from "react-router-dom";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
-import { ILogin, initialLoginValues } from "../../../types/ILogin";
+import { initialLoginValues } from "../../../types/ILogin";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Login = () => {
-  const [login, setLogin] = useState<ILogin>();
-
-  const { isLoading, error } = useLogin(login);
+  const { isLoading, error, loginUser } = useLogin();
   const { isAuthenticated } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   if (isAuthenticated) {
-    navigate("/");
+    navigate(-1);
   }
 
   return (
     <Wrapper id={"login"}>
       <Formik
         initialValues={initialLoginValues}
-        onSubmit={(values) => setLogin(values)}
+        onSubmit={(values) => loginUser(values)}
       >
         {(formik) => {
           return (
