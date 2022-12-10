@@ -6,12 +6,18 @@ import { Tab, Tabs } from "@mui/material";
 import DeliveryDetails from "./DeliveryDetails/DeliveryDetails";
 import BillingDetails from "./BillingDetails/BillingDetails";
 import PurchaseComplete from "./PurchaseComplete/PurchaseComplete";
-import ErrorMessage from "../../molecules/ErrorMessage/ErrorMessage";
+import AppError from "../../molecules/AppError/AppError";
 import { ICheckoutFormValues } from "../../../types/IOrder";
 
 const CheckoutForm = () => {
-  const { initialValues, submitCheckout, order, isLoading, error } =
-    useCheckout();
+  const {
+    initialValues,
+    validationSchema,
+    submitCheckout,
+    order,
+    isLoading,
+    error,
+  } = useCheckout();
   const [tabIndex, setTabIndex] = useState(0);
 
   const handleTabChange = (event: React.SyntheticEvent, newTabIndex: any) => {
@@ -24,7 +30,7 @@ const CheckoutForm = () => {
     }
   }, [order]);
 
-  if (error) return <ErrorMessage error={error} />;
+  if (error) return <AppError error={error} />;
 
   return (
     <div id={"checkout-form"}>
@@ -35,6 +41,7 @@ const CheckoutForm = () => {
       </Tabs>
       <Formik
         initialValues={initialValues}
+        validationSchema={validationSchema}
         onSubmit={(values) => {
           submitCheckout(values);
         }}

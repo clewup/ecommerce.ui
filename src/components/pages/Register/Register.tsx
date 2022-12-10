@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useContext } from "react";
 import { LoadingButton } from "@mui/lab";
 import "./register.scss";
@@ -12,7 +12,7 @@ import useRegister from "../../../hooks/useRegister";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Register = () => {
-  const { isLoading, error, registerUser } = useRegister();
+  const { isLoading, error, validationSchema, registerUser } = useRegister();
   const { isAuthenticated } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -25,26 +25,28 @@ const Register = () => {
     <Wrapper id={"register"}>
       <Formik
         initialValues={initialRegisterValues}
+        validationSchema={validationSchema}
         onSubmit={(values) => registerUser(values)}
       >
         {(formik) => {
           return (
             <Form className={"register-form"}>
               <Subheading size={subheadingSize.MEDIUM}>Register</Subheading>
-              <div className={"register-form-group"}>
-                <Field
-                  name={"firstName"}
-                  component={Input}
-                  label={"First Name"}
-                  onChange={formik.handleChange}
-                />
-                <Field
-                  name={"lastName"}
-                  component={Input}
-                  label={"Last Name"}
-                  onChange={formik.handleChange}
-                />
-              </div>
+              <Field
+                name={"firstName"}
+                component={Input}
+                label={"First Name"}
+                onChange={formik.handleChange}
+              />
+              <ErrorMessage name={"firstName"} />
+
+              <Field
+                name={"lastName"}
+                component={Input}
+                label={"Last Name"}
+                onChange={formik.handleChange}
+              />
+              <ErrorMessage name={"lastName"} />
 
               <Field
                 name={"email"}
@@ -52,6 +54,8 @@ const Register = () => {
                 label={"Email"}
                 onChange={formik.handleChange}
               />
+              <ErrorMessage name={"email"} />
+
               <Field
                 name={"password"}
                 component={Input}
@@ -59,6 +63,8 @@ const Register = () => {
                 isPassword={true}
                 onChange={formik.handleChange}
               />
+              <ErrorMessage name={"password"} />
+
               <Field
                 name={"confirmPassword"}
                 component={Input}
@@ -66,6 +72,7 @@ const Register = () => {
                 isPassword={true}
                 onChange={formik.handleChange}
               />
+              <ErrorMessage name={"confirmPassword"} />
 
               {error && <p>{error.message}</p>}
 

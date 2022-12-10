@@ -5,7 +5,7 @@ import { UserContext } from "../../../contexts/User";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import OrderItem from "../../molecules/OrderItem/OrderItem";
 import Loader from "../../atoms/Loader/Loader";
-import ErrorMessage from "../../molecules/ErrorMessage/ErrorMessage";
+import AppError from "../../molecules/AppError/AppError";
 
 const AccountOrders = () => {
   const { orders, isLoading, error, getUserOrders } = useOrder();
@@ -19,7 +19,7 @@ const AccountOrders = () => {
   }, []);
 
   if (isLoading) return <Loader />;
-  if (error) return <ErrorMessage error={error} />;
+  if (error) return <AppError error={error} />;
 
   return (
     <div id={"account-orders"}>

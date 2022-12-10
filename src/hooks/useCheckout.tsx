@@ -4,6 +4,7 @@ import { ICheckoutFormValues, IOrder } from "../types/IOrder";
 import postOrder from "../api/PostOrder";
 import { AxiosError } from "axios";
 import { CartContext } from "../contexts/Cart";
+import * as Yup from "yup";
 
 interface IUseCheckoutProps {
   initialValues: ICheckoutFormValues;
@@ -11,6 +12,7 @@ interface IUseCheckoutProps {
   order: IOrder | null;
   isLoading: boolean;
   error: AxiosError | null;
+  validationSchema: Yup.ObjectSchema<any>;
 }
 
 const useCheckout = (): IUseCheckoutProps => {
@@ -36,6 +38,23 @@ const useCheckout = (): IUseCheckoutProps => {
     expiryYear: "34",
     cvc: "567",
   };
+
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required("Required"),
+    lastName: Yup.string().required("Required"),
+    email: Yup.string().email().required("Required"),
+    lineOne: Yup.string().required("Required"),
+    lineTwo: Yup.string(),
+    lineThree: Yup.string(),
+    postcode: Yup.string().required("Required"),
+    city: Yup.string().required("Required"),
+    county: Yup.string(),
+    country: Yup.string().required("Required"),
+    cardNumber: Yup.string().min(16).max(16).required("Required"),
+    expiryMonth: Yup.number().min(2).max(2).required("Required"),
+    expiryYear: Yup.number().min(2).max(2).required("Required"),
+    cvc: Yup.number().min(3).max(3).required("Required"),
+  });
 
   const submitCheckout = (values: ICheckoutFormValues) => {
     const order: IOrder = {
@@ -63,6 +82,13 @@ const useCheckout = (): IUseCheckoutProps => {
       .finally(() => setLoading(false));
   };
 
-  return { initialValues, submitCheckout, order, isLoading, error };
+  return {
+    initialValues,
+    validationSchema,
+    submitCheckout,
+    order,
+    isLoading,
+    error,
+  };
 };
 export default useCheckout;

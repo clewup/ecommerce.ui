@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useContext } from "react";
 import useLogin from "../../../hooks/useLogin";
 import "./login.scss";
@@ -12,7 +12,7 @@ import { initialLoginValues } from "../../../types/ILogin";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Login = () => {
-  const { isLoading, error, loginUser } = useLogin();
+  const { isLoading, error, validationSchema, loginUser } = useLogin();
   const { isAuthenticated } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -25,6 +25,7 @@ const Login = () => {
     <Wrapper id={"login"}>
       <Formik
         initialValues={initialLoginValues}
+        validationSchema={validationSchema}
         onSubmit={(values) => loginUser(values)}
       >
         {(formik) => {
@@ -37,6 +38,8 @@ const Login = () => {
                 label={"Email"}
                 onChange={formik.handleChange}
               />
+              <ErrorMessage name={"email"} />
+
               <Field
                 name={"password"}
                 component={Input}
@@ -44,6 +47,7 @@ const Login = () => {
                 isPassword={true}
                 onChange={formik.handleChange}
               />
+              <ErrorMessage name={"password"} />
 
               {error && <p>{error.message}</p>}
 

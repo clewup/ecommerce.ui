@@ -4,7 +4,7 @@ import { UserContext } from "../../../contexts/User";
 import AccountDetails from "../../organisms/AccountDetails/AccountDetails";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 import AccountFooter from "../../molecules/AccountFooter/AccountFooter";
-import ErrorMessage from "../../molecules/ErrorMessage/ErrorMessage";
+import AppError from "../../molecules/AppError/AppError";
 import { Form, Formik } from "formik";
 import useUser from "../../../hooks/useUser";
 import AccountOrders from "../../organisms/AccountOrders/AccountOrders";
@@ -25,7 +25,7 @@ const Account = () => {
 
   if (!user || !isAuthenticated) {
     return (
-      <ErrorMessage
+      <AppError
         error={{ message: "You must be logged in to view this page." }}
       />
     );

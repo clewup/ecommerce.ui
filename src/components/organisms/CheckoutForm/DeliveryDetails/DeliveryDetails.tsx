@@ -2,7 +2,7 @@ import Subheading, {
   subheadingSize,
 } from "../../../atoms/Subheading/Subheading";
 import "./delivery-details.scss";
-import { Field, FormikProps } from "formik";
+import { ErrorMessage, Field, FormikProps } from "formik";
 import Input from "../../../atoms/Input/Input";
 import React from "react";
 import { Button } from "@mui/material";
@@ -17,96 +17,96 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
   return (
     <div id={"delivery-details"}>
       <Subheading size={subheadingSize.SMALL}>Delivery Details</Subheading>
-      <div className={"checkout-form-group"}>
-        <Field
-          name={"firstName"}
-          component={Input}
-          label={"First Name"}
-          onChange={formik.handleChange}
-          value={formik.values.firstName}
-        />
-        <Field
-          name={"lastName"}
-          component={Input}
-          label={"Last Name"}
-          onChange={formik.handleChange}
-          value={formik.values.lastName}
-        />
-      </div>
+      <Field
+        name={"firstName"}
+        component={Input}
+        label={"First Name"}
+        onChange={formik.handleChange}
+        value={formik.values.firstName}
+      />
+      <ErrorMessage name={"firstName"} />
 
-      <div className={"checkout-form-group"}>
-        <Field
-          name={"email"}
-          component={Input}
-          label={"Email"}
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-      </div>
+      <Field
+        name={"lastName"}
+        component={Input}
+        label={"Last Name"}
+        onChange={formik.handleChange}
+        value={formik.values.lastName}
+      />
+      <ErrorMessage name={"lastName"} />
 
-      <div className={"checkout-form-group"}>
-        <Field
-          name={"lineOne"}
-          component={Input}
-          label={"Line One"}
-          onChange={formik.handleChange}
-          value={formik.values.lineOne}
-        />
-      </div>
+      <Field
+        name={"email"}
+        component={Input}
+        label={"Email"}
+        onChange={formik.handleChange}
+        value={formik.values.email}
+      />
+      <ErrorMessage name={"email"} />
 
-      <div className={"checkout-form-group"}>
-        <Field
-          name={"lineTwo"}
-          component={Input}
-          label={"Line Two"}
-          onChange={formik.handleChange}
-          value={formik.values.lineTwo}
-        />
-      </div>
+      <Field
+        name={"lineOne"}
+        component={Input}
+        label={"Line One"}
+        onChange={formik.handleChange}
+        value={formik.values.lineOne}
+      />
+      <ErrorMessage name={"lineOne"} />
 
-      <div className={"checkout-form-group"}>
-        <Field
-          name={"lineThree"}
-          component={Input}
-          label={"Line Three"}
-          onChange={formik.handleChange}
-          value={formik.values.lineThree}
-        />
-      </div>
+      <Field
+        name={"lineTwo"}
+        component={Input}
+        label={"Line Two"}
+        onChange={formik.handleChange}
+        value={formik.values.lineTwo}
+      />
+      <ErrorMessage name={"lineTwo"} />
 
-      <div className={"checkout-form-group"}>
-        <Field
-          name={"postcode"}
-          component={Input}
-          label={"Postcode"}
-          onChange={formik.handleChange}
-          value={formik.values.postcode}
-        />
-        <Field
-          name={"city"}
-          component={Input}
-          label={"City"}
-          onChange={formik.handleChange}
-          value={formik.values.city}
-        />
-      </div>
+      <Field
+        name={"lineThree"}
+        component={Input}
+        label={"Line Three"}
+        onChange={formik.handleChange}
+        value={formik.values.lineThree}
+      />
+      <ErrorMessage name={"lineThree"} />
 
-      <div className={"checkout-form-group"}>
-        <Field
-          name={"county"}
-          component={Input}
-          label={"County"}
-          onChange={formik.handleChange}
-          value={formik.values.county}
-        />
-        <Field
-          name={"country"}
-          component={Input}
-          label={"Country"}
-          onChange={formik.handleChange}
-          value={formik.values.country}
-        />
-      </div>
+      <Field
+        name={"postcode"}
+        component={Input}
+        label={"Postcode"}
+        onChange={formik.handleChange}
+        value={formik.values.postcode}
+      />
+      <ErrorMessage name={"postcode"} />
+
+      <Field
+        name={"city"}
+        component={Input}
+        label={"City"}
+        onChange={formik.handleChange}
+        value={formik.values.city}
+      />
+      <ErrorMessage name={"city"} />
+
+      <Field
+        name={"county"}
+        component={Input}
+        label={"County"}
+        onChange={formik.handleChange}
+        value={formik.values.county}
+      />
+      <ErrorMessage name={"county"} />
+
+      <Field
+        name={"country"}
+        component={Input}
+        label={"Country"}
+        onChange={formik.handleChange}
+        value={formik.values.country}
+      />
+      <ErrorMessage name={"country"} />
+
       <div className={"checkout-action-buttons"}>
         <Button
           size={"large"}

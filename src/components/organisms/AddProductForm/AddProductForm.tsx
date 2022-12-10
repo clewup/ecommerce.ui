@@ -1,23 +1,24 @@
 import "./add-product-form.scss";
-import { Field, Form, Formik, FormikProps } from "formik";
-import useAddProduct from "../../../hooks/useAddProduct";
+import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import React, { useRef } from "react";
 import useImageUpload from "../../../hooks/useImageUpload";
-import ErrorMessage from "../../molecules/ErrorMessage/ErrorMessage";
+import AppError from "../../molecules/AppError/AppError";
+import useProduct from "../../../hooks/useProduct";
 
 const AddProductForm = () => {
   const formRef = useRef<FormikProps<IProduct> | null>(null);
 
   const {
     initialValues,
+    validationSchema,
     isLoading: productLoading,
     error: productError,
     addProduct,
-  } = useAddProduct();
+  } = useProduct();
   const {
     images,
     isLoading: imagesLoading,
@@ -31,11 +32,12 @@ const AddProductForm = () => {
   };
 
   if (productError || imagesError)
-    return <ErrorMessage error={productError || imagesError!} />;
+    return <AppError error={productError || imagesError!} />;
 
   return (
     <Formik
       initialValues={initialValues}
+      validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => handleSubmit(values)}
       innerRef={formRef}
     >
@@ -66,6 +68,7 @@ const AddProductForm = () => {
                   }}
                 />
               </Button>
+              <ErrorMessage name={"images"} />
 
               <Field
                 name={"name"}
@@ -73,30 +76,40 @@ const AddProductForm = () => {
                 label={"Name"}
                 onChange={formik.handleChange}
               />
+              <ErrorMessage name={"name"} />
+
               <Field
                 name={"description"}
                 component={Input}
                 label={"Description"}
                 onChange={formik.handleChange}
               />
+              <ErrorMessage name={"description"} />
+
               <Field
                 name={"category"}
                 component={Input}
                 label={"Category"}
                 onChange={formik.handleChange}
               />
+              <ErrorMessage name={"category"} />
+
               <Field
                 name={"pricePerUnit"}
                 component={Input}
                 label={"Price"}
                 onChange={formik.handleChange}
               />
+              <ErrorMessage name={"pricePerUnit"} />
+
               <Field
                 name={"discount"}
                 component={Input}
                 label={"Discount"}
                 onChange={formik.handleChange}
               />
+              <ErrorMessage name={"discount"} />
+
               <Button
                 type={"submit"}
                 variant={"contained"}

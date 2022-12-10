@@ -5,7 +5,7 @@ import AllOrders from "../../organisms/AllOrders/AllOrders";
 import { Tab, Tabs } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../../contexts/User";
-import ErrorMessage from "../../molecules/ErrorMessage/ErrorMessage";
+import AppError from "../../molecules/AppError/AppError";
 import { AuthContext } from "../../../contexts/Auth";
 import { roles } from "../../../enums/roles";
 
@@ -22,7 +22,7 @@ const Admin = () => {
 
   if (!user || !isAuthenticated) {
     return (
-      <ErrorMessage
+      <AppError
         error={{ message: "You must be logged in to view this page." }}
       />
     );
@@ -30,7 +30,7 @@ const Admin = () => {
 
   if (role && role !== roles.DEVELOPER && role !== roles.EMPLOYEE) {
     return (
-      <ErrorMessage
+      <AppError
         error={{ message: "You do not have permission to view this page." }}
       />
     );

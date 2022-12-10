@@ -3,7 +3,7 @@ import "./products.scss";
 import { IProduct } from "../../../types/IProduct";
 import Loader from "../../atoms/Loader/Loader";
 import useProductFilter from "../../../hooks/useProductFilter";
-import ErrorMessage from "../../molecules/ErrorMessage/ErrorMessage";
+import AppError from "../../molecules/AppError/AppError";
 import React from "react";
 
 const Products = () => {
@@ -11,7 +11,7 @@ const Products = () => {
 
   if (!products || isLoading) return <Loader />;
 
-  if (error) return <ErrorMessage error={error} />;
+  if (error) return <AppError error={error} />;
 
   return (
     <div id={"products"}>

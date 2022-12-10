@@ -21,14 +21,7 @@ const CartItem: React.FC<IProps> = ({ cartItem }) => {
       ) : (
         <>
           <div className={"cart-item-image"}>
-            <img
-              src={
-                cartItem.images.length > 0
-                  ? cartItem.images![0]!.url!
-                  : "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80"
-              }
-              alt={cartItem.name}
-            />
+            <img src={cartItem.images![0]!.url!} alt={cartItem.name} />
           </div>
           <div className={"cart-item-info"}>
             <p>{cartItem.name}</p>
