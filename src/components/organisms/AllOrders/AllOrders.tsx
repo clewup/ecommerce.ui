@@ -1,20 +1,16 @@
-import "./account-orders.scss";
+import "./all-orders.scss";
 import useOrder from "../../../hooks/useOrder";
-import { useContext, useEffect } from "react";
-import { UserContext } from "../../../contexts/User";
+import { useEffect } from "react";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import OrderItem from "../../molecules/OrderItem/OrderItem";
 import Loader from "../../atoms/Loader/Loader";
 import ErrorMessage from "../../molecules/ErrorMessage/ErrorMessage";
 
-const AccountOrders = () => {
-  const { orders, isLoading, error, getUserOrders } = useOrder();
-  const { user } = useContext(UserContext);
+const AllOrders = () => {
+  const { orders, isLoading, error, getAllOrders } = useOrder();
 
   useEffect(() => {
-    if (user) {
-      getUserOrders(user.id);
-    }
+    getAllOrders();
     // eslint-disable-next-line
   }, []);
 
@@ -22,8 +18,8 @@ const AccountOrders = () => {
   if (error) return <ErrorMessage error={error} />;
 
   return (
-    <div id={"account-orders"}>
-      <Subheading size={subheadingSize.SMALL}>Your Orders</Subheading>
+    <div id={"all-orders"}>
+      <Subheading size={subheadingSize.SMALL}>Orders</Subheading>
       <div className={"orders"}>
         {orders.map((order) => {
           return (
@@ -47,4 +43,4 @@ const AccountOrders = () => {
     </div>
   );
 };
-export default AccountOrders;
+export default AllOrders;

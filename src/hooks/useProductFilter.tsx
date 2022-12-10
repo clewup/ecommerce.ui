@@ -21,13 +21,8 @@ const useProductFilter = (): IUseProductFilterProps => {
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
 
-  const {
-    searchQuery,
-    categoryQuery,
-    priceQuery,
-    //stockQuery,
-    saleQuery,
-  } = useContext(ProductContext);
+  const { searchQuery, categoryQuery, priceQuery, saleQuery } =
+    useContext(ProductContext);
 
   useEffect(() => {
     setLoading(true);
@@ -75,8 +70,6 @@ const useProductFilter = (): IUseProductFilterProps => {
     }
   };
 
-  // TODO: Add stock query
-
   const filterBySale = (joinedFilter: any[]) => {
     if (saleQuery) {
       return joinedFilter.filter((product: IProduct) => product.discount);
@@ -90,17 +83,10 @@ const useProductFilter = (): IUseProductFilterProps => {
     joinedFilter = filterBySearch(joinedFilter);
     joinedFilter = filterByCategory(joinedFilter);
     joinedFilter = filterByPrice(joinedFilter);
-    //joinedFilter = filterByStock(joinedFilter);
     joinedFilter = filterBySale(joinedFilter);
     setFilteredProducts(joinedFilter);
     // eslint-disable-next-line
-  }, [
-    searchQuery,
-    categoryQuery,
-    priceQuery,
-    //stockQuery,
-    saleQuery,
-  ]);
+  }, [searchQuery, categoryQuery, priceQuery, saleQuery]);
 
   return {
     products,

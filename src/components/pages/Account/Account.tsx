@@ -9,21 +9,24 @@ import { Form, Formik } from "formik";
 import useUser from "../../../hooks/useUser";
 import AccountOrders from "../../organisms/AccountOrders/AccountOrders";
 import { Tab, Tabs } from "@mui/material";
+import { AuthContext } from "../../../contexts/Auth";
 
 const Account = () => {
   const { user } = useContext(UserContext);
-  const [isEditing, setEditing] = useState(false);
+  const { isAuthenticated } = useContext(AuthContext);
   const { updateUser } = useUser();
+
+  const [isEditing, setEditing] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
 
   const handleTabChange = (event: React.SyntheticEvent, newTabIndex: any) => {
     setTabIndex(newTabIndex);
   };
 
-  if (!user) {
+  if (!user || !isAuthenticated) {
     return (
       <ErrorMessage
-        error={{ message: "You must be logged in to view your details." }}
+        error={{ message: "You must be logged in to view this page." }}
       />
     );
   }

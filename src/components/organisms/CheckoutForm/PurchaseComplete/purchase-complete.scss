@@ -6,6 +6,12 @@
     text-transform: uppercase;
   }
 
+  .order-cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   .order-total {
     padding: 2rem 0;
     text-align: center;

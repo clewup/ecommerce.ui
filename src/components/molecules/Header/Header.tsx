@@ -2,9 +2,10 @@ import "./header.scss";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/Auth";
+import { roles } from "../../../enums/roles";
 
 const Header = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, role } = useContext(AuthContext);
 
   return (
     <div id={"header"}>
@@ -32,6 +33,11 @@ const Header = () => {
         <Link to={"cart"}>
           <p>Basket</p>
         </Link>
+        {role && (role === roles.DEVELOPER || role === roles.EMPLOYEE) && (
+          <Link to={"admin"}>
+            <p>Admin</p>
+          </Link>
+        )}
       </div>
     </div>
   );

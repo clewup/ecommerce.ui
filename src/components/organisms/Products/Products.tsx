@@ -10,6 +10,7 @@ const Products = () => {
   const { products, filteredProducts, isLoading, error } = useProductFilter();
 
   if (!products || isLoading) return <Loader />;
+
   if (error) return <ErrorMessage error={error} />;
 
   return (
