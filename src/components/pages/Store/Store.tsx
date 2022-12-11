@@ -29,10 +29,12 @@ const Store = () => {
 
   return (
     <Wrapper id={"store"}>
-      <div>
+      <div className={"product-filter"}>
         <ProductFilter />
       </div>
-      <Products />
+      <div className={"products"}>
+        <Products />
+      </div>
     </Wrapper>
   );
 };

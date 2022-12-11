@@ -1,4 +1,10 @@
 #store {
   display: flex;
   gap: 2rem;
+
+  .products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
