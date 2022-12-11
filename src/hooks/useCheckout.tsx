@@ -50,10 +50,6 @@ const useCheckout = (): IUseCheckoutProps => {
     city: Yup.string().required("Required"),
     county: Yup.string(),
     country: Yup.string().required("Required"),
-    cardNumber: Yup.string().min(16).max(16).required("Required"),
-    expiryMonth: Yup.number().min(2).max(2).required("Required"),
-    expiryYear: Yup.number().min(2).max(2).required("Required"),
-    cvc: Yup.number().min(3).max(3).required("Required"),
   });
 
   const submitCheckout = (values: ICheckoutFormValues) => {
