@@ -7,6 +7,7 @@ import getCartByUserId from "../api/GetCartByUserId";
 import { AxiosError } from "axios";
 import putCart from "../api/PutCart";
 import postCart from "../api/PostCart";
+import { createGuid } from "../utils/CreateGuid";
 
 interface IUseCartProps {
   getCart: () => void;
@@ -57,6 +58,7 @@ const useCart = (): IUseCartProps => {
     } else {
       // Create the cart.
       const createdCart: ICart = {
+        id: createGuid(),
         userId: user?.id!,
         products: [product],
         total: 0,

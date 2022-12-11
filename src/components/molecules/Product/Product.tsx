@@ -30,7 +30,7 @@ const Product: React.FC<IProps> = ({ product }) => {
         <img src={product.images![0]!.url!} alt={product.name} />
       </div>
       <div className={"product-info"}>
-        <p>{product.description}</p>
+        <p>{product.color}</p>
         <p>£{product.pricePerUnit}</p>
       </div>
       <div className={"product-actions"}>

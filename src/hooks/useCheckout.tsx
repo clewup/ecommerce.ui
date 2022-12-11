@@ -5,6 +5,7 @@ import postOrder from "../api/PostOrder";
 import { AxiosError } from "axios";
 import { CartContext } from "../contexts/Cart";
 import * as Yup from "yup";
+import { createGuid } from "../utils/CreateGuid";
 
 interface IUseCheckoutProps {
   initialValues: ICheckoutFormValues;
@@ -17,7 +18,7 @@ interface IUseCheckoutProps {
 
 const useCheckout = (): IUseCheckoutProps => {
   const { user } = useContext(UserContext);
-  const { cart } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
   const [order, setOrder] = useState<IOrder | null>(null);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
@@ -54,6 +55,7 @@ const useCheckout = (): IUseCheckoutProps => {
 
   const submitCheckout = (values: ICheckoutFormValues) => {
     const order: IOrder = {
+      id: createGuid(),
       userId: user?.id!,
       firstName: values.firstName,
       lastName: values.lastName,
@@ -73,7 +75,10 @@ const useCheckout = (): IUseCheckoutProps => {
 
     setLoading(true);
     postOrder(order)
-      .then((res) => setOrder(res.data))
+      .then((res) => {
+        setOrder(res.data);
+        setCart(null);
+      })
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   };

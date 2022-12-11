@@ -6,6 +6,7 @@ import { AxiosError } from "axios";
 import { IImage } from "../types/IImage";
 import postProduct from "../api/PostProduct";
 import * as Yup from "yup";
+import { createGuid } from "utils/CreateGuid";
 
 interface IUseProductProps {
   initialValues: IProduct;
@@ -23,10 +24,12 @@ const useProduct = (): IUseProductProps => {
   const [error, setError] = useState<AxiosError | null>(null);
 
   const initialValues: IProduct = {
+    id: createGuid(),
     name: "",
     images: [],
     description: "",
     category: "",
+    color: "",
     pricePerUnit: 0,
     discount: 0,
   };
@@ -36,16 +39,19 @@ const useProduct = (): IUseProductProps => {
     images: Yup.array().required(),
     description: Yup.string().required("Required"),
     category: Yup.string().required("Required"),
+    color: Yup.string().required("Required"),
     pricePerUnit: Yup.number().required("Required"),
     discount: Yup.number().required("Required"),
   });
 
   const formatProduct = (values: IProduct, images: IImage[]) => {
     return {
+      id: values.id,
       name: values.name,
       images: images,
       description: values.description,
       category: values.category,
+      color: values.color,
       pricePerUnit: values.pricePerUnit,
       discount: values.discount,
     } as IProduct;

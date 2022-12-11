@@ -38,7 +38,7 @@ const AddProductForm = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) => handleSubmit(values)}
+      onSubmit={(values) => handleSubmit(values)}
       innerRef={formRef}
     >
       {(formik: FormikProps<IProduct>) => {
@@ -93,6 +93,14 @@ const AddProductForm = () => {
                 onChange={formik.handleChange}
               />
               <ErrorMessage name={"category"} />
+
+              <Field
+                name={"color"}
+                component={Input}
+                label={"Color"}
+                onChange={formik.handleChange}
+              />
+              <ErrorMessage name={"color"} />
 
               <Field
                 name={"pricePerUnit"}

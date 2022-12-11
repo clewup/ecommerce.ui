@@ -3,7 +3,7 @@ import { ICart } from "./ICart";
 import { IAddress } from "./IAddress";
 
 export interface IOrder {
-  id?: Guid;
+  id: Guid;
   userId: Guid;
   firstName: string;
   lastName: string;
