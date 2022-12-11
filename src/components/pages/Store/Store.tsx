@@ -24,6 +24,7 @@ const Store = () => {
     } else {
       setCategoryQuery("all");
     }
+    // eslint-disable-next-line
   }, [category]);
 
   return (
