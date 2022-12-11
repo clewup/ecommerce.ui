@@ -21,8 +21,10 @@ const Store = () => {
       if (matchingCategory) {
         setCategoryQuery(matchingCategory);
       }
+    } else {
+      setCategoryQuery("all");
     }
-  });
+  }, [category]);
 
   return (
     <Wrapper id={"store"}>
