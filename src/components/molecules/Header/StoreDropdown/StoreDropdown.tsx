@@ -57,7 +57,11 @@ const StoreDropdown = () => {
         aria-controls={open ? "composition-menu" : undefined}
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
-        onClick={handleToggle}
+        onMouseEnter={handleToggle}
+        onClick={() => {
+          navigate("store");
+          handleToggle();
+        }}
         sx={{ color: "white" }}
       >
         Store
@@ -67,6 +71,7 @@ const StoreDropdown = () => {
         anchorEl={anchorRef.current}
         role={undefined}
         placement="bottom-start"
+        onMouseLeave={handleToggle}
         transition
         disablePortal
       >
@@ -86,14 +91,6 @@ const StoreDropdown = () => {
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem
-                    onClick={(e) => {
-                      handleClose(e);
-                      navigate("store");
-                    }}
-                  >
-                    All Products
-                  </MenuItem>
                   <MenuItem
                     onClick={(e) => {
                       handleClose(e);

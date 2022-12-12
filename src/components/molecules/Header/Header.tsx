@@ -16,12 +16,7 @@ const Header = () => {
         <Button onClick={() => navigate("/")} sx={{ color: "white" }}>
           Home
         </Button>
-
         <StoreDropdown />
-
-        <Button onClick={() => navigate("trending")} sx={{ color: "white" }}>
-          Trending
-        </Button>
       </div>
 
       <div className={"header-group"}>
