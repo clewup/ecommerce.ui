@@ -7,11 +7,13 @@ import {
   Paper,
   Popper,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { ProductContext } from "../../../../contexts/Product";
 
 const StoreDropdown = () => {
   const navigate = useNavigate();
+  const { categories } = useContext(ProductContext);
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -91,38 +93,23 @@ const StoreDropdown = () => {
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem
-                    onClick={(e) => {
-                      handleClose(e);
-                      navigate("store/laptops");
-                    }}
-                  >
-                    Laptops
-                  </MenuItem>
-                  <MenuItem
-                    onClick={(e) => {
-                      handleClose(e);
-                      navigate("store/mobile-phones");
-                    }}
-                  >
-                    Mobile Phones
-                  </MenuItem>
-                  <MenuItem
-                    onClick={(e) => {
-                      handleClose(e);
-                      navigate("store/smart-watches");
-                    }}
-                  >
-                    Smart Watches
-                  </MenuItem>
-                  <MenuItem
-                    onClick={(e) => {
-                      handleClose(e);
-                      navigate("store/tablets");
-                    }}
-                  >
-                    Tablets
-                  </MenuItem>
+                  {categories.map((category) => {
+                    return (
+                      <MenuItem
+                        key={category}
+                        onClick={(e) => {
+                          handleClose(e);
+                          navigate(
+                            `store/${category
+                              .replace(/\s/g, "-")
+                              .toLowerCase()}`
+                          );
+                        }}
+                      >
+                        {category}
+                      </MenuItem>
+                    );
+                  })}
                 </MenuList>
               </ClickAwayListener>
             </Paper>

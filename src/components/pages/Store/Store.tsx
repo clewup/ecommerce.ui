@@ -6,12 +6,10 @@ import Wrapper from "../../atoms/Wrapper/Wrapper";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { ProductContext } from "../../../contexts/Product";
-import useProductFilter from "../../../hooks/useProductFilter";
 
 const Store = () => {
   const { category } = useParams();
-  const { setCategoryQuery } = useContext(ProductContext);
-  const { categories } = useProductFilter();
+  const { categories, setCategoryQuery } = useContext(ProductContext);
 
   useEffect(() => {
     if (category) {

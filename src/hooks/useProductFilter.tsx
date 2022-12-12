@@ -8,18 +8,18 @@ import getProducts from "../api/GetProducts";
 interface IUseProductFilterProps {
   products: IProduct[];
   filteredProducts: IProduct[];
-  categories: string[];
   isLoading: boolean;
   error: AxiosError | null;
 }
 
 const useProductFilter = (): IUseProductFilterProps => {
+  const { setCategories } = useContext(ProductContext);
+
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
 
   const { searchQuery, categoryQuery, priceQuery, saleQuery } =
     useContext(ProductContext);
@@ -38,8 +38,11 @@ const useProductFilter = (): IUseProductFilterProps => {
   useEffect(() => {
     setLoading(true);
     getProductCategories()
-      .then((res) => setCategories(res.data))
+      .then((res) => {
+        setCategories(res.data);
+      })
       .catch((err) => setError(err));
+    // eslint-disable-next-line
   }, []);
 
   const filterBySearch = (joinedFilter: any[]) => {
@@ -91,8 +94,6 @@ const useProductFilter = (): IUseProductFilterProps => {
   return {
     products,
     filteredProducts,
-    // @ts-ignore
-    categories: [...new Set(categories)], // Removes duplicates from the array.
     isLoading,
     error,
   };

@@ -10,6 +10,7 @@ import AppError from "../AppError/AppError";
 
 const ProductFilter = () => {
   const {
+    categories,
     searchQuery,
     setSearchQuery,
     categoryQuery,
@@ -19,7 +20,7 @@ const ProductFilter = () => {
     setSaleQuery,
   } = useContext(ProductContext);
 
-  const { categories, error } = useProductFilter();
+  const { error } = useProductFilter();
 
   if (error) return <AppError error={error} />;
 
