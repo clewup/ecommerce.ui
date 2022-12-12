@@ -57,7 +57,7 @@ const AddProductForm = () => {
                 component="label"
                 disabled={imagesLoading}
               >
-                Upload File
+                Upload Images
                 <input
                   type="file"
                   hidden

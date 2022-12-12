@@ -8,6 +8,8 @@ import { UserContext } from "../../../contexts/User";
 import { AuthContext } from "../../../contexts/Auth";
 import { CartContext } from "../../../contexts/Cart";
 import { LoadingButton } from "@mui/lab";
+import { Tooltip } from "@mui/material";
+import Carousel from "react-material-ui-carousel";
 
 interface IProps {
   product: IProduct;
@@ -27,24 +29,32 @@ const Product: React.FC<IProps> = ({ product }) => {
         className={"product-image"}
         onClick={() => navigate(`/product/${product.id}`)}
       >
-        <img src={product.images![0]!.url!} alt={product.name} />
+        <Carousel animation={"slide"} swipe={false} indicators={false}>
+          {product.images.map((image) => (
+            <img src={image.url!} alt={image.title} />
+          ))}
+        </Carousel>
       </div>
       <div className={"product-info"}>
         <p>{product.color}</p>
         <p>£{product.pricePerUnit}</p>
       </div>
       <div className={"product-actions"}>
-        <LoadingButton
-          color="success"
-          type={"button"}
-          variant={"contained"}
-          loading={isLoading}
-          onClick={() => {
-            !user && !isAuthenticated ? navigate("/login") : addToCart(product);
-          }}
-        >
-          <AddToCartIcon />
-        </LoadingButton>
+        <Tooltip title={"Add to Cart"}>
+          <LoadingButton
+            color="success"
+            type={"button"}
+            variant={"contained"}
+            loading={isLoading}
+            onClick={() => {
+              !user && !isAuthenticated
+                ? navigate("/login")
+                : addToCart(product);
+            }}
+          >
+            <AddToCartIcon />
+          </LoadingButton>
+        </Tooltip>
       </div>
     </div>
   );

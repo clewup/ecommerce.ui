@@ -17,7 +17,7 @@ const Products = () => {
     <div id={"products"}>
       {filteredProducts.map((product: IProduct) => {
         return (
-          <div key={"product"}>
+          <div key={`product-${product.id}`}>
             <Product product={product} />
           </div>
         );
