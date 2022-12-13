@@ -4,14 +4,12 @@ import CartItem from "../../molecules/CartItem/CartItem";
 import useCart from "../../../hooks/useCart";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { CartContext } from "../../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
 const CartItems = () => {
-  const [discountCode, setDiscountCode] = useState("");
-
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
   const { getCart } = useCart();
@@ -38,11 +36,7 @@ const CartItems = () => {
       <div className={"cart-discount"}>
         <p>Discount Code</p>
         <div className={"discount-input"}>
-          <Input
-            label={"Discount"}
-            onChange={(e) => setDiscountCode(e.target.value)}
-            value={discountCode}
-          />
+          <Input label={"Discount"} />
           <Button
             type={"button"}
             variant={"contained"}
@@ -53,10 +47,6 @@ const CartItems = () => {
           </Button>
         </div>
       </div>
-      {/*<div className={"cart-shipping"}>
-        <p>Estimated shipping costs</p>
-        <p className={"shipping-price"}>£5.00</p>
-      </div>*/}
       <div className={"cart-total"}>
         <p>Cart Total: £{cart?.total?.toFixed(2) || "0"}</p>
       </div>
