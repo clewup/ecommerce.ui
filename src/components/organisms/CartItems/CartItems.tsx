@@ -2,7 +2,6 @@ import "./cart-items.scss";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import CartItem from "../../molecules/CartItem/CartItem";
 import useCart from "../../../hooks/useCart";
-import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import { CartContext } from "../../../contexts/Cart";
@@ -32,21 +31,6 @@ const CartItems = () => {
       {cart?.products?.map((product) => {
         return <CartItem cartItem={product} key={product.name} />;
       })}
-
-      <div className={"cart-discount"}>
-        <p>Discount Code</p>
-        <div className={"discount-input"}>
-          <Input label={"Discount"} />
-          <Button
-            type={"button"}
-            variant={"contained"}
-            color={"success"}
-            size={"large"}
-          >
-            APPLY
-          </Button>
-        </div>
-      </div>
       <div className={"cart-total"}>
         <p>Cart Total: £{cart?.total?.toFixed(2) || "0"}</p>
       </div>

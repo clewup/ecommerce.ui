@@ -7,8 +7,6 @@ export const apiEndpoints = {
 
   // ECOMMERCE
   PRODUCT: "product",
-  MOST_DISCOUNTED_PRODUCTS: (amount: number) =>
-    `product/featured?amount=${amount}`,
   PRODUCT_CATEGORIES: "product/categories",
   PRODUCT_BY_ID: (id: Guid) => `product/${id}`,
   IMAGE_UPLOAD: "upload/image",
@@ -16,4 +14,8 @@ export const apiEndpoints = {
   CART_BY_USER_ID: (userId: Guid) => `cart/user/${userId}`,
   ORDER: "order",
   ORDER_BY_USER_ID: (userId: Guid) => `order/user/${userId}`,
+  STATISTICS_MOST_POPULAR: (amount: number) =>
+    `statistics/popular?amount=${amount}`,
+  STATISTICS_MOST_DISCOUNTED: (amount: number) =>
+    `statistics/discounted?amount=${amount}`,
 };

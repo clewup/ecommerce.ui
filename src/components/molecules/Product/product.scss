@@ -21,6 +21,19 @@
     flex-direction: column;
     gap: 1rem;
     padding: 1rem 0 0 0;
+
+    .discounted-price {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      .discounted-price-striked {
+        text-decoration: line-through;
+      }
+      .discounted-price-total {
+        color: red;
+      }
+    }
+
   }
   .product-actions {
     display: flex;

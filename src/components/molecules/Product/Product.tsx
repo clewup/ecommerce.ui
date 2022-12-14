@@ -37,7 +37,20 @@ const Product: React.FC<IProps> = ({ product }) => {
       </div>
       <div className={"product-info"}>
         <p>{product.color}</p>
-        <p>£{product.pricePerUnit}</p>
+        {product.discount > 0 ? (
+          <div className={"discounted-price"}>
+            <p className="discounted-price-striked">£{product.pricePerUnit}</p>
+            <p className={"discounted-price-total"}>
+              £
+              {(
+                product.pricePerUnit -
+                (product.pricePerUnit * product.discount) / 100
+              ).toFixed(2)}
+            </p>
+          </div>
+        ) : (
+          <p>£{product.pricePerUnit} </p>
+        )}
       </div>
       <div className={"product-actions"}>
         <Tooltip title={"Add to Cart"}>

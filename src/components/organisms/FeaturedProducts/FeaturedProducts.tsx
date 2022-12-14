@@ -1,17 +1,24 @@
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import "./featured-products.scss";
-import useFeaturedProducts from "../../../hooks/useFeaturedProducts";
+import useStatistics from "../../../hooks/useStatistics";
 import { useEffect } from "react";
 import Product from "../../molecules/Product/Product";
 import Loader from "../../atoms/Loader/Loader";
 import AppError from "../../molecules/AppError/AppError";
 
 const FeaturedProducts = () => {
-  const { products, isLoading, error, getFeaturedProducts } =
-    useFeaturedProducts();
+  const {
+    discountedProducts,
+    popularProducts,
+    isLoading,
+    error,
+    getMostDiscounted,
+    getMostPopular,
+  } = useStatistics();
 
   useEffect(() => {
-    getFeaturedProducts(4);
+    getMostDiscounted(4);
+    getMostPopular(4);
     // eslint-disable-next-line
   }, []);
 
@@ -20,9 +27,19 @@ const FeaturedProducts = () => {
 
   return (
     <div id={"featured-products"}>
-      <Subheading size={subheadingSize.MEDIUM}>Featured Products</Subheading>
+      <Subheading size={subheadingSize.SMALL}>On Sale</Subheading>
       <div className={"featured-products"}>
-        {products?.map((product) => {
+        {discountedProducts?.map((product) => {
+          return (
+            <div key={product.name}>
+              <Product product={product} />
+            </div>
+          );
+        })}
+      </div>
+      <Subheading size={subheadingSize.SMALL}>Trending</Subheading>
+      <div className={"featured-products"}>
+        {popularProducts?.map((product) => {
           return (
             <div key={product.name}>
               <Product product={product} />
