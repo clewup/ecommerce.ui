@@ -2,15 +2,17 @@ import "./add-product-form.scss";
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
-import { Button } from "@mui/material";
+import { Button, Snackbar } from "@mui/material";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import React, { useRef } from "react";
 import useImageUpload from "../../../hooks/useImageUpload";
 import AppError from "../../molecules/AppError/AppError";
 import useProduct from "../../../hooks/useProduct";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 const AddProductForm = () => {
   const formRef = useRef<FormikProps<IProduct> | null>(null);
+  const [openAlert, setOpenAlert] = React.useState(false);
 
   const {
     initialValues,
@@ -30,16 +32,25 @@ const AddProductForm = () => {
 
   const handleSubmit = (values: IProduct) => {
     addProduct(values, images);
-    formRef.current?.resetForm({ values: formRef.current?.initialValues });
+    setOpenAlert(true);
+    formRef.current?.resetForm({ values: initialValues });
   };
 
   if (productError || imagesError)
     return <AppError error={productError || imagesError!} />;
 
+  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
+      enableReinitialize={true}
       onSubmit={(values) => handleSubmit(values)}
       innerRef={formRef}
     >
@@ -136,6 +147,19 @@ const AddProductForm = () => {
                 Add Product
               </Button>
             </Form>
+            <Snackbar
+              open={openAlert}
+              autoHideDuration={6000}
+              onClose={() => setOpenAlert(false)}
+            >
+              <Alert
+                onClose={() => setOpenAlert(false)}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                Product successfully added.
+              </Alert>
+            </Snackbar>
           </div>
         );
       }}
