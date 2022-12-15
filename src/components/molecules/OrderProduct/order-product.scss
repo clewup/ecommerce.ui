@@ -1,11 +1,11 @@
-#order-item {
+#order-product {
   border-radius: 1rem;
   display: flex;
   padding: 1rem 1rem;
   gap: 2rem;
   background-color: white;
 
-  .order-item-image {
+  .order-product-image {
     height: 5rem;
     width: 5rem;
 
@@ -16,7 +16,7 @@
     }
   }
 
-  .order-item-info {
+  .order-product-info {
     width: 10rem;
   }
 }

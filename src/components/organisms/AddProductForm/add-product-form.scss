@@ -1,8 +1,6 @@
 #add-product-form {
   display: flex;
   flex-direction: column;
-  background-color: #ccc;
-  border-radius: 1rem;
   width: 40vw;
 
   Form {
@@ -11,18 +9,24 @@
     gap: 1rem;
     padding: 1rem;
 
+    .product-form-fields {
+      display: flex;
+      gap: 1rem;
 
-    .product-images {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      justify-content: center;
-      align-items: center;
-      place-items: center;
+      .product-form-half {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
 
-      img {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
+        .upload-button {
+          margin: 0.5rem 0;
+        }
+
+          img {
+            width: 310px;
+            height: 310px;
+            object-fit: cover;
+          }
       }
     }
   }

@@ -3,7 +3,7 @@ import useOrder from "../../../hooks/useOrder";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../../contexts/User";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
-import OrderItem from "../../molecules/OrderItem/OrderItem";
+import OrderProduct from "../../molecules/OrderProduct/OrderProduct";
 import Loader from "../../atoms/Loader/Loader";
 import AppError from "../../molecules/AppError/AppError";
 
@@ -33,13 +33,15 @@ const AccountOrders = () => {
                 <p>{new Date(order.orderDate).toDateString()}</p>
                 <p>Total: £{order.cart.total}</p>
               </div>
-              {order.cart.products.map((orderItem) => {
-                return (
-                  <div className={"order-items"}>
-                    <OrderItem orderItem={orderItem} />
-                  </div>
-                );
-              })}
+              <div className={"order-products"}>
+                {order.cart.products.map((orderProduct) => {
+                  return (
+                    <div key={String(orderProduct.id)}>
+                      <OrderProduct orderProduct={orderProduct} />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           );
         })}

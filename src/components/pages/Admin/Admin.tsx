@@ -18,8 +18,6 @@ const Admin = () => {
     setTabIndex(newTabIndex);
   };
 
-  console.log(role);
-
   if (!user || !isAuthenticated) {
     return (
       <AppError

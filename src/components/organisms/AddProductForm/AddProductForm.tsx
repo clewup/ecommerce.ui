@@ -4,11 +4,14 @@ import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button, Snackbar } from "@mui/material";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import useImageUpload from "../../../hooks/useImageUpload";
 import AppError from "../../molecules/AppError/AppError";
 import useProduct from "../../../hooks/useProduct";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Carousel from "react-material-ui-carousel";
+import CreatableSelect from "react-select/creatable";
+import { ProductContext } from "../../../contexts/Product";
 
 const AddProductForm = () => {
   const formRef = useRef<FormikProps<IProduct> | null>(null);
@@ -28,7 +31,23 @@ const AddProductForm = () => {
     uploadImages,
   } = useImageUpload();
 
-  console.log(images);
+  const { categories } = useContext(ProductContext);
+
+  interface ISelectOption {
+    value: string;
+    label: string;
+  }
+
+  const formatCategoryOptions = (categories: string[]) => {
+    const formatted: ISelectOption[] = [];
+    categories.forEach((category) => {
+      formatted.push({
+        label: category,
+        value: category,
+      });
+    });
+    return formatted;
+  };
 
   const handleSubmit = (values: IProduct) => {
     addProduct(values, images);
@@ -59,85 +78,109 @@ const AddProductForm = () => {
           <div id={"add-product-form"}>
             <Form>
               <Subheading size={subheadingSize.MEDIUM}>Add Product</Subheading>
-              <div className={"product-images"}>
-                {images.map((image) => {
-                  return <img src={image.url} alt={image.url} />;
-                })}
+
+              <div className={"product-form-fields"}>
+                <div className={"product-form-half"}>
+                  <Carousel
+                    animation={"slide"}
+                    swipe={false}
+                    indicators={false}
+                    autoPlay={false}
+                    height={"310px"}
+                    sx={{
+                      backgroundColor: "white",
+                    }}
+                  >
+                    {images.map((image) => {
+                      return <img src={image.url} alt={image.url} />;
+                    })}
+                  </Carousel>
+
+                  <Button
+                    variant="contained"
+                    component="label"
+                    disabled={imagesLoading}
+                    className={"upload-button"}
+                  >
+                    Upload Images
+                    <input
+                      type="file"
+                      hidden
+                      accept={"image/*"}
+                      multiple
+                      onChange={(e) => {
+                        e.target.files && uploadImages(e.target.files);
+                      }}
+                    />
+                  </Button>
+
+                  <CreatableSelect
+                    isClearable
+                    options={formatCategoryOptions(categories)}
+                    onChange={(category) =>
+                      formik.setFieldValue("category", category?.value)
+                    }
+                    placeholder={"Category"}
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        height: "55px",
+                        margin: "0.5rem 0",
+                      }),
+                    }}
+                  />
+                </div>
+
+                <div className={"product-form-half"}>
+                  <Field
+                    name={"name"}
+                    component={Input}
+                    label={"Name"}
+                    onChange={formik.handleChange}
+                  />
+                  <ErrorMessage name={"name"} />
+
+                  <Field
+                    name={"description"}
+                    component={Input}
+                    label={"Description"}
+                    onChange={formik.handleChange}
+                  />
+                  <ErrorMessage name={"description"} />
+
+                  <Field
+                    name={"color"}
+                    component={Input}
+                    label={"Color"}
+                    onChange={formik.handleChange}
+                  />
+                  <ErrorMessage name={"color"} />
+
+                  <Field
+                    name={"stock"}
+                    component={Input}
+                    label={"Stock"}
+                    onChange={formik.handleChange}
+                  />
+                  <ErrorMessage name={"stock"} />
+
+                  <Field
+                    name={"price"}
+                    component={Input}
+                    label={"Price"}
+                    onChange={formik.handleChange}
+                  />
+                  <ErrorMessage name={"price"} />
+
+                  <Field
+                    name={"discount"}
+                    component={Input}
+                    label={"Discount"}
+                    onChange={formik.handleChange}
+                  />
+                  <ErrorMessage name={"discount"} />
+                </div>
               </div>
-
-              <Button
-                variant="contained"
-                component="label"
-                disabled={imagesLoading}
-              >
-                Upload Images
-                <input
-                  type="file"
-                  hidden
-                  accept={"image/*"}
-                  multiple
-                  onChange={(e) => {
-                    e.target.files && uploadImages(e.target.files);
-                  }}
-                />
-              </Button>
-
-              <Field
-                name={"name"}
-                component={Input}
-                label={"Name"}
-                onChange={formik.handleChange}
-              />
-              <ErrorMessage name={"name"} />
-
-              <Field
-                name={"description"}
-                component={Input}
-                label={"Description"}
-                onChange={formik.handleChange}
-              />
-              <ErrorMessage name={"description"} />
-
-              <Field
-                name={"category"}
-                component={Input}
-                label={"Category"}
-                onChange={formik.handleChange}
-              />
-              <ErrorMessage name={"category"} />
-
-              <Field
-                name={"color"}
-                component={Input}
-                label={"Color"}
-                onChange={formik.handleChange}
-              />
-              <ErrorMessage name={"color"} />
-
-              <Field
-                name={"stock"}
-                component={Input}
-                label={"Stock"}
-                onChange={formik.handleChange}
-              />
-              <ErrorMessage name={"stock"} />
-
-              <Field
-                name={"price"}
-                component={Input}
-                label={"Price"}
-                onChange={formik.handleChange}
-              />
-              <ErrorMessage name={"price"} />
-
-              <Field
-                name={"discount"}
-                component={Input}
-                label={"Discount"}
-                onChange={formik.handleChange}
-              />
-              <ErrorMessage name={"discount"} />
-
               <Button
                 type={"submit"}
                 variant={"contained"}

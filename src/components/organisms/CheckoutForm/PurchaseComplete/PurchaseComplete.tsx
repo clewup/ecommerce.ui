@@ -3,7 +3,7 @@ import Subheading, {
   subheadingSize,
 } from "../../../atoms/Subheading/Subheading";
 import { IOrder } from "../../../../types/IOrder";
-import OrderItem from "../../../molecules/OrderItem/OrderItem";
+import OrderProduct from "../../../molecules/OrderProduct/OrderProduct";
 import Loader from "../../../atoms/Loader/Loader";
 
 interface IProps {
@@ -21,10 +21,10 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
       </Subheading>
       <p className={"order-details"}>{String(order.id)}</p>
       <div className={"order-cart-items"}>
-        {order?.cart.products.map((orderItem) => {
+        {order?.cart.products.map((orderProduct) => {
           return (
-            <div key={orderItem.name}>
-              <OrderItem orderItem={orderItem} />
+            <div key={String(orderProduct.id)}>
+              <OrderProduct orderProduct={orderProduct} />
             </div>
           );
         })}

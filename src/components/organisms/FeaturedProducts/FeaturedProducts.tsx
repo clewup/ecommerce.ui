@@ -6,14 +6,12 @@ import "./featured-products.scss";
 import useStatistics from "../../../hooks/useStatistics";
 import { useEffect } from "react";
 import Product from "../../molecules/Product/Product";
-import Loader from "../../atoms/Loader/Loader";
 import AppError from "../../molecules/AppError/AppError";
 
 const FeaturedProducts = () => {
   const {
     discountedProducts,
     popularProducts,
-    isLoading,
     error,
     getMostDiscounted,
     getMostPopular,
@@ -25,7 +23,6 @@ const FeaturedProducts = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (isLoading) return <Loader />;
   if (error) return <AppError error={error} />;
 
   return (

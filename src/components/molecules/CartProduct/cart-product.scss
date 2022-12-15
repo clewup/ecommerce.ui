@@ -1,5 +1,4 @@
-#cart-item {
-  background-color: #ccc;
+#cart-product {
   border-radius: 1rem;
   display: flex;
   padding: 1rem 0;
@@ -7,7 +6,7 @@
   justify-content: space-around;
   background-color: white;
 
-  .cart-item-image {
+  .cart-product-image {
     height: 5rem;
     width: 5rem;
 
@@ -18,12 +17,11 @@
     }
   }
 
-  .cart-item-info {
+  .cart-product-info {
     width: 10rem;
-
   }
 
-  .cart-remove-item {
+  .cart-product-remove {
     cursor: pointer;
   }
 }
