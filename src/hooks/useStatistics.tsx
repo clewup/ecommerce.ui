@@ -5,8 +5,8 @@ import getMostDiscountedProducts from "../api/GetMostDiscountedProducts";
 import getMostPopularProducts from "../api/GetMostPopularProducts";
 
 interface IUseStatistics {
-  popularProducts: IProduct[] | null;
-  discountedProducts: IProduct[] | null;
+  popularProducts: IProduct[];
+  discountedProducts: IProduct[];
   isLoading: boolean;
   error: AxiosError | null;
   getMostDiscounted: (amount: number) => void;
@@ -14,12 +14,8 @@ interface IUseStatistics {
 }
 
 const useStatistics = (): IUseStatistics => {
-  const [popularProducts, setPopularProducts] = useState<IProduct[] | null>(
-    null
-  );
-  const [discountedProducts, setDiscountedProducts] = useState<
-    IProduct[] | null
-  >(null);
+  const [popularProducts, setPopularProducts] = useState<IProduct[]>([]);
+  const [discountedProducts, setDiscountedProducts] = useState<IProduct[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 

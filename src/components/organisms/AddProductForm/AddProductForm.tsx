@@ -26,6 +26,8 @@ const AddProductForm = () => {
     uploadImages,
   } = useImageUpload();
 
+  console.log(images);
+
   const handleSubmit = (values: IProduct) => {
     addProduct(values, images);
     formRef.current?.resetForm({ values: formRef.current?.initialValues });
@@ -68,7 +70,6 @@ const AddProductForm = () => {
                   }}
                 />
               </Button>
-              <ErrorMessage name={"images"} />
 
               <Field
                 name={"name"}
@@ -103,12 +104,20 @@ const AddProductForm = () => {
               <ErrorMessage name={"color"} />
 
               <Field
-                name={"pricePerUnit"}
+                name={"stock"}
+                component={Input}
+                label={"Stock"}
+                onChange={formik.handleChange}
+              />
+              <ErrorMessage name={"stock"} />
+
+              <Field
+                name={"price"}
                 component={Input}
                 label={"Price"}
                 onChange={formik.handleChange}
               />
-              <ErrorMessage name={"pricePerUnit"} />
+              <ErrorMessage name={"price"} />
 
               <Field
                 name={"discount"}

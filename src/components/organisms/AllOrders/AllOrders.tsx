@@ -19,13 +19,13 @@ const AllOrders = () => {
 
   return (
     <div id={"all-orders"}>
-      <Subheading size={subheadingSize.SMALL}>Orders</Subheading>
+      <Subheading size={subheadingSize.MEDIUM}>Orders</Subheading>
       <div className={"orders"}>
         {orders.map((order) => {
           return (
             <div className={`order order-${order.id}`}>
               <div className={"order-info"}>
-                <p className={"order-id"}>{order.id!.toString()}</p>
+                <p className={"order-id"}>{String(order.id)}</p>
                 <p>{new Date(order.orderDate).toDateString()}</p>
                 <p>Total: £{order.cart.total}</p>
               </div>

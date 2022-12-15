@@ -11,9 +11,9 @@ export const apiEndpoints = {
   PRODUCT_BY_ID: (id: Guid) => `product/${id}`,
   IMAGE_UPLOAD: "upload/image",
   CART: "cart",
-  CART_BY_USER_ID: (userId: Guid) => `cart/user/${userId}`,
+  USER_CART: "cart/user",
   ORDER: "order",
-  ORDER_BY_USER_ID: (userId: Guid) => `order/user/${userId}`,
+  USER_ORDERS: "order/user",
   STATISTICS_MOST_POPULAR: (amount: number) =>
     `statistics/popular?amount=${amount}`,
   STATISTICS_MOST_DISCOUNTED: (amount: number) =>

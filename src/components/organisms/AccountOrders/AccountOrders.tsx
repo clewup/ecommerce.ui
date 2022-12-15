@@ -29,7 +29,7 @@ const AccountOrders = () => {
           return (
             <div className={`order order-${order.id}`}>
               <div className={"order-info"}>
-                <p className={"order-id"}>{order.id!.toString()}</p>
+                <p className={"order-id"}>{String(order.id)}</p>
                 <p>{new Date(order.orderDate).toDateString()}</p>
                 <p>Total: £{order.cart.total}</p>
               </div>

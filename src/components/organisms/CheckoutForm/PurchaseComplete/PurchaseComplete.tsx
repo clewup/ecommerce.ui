@@ -19,7 +19,7 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
       <Subheading size={subheadingSize.MEDIUM}>
         Your order is complete!
       </Subheading>
-      <p className={"order-details"}>{order.id.toString()}</p>
+      <p className={"order-details"}>{String(order.id)}</p>
       <div className={"order-cart-items"}>
         {order?.cart.products.map((orderItem) => {
           return (

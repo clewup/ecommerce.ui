@@ -5,6 +5,7 @@ import classnames from "classnames";
 interface IProps {
   children: any;
   size: string;
+  color?: string;
 }
 
 export const subheadingSize = {
@@ -13,7 +14,11 @@ export const subheadingSize = {
   LARGE: "subheading-large",
 };
 
-const Subheading: React.FC<IProps> = ({ children, size }) => {
-  return <h3 className={classnames("subheading", size)}>{children}</h3>;
+export const subheadingColor = {
+  RED: "subheading-red",
+};
+
+const Subheading: React.FC<IProps> = ({ children, size, color }) => {
+  return <h3 className={classnames("subheading", size, color)}>{children}</h3>;
 };
 export default Subheading;

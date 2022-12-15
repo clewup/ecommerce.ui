@@ -65,8 +65,7 @@ const useProductFilter = (): IUseProductFilterProps => {
     if (priceQuery && priceQuery.length === 2) {
       return joinedFilter.filter(
         (product: IProduct) =>
-          product.pricePerUnit >= priceQuery[0]! &&
-          product.pricePerUnit <= priceQuery[1]!
+          product.price >= priceQuery[0]! && product.price <= priceQuery[1]!
       );
     } else {
       return joinedFilter;

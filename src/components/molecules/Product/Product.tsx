@@ -25,11 +25,17 @@ const Product: React.FC<IProps> = ({ product }) => {
   return (
     <div id={"product"}>
       <div className={"product-title"}>{product.name}</div>
+
       <div
         className={"product-image"}
         onClick={() => navigate(`/product/${product.id}`)}
       >
-        <Carousel animation={"slide"} swipe={false} indicators={false}>
+        <Carousel
+          animation={"slide"}
+          swipe={false}
+          indicators={false}
+          autoPlay={false}
+        >
           {product.images.map((image) => (
             <img src={image.url!} alt={image.title} />
           ))}
@@ -39,17 +45,17 @@ const Product: React.FC<IProps> = ({ product }) => {
         <p>{product.color}</p>
         {product.discount > 0 ? (
           <div className={"discounted-price"}>
-            <p className="discounted-price-striked">£{product.pricePerUnit}</p>
+            <p className="discounted-price-striked">£{product.price}</p>
             <p className={"discounted-price-total"}>
               £
               {(
-                product.pricePerUnit -
-                (product.pricePerUnit * product.discount) / 100
+                product.price -
+                (product.price * product.discount) / 100
               ).toFixed(2)}
             </p>
           </div>
         ) : (
-          <p>£{product.pricePerUnit} </p>
+          <p>£{product.price} </p>
         )}
       </div>
       <div className={"product-actions"}>

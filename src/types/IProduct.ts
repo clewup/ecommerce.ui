@@ -8,6 +8,9 @@ export interface IProduct {
   description: string;
   category: string;
   color: string;
-  pricePerUnit: number;
+  stock: number;
+  price: number;
   discount: number;
 }
+
+export interface ICartProduct extends Omit<IProduct, "stock"> {}

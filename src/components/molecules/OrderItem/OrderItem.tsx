@@ -1,9 +1,9 @@
 import "./order-item.scss";
 import React from "react";
-import { IProduct } from "../../../types/IProduct";
+import { ICartProduct } from "../../../types/IProduct";
 
 interface IProps {
-  orderItem: IProduct;
+  orderItem: ICartProduct;
 }
 
 const OrderItem: React.FC<IProps> = ({ orderItem }) => {
@@ -14,7 +14,7 @@ const OrderItem: React.FC<IProps> = ({ orderItem }) => {
       </div>
       <div className={"cart-item-info"}>
         <p>{orderItem.name}</p>
-        <p>£{orderItem.pricePerUnit.toFixed(2)}</p>
+        <p>£{orderItem.price.toFixed(2)}</p>
       </div>
     </div>
   );

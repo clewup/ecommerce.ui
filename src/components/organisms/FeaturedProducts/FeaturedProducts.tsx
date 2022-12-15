@@ -1,4 +1,7 @@
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading, {
+  subheadingColor,
+  subheadingSize,
+} from "../../atoms/Subheading/Subheading";
 import "./featured-products.scss";
 import useStatistics from "../../../hooks/useStatistics";
 import { useEffect } from "react";
@@ -27,21 +30,24 @@ const FeaturedProducts = () => {
 
   return (
     <div id={"featured-products"}>
-      <Subheading size={subheadingSize.SMALL}>On Sale</Subheading>
+      <Subheading size={subheadingSize.SMALL}>TRENDING</Subheading>
       <div className={"featured-products"}>
-        {discountedProducts?.map((product) => {
+        {popularProducts.map((product) => {
           return (
-            <div key={product.name}>
+            <div key={String(product.id)}>
               <Product product={product} />
             </div>
           );
         })}
       </div>
-      <Subheading size={subheadingSize.SMALL}>Trending</Subheading>
+
+      <Subheading size={subheadingSize.SMALL} color={subheadingColor.RED}>
+        SALE!
+      </Subheading>
       <div className={"featured-products"}>
-        {popularProducts?.map((product) => {
+        {discountedProducts.map((product) => {
           return (
-            <div key={product.name}>
+            <div key={String(product.id)}>
               <Product product={product} />
             </div>
           );

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { IOrder } from "../types/IOrder";
 import { AxiosError } from "axios";
-import getOrdersByUserId from "../api/GetOrdersByUserId";
+import GetUserOrders from "../api/GetUserOrders";
 import { Guid } from "guid-typescript";
-import getOrders from "../api/GetOrders";
+import GetAllOrders from "../api/GetAllOrders";
 
 interface IUseOrderProps {
   orders: IOrder[];
@@ -18,16 +18,16 @@ const useOrder = (): IUseOrderProps => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
-  const getUserOrders = (userId: Guid) => {
+  const getUserOrders = () => {
     setLoading(true);
-    getOrdersByUserId(userId)
+    GetUserOrders()
       .then((res) => setOrders(res.data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   };
   const getAllOrders = () => {
     setLoading(true);
-    getOrders()
+    GetAllOrders()
       .then((res) => setOrders(res.data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));

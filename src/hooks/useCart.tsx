@@ -1,9 +1,9 @@
 import { ICart } from "../types/ICart";
-import { IProduct } from "../types/IProduct";
+import { ICartProduct } from "../types/IProduct";
 import { useContext, useState } from "react";
 import { CartContext } from "../contexts/Cart";
 import { UserContext } from "../contexts/User";
-import getCartByUserId from "../api/GetCartByUserId";
+import getUserCart from "../api/GetUserCart";
 import { AxiosError } from "axios";
 import putCart from "../api/PutCart";
 import postCart from "../api/PostCart";
@@ -11,8 +11,8 @@ import { createGuid } from "../utils/CreateGuid";
 
 interface IUseCartProps {
   getCart: () => void;
-  addToCart: (product: IProduct) => void;
-  removeFromCart: (product: IProduct) => void;
+  addToCart: (product: ICartProduct) => void;
+  removeFromCart: (product: ICartProduct) => void;
   error: AxiosError | null;
 }
 
@@ -25,7 +25,7 @@ const useCart = (): IUseCartProps => {
   const getCart = () => {
     if (user) {
       setLoading(true);
-      getCartByUserId(user?.id!)
+      getUserCart()
         .then((res) => {
           if (res.status === 204) setCart(null);
           else setCart(res.data);
@@ -35,12 +35,12 @@ const useCart = (): IUseCartProps => {
     }
   };
 
-  const addToCart = (product: IProduct) => {
+  const addToCart = (product: ICartProduct) => {
     if (cart) {
       const updatedCart: ICart = cart;
       if (updatedCart.products.some((prod) => prod.id === product.id)) {
         // Update the cart.
-        const existingProduct: IProduct = cart.products.find(
+        const existingProduct: ICartProduct = cart.products.find(
           (prod) => prod.id === product.id
         )!;
         updatedCart.products = [
@@ -71,7 +71,7 @@ const useCart = (): IUseCartProps => {
     }
   };
 
-  const removeFromCart = (product: IProduct) => {
+  const removeFromCart = (product: ICartProduct) => {
     if (cart) {
       const updatedCart = cart;
       updatedCart.products = cart.products.filter(

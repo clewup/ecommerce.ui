@@ -30,7 +30,8 @@ const useProduct = (): IUseProductProps => {
     description: "",
     category: "",
     color: "",
-    pricePerUnit: 0,
+    stock: 0,
+    price: 0,
     discount: 0,
   };
 
@@ -40,7 +41,8 @@ const useProduct = (): IUseProductProps => {
     description: Yup.string().required("Required"),
     category: Yup.string().required("Required"),
     color: Yup.string().required("Required"),
-    pricePerUnit: Yup.number().required("Required"),
+    stock: Yup.number().required("Required"),
+    price: Yup.number().required("Required"),
     discount: Yup.number().required("Required"),
   });
 
@@ -52,7 +54,8 @@ const useProduct = (): IUseProductProps => {
       description: values.description,
       category: values.category,
       color: values.color,
-      pricePerUnit: values.pricePerUnit,
+      stock: values.stock,
+      price: values.price,
       discount: values.discount,
     } as IProduct;
   };
