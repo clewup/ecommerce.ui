@@ -9,6 +9,7 @@
   .cart-product-image {
     height: 5rem;
     width: 5rem;
+    cursor: pointer;
 
     img {
       height: inherit;
@@ -19,6 +20,17 @@
 
   .cart-product-info {
     width: 10rem;
+
+    .discounted-price {
+      display: flex;
+      gap: 0.5rem;
+      .discounted-price-striked {
+        text-decoration: line-through;
+      }
+      .discounted-price-total {
+        color: red;
+      }
+    }
   }
 
   .cart-product-remove {

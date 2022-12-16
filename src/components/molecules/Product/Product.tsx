@@ -23,7 +23,7 @@ const Product: React.FC<IProps> = ({ product }) => {
   const navigate = useNavigate();
 
   return (
-    <div id={"product"}>
+    <div id={"product-tile"}>
       <div className={"product-title"}>{product.name}</div>
 
       <div
@@ -45,17 +45,13 @@ const Product: React.FC<IProps> = ({ product }) => {
         <p>{product.color}</p>
         {product.discount > 0 ? (
           <div className={"discounted-price"}>
-            <p className="discounted-price-striked">£{product.price}</p>
-            <p className={"discounted-price-total"}>
-              £
-              {(
-                product.price -
-                (product.price * product.discount) / 100
-              ).toFixed(2)}
+            <p className="discounted-price-striked">
+              £{((product.price / (100 - product.discount)) * 100).toFixed(2)}
             </p>
+            <p className={"discounted-price-total"}>£{product.price}</p>
           </div>
         ) : (
-          <p>£{product.price} </p>
+          <p>£{product.price}</p>
         )}
       </div>
       <div className={"product-actions"}>
@@ -65,13 +61,14 @@ const Product: React.FC<IProps> = ({ product }) => {
             type={"button"}
             variant={"contained"}
             loading={isLoading}
+            disabled={product.stock === 0}
             onClick={() => {
               !user && !isAuthenticated
                 ? navigate("/login")
                 : addToCart(product);
             }}
           >
-            <AddToCartIcon />
+            {product.stock !== 0 ? <AddToCartIcon /> : "OUT OF STOCK"}
           </LoadingButton>
         </Tooltip>
       </div>

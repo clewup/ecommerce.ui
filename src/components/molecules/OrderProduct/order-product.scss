@@ -18,5 +18,16 @@
 
   .order-product-info {
     width: 10rem;
+
+    .discounted-price {
+      display: flex;
+      gap: 0.5rem;
+      .discounted-price-striked {
+        text-decoration: line-through;
+      }
+      .discounted-price-total {
+        color: red;
+      }
+    }
   }
 }

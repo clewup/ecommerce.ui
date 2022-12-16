@@ -7,16 +7,26 @@ import {
   Paper,
   Popper,
 } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProductContext } from "../../../../contexts/Product";
+import getProductCategories from "../../../../api/GetProductCategories";
 
 const StoreDropdown = () => {
   const navigate = useNavigate();
-  const { categories } = useContext(ProductContext);
+  const { categories, setCategories } = useContext(ProductContext);
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (categories.length === 0 || !categories.length) {
+      getProductCategories().then((res) => {
+        setCategories(res.data);
+      });
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);

@@ -30,6 +30,7 @@ const CheckoutForm = () => {
     }
   }, [order]);
 
+  console.log(error);
   if (error) return <AppError error={error} />;
 
   return (

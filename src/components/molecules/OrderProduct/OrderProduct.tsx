@@ -15,9 +15,23 @@ const OrderProduct: React.FC<IProps> = ({ orderProduct }) => {
           alt={String(orderProduct.id)}
         />
       </div>
-      <div className={"cart-product-info"}>
+      <div className={"order-product-info"}>
         <p>{orderProduct.name}</p>
-        <p>£{orderProduct.price.toFixed(2)}</p>
+        <p>{orderProduct.color}</p>
+        {orderProduct.discount > 0 ? (
+          <div className={"discounted-price"}>
+            <p className="discounted-price-striked">
+              £
+              {(
+                (orderProduct.price / (100 - orderProduct.discount)) *
+                100
+              ).toFixed(2)}
+            </p>
+            <p className={"discounted-price-total"}>£{orderProduct.price}</p>
+          </div>
+        ) : (
+          <p>£{orderProduct.price}</p>
+        )}
       </div>
     </div>
   );

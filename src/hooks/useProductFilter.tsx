@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { AxiosError } from "axios";
-import getProductCategories from "../api/GetProductCategories";
 import { ProductContext } from "../contexts/Product";
 import { IProduct } from "../types/IProduct";
 import getProducts from "../api/GetProducts";
@@ -13,8 +12,6 @@ interface IUseProductFilterProps {
 }
 
 const useProductFilter = (): IUseProductFilterProps => {
-  const { setCategories } = useContext(ProductContext);
-
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
@@ -33,16 +30,6 @@ const useProductFilter = (): IUseProductFilterProps => {
       })
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    setLoading(true);
-    getProductCategories()
-      .then((res) => {
-        setCategories(res.data);
-      })
-      .catch((err) => setError(err));
-    // eslint-disable-next-line
   }, []);
 
   const filterBySearch = (joinedFilter: any[]) => {
