@@ -22,7 +22,7 @@ const Login = () => {
       navigate(-1);
     }
     // eslint-disable-next-line
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <Wrapper id={"login"}>
