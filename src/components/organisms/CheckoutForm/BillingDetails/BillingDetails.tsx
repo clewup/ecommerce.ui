@@ -2,7 +2,7 @@ import "./billing-details.scss";
 import Subheading, {
   subheadingSize,
 } from "../../../atoms/Subheading/Subheading";
-import { ErrorMessage, Field, FormikProps } from "formik";
+import { Field, FormikProps } from "formik";
 import Input from "../../../atoms/Input/Input";
 import Checkbox from "../../../atoms/Checkbox/Checkbox";
 import { Button } from "@mui/material";
@@ -27,7 +27,6 @@ const BillingDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         value={formik.values.cardNumber}
         disabled
       />
-      <ErrorMessage name={"cardNumber"} />
 
       <Field
         name={"expiryMonth"}
@@ -37,7 +36,6 @@ const BillingDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         value={formik.values.expiryMonth}
         disabled
       />
-      <ErrorMessage name={"expiryMonth"} />
 
       <Field
         name={"expiryYear"}
@@ -47,7 +45,6 @@ const BillingDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         value={formik.values.expiryYear}
         disabled
       />
-      <ErrorMessage name={"expiryYear"} />
 
       <Field
         name={"cvc"}
@@ -57,7 +54,6 @@ const BillingDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         value={formik.values.cvc}
         disabled
       />
-      <ErrorMessage name={"cvc"} />
 
       <div className={"billing-address"}>
         <Checkbox

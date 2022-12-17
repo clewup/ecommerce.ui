@@ -12,7 +12,7 @@ interface IUseProductFilterProps {
 }
 
 const useProductFilter = (): IUseProductFilterProps => {
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<AxiosError | null>(null);
 
   const [products, setProducts] = useState<IProduct[]>([]);

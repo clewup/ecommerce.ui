@@ -1,20 +1,21 @@
 import "./account.scss";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../contexts/User";
 import AccountDetails from "../../organisms/AccountDetails/AccountDetails";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 import AccountFooter from "../../molecules/AccountFooter/AccountFooter";
-import AppError from "../../molecules/AppError/AppError";
 import { Form, Formik } from "formik";
 import useUser from "../../../hooks/useUser";
 import AccountOrders from "../../organisms/AccountOrders/AccountOrders";
 import { Tab, Tabs } from "@mui/material";
 import { AuthContext } from "../../../contexts/Auth";
+import { useNavigate } from "react-router-dom";
 
 const Account = () => {
   const { user } = useContext(UserContext);
   const { isAuthenticated } = useContext(AuthContext);
   const { updateUser } = useUser();
+  const navigate = useNavigate();
 
   const [isEditing, setEditing] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
@@ -23,13 +24,10 @@ const Account = () => {
     setTabIndex(newTabIndex);
   };
 
-  if (!user || !isAuthenticated) {
-    return (
-      <AppError
-        error={{ message: "You must be logged in to view this page." }}
-      />
-    );
-  }
+  useEffect(() => {
+    if (!isAuthenticated) navigate("/login");
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Formik

@@ -1,5 +1,5 @@
 import "./add-product-form.scss";
-import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
+import { Field, Form, Formik, FormikProps } from "formik";
 import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button, Snackbar } from "@mui/material";
@@ -138,7 +138,6 @@ const AddProductForm = () => {
                     label={"Name"}
                     onChange={formik.handleChange}
                   />
-                  <ErrorMessage name={"name"} />
 
                   <Field
                     name={"description"}
@@ -146,7 +145,6 @@ const AddProductForm = () => {
                     label={"Description"}
                     onChange={formik.handleChange}
                   />
-                  <ErrorMessage name={"description"} />
 
                   <Field
                     name={"color"}
@@ -154,7 +152,6 @@ const AddProductForm = () => {
                     label={"Color"}
                     onChange={formik.handleChange}
                   />
-                  <ErrorMessage name={"color"} />
 
                   <Field
                     name={"stock"}
@@ -162,7 +159,6 @@ const AddProductForm = () => {
                     label={"Stock"}
                     onChange={formik.handleChange}
                   />
-                  <ErrorMessage name={"stock"} />
 
                   <Field
                     name={"price"}
@@ -170,7 +166,6 @@ const AddProductForm = () => {
                     label={"Price"}
                     onChange={formik.handleChange}
                   />
-                  <ErrorMessage name={"price"} />
 
                   <Field
                     name={"discount"}
@@ -178,7 +173,6 @@ const AddProductForm = () => {
                     label={"Discount"}
                     onChange={formik.handleChange}
                   />
-                  <ErrorMessage name={"discount"} />
                 </div>
               </div>
               <Button

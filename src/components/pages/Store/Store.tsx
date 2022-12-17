@@ -1,15 +1,20 @@
 import "./store.scss";
-
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Products from "../../organisms/Products/Products";
 import ProductFilter from "../../molecules/ProductFilter/ProductFilter";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 import { useParams } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../../contexts/Product";
+import useProductFilter from "../../../hooks/useProductFilter";
+import AppLoader from "../../atoms/AppLoader/AppLoader";
+import { Button } from "@mui/material";
 
 const Store = () => {
   const { category } = useParams();
+  const { products, filteredProducts, isLoading } = useProductFilter();
   const { categories, setCategoryQuery } = useContext(ProductContext);
+  const [isFilterOpen, setFilterOpen] = useState(false);
 
   useEffect(() => {
     if (category) {
@@ -25,14 +30,45 @@ const Store = () => {
     // eslint-disable-next-line
   }, [category]);
 
+  const toggleDrawer =
+    (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event &&
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+      setFilterOpen(isOpen);
+    };
+
   return (
     <Wrapper id={"store"}>
-      <div className={"product-filter"}>
-        <ProductFilter />
-      </div>
-      <div className={"products"}>
-        <Products />
-      </div>
+      {isLoading ? (
+        <AppLoader />
+      ) : (
+        <>
+          <div className={"product-filter"}>
+            <Button onClick={toggleDrawer(true)}>Filters</Button>
+            <p>
+              Showing {filteredProducts.length} results of {products.length}
+            </p>
+
+            <SwipeableDrawer
+              anchor={"left"}
+              open={isFilterOpen}
+              onClose={toggleDrawer(false)}
+              onOpen={toggleDrawer(true)}
+            >
+              <ProductFilter toggleDrawer={toggleDrawer} />
+            </SwipeableDrawer>
+          </div>
+          <div className={"products"}>
+            <Products />
+          </div>
+        </>
+      )}
     </Wrapper>
   );
 };

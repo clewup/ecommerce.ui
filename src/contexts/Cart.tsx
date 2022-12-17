@@ -11,14 +11,14 @@ interface IProps {
 }
 
 interface ICartContextProps {
-  cart: ICart | null;
-  setCart: Dispatch<SetStateAction<ICart | null>>;
+  cart: ICart;
+  setCart: Dispatch<SetStateAction<ICart>>;
   isLoading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const initialCartContextProps: ICartContextProps = {
-  cart: null,
+  cart: {} as ICart,
   setCart: (() => undefined) as Dispatch<any>,
   isLoading: false,
   setLoading: (() => undefined) as Dispatch<any>,
@@ -27,7 +27,7 @@ const initialCartContextProps: ICartContextProps = {
 const CartContext = createContext<ICartContextProps>(initialCartContextProps);
 
 const CartProvider = ({ children }: IProps) => {
-  const [cart, setCart] = useState<ICart | null>(null);
+  const [cart, setCart] = useState<ICart>({} as ICart);
   const [isLoading, setLoading] = useState(false);
 
   return (

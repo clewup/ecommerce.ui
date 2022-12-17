@@ -6,11 +6,12 @@ import { AxiosError } from "axios";
 import { CartContext } from "../contexts/Cart";
 import * as Yup from "yup";
 import { createGuid } from "../utils/CreateGuid";
+import { ICart } from "../types/ICart";
 
 interface IUseCheckoutProps {
   initialValues: ICheckoutFormValues;
   submitCheckout: (values: ICheckoutFormValues) => void;
-  order: IOrder | null;
+  order: IOrder;
   isLoading: boolean;
   error: AxiosError | null;
   validationSchema: Yup.ObjectSchema<any>;
@@ -19,7 +20,7 @@ interface IUseCheckoutProps {
 const useCheckout = (): IUseCheckoutProps => {
   const { user } = useContext(UserContext);
   const { cart, setCart } = useContext(CartContext);
-  const [order, setOrder] = useState<IOrder | null>(null);
+  const [order, setOrder] = useState<IOrder>({} as IOrder);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
@@ -77,7 +78,7 @@ const useCheckout = (): IUseCheckoutProps => {
     postOrder(order)
       .then((res) => {
         setOrder(res.data);
-        setCart(null);
+        setCart({} as ICart);
       })
       .catch((err) => setError(err))
       .finally(() => setLoading(false));

@@ -2,11 +2,17 @@
   min-height: 50vh;
 
   .featured-products {
-    padding: 1rem 10vw 2rem 10vw;
+    padding: 1rem;
     justify-content: center;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     place-items: center;
+    gap: 1rem;
+  }
 
+  .featured-products-loader {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 0;
   }
 }

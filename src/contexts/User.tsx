@@ -6,19 +6,19 @@ interface IProps {
 }
 
 interface IUserContextProps {
-  user: IUser | null;
-  setUser: Dispatch<SetStateAction<IUser | null>>;
+  user: IUser;
+  setUser: Dispatch<SetStateAction<IUser>>;
 }
 
 const initialUserContextProps: IUserContextProps = {
-  user: null,
+  user: {} as IUser,
   setUser: (() => undefined) as Dispatch<any>,
 };
 
 const UserContext = createContext<IUserContextProps>(initialUserContextProps);
 
 const UserProvider = ({ children }: IProps) => {
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser>({} as IUser);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

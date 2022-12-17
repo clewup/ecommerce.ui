@@ -1,5 +1,5 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useContext } from "react";
+import { Field, Form, Formik } from "formik";
+import React, { useContext, useEffect } from "react";
 import { LoadingButton } from "@mui/lab";
 import "./register.scss";
 import { AuthContext } from "../../../contexts/Auth";
@@ -17,9 +17,12 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  if (isAuthenticated) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Wrapper id={"register"}>
@@ -38,7 +41,6 @@ const Register = () => {
                 label={"First Name"}
                 onChange={formik.handleChange}
               />
-              <ErrorMessage name={"firstName"} />
 
               <Field
                 name={"lastName"}
@@ -46,7 +48,6 @@ const Register = () => {
                 label={"Last Name"}
                 onChange={formik.handleChange}
               />
-              <ErrorMessage name={"lastName"} />
 
               <Field
                 name={"email"}
@@ -54,7 +55,6 @@ const Register = () => {
                 label={"Email"}
                 onChange={formik.handleChange}
               />
-              <ErrorMessage name={"email"} />
 
               <Field
                 name={"password"}
@@ -63,7 +63,6 @@ const Register = () => {
                 isPassword={true}
                 onChange={formik.handleChange}
               />
-              <ErrorMessage name={"password"} />
 
               <Field
                 name={"confirmPassword"}
@@ -72,7 +71,6 @@ const Register = () => {
                 isPassword={true}
                 onChange={formik.handleChange}
               />
-              <ErrorMessage name={"confirmPassword"} />
 
               {error && <p>{error.message}</p>}
 

@@ -1,24 +1,22 @@
 import "./cart.scss";
-import CartItems from "../../organisms/CartItems/CartItems";
+import CartProducts from "../../organisms/CartProducts/CartProducts";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/Auth";
-import { UserContext } from "../../../contexts/User";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
   const { isAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!isAuthenticated && !user) navigate("/login");
+    if (!isAuthenticated) navigate("/login");
     // eslint-disable-next-line
   }, []);
 
   return (
     <Wrapper id={"cart"}>
-      <CartItems />
+      <CartProducts />
     </Wrapper>
   );
 };

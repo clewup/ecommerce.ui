@@ -16,7 +16,7 @@ interface IUseStatistics {
 const useStatistics = (): IUseStatistics => {
   const [popularProducts, setPopularProducts] = useState<IProduct[]>([]);
   const [discountedProducts, setDiscountedProducts] = useState<IProduct[]>([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<AxiosError | null>(null);
 
   const getMostDiscounted = (amount: number) => {

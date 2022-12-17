@@ -8,7 +8,11 @@ import Checkbox from "../../atoms/Checkbox/Checkbox";
 import { InputLabel, Slider } from "@mui/material";
 import AppError from "../AppError/AppError";
 
-const ProductFilter = () => {
+interface IProps {
+  toggleDrawer: (isOpen: boolean) => void;
+}
+
+const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
   const {
     categories,
     searchQuery,
@@ -25,7 +29,11 @@ const ProductFilter = () => {
   if (error) return <AppError error={error} />;
 
   return (
-    <div id={"product-filter"}>
+    <div
+      id={"product-filter"}
+      onClick={() => toggleDrawer(false)}
+      onKeyDown={() => toggleDrawer(false)}
+    >
       <Input
         label={"Search"}
         value={searchQuery}

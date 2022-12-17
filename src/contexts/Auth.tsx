@@ -8,22 +8,22 @@ interface IProps {
 interface IAuthContextProps {
   isAuthenticated: boolean;
   setAuthenticated: Dispatch<SetStateAction<boolean>>;
-  accessToken: string | null;
-  setAccessToken: Dispatch<SetStateAction<string | null>>;
+  accessToken: string;
+  setAccessToken: Dispatch<SetStateAction<string>>;
   claims: IClaim[];
   setClaims: Dispatch<SetStateAction<IClaim[]>>;
-  role: string | null;
-  setRole: Dispatch<SetStateAction<string | null>>;
+  role: string;
+  setRole: Dispatch<SetStateAction<string>>;
 }
 
 const initialAuthContextProps: IAuthContextProps = {
   isAuthenticated: false,
   setAuthenticated: (() => undefined) as Dispatch<any>,
-  accessToken: null,
+  accessToken: "",
   setAccessToken: (() => undefined) as Dispatch<any>,
   claims: [],
   setClaims: (() => undefined) as Dispatch<any>,
-  role: null,
+  role: "",
   setRole: (() => undefined) as Dispatch<any>,
 };
 
@@ -31,9 +31,9 @@ const AuthContext = createContext<IAuthContextProps>(initialAuthContextProps);
 
 const AuthProvider = ({ children }: IProps) => {
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [accessToken, setAccessToken] = useState<string>("");
   const [claims, setClaims] = useState<IClaim[]>([]);
-  const [role, setRole] = useState<string | null>(null);
+  const [role, setRole] = useState<string>("");
 
   return (
     <AuthContext.Provider

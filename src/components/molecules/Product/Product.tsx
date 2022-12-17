@@ -4,7 +4,6 @@ import React, { useContext } from "react";
 import useCart from "../../../hooks/useCart";
 import { ShoppingCart as AddToCartIcon } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../../contexts/User";
 import { AuthContext } from "../../../contexts/Auth";
 import { CartContext } from "../../../contexts/Cart";
 import { LoadingButton } from "@mui/lab";
@@ -16,7 +15,6 @@ interface IProps {
 }
 
 const Product: React.FC<IProps> = ({ product }) => {
-  const { user } = useContext(UserContext);
   const { isAuthenticated } = useContext(AuthContext);
   const { isLoading } = useContext(CartContext);
   const { addToCart } = useCart();
@@ -63,9 +61,7 @@ const Product: React.FC<IProps> = ({ product }) => {
             loading={isLoading}
             disabled={product.stock === 0}
             onClick={() => {
-              !user && !isAuthenticated
-                ? navigate("/login")
-                : addToCart(product);
+              !isAuthenticated ? navigate("/login") : addToCart(product);
             }}
           >
             {product.stock !== 0 ? <AddToCartIcon /> : "OUT OF STOCK"}

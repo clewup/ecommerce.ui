@@ -27,7 +27,7 @@ const useCart = (): IUseCartProps => {
       setLoading(true);
       getUserCart()
         .then((res) => {
-          if (res.status === 204) setCart(null);
+          if (res.status === 204) setCart({} as ICart);
           else setCart(res.data);
         })
         .catch((err) => setError(err))
@@ -36,7 +36,7 @@ const useCart = (): IUseCartProps => {
   };
 
   const addToCart = (product: ICartProduct) => {
-    if (cart) {
+    if (cart.id) {
       const updatedCart: ICart = cart;
       if (updatedCart.products.some((prod) => prod.id === product.id)) {
         // Update the cart.
@@ -72,7 +72,7 @@ const useCart = (): IUseCartProps => {
   };
 
   const removeFromCart = (product: ICartProduct) => {
-    if (cart) {
+    if (cart.id) {
       const updatedCart = cart;
       updatedCart.products = cart.products.filter(
         (prod) => prod.id !== product.id

@@ -1,15 +1,12 @@
 import Product from "../../molecules/Product/Product";
 import "./products.scss";
 import { IProduct } from "../../../types/IProduct";
-import Loader from "../../atoms/Loader/Loader";
 import useProductFilter from "../../../hooks/useProductFilter";
 import AppError from "../../molecules/AppError/AppError";
 import React from "react";
 
 const Products = () => {
-  const { products, filteredProducts, isLoading, error } = useProductFilter();
-
-  if (!products || isLoading) return <Loader />;
+  const { filteredProducts, error } = useProductFilter();
 
   if (error) return <AppError error={error} />;
 

@@ -3,16 +3,14 @@ import Wrapper from "../../atoms/Wrapper/Wrapper";
 import CheckoutForm from "../../organisms/CheckoutForm/CheckoutForm";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../../contexts/User";
 import { AuthContext } from "../../../contexts/Auth";
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
   const { isAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!isAuthenticated && !user) navigate("/login");
+    if (!isAuthenticated) navigate("/login");
     // eslint-disable-next-line
   }, []);
 

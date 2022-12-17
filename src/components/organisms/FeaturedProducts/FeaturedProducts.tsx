@@ -7,19 +7,21 @@ import useStatistics from "../../../hooks/useStatistics";
 import { useEffect } from "react";
 import Product from "../../molecules/Product/Product";
 import AppError from "../../molecules/AppError/AppError";
+import Loader from "../../atoms/Loader/Loader";
 
 const FeaturedProducts = () => {
   const {
     discountedProducts,
     popularProducts,
+    isLoading,
     error,
     getMostDiscounted,
     getMostPopular,
   } = useStatistics();
 
   useEffect(() => {
-    getMostDiscounted(4);
-    getMostPopular(4);
+    getMostDiscounted(5);
+    getMostPopular(5);
     // eslint-disable-next-line
   }, []);
 
@@ -28,28 +30,41 @@ const FeaturedProducts = () => {
   return (
     <div id={"featured-products"}>
       <Subheading size={subheadingSize.SMALL}>TRENDING</Subheading>
-      <div className={"featured-products"}>
-        {popularProducts.map((product) => {
-          return (
-            <div key={String(product.id)}>
-              <Product product={product} />
-            </div>
-          );
-        })}
-      </div>
+
+      {isLoading ? (
+        <div className={"featured-products-loader"}>
+          <Loader />
+        </div>
+      ) : (
+        <div className={"featured-products"}>
+          {popularProducts.map((product) => {
+            return (
+              <div key={String(product.id)}>
+                <Product product={product} />
+              </div>
+            );
+          })}{" "}
+        </div>
+      )}
 
       <Subheading size={subheadingSize.SMALL} color={subheadingColor.RED}>
         SALE!
       </Subheading>
-      <div className={"featured-products"}>
-        {discountedProducts.map((product) => {
-          return (
-            <div key={String(product.id)}>
-              <Product product={product} />
-            </div>
-          );
-        })}
-      </div>
+      {isLoading ? (
+        <div className={"featured-products-loader"}>
+          <Loader />
+        </div>
+      ) : (
+        <div className={"featured-products"}>
+          {discountedProducts.map((product) => {
+            return (
+              <div key={String(product.id)}>
+                <Product product={product} />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

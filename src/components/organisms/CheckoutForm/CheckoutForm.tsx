@@ -25,7 +25,7 @@ const CheckoutForm = () => {
   };
 
   useEffect(() => {
-    if (order) {
+    if (order.id) {
       setTabIndex(2);
     }
   }, [order]);

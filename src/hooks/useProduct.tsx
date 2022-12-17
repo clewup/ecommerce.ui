@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { IProduct } from "../types/IProduct";
 import { Guid } from "guid-typescript";
 import getProductById from "../api/GetProductById";
@@ -7,12 +7,10 @@ import { IImage } from "../types/IImage";
 import postProduct from "../api/PostProduct";
 import * as Yup from "yup";
 import { createGuid } from "utils/CreateGuid";
-import getProductCategories from "../api/GetProductCategories";
-import { ProductContext } from "../contexts/Product";
 
 interface IUseProductProps {
   initialValues: IProduct;
-  product: IProduct | null;
+  product: IProduct;
   isLoading: boolean;
   error: AxiosError | null;
   getProduct: (id: Guid) => void;
@@ -21,7 +19,7 @@ interface IUseProductProps {
 }
 
 const useProduct = (): IUseProductProps => {
-  const [product, setProduct] = useState<IProduct | null>(null);
+  const [product, setProduct] = useState<IProduct>({} as IProduct);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 

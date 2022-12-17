@@ -2,7 +2,7 @@ import Subheading, {
   subheadingSize,
 } from "../../../atoms/Subheading/Subheading";
 import "./delivery-details.scss";
-import { ErrorMessage, Field, FormikProps } from "formik";
+import { Field, FormikProps } from "formik";
 import Input from "../../../atoms/Input/Input";
 import React from "react";
 import { Button } from "@mui/material";
@@ -24,7 +24,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         onChange={formik.handleChange}
         value={formik.values.firstName}
       />
-      <ErrorMessage name={"firstName"} />
 
       <Field
         name={"lastName"}
@@ -33,7 +32,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         onChange={formik.handleChange}
         value={formik.values.lastName}
       />
-      <ErrorMessage name={"lastName"} />
 
       <Field
         name={"email"}
@@ -42,7 +40,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         onChange={formik.handleChange}
         value={formik.values.email}
       />
-      <ErrorMessage name={"email"} />
 
       <Field
         name={"lineOne"}
@@ -51,7 +48,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         onChange={formik.handleChange}
         value={formik.values.lineOne}
       />
-      <ErrorMessage name={"lineOne"} />
 
       <Field
         name={"lineTwo"}
@@ -60,7 +56,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         onChange={formik.handleChange}
         value={formik.values.lineTwo}
       />
-      <ErrorMessage name={"lineTwo"} />
 
       <Field
         name={"lineThree"}
@@ -69,7 +64,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         onChange={formik.handleChange}
         value={formik.values.lineThree}
       />
-      <ErrorMessage name={"lineThree"} />
 
       <Field
         name={"postcode"}
@@ -78,7 +72,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         onChange={formik.handleChange}
         value={formik.values.postcode}
       />
-      <ErrorMessage name={"postcode"} />
 
       <Field
         name={"city"}
@@ -87,7 +80,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         onChange={formik.handleChange}
         value={formik.values.city}
       />
-      <ErrorMessage name={"city"} />
 
       <Field
         name={"county"}
@@ -96,7 +88,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         onChange={formik.handleChange}
         value={formik.values.county}
       />
-      <ErrorMessage name={"county"} />
 
       <Field
         name={"country"}
@@ -105,7 +96,6 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
         onChange={formik.handleChange}
         value={formik.values.country}
       />
-      <ErrorMessage name={"country"} />
 
       <div className={"checkout-action-buttons"}>
         <Button

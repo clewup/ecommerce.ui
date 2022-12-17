@@ -1,5 +1,5 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useContext } from "react";
+import { Field, Form, Formik } from "formik";
+import React, { useContext, useEffect } from "react";
 import useLogin from "../../../hooks/useLogin";
 import "./login.scss";
 import { LoadingButton } from "@mui/lab";
@@ -17,9 +17,12 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  if (isAuthenticated) {
-    navigate(-1);
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(-1);
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Wrapper id={"login"}>
@@ -38,7 +41,6 @@ const Login = () => {
                 label={"Email"}
                 onChange={formik.handleChange}
               />
-              <ErrorMessage name={"email"} />
 
               <Field
                 name={"password"}
@@ -47,7 +49,6 @@ const Login = () => {
                 isPassword={true}
                 onChange={formik.handleChange}
               />
-              <ErrorMessage name={"password"} />
 
               {error && <p>{error.message}</p>}
 

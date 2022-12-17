@@ -1,7 +1,11 @@
 #store {
-  display: flex;
-  gap: 2rem;
 
+  .product-filter {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+   margin: 0 2rem 1rem 2rem;
+  }
   .products {
     display: flex;
     justify-content: center;

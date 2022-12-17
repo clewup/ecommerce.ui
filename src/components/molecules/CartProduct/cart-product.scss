@@ -3,8 +3,10 @@
   display: flex;
   padding: 1rem 0;
   gap: 1rem;
+  width: 100%;
   justify-content: space-around;
   background-color: white;
+  height: 75px;
 
   .cart-product-image {
     height: 5rem;

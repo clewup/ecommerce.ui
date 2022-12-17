@@ -1,9 +1,10 @@
 import { TextField } from "@mui/material";
-import { FieldAttributes } from "formik";
+import { FieldAttributes, FormikProps } from "formik";
 import React from "react";
 
 interface IProps {
   field?: FieldAttributes<any>;
+  form?: FormikProps<any>;
   label?: string;
   isPassword?: boolean;
   disabled?: boolean;
@@ -14,6 +15,7 @@ interface IProps {
 
 const Input: React.FC<IProps> = ({
   field,
+  form,
   label,
   isPassword,
   disabled = false,
@@ -24,6 +26,7 @@ const Input: React.FC<IProps> = ({
   return (
     <TextField
       {...field}
+      error={form?.touched[field.name] && form?.errors[field.name]}
       label={label}
       type={isPassword ? "password" : "text"}
       disabled={disabled}

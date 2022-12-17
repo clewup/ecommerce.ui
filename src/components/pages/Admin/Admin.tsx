@@ -3,28 +3,25 @@ import AddProductForm from "../../organisms/AddProductForm/AddProductForm";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 import AllOrders from "../../organisms/AllOrders/AllOrders";
 import { Tab, Tabs } from "@mui/material";
-import React, { useContext, useState } from "react";
-import { UserContext } from "../../../contexts/User";
+import React, { useContext, useEffect, useState } from "react";
 import AppError from "../../molecules/AppError/AppError";
 import { AuthContext } from "../../../contexts/Auth";
 import { roles } from "../../../enums/roles";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
   const [tabIndex, setTabIndex] = useState(0);
-  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   const { isAuthenticated, role } = useContext(AuthContext);
 
   const handleTabChange = (event: React.SyntheticEvent, newTabIndex: any) => {
     setTabIndex(newTabIndex);
   };
 
-  if (!user || !isAuthenticated) {
-    return (
-      <AppError
-        error={{ message: "You must be logged in to view this page." }}
-      />
-    );
-  }
+  useEffect(() => {
+    if (!isAuthenticated) navigate("/login");
+    // eslint-disable-next-line
+  }, []);
 
   if (role && role !== roles.DEVELOPER && role !== roles.EMPLOYEE) {
     return (
