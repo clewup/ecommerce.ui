@@ -23,7 +23,7 @@ const CartProducts = () => {
     <div id={"cart-products"}>
       <Subheading size={subheadingSize.SMALL}>Cart</Subheading>
       {isLoading ? (
-        <Loader color={"#333"} />
+        <Loader color={"#fff"} />
       ) : (
         <>
           {cart?.products?.length === 0 || cart == null || !cart.products ? (

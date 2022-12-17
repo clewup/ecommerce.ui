@@ -20,16 +20,12 @@ const useRegister = (): IUseRegisterProps => {
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("Required"),
     lastName: Yup.string().required("Required"),
-    email: Yup.string()
-      .email()
-      .min(5, "Must be 5 at least characters.")
-      .max(20, "Must be less than 20 characters.")
-      .required("Required"),
+    email: Yup.string().email("Must be a valid email.").required("Required"),
     password: Yup.string()
       .min(5, "Must be at least 5 characters.")
       .required("Required"),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .oneOf([Yup.ref("password"), null], "Passwords do not match")
       .required("Required"),
   });
 

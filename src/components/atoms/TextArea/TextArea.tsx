@@ -11,9 +11,10 @@ interface IProps {
   value?: unknown;
   onChange?: (e: any) => void;
   width?: string;
+  rows?: number;
 }
 
-const Input: React.FC<IProps> = ({
+const TextArea: React.FC<IProps> = ({
   field,
   form,
   label,
@@ -22,6 +23,7 @@ const Input: React.FC<IProps> = ({
   value,
   onChange,
   width,
+  rows = 4,
 }) => {
   return (
     <Tooltip
@@ -39,6 +41,8 @@ const Input: React.FC<IProps> = ({
         type={isPassword ? "password" : "text"}
         disabled={disabled}
         value={value ?? value}
+        multiline={true}
+        rows={rows}
         onChange={onChange ?? onChange}
         sx={{
           marginTop: 1,
@@ -51,4 +55,4 @@ const Input: React.FC<IProps> = ({
     </Tooltip>
   );
 };
-export default Input;
+export default TextArea;

@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 const Account = () => {
   const { user } = useContext(UserContext);
   const { isAuthenticated } = useContext(AuthContext);
-  const { updateUser } = useUser();
+  const { validationSchema, updateUser } = useUser();
   const navigate = useNavigate();
 
   const [isEditing, setEditing] = useState(false);
@@ -32,6 +32,7 @@ const Account = () => {
   return (
     <Formik
       initialValues={user}
+      validationSchema={validationSchema}
       onSubmit={(values) => {
         updateUser(values);
         setEditing(false);
@@ -51,7 +52,11 @@ const Account = () => {
                   user={user}
                   isEditing={isEditing}
                 />
-                <AccountFooter isEditing={isEditing} setEditing={setEditing} />
+                <AccountFooter
+                  formik={formik}
+                  isEditing={isEditing}
+                  setEditing={setEditing}
+                />
               </Form>
             )}
             {tabIndex === 1 && <AccountOrders />}

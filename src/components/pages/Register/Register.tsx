@@ -21,8 +21,7 @@ const Register = () => {
     if (isAuthenticated) {
       navigate("/");
     }
-    // eslint-disable-next-line
-  }, []);
+  });
 
   return (
     <Wrapper id={"register"}>

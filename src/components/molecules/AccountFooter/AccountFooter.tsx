@@ -1,20 +1,30 @@
 import { Button } from "@mui/material";
 import React, { SetStateAction } from "react";
 import "./account-footer.scss";
+import { FormikProps } from "formik";
+import { IUser } from "../../../types/IUser";
 
 interface IProps {
+  formik: FormikProps<IUser>;
   isEditing: boolean;
   setEditing: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const AccountFooter: React.FC<IProps> = ({ isEditing, setEditing }) => {
+const AccountFooter: React.FC<IProps> = ({ formik, isEditing, setEditing }) => {
   return (
     <div id={"account-footer"}>
       <Button
         variant={"contained"}
         color={"info"}
         size={"large"}
-        onClick={() => (isEditing ? setEditing(false) : setEditing(true))}
+        onClick={() => {
+          if (isEditing) {
+            formik.resetForm({ values: formik.initialValues });
+            setEditing(false);
+          } else {
+            setEditing(true);
+          }
+        }}
       >
         Edit
       </Button>
@@ -23,7 +33,7 @@ const AccountFooter: React.FC<IProps> = ({ isEditing, setEditing }) => {
         variant={"contained"}
         color={"success"}
         size={"large"}
-        disabled={!isEditing}
+        disabled={!isEditing || !formik.dirty}
       >
         Save
       </Button>

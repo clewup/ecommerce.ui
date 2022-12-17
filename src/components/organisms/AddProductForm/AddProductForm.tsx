@@ -1,10 +1,10 @@
 import "./add-product-form.scss";
-import { Field, Form, Formik, FormikProps } from "formik";
+import { Field, Form, Formik, FormikHelpers, FormikProps } from "formik";
 import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button, Snackbar } from "@mui/material";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
-import React, { useContext, useRef } from "react";
+import React, { useContext } from "react";
 import useImageUpload from "../../../hooks/useImageUpload";
 import AppError from "../../molecules/AppError/AppError";
 import useProduct from "../../../hooks/useProduct";
@@ -12,9 +12,10 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Carousel from "react-material-ui-carousel";
 import CreatableSelect from "react-select/creatable";
 import { ProductContext } from "../../../contexts/Product";
+import TextArea from "../../atoms/TextArea/TextArea";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
 
 const AddProductForm = () => {
-  const formRef = useRef<FormikProps<IProduct> | null>(null);
   const [openAlert, setOpenAlert] = React.useState(false);
 
   const {
@@ -49,10 +50,10 @@ const AddProductForm = () => {
     return formatted;
   };
 
-  const handleSubmit = (values: IProduct) => {
+  const handleSubmit = (values: IProduct, actions: FormikHelpers<IProduct>) => {
     addProduct(values, images);
     setOpenAlert(true);
-    formRef.current?.resetForm({ values: initialValues });
+    actions.resetForm({ values: initialValues });
   };
 
   if (productError || imagesError)
@@ -70,8 +71,7 @@ const AddProductForm = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       enableReinitialize={true}
-      onSubmit={(values) => handleSubmit(values)}
-      innerRef={formRef}
+      onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
       {(formik: FormikProps<IProduct>) => {
         return (
@@ -103,6 +103,7 @@ const AddProductForm = () => {
                     className={"upload-button"}
                   >
                     Upload Images
+                    <CameraAltIcon />
                     <input
                       type="file"
                       hidden
@@ -113,6 +114,13 @@ const AddProductForm = () => {
                       }}
                     />
                   </Button>
+
+                  <Field
+                    name={"name"}
+                    component={Input}
+                    label={"Name"}
+                    onChange={formik.handleChange}
+                  />
 
                   <CreatableSelect
                     isClearable
@@ -133,15 +141,9 @@ const AddProductForm = () => {
 
                 <div className={"product-form-half"}>
                   <Field
-                    name={"name"}
-                    component={Input}
-                    label={"Name"}
-                    onChange={formik.handleChange}
-                  />
-
-                  <Field
                     name={"description"}
-                    component={Input}
+                    component={TextArea}
+                    rows={8}
                     label={"Description"}
                     onChange={formik.handleChange}
                   />

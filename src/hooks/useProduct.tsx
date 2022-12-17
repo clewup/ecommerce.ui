@@ -37,13 +37,32 @@ const useProduct = (): IUseProductProps => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
-    images: Yup.array().required(),
+    images: Yup.array().required("Required"),
     description: Yup.string().required("Required"),
     category: Yup.string().required("Required"),
     color: Yup.string().required("Required"),
-    stock: Yup.number().required("Required"),
-    price: Yup.number().required("Required"),
-    discount: Yup.number().required("Required"),
+    stock: Yup.number()
+      .integer("Must be a whole number")
+      .positive("Must be greater than 0")
+      .required("Required"),
+    price: Yup.number()
+      .positive("Must be greater than 0")
+      .test("is-decimal", "Maximum two decimal places", (value: any) => {
+        if (value !== undefined) {
+          return /^[0-9]*(\.[0-9]{0,2})?$/.test(value);
+        }
+        return true;
+      })
+      .required("Required"),
+    discount: Yup.number()
+      .moreThan(-1, "Must be 0 or greater")
+      .test("is-decimal", "Maximum two decimal places", (value: any) => {
+        if (value !== undefined) {
+          return /^[0-9]*(\.[0-9]{0,2})?$/.test(value);
+        }
+        return true;
+      })
+      .required("Required"),
   });
 
   const formatProduct = (values: IProduct, images: IImage[]) => {

@@ -24,7 +24,7 @@ const useLogin = (): IUseLoginProps => {
   const [error, setError] = useState<AxiosError | null>(null);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required("Required"),
+    email: Yup.string().email("Must be a valid email").required("Required"),
     password: Yup.string().required("Required"),
   });
 
