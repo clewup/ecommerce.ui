@@ -35,68 +35,80 @@ const Product = () => {
     // eslint-disable-next-line
   }, [id]);
 
-  if (!product || isProductLoading) return <Loader />;
   if (error) return <AppError error={error} />;
 
   return (
     <Wrapper id={"product"}>
-      <div className={"product-left"}>
-        <div className={"product-image"}>
-          <Carousel
-            animation={"slide"}
-            swipe={false}
-            indicators={false}
-            autoPlay={false}
-          >
-            {product.images.map((image) => (
-              <img src={image.url!} alt={image.title} />
-            ))}
-          </Carousel>
-        </div>
-      </div>
-      <div className={"product-right"}>
-        <div className={"product-description"}>
-          <Subheading size={subheadingSize.MEDIUM}>{product.name}</Subheading>
-          <p>{product.description}</p>
-        </div>
-
-        <div className={"product-color"}>
-          <Subheading size={subheadingSize.SMALL}>Color</Subheading>
-          <p>{product.color}</p>
-        </div>
-
-        <div className={"product-price"}>
-          <Subheading size={subheadingSize.SMALL}>Price</Subheading>
-          {product.discount > 0 ? (
-            <div className={"discounted-price"}>
-              <p className="discounted-price-striked">
-                £{((product.price / (100 - product.discount)) * 100).toFixed(2)}
-              </p>
-              <p className={"discounted-price-total"}>£{product.price}</p>
+      {isProductLoading || !product.id ? (
+        <Loader />
+      ) : (
+        <>
+          <div className={"product-left"}>
+            <div className={"product-image"}>
+              <Carousel
+                animation={"slide"}
+                swipe={false}
+                indicators={false}
+                autoPlay={false}
+              >
+                {product.images.map((image) => (
+                  <img src={image.url!} alt={image.title} />
+                ))}
+              </Carousel>
             </div>
-          ) : (
-            <p>£{product.price}</p>
-          )}
-        </div>
+          </div>
+          <div className={"product-right"}>
+            <div className={"product-description"}>
+              <Subheading size={subheadingSize.MEDIUM}>
+                {product.name}
+              </Subheading>
+              <p>{product.description}</p>
+            </div>
 
-        <div className={"product-checkout"}>
-          <Subheading size={subheadingSize.SMALL}>Treat Yourself</Subheading>
-          <Tooltip title={"Add to Cart"}>
-            <LoadingButton
-              color="success"
-              type={"button"}
-              variant={"contained"}
-              loading={isCartLoading}
-              disabled={product.stock === 0}
-              onClick={() => {
-                !isAuthenticated ? navigate("/login") : addToCart(product);
-              }}
-            >
-              {product.stock !== 0 ? <AddToCartIcon /> : "OUT OF STOCK"}
-            </LoadingButton>
-          </Tooltip>
-        </div>
-      </div>
+            <div className={"product-color"}>
+              <Subheading size={subheadingSize.SMALL}>Color</Subheading>
+              <p>{product.color}</p>
+            </div>
+
+            <div className={"product-price"}>
+              <Subheading size={subheadingSize.SMALL}>Price</Subheading>
+              {product.discount > 0 ? (
+                <div className={"discounted-price"}>
+                  <p className="discounted-price-striked">
+                    £
+                    {((product.price / (100 - product.discount)) * 100).toFixed(
+                      2
+                    )}
+                  </p>
+                  <p className={"discounted-price-total"}>£{product.price}</p>
+                </div>
+              ) : (
+                <p>£{product.price}</p>
+              )}
+            </div>
+
+            <div className={"product-checkout"}>
+              <Subheading size={subheadingSize.SMALL}>
+                Treat Yourself
+              </Subheading>
+              <Tooltip title={"Add to Cart"}>
+                <LoadingButton
+                  color="success"
+                  type={"button"}
+                  variant={"contained"}
+                  loading={isCartLoading}
+                  disabled={product.stock === 0}
+                  onClick={() => {
+                    !isAuthenticated ? navigate("/login") : addToCart(product);
+                  }}
+                >
+                  {product.stock !== 0 ? <AddToCartIcon /> : "OUT OF STOCK"}
+                </LoadingButton>
+              </Tooltip>
+            </div>
+          </div>
+        </>
+      )}
     </Wrapper>
   );
 };
