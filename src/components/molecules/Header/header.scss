@@ -1,15 +1,82 @@
-#header {
-  height: 4vh;
-  background-color: black;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: white;
-  position: relative;
-  z-index: 10;
+@import '../../../styles/colors';
 
-  .header-group {
+#header {
+  .header-top {
     display: flex;
-    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+
+    .header-logo {
+      display: flex;
+      gap: 1rem;
+      font-size: 2rem;
+      font-weight: bold;
+      padding: 0 2rem;
+    }
+
+    .header-content {
+      .header-actions {
+        position: relative;
+        background-color: $branding-darkgrey;
+        color: $branding-white;
+        overflow:hidden;
+
+        p {
+          cursor: pointer;
+        }
+
+        span {
+          display: flex;
+          justify-content: space-around;
+          padding: 0.2rem 2rem;
+        }
+
+        &:after {
+          content: "";
+          position:absolute;
+          margin:-20px;
+          width:40px;
+          height:40px;
+          transform:rotate(45deg);
+          background-color:#000;
+          background-color: white
+        }
+      }
+
+      .header-information {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem 5rem;
+
+        .header-shipping {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
+
+        .header-telephone {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
+
+        .header-bolded {
+          font-weight: bold;
+          color: $branding-blue;
+        }
+      }
+    }
+  }
+  .header-bottom {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.5rem 0;
+    background-color: $branding-blue;
+    color: $branding-white;
+
+    p {
+      cursor: pointer;
+    }
   }
 }

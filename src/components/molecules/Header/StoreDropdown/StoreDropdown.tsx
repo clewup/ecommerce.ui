@@ -1,5 +1,4 @@
 import {
-  Button,
   ClickAwayListener,
   Grow,
   MenuItem,
@@ -17,7 +16,7 @@ const StoreDropdown = () => {
   const { categories, setCategories } = useContext(ProductContext);
 
   const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement>(null);
+  const anchorRef = React.useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     if (categories.length === 0 || !categories.length) {
@@ -63,7 +62,7 @@ const StoreDropdown = () => {
 
   return (
     <>
-      <Button
+      <p
         ref={anchorRef}
         id="composition-button"
         aria-controls={open ? "composition-menu" : undefined}
@@ -74,10 +73,9 @@ const StoreDropdown = () => {
           navigate("store");
           handleToggle();
         }}
-        sx={{ color: "white" }}
       >
-        Store
-      </Button>
+        STORE
+      </p>
       <Popper
         open={open}
         anchorEl={anchorRef.current}
@@ -91,6 +89,7 @@ const StoreDropdown = () => {
           <Grow
             {...TransitionProps}
             style={{
+              marginTop: "0.5rem",
               transformOrigin:
                 placement === "bottom-start" ? "left top" : "left bottom",
             }}
