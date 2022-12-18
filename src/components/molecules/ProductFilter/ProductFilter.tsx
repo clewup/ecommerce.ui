@@ -25,8 +25,19 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
     sortByQuery,
     setSortByQuery,
   } = useContext(ProductContext);
-  console.log(sortByQuery);
+
   const { error } = useProductFilter();
+
+  const priceQueryMarks = [
+    {
+      value: 0,
+      label: "£0",
+    },
+    {
+      value: 400,
+      label: "£400",
+    },
+  ];
 
   if (error) return <AppError error={error} />;
 
@@ -67,10 +78,11 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
       <InputLabel>Price</InputLabel>
       <Slider
         getAriaLabel={() => "Price"}
-        defaultValue={[0, 500]}
+        defaultValue={[0, 400]}
         min={0}
-        max={500}
+        max={400}
         step={50}
+        marks={priceQueryMarks}
         onChange={(e, value) => setPriceQuery(value as number[])}
         valueLabelDisplay="auto"
         sx={{ width: 180 }}

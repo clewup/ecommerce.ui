@@ -1,0 +1,74 @@
+@import './src/styles/colors';
+
+#tile {
+  height: 280px;
+  width: 33%;
+}
+
+.born-to-ski {
+  background-image: url("https://res.cloudinary.com/dliog6kq6/image/upload/v1671403988/ecommerce/photo-1551698618-1dfe5d97d256_py7nts.png");
+  background-size: cover;
+  display: flex;
+  color: white;
+  gap: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  justify-content: space-around;
+
+  .tile-text {
+    width: 40%;
+    padding: 1rem;
+  }
+
+  .tile-actions {
+    width: 60%;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+  }
+}
+
+.live-to-explore {
+  background-image: url("https://res.cloudinary.com/dliog6kq6/image/upload/v1671407117/ecommerce/clement-delhaye-cnluLIyhpBA-unsplash_p8yksa.jpg");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+
+  .tile-text {
+    width: 60%;
+    padding: 1rem;
+  }
+
+  .tile-actions {
+    width: 40%;
+    display: flex;
+    padding: 1rem;
+  }
+}
+
+.dare-to-push-limits {
+  background-image: url("https://res.cloudinary.com/dliog6kq6/image/upload/v1671407440/ecommerce/nicolai-berntsen-OyP-8El8vWk-unsplash_pjzbfz.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  color: white;
+  gap: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  justify-content: space-around;
+
+  .tile-text {
+    width: 40%;
+    padding: 1rem;
+  }
+
+  .tile-actions {
+    width: 60%;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+  }
+}
