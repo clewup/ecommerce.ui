@@ -3,6 +3,7 @@ import { AxiosError } from "axios";
 import { ProductContext } from "../contexts/Product";
 import { IProduct } from "../types/IProduct";
 import getProducts from "../api/GetProducts";
+import _ from "lodash";
 
 interface IUseProductFilterProps {
   products: IProduct[];
@@ -18,7 +19,7 @@ const useProductFilter = (): IUseProductFilterProps => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
 
-  const { searchQuery, categoryQuery, priceQuery, saleQuery } =
+  const { searchQuery, categoryQuery, priceQuery, saleQuery, sortByQuery } =
     useContext(ProductContext);
 
   useEffect(() => {
@@ -36,6 +37,22 @@ const useProductFilter = (): IUseProductFilterProps => {
     return joinedFilter.filter(
       (product: IProduct) => new RegExp(searchQuery, "i").test(product.name) // Case insensitive query.
     );
+  };
+
+  const sortBy = (joinedFilter: any[]) => {
+    if (sortByQuery && sortByQuery !== "any") {
+      console.log(sortByQuery);
+      if (sortByQuery === "low-to-high") {
+        return _.sortBy(joinedFilter, "price");
+      }
+      if (sortByQuery === "high-to-low") {
+        return _.sortBy(joinedFilter, "price").reverse();
+      } else {
+        return joinedFilter;
+      }
+    } else {
+      return joinedFilter;
+    }
   };
 
   const filterByCategory = (joinedFilter: any[]) => {
@@ -70,12 +87,13 @@ const useProductFilter = (): IUseProductFilterProps => {
   useEffect(() => {
     let joinedFilter = products;
     joinedFilter = filterBySearch(joinedFilter);
+    joinedFilter = sortBy(joinedFilter);
     joinedFilter = filterByCategory(joinedFilter);
     joinedFilter = filterByPrice(joinedFilter);
     joinedFilter = filterBySale(joinedFilter);
     setFilteredProducts(joinedFilter);
     // eslint-disable-next-line
-  }, [searchQuery, categoryQuery, priceQuery, saleQuery]);
+  }, [searchQuery, categoryQuery, priceQuery, saleQuery, sortByQuery]);
 
   return {
     products,

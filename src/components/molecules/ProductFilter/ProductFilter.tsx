@@ -5,7 +5,7 @@ import useProductFilter from "../../../hooks/useProductFilter";
 import Input from "../../atoms/Input/Input";
 import SelectInput from "../../atoms/SelectInput/SelectInput";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
-import { InputLabel, Slider } from "@mui/material";
+import { InputLabel, MenuItem, Select, Slider } from "@mui/material";
 import AppError from "../AppError/AppError";
 
 interface IProps {
@@ -22,8 +22,10 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
     setPriceQuery,
     saleQuery,
     setSaleQuery,
+    sortByQuery,
+    setSortByQuery,
   } = useContext(ProductContext);
-
+  console.log(sortByQuery);
   const { error } = useProductFilter();
 
   if (error) return <AppError error={error} />;
@@ -39,6 +41,22 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+      <InputLabel>Sort By</InputLabel>
+      <Select
+        value={sortByQuery}
+        onChange={(e) => setSortByQuery(e.target.value)}
+        sx={{
+          marginTop: 1,
+          marginBottom: 1,
+          backgroundColor: "white",
+          textAlign: "center",
+          width: "100%",
+        }}
+      >
+        <MenuItem value={"any"}>Any</MenuItem>
+        <MenuItem value={"low-to-high"}>£ Low-High</MenuItem>
+        <MenuItem value={"high-to-low"}>£ High-Low</MenuItem>
+      </Select>
       <SelectInput
         label={"Category"}
         value={categoryQuery}
@@ -49,10 +67,10 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
       <InputLabel>Price</InputLabel>
       <Slider
         getAriaLabel={() => "Price"}
-        defaultValue={[0, 2000]}
+        defaultValue={[0, 500]}
         min={0}
-        max={2000}
-        step={100}
+        max={500}
+        step={50}
         onChange={(e, value) => setPriceQuery(value as number[])}
         valueLabelDisplay="auto"
         sx={{ width: 180 }}
