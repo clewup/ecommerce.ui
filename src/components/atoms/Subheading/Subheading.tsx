@@ -16,6 +16,7 @@ export const subheadingSize = {
 
 export const subheadingColor = {
   RED: "subheading-red",
+  WHITE: "subheading-white",
 };
 
 const Subheading: React.FC<IProps> = ({ children, size, color }) => {

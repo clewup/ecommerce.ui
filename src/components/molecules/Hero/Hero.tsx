@@ -1,13 +1,19 @@
 import "./hero.scss";
-import Heading from "../../atoms/Heading/Heading";
+import Heading, { headingColor } from "../../atoms/Heading/Heading";
 import React from "react";
+import Subheading, {
+  subheadingColor,
+  subheadingSize,
+} from "../../atoms/Subheading/Subheading";
 
 const Hero = () => {
   return (
     <div id={"hero"}>
       <div className={"hero-text"}>
-        <Heading>Ecommerce</Heading>
-        <p>Your one stop shop for the latest trends.</p>
+        <Subheading size={subheadingSize.SMALL} color={subheadingColor.WHITE}>
+          Welcome To
+        </Subheading>
+        <Heading color={headingColor.WHITE}>Ecommerce</Heading>
       </div>
     </div>
   );

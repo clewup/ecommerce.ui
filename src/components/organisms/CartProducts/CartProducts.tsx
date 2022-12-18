@@ -8,14 +8,18 @@ import { CartContext } from "../../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import Loader from "../../atoms/Loader/Loader";
+import { AuthContext } from "../../../contexts/Auth";
 
 const CartProducts = () => {
   const navigate = useNavigate();
   const { cart, isLoading } = useContext(CartContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const { getCart } = useCart();
 
   useEffect(() => {
-    getCart();
+    if (isAuthenticated) {
+      getCart();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -51,7 +55,12 @@ const CartProducts = () => {
               variant={"contained"}
               color={"success"}
               onClick={() => navigate("/checkout")}
-              disabled={cart?.products?.length === 0 || isLoading}
+              disabled={
+                !cart ||
+                !cart.products?.length ||
+                cart?.products?.length === 0 ||
+                isLoading
+              }
             >
               CHECKOUT
             </Button>

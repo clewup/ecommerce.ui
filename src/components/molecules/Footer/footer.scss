@@ -1,10 +1,12 @@
+@import '../../../styles/colors';
+
 #footer {
   display: flex;
   padding: 1rem 0;
   justify-content: space-around;
   height: 9vh;
-  background-color: black;
-  color: white;
+  background-color: $branding-darkgrey;
+  color: $branding-white;
 
   .footer-group {
     display: flex;

@@ -1,3 +1,5 @@
+@import '../../../styles/colors';
+
 .subheading {
   text-align: center;
   padding: 0;
@@ -9,15 +11,19 @@
 .subheading-small {
   font-size: 1.5rem;
 }
-
 .subheading-medium {
   font-size: 1.8rem;
 }
-
 .subheading-large {
   font-size: 2.3rem;
 }
 
 .subheading-red {
-  color: red;
+  color: $branding-red;
+}
+.subheading-white {
+  color: $branding-white;
+}
+.subheading-blue {
+  color: $branding-blue;
 }

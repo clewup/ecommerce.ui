@@ -12,6 +12,9 @@ import Product from "./components/pages/Product/Product";
 import Checkout from "./components/pages/Checkout/Checkout";
 import { AuthContext } from "./contexts/Auth";
 import axios from "axios";
+import About from "./components/pages/About/About";
+import Faq from "./components/pages/Faq/Faq";
+import Contact from "./components/pages/Contact/Contact";
 
 const App = () => {
   const { accessToken } = useContext(AuthContext);
@@ -32,6 +35,9 @@ const App = () => {
           <Route path={"login"} element={<Login />} />
           <Route path={"register"} element={<Register />} />
           <Route path={"account"} element={<Account />} />
+          <Route path={"about-us"} element={<About />} />
+          <Route path={"contact-us"} element={<Contact />} />
+          <Route path={"faq"} element={<Faq />} />
         </Routes>
       </Layout>
     </section>
