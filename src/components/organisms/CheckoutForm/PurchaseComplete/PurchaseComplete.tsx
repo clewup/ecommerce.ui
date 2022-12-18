@@ -5,6 +5,7 @@ import Subheading, {
 import { IOrder } from "../../../../types/IOrder";
 import OrderProduct from "../../../molecules/OrderProduct/OrderProduct";
 import Loader from "../../../atoms/Loader/Loader";
+import Text from "../../../atoms/Text/Text";
 
 interface IProps {
   order: IOrder;
@@ -21,7 +22,7 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
           <Subheading size={subheadingSize.MEDIUM}>
             Your order is complete!
           </Subheading>
-          <p className={"order-details"}>{String(order.id)}</p>
+          <Text className={"order-details"}>{String(order.id)}</Text>
           <div className={"order-cart-items"}>
             {order?.cart?.products.map((orderProduct) => {
               return (
@@ -30,7 +31,7 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
                 </div>
               );
             })}
-            <p className={"order-total"}>£{order?.cart?.total}</p>
+            <Text className={"order-total"}>£{order?.cart?.total}</Text>
           </div>
         </>
       )}

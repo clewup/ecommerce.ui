@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import Loader from "../../atoms/Loader/Loader";
 import { AuthContext } from "../../../contexts/Auth";
+import Text from "../../atoms/Text/Text";
 
 const CartProducts = () => {
   const navigate = useNavigate();
@@ -31,9 +32,9 @@ const CartProducts = () => {
       ) : (
         <>
           {cart?.products?.length === 0 || cart == null || !cart.products ? (
-            <p className={"empty-cart"}>
+            <Text className={"empty-cart"}>
               Your cart is empty. <RemoveShoppingCartIcon />
-            </p>
+            </Text>
           ) : null}
 
           {cart?.products?.map((cartProduct) => {
@@ -46,7 +47,7 @@ const CartProducts = () => {
           })}
 
           <div className={"cart-total"}>
-            <p>Cart Total: £{cart?.total?.toFixed(2) || "0"}</p>
+            <Text>Cart Total: £{cart?.total?.toFixed(2) || "0"}</Text>
           </div>
           <div className={"cart-action-buttons"}>
             <Button

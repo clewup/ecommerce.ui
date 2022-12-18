@@ -14,6 +14,7 @@ import { Tooltip } from "@mui/material";
 import { AuthContext } from "../../../contexts/Auth";
 import { CartContext } from "../../../contexts/Cart";
 import useCart from "../../../hooks/useCart";
+import Text from "../../atoms/Text/Text";
 
 const Product = () => {
   const { id } = useParams();
@@ -62,28 +63,30 @@ const Product = () => {
               <Subheading size={subheadingSize.MEDIUM}>
                 {product.name}
               </Subheading>
-              <p>{product.description}</p>
+              <Text>{product.description}</Text>
             </div>
 
             <div className={"product-color"}>
               <Subheading size={subheadingSize.SMALL}>Color</Subheading>
-              <p>{product.color}</p>
+              <Text>{product.color}</Text>
             </div>
 
             <div className={"product-price"}>
               <Subheading size={subheadingSize.SMALL}>Price</Subheading>
               {product.discount > 0 ? (
                 <div className={"discounted-price"}>
-                  <p className="discounted-price-striked">
+                  <Text className="discounted-price-striked">
                     £
                     {((product.price / (100 - product.discount)) * 100).toFixed(
                       2
                     )}
-                  </p>
-                  <p className={"discounted-price-total"}>£{product.price}</p>
+                  </Text>
+                  <Text className={"discounted-price-total"}>
+                    £{product.price}
+                  </Text>
                 </div>
               ) : (
-                <p>£{product.price}</p>
+                <Text>£{product.price}</Text>
               )}
             </div>
 

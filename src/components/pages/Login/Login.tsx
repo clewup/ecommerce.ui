@@ -10,6 +10,7 @@ import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import { initialLoginValues } from "../../../types/ILogin";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
+import Text from "../../atoms/Text/Text";
 
 const Login = () => {
   const { isLoading, error, validationSchema, loginUser } = useLogin();
@@ -50,7 +51,7 @@ const Login = () => {
                 onChange={formik.handleChange}
               />
 
-              {error && <p>{error.message}</p>}
+              {error && <Text>{error.message}</Text>}
 
               <div className={"login-action-buttons"}>
                 <LoadingButton

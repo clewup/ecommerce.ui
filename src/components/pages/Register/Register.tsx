@@ -10,6 +10,7 @@ import { Button } from "@mui/material";
 import { initialRegisterValues } from "../../../types/IRegister";
 import useRegister from "../../../hooks/useRegister";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
+import Text from "../../atoms/Text/Text";
 
 const Register = () => {
   const { isLoading, error, validationSchema, registerUser } = useRegister();
@@ -71,7 +72,7 @@ const Register = () => {
                 onChange={formik.handleChange}
               />
 
-              {error && <p>{error.message}</p>}
+              {error && <Text>{error.message}</Text>}
 
               <div className={"register-action-buttons"}>
                 <LoadingButton

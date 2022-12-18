@@ -1,22 +1,26 @@
 import "./footer.scss";
+import Text from "../../atoms/Text/Text";
+import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 
 const Footer = () => {
   return (
     <div id={"footer"}>
       <div className={"footer-group"}>
-        <h3>Help and Information</h3>
-        <p>Track your order</p>
-        <p>Returns</p>
-        <p>Promotions</p>
+        <Subheading size={subheadingSize.SMALL}>
+          Help and Information
+        </Subheading>
+        <Text>Track your order</Text>
+        <Text>Returns</Text>
+        <Text>Promotions</Text>
       </div>
       <div className={"footer-group"}>
-        <h3>About Ecommerce</h3>
-        <p>About us</p>
-        <p>Conservation efforts</p>
+        <Subheading size={subheadingSize.SMALL}>About Ecommerce</Subheading>
+        <Text>About us</Text>
+        <Text>Conservation efforts</Text>
       </div>
       <div className={"footer-group"}>
-        <h3>More from Ecommerce</h3>
-        <p>Gift vouchers</p>
+        <Subheading size={subheadingSize.SMALL}>More from Ecommerce</Subheading>
+        <Text>Gift vouchers</Text>
       </div>
     </div>
   );

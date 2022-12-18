@@ -6,6 +6,7 @@ import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
 import OrderProduct from "../../molecules/OrderProduct/OrderProduct";
 import AppError from "../../molecules/AppError/AppError";
 import Loader from "../../atoms/Loader/Loader";
+import Text from "../../atoms/Text/Text";
 
 const AccountOrders = () => {
   const { orders, isLoading, error, getUserOrders } = useOrder();
@@ -31,9 +32,9 @@ const AccountOrders = () => {
             return (
               <div className={`order order-${order.id}`}>
                 <div className={"order-info"}>
-                  <p className={"order-id"}>{String(order.id)}</p>
-                  <p>{new Date(order.orderDate).toDateString()}</p>
-                  <p>Total: £{order.cart.total}</p>
+                  <Text className={"order-id"}>{String(order.id)}</Text>
+                  <Text>{new Date(order.orderDate).toDateString()}</Text>
+                  <Text>Total: £{order.cart.total}</Text>
                 </div>
                 <div className={"order-products"}>
                   {order.cart.products.map((orderProduct) => {

@@ -9,6 +9,7 @@ import { ProductContext } from "../../../contexts/Product";
 import useProductFilter from "../../../hooks/useProductFilter";
 import AppLoader from "../../atoms/AppLoader/AppLoader";
 import { Button } from "@mui/material";
+import Text from "../../atoms/Text/Text";
 
 const Store = () => {
   const { category } = useParams();
@@ -51,9 +52,9 @@ const Store = () => {
         <>
           <div className={"product-filter"}>
             <Button onClick={toggleDrawer(true)}>Filters</Button>
-            <p>
+            <Text>
               Showing {filteredProducts.length} results of {products.length}
-            </p>
+            </Text>
 
             <SwipeableDrawer
               anchor={"left"}

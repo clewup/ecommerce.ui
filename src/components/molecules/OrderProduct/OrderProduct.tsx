@@ -1,6 +1,7 @@
 import "./order-product.scss";
 import React from "react";
 import { ICartProduct } from "../../../types/IProduct";
+import Text from "../../atoms/Text/Text";
 
 interface IProps {
   orderProduct: ICartProduct;
@@ -16,21 +17,23 @@ const OrderProduct: React.FC<IProps> = ({ orderProduct }) => {
         />
       </div>
       <div className={"order-product-info"}>
-        <p>{orderProduct.name}</p>
-        <p>{orderProduct.color}</p>
+        <Text>{orderProduct.name}</Text>
+        <Text>{orderProduct.color}</Text>
         {orderProduct.discount > 0 ? (
           <div className={"discounted-price"}>
-            <p className="discounted-price-striked">
+            <Text className="discounted-price-striked">
               £
               {(
                 (orderProduct.price / (100 - orderProduct.discount)) *
                 100
               ).toFixed(2)}
-            </p>
-            <p className={"discounted-price-total"}>£{orderProduct.price}</p>
+            </Text>
+            <Text className={"discounted-price-total"}>
+              £{orderProduct.price}
+            </Text>
           </div>
         ) : (
-          <p>£{orderProduct.price}</p>
+          <Text>£{orderProduct.price}</Text>
         )}
       </div>
     </div>

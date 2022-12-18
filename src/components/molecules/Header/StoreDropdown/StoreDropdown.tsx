@@ -10,6 +10,7 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProductContext } from "../../../../contexts/Product";
 import getProductCategories from "../../../../api/GetProductCategories";
+import Text from "../../../atoms/Text/Text";
 
 const StoreDropdown = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const StoreDropdown = () => {
 
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
+    if (prevOpen.current && !open) {
       anchorRef.current!.focus();
     }
 
@@ -62,7 +63,7 @@ const StoreDropdown = () => {
 
   return (
     <>
-      <p
+      <Text
         ref={anchorRef}
         id="composition-button"
         aria-controls={open ? "composition-menu" : undefined}
@@ -75,7 +76,7 @@ const StoreDropdown = () => {
         }}
       >
         STORE
-      </p>
+      </Text>
       <Popper
         open={open}
         anchorEl={anchorRef.current}

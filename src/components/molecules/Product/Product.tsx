@@ -9,6 +9,7 @@ import { CartContext } from "../../../contexts/Cart";
 import { LoadingButton } from "@mui/lab";
 import { Tooltip } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
+import Text from "../../atoms/Text/Text";
 
 interface IProps {
   product: IProduct;
@@ -40,16 +41,16 @@ const Product: React.FC<IProps> = ({ product }) => {
         </Carousel>
       </div>
       <div className={"product-info"}>
-        <p>{product.color}</p>
+        <Text>{product.color}</Text>
         {product.discount > 0 ? (
           <div className={"discounted-price"}>
-            <p className="discounted-price-striked">
+            <Text className="discounted-price-striked">
               £{((product.price / (100 - product.discount)) * 100).toFixed(2)}
-            </p>
-            <p className={"discounted-price-total"}>£{product.price}</p>
+            </Text>
+            <Text className={"discounted-price-total"}>£{product.price}</Text>
           </div>
         ) : (
-          <p>£{product.price}</p>
+          <Text>£{product.price}</Text>
         )}
       </div>
       <div className={"product-actions"}>

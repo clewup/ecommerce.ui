@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 import { ICartProduct } from "../../../types/IProduct";
 import { CartContext } from "../../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
+import Text from "../../atoms/Text/Text";
 
 interface IProps {
   cartProduct: ICartProduct;
@@ -24,21 +25,23 @@ const CartProduct: React.FC<IProps> = ({ cartProduct }) => {
         <img src={cartProduct.images![0]!.url!} alt={cartProduct.name} />
       </div>
       <div className={"cart-product-info"}>
-        <p>{cartProduct.name}</p>
-        <p>{cartProduct.color}</p>
+        <Text>{cartProduct.name}</Text>
+        <Text>{cartProduct.color}</Text>
         {cartProduct.discount > 0 ? (
           <div className={"discounted-price"}>
-            <p className="discounted-price-striked">
+            <Text className="discounted-price-striked">
               £
               {(
                 (cartProduct.price / (100 - cartProduct.discount)) *
                 100
               ).toFixed(2)}
-            </p>
-            <p className={"discounted-price-total"}>£{cartProduct.price}</p>
+            </Text>
+            <Text className={"discounted-price-total"}>
+              £{cartProduct.price}
+            </Text>
           </div>
         ) : (
-          <p>£{cartProduct.price}</p>
+          <Text>£{cartProduct.price}</Text>
         )}
       </div>
       <div className={"cart-product-remove"}>

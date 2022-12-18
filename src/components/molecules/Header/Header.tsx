@@ -9,6 +9,7 @@ import {
 } from "@mui/icons-material";
 import { roles } from "../../../enums/roles";
 import StoreDropdown from "./StoreDropdown/StoreDropdown";
+import Text from "../../atoms/Text/Text";
 
 const Header = () => {
   const { isAuthenticated, role } = useContext(AuthContext);
@@ -19,50 +20,50 @@ const Header = () => {
       <div className={"header-top"}>
         <div className={"header-logo"}>
           <EcommerceIcon fontSize={"inherit"} />
-          <p>Ecommerce</p>
+          <Text>Ecommerce</Text>
         </div>
         <div className={"header-content"}>
           <div className={"header-actions"}>
             <span>
               {isAuthenticated ? (
-                <p onClick={() => navigate("account")}>ACCOUNT</p>
+                <Text onClick={() => navigate("account")}>ACCOUNT</Text>
               ) : (
                 <>
-                  <p onClick={() => navigate("login")}>LOGIN</p>
-                  <p onClick={() => navigate("register")}>REGISTER</p>
+                  <Text onClick={() => navigate("login")}>LOGIN</Text>
+                  <Text onClick={() => navigate("register")}>REGISTER</Text>
                 </>
               )}
               {role &&
                 (role === roles.DEVELOPER || role === roles.EMPLOYEE) && (
-                  <p onClick={() => navigate("admin")}>ADMIN</p>
+                  <Text onClick={() => navigate("admin")}>ADMIN</Text>
                 )}
-              <p onClick={() => navigate("cart")}>CART</p>
+              <Text onClick={() => navigate("cart")}>CART</Text>
             </span>
           </div>
           <div className={"header-information"}>
             <div className={"header-shipping"}>
               <ShippingIcon />
               <div>
-                <p className={"header-bolded"}>FREE SHIPPING</p>
-                <p>STORE WIDE</p>
+                <Text className={"header-bolded"}>FREE SHIPPING</Text>
+                <Text>STORE WIDE</Text>
               </div>
             </div>
             <div className={"header-telephone"}>
               <PhoneIcon />
               <div>
-                <p>UK +12 345678910</p>
-                <p>EU +10 987654321</p>
+                <Text>UK +12 345678910</Text>
+                <Text>EU +10 987654321</Text>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className={"header-bottom"}>
-        <p onClick={() => navigate("/")}>HOME</p>
+        <Text onClick={() => navigate("/")}>HOME</Text>
         <StoreDropdown />
-        <p onClick={() => navigate("about-us")}>ABOUT US</p>
-        <p onClick={() => navigate("faq")}>FAQ</p>
-        <p onClick={() => navigate("contact-us")}>CONTACT US</p>
+        <Text onClick={() => navigate("about-us")}>ABOUT US</Text>
+        <Text onClick={() => navigate("faq")}>FAQ</Text>
+        <Text onClick={() => navigate("contact-us")}>CONTACT US</Text>
       </div>
     </div>
   );

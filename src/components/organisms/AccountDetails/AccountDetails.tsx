@@ -2,6 +2,7 @@ import { Field, FormikProps } from "formik";
 import { IUser } from "../../../types/IUser";
 import React from "react";
 import "./account-details.scss";
+import Text from "../../atoms/Text/Text";
 
 import Input from "../../atoms/Input/Input";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
@@ -47,13 +48,13 @@ const AccountDetails: React.FC<IProps> = ({ formik, user, isEditing }) => {
         <div className={"address-info"}>
           <Subheading size={subheadingSize.SMALL}>Address</Subheading>
           <div className={"existing-address"}>
-            <p>{user.lineOne}</p>
-            <p>{user.lineTwo}</p>
-            <p>{user.lineThree}</p>
-            <p>{user.postcode}</p>
-            <p>{user.city}</p>
-            <p>{user.county}</p>
-            <p>{user.country}</p>
+            <Text>{user.lineOne}</Text>
+            <Text>{user.lineTwo}</Text>
+            <Text>{user.lineThree}</Text>
+            <Text>{user.postcode}</Text>
+            <Text>{user.city}</Text>
+            <Text>{user.county}</Text>
+            <Text>{user.country}</Text>
           </div>
         </div>
       ) : (
