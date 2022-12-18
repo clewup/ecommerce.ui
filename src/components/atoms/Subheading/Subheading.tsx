@@ -6,6 +6,7 @@ interface IProps {
   children: any;
   size: string;
   color?: string;
+  noPadding?: boolean;
 }
 
 export const subheadingSize = {
@@ -19,7 +20,15 @@ export const subheadingColor = {
   WHITE: "subheading-white",
 };
 
-const Subheading: React.FC<IProps> = ({ children, size, color }) => {
-  return <h3 className={classnames("subheading", size, color)}>{children}</h3>;
+const Subheading: React.FC<IProps> = ({ children, size, color, noPadding }) => {
+  return (
+    <h3
+      className={classnames("subheading", size, color, {
+        "no-padding": noPadding,
+      })}
+    >
+      {children}
+    </h3>
+  );
 };
 export default Subheading;

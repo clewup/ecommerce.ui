@@ -1,8 +1,9 @@
 #featured-products {
   min-height: 50vh;
+  padding: 1rem 0;
 
   .featured-products {
-    padding: 1rem;
+    padding: 1rem 0;
     justify-content: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

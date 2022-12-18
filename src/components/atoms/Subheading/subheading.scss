@@ -2,10 +2,11 @@
 
 .subheading {
   text-align: center;
-  padding: 0;
-  margin: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
+  padding: 0;
+  margin: 1rem 0;
+
 }
 
 .subheading-small {
@@ -26,4 +27,9 @@
 }
 .subheading-blue {
   color: $branding-blue;
+}
+
+.no-padding {
+  padding: 0;
+  margin: 0;
 }

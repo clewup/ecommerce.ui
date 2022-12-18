@@ -5,7 +5,7 @@ import { AuthContext } from "../../../contexts/Auth";
 import {
   LocalPhone as PhoneIcon,
   LocalShipping as ShippingIcon,
-  LocalOffer as EcommerceIcon,
+  Landscape as EcommerceIcon,
 } from "@mui/icons-material";
 import { roles } from "../../../enums/roles";
 import StoreDropdown from "./StoreDropdown/StoreDropdown";

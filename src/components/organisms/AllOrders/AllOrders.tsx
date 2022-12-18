@@ -19,7 +19,7 @@ const AllOrders = () => {
 
   return (
     <div id={"all-orders"}>
-      <Subheading size={subheadingSize.MEDIUM}>Orders</Subheading>
+      <Subheading size={subheadingSize.SMALL}>Orders</Subheading>
       {isLoading ? (
         <Loader />
       ) : (

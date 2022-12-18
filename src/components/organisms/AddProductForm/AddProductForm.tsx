@@ -4,7 +4,7 @@ import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button, Snackbar } from "@mui/material";
 import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import useImageUpload from "../../../hooks/useImageUpload";
 import AppError from "../../molecules/AppError/AppError";
 import useProduct from "../../../hooks/useProduct";
@@ -27,12 +27,18 @@ const AddProductForm = () => {
   } = useProduct();
   const {
     images,
+    clearImages,
     isLoading: imagesLoading,
     error: imagesError,
     uploadImages,
   } = useImageUpload();
 
   const { categories } = useContext(ProductContext);
+
+  useEffect(() => {
+    clearImages();
+    // eslint-disable-next-line
+  }, []);
 
   interface ISelectOption {
     value: string;
@@ -52,6 +58,7 @@ const AddProductForm = () => {
 
   const handleSubmit = (values: IProduct, actions: FormikHelpers<IProduct>) => {
     addProduct(values, images);
+    clearImages();
     setOpenAlert(true);
     actions.resetForm({ values: initialValues });
   };
@@ -70,14 +77,13 @@ const AddProductForm = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      enableReinitialize={true}
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
       {(formik: FormikProps<IProduct>) => {
         return (
           <div id={"add-product-form"}>
             <Form>
-              <Subheading size={subheadingSize.MEDIUM}>Add Product</Subheading>
+              <Subheading size={subheadingSize.SMALL}>Add Product</Subheading>
 
               <div className={"product-form-fields"}>
                 <div className={"product-form-half"}>

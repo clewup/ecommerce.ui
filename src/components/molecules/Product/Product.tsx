@@ -47,10 +47,12 @@ const Product: React.FC<IProps> = ({ product }) => {
             <Text className="discounted-price-striked">
               £{((product.price / (100 - product.discount)) * 100).toFixed(2)}
             </Text>
-            <Text className={"discounted-price-total"}>£{product.price}</Text>
+            <Text className={"discounted-price-total"}>
+              £{product.price.toFixed(2)}
+            </Text>
           </div>
         ) : (
-          <Text>£{product.price}</Text>
+          <Text>£{product.price.toFixed(2)}</Text>
         )}
       </div>
       <div className={"product-actions"}>

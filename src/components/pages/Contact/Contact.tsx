@@ -1,9 +1,10 @@
 import Wrapper from "../../atoms/Wrapper/Wrapper";
+import Heading from "../../atoms/Heading/Heading";
 
 const Contact = () => {
   return (
     <Wrapper id={"contact"}>
-      <div></div>
+      <Heading>Contact Us</Heading>
     </Wrapper>
   );
 };

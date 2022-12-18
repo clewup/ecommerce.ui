@@ -1,6 +1,8 @@
 @import '../../../styles/colors';
 
 #header {
+  position: relative;
+  z-index: 999;
   .header-top {
     display: flex;
     justify-content: space-between;
@@ -8,10 +10,15 @@
 
     .header-logo {
       display: flex;
+      align-items: center;
       gap: 1rem;
       font-size: 2rem;
       font-weight: bold;
       padding: 0 2rem;
+
+      svg {
+        color: $branding-darkgrey;
+      }
     }
 
     .header-content {

@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import Product from "../../molecules/Product/Product";
 import AppError from "../../molecules/AppError/AppError";
 import Loader from "../../atoms/Loader/Loader";
+import { Divider } from "@mui/material";
 
 const FeaturedProducts = () => {
   const {
@@ -29,8 +30,9 @@ const FeaturedProducts = () => {
 
   return (
     <div id={"featured-products"}>
-      <Subheading size={subheadingSize.SMALL}>TRENDING</Subheading>
-
+      <Divider>
+        <Subheading size={subheadingSize.SMALL}>TRENDING</Subheading>
+      </Divider>
       {isLoading ? (
         <div className={"featured-products-loader"}>
           <Loader />
@@ -47,9 +49,11 @@ const FeaturedProducts = () => {
         </div>
       )}
 
-      <Subheading size={subheadingSize.SMALL} color={subheadingColor.RED}>
-        SALE!
-      </Subheading>
+      <Divider>
+        <Subheading size={subheadingSize.SMALL} color={subheadingColor.RED}>
+          SALE!
+        </Subheading>
+      </Divider>
       {isLoading ? (
         <div className={"featured-products-loader"}>
           <Loader />

@@ -8,6 +8,7 @@ interface IUseImageUpload {
   isLoading: boolean;
   error: AxiosError | null;
   uploadImages: (files: FileList) => void;
+  clearImages: () => void;
 }
 
 const useImageUpload = (): IUseImageUpload => {
@@ -30,6 +31,10 @@ const useImageUpload = (): IUseImageUpload => {
     setLoading(false);
   };
 
-  return { images, isLoading, error, uploadImages };
+  const clearImages = () => {
+    setImages([]);
+  };
+
+  return { images, clearImages, isLoading, error, uploadImages };
 };
 export default useImageUpload;

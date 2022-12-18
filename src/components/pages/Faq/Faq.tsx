@@ -6,7 +6,6 @@ const Faq = () => {
   return (
     <Wrapper id={"faq"}>
       <Heading>FAQ</Heading>
-      <Text>asjhsdghsd</Text>
     </Wrapper>
   );
 };

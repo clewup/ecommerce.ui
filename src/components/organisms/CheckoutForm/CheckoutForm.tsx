@@ -38,7 +38,7 @@ const CheckoutForm = () => {
       <Tabs value={tabIndex} onChange={handleTabChange} centered>
         <Tab label="Delivery" />
         <Tab label="Billing" />
-        <Tab label="Complete" disabled={!order} />
+        <Tab label="Complete" disabled />
       </Tabs>
       <Formik
         initialValues={initialValues}
