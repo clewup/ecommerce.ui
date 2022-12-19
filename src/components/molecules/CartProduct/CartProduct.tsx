@@ -25,7 +25,10 @@ const CartProduct: React.FC<IProps> = ({ cartProduct }) => {
         <img src={cartProduct.images![0]!.url!} alt={cartProduct.name} />
       </div>
       <div className={"cart-product-info"}>
-        <Text>{cartProduct.name}</Text>
+        <Text>
+          {cartProduct.name.substring(0, 30)}
+          {cartProduct.name.length >= 30 && "..."}
+        </Text>
         <Text>{cartProduct.color}</Text>
         {cartProduct.discount > 0 ? (
           <div className={"discounted-price"}>
@@ -37,7 +40,7 @@ const CartProduct: React.FC<IProps> = ({ cartProduct }) => {
               ).toFixed(2)}
             </Text>
             <Text className={"discounted-price-total"}>
-              £{cartProduct.price}
+              £{cartProduct.price.toFixed(2)}
             </Text>
           </div>
         ) : (

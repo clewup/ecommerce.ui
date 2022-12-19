@@ -80,7 +80,7 @@ const Product = () => {
                     )}
                   </Text>
                   <Text className={"discounted-price-total"}>
-                    £{product.price}
+                    £{product.price.toFixed(2)}
                   </Text>
                 </div>
               ) : (
