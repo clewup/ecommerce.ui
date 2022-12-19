@@ -36,7 +36,7 @@ const Product: React.FC<IProps> = ({ product }) => {
           autoPlay={false}
         >
           {product.images.map((image) => (
-            <img src={image.url!} alt={image.title} />
+            <img src={image.url} alt={image.title} key={image.url} />
           ))}
         </Carousel>
       </div>

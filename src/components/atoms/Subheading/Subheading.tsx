@@ -4,29 +4,20 @@ import classnames from "classnames";
 
 interface IProps {
   children: any;
-  size: string;
+  size?: string;
   color?: string;
-  noPadding?: boolean;
+  padding?: string;
 }
 
 export const subheadingSize = {
+  XSMALL: "subheading-xsmall",
   SMALL: "subheading-small",
-  MEDIUM: "subheading-medium",
   LARGE: "subheading-large",
 };
 
-export const subheadingColor = {
-  RED: "subheading-red",
-  WHITE: "subheading-white",
-};
-
-const Subheading: React.FC<IProps> = ({ children, size, color, noPadding }) => {
+const Subheading: React.FC<IProps> = ({ children, size, color, padding }) => {
   return (
-    <h3
-      className={classnames("subheading", size, color, {
-        "no-padding": noPadding,
-      })}
-    >
+    <h3 className={classnames("subheading", size, color, padding)}>
       {children}
     </h3>
   );

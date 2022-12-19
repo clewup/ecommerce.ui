@@ -23,14 +23,16 @@ const useProductFilter = (): IUseProductFilterProps => {
     useContext(ProductContext);
 
   useEffect(() => {
-    setLoading(true);
-    getProducts()
-      .then((res) => {
-        setProducts(res.data);
-        setFilteredProducts(res.data);
-      })
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
+    if (!filteredProducts || !filteredProducts.length) {
+      setLoading(true);
+      getProducts()
+        .then((res) => {
+          setProducts(res.data);
+          setFilteredProducts(res.data);
+        })
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false));
+    }
   }, []);
 
   const filterBySearch = (joinedFilter: any[]) => {
@@ -41,7 +43,6 @@ const useProductFilter = (): IUseProductFilterProps => {
 
   const sortBy = (joinedFilter: any[]) => {
     if (sortByQuery && sortByQuery !== "any") {
-      console.log(sortByQuery);
       if (sortByQuery === "low-to-high") {
         return _.sortBy(joinedFilter, "price");
       }

@@ -1,7 +1,7 @@
 import "./account.scss";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../contexts/User";
-import AccountDetails from "../../organisms/AccountDetails/AccountDetails";
+import AccountForm from "../../organisms/AccountForm/AccountForm";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 import AccountFooter from "../../molecules/AccountFooter/AccountFooter";
 import { Form, Formik } from "formik";
@@ -47,7 +47,7 @@ const Account = () => {
             </Tabs>
             {tabIndex === 0 && (
               <Form>
-                <AccountDetails
+                <AccountForm
                   formik={formik}
                   user={user}
                   isEditing={isEditing}

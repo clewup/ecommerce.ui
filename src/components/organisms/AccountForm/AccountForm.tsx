@@ -1,7 +1,7 @@
 import { Field, FormikProps } from "formik";
 import { IUser } from "../../../types/IUser";
 import React from "react";
-import "./account-details.scss";
+import "./account-form.scss";
 import Text from "../../atoms/Text/Text";
 
 import Input from "../../atoms/Input/Input";
@@ -13,9 +13,9 @@ interface IProps {
   isEditing: boolean;
 }
 
-const AccountDetails: React.FC<IProps> = ({ formik, user, isEditing }) => {
+const AccountForm: React.FC<IProps> = ({ formik, user, isEditing }) => {
   return (
-    <div id={"account-details"}>
+    <div id={"account-form"}>
       <div className={"contact-info"}>
         <Subheading size={subheadingSize.SMALL}>Contact Info</Subheading>
         <Field
@@ -121,4 +121,4 @@ const AccountDetails: React.FC<IProps> = ({ formik, user, isEditing }) => {
     </div>
   );
 };
-export default AccountDetails;
+export default AccountForm;

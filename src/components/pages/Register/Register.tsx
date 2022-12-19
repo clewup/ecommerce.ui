@@ -4,7 +4,7 @@ import { LoadingButton } from "@mui/lab";
 import "./register.scss";
 import { AuthContext } from "../../../contexts/Auth";
 import { useNavigate } from "react-router-dom";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import { initialRegisterValues } from "../../../types/IRegister";
@@ -34,7 +34,7 @@ const Register = () => {
         {(formik) => {
           return (
             <Form className={"register-form"}>
-              <Subheading size={subheadingSize.MEDIUM}>Register</Subheading>
+              <Subheading>Register</Subheading>
               <Field
                 name={"firstName"}
                 component={Input}

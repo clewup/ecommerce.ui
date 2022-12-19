@@ -60,9 +60,7 @@ const Product = () => {
           </div>
           <div className={"product-right"}>
             <div className={"product-description"}>
-              <Subheading size={subheadingSize.MEDIUM}>
-                {product.name}
-              </Subheading>
+              <Subheading>{product.name}</Subheading>
               <Text>{product.description}</Text>
             </div>
 

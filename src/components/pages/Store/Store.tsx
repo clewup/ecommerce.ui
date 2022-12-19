@@ -3,33 +3,15 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Products from "../../organisms/Products/Products";
 import ProductFilter from "../../molecules/ProductFilter/ProductFilter";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
-import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { ProductContext } from "../../../contexts/Product";
+import { useState } from "react";
 import useProductFilter from "../../../hooks/useProductFilter";
 import AppLoader from "../../atoms/AppLoader/AppLoader";
 import { Button } from "@mui/material";
 import Text from "../../atoms/Text/Text";
 
 const Store = () => {
-  const { category } = useParams();
-  const { products, filteredProducts, isLoading } = useProductFilter();
-  const { categories, setCategoryQuery } = useContext(ProductContext);
+  const { filteredProducts, isLoading } = useProductFilter();
   const [isFilterOpen, setFilterOpen] = useState(false);
-
-  useEffect(() => {
-    if (category) {
-      const matchingCategory = categories.find(
-        (c) => c.replace(/\s/g, "-").toLowerCase() === category.toLowerCase()
-      );
-      if (matchingCategory) {
-        setCategoryQuery(matchingCategory);
-      }
-    } else {
-      setCategoryQuery("all");
-    }
-    // eslint-disable-next-line
-  }, [category]);
 
   const toggleDrawer =
     (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -52,9 +34,7 @@ const Store = () => {
         <>
           <div className={"product-filter"}>
             <Button onClick={toggleDrawer(true)}>Filters</Button>
-            <Text>
-              Showing {filteredProducts.length} results of {products.length}
-            </Text>
+            <Text>Showing {filteredProducts.length} results.</Text>
 
             <SwipeableDrawer
               anchor={"left"}

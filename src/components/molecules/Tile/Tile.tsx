@@ -1,11 +1,13 @@
 import "./tile.scss";
 import classnames from "classnames";
-import Text from "../../atoms/Text/Text";
+import Text, { textSize } from "../../atoms/Text/Text";
 import { Button } from "@mui/material";
+import Subheading from "../../atoms/Subheading/Subheading";
 
 interface IProps {
   variant: string;
-  text: string;
+  heading: string;
+  caption: string;
   buttonText: string;
   buttonOnClick: () => void;
 }
@@ -18,14 +20,16 @@ export const tileVariant = {
 
 const Tile: React.FC<IProps> = ({
   variant,
-  text,
+  heading,
+  caption,
   buttonText,
   buttonOnClick,
 }) => {
   return (
     <div id={"tile"} className={classnames(variant)}>
       <div className={"tile-text"}>
-        <Text>{text}</Text>
+        <Subheading>{heading}</Subheading>
+        <Text size={textSize.LARGE}>{caption}</Text>
       </div>
       <div className={"tile-actions"}>
         <Button

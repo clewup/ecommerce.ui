@@ -1,32 +1,21 @@
 @import '../../../styles/colors';
 
 .subheading {
-  text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   padding: 0;
   margin: 1rem 0;
-
+  font-size: 1.8rem;
 }
 
+.subheading-xsmall {
+  font-size: 0.8rem;
+}
 .subheading-small {
   font-size: 1.2rem;
 }
-.subheading-medium {
-  font-size: 1.8rem;
-}
 .subheading-large {
   font-size: 2.3rem;
-}
-
-.subheading-red {
-  color: $branding-red;
-}
-.subheading-white {
-  color: $branding-white;
-}
-.subheading-blue {
-  color: $branding-blue;
 }
 
 .no-padding {

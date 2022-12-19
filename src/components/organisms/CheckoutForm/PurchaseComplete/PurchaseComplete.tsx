@@ -1,7 +1,5 @@
 import "./purchase-complete.scss";
-import Subheading, {
-  subheadingSize,
-} from "../../../atoms/Subheading/Subheading";
+import Subheading from "../../../atoms/Subheading/Subheading";
 import { IOrder } from "../../../../types/IOrder";
 import OrderProduct from "../../../molecules/OrderProduct/OrderProduct";
 import Loader from "../../../atoms/Loader/Loader";
@@ -19,9 +17,7 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
         <Loader />
       ) : (
         <>
-          <Subheading size={subheadingSize.MEDIUM}>
-            Your order is complete!
-          </Subheading>
+          <Subheading>Your order is complete!</Subheading>
           <Text className={"order-details"}>{String(order.id)}</Text>
           <div className={"order-cart-items"}>
             {order?.cart?.products.map((orderProduct) => {

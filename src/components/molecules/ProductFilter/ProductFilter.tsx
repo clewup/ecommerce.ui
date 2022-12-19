@@ -1,5 +1,5 @@
 import "./product-filter.scss";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ProductContext } from "../../../contexts/Product";
 import useProductFilter from "../../../hooks/useProductFilter";
 import Input from "../../atoms/Input/Input";
@@ -7,12 +7,15 @@ import SelectInput from "../../atoms/SelectInput/SelectInput";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
 import { InputLabel, MenuItem, Select, Slider } from "@mui/material";
 import AppError from "../AppError/AppError";
+import { useParams } from "react-router-dom";
 
 interface IProps {
   toggleDrawer: (isOpen: boolean) => void;
 }
 
 const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
+  const { category } = useParams();
+
   const {
     categories,
     searchQuery,
@@ -25,6 +28,20 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
     sortByQuery,
     setSortByQuery,
   } = useContext(ProductContext);
+
+  useEffect(() => {
+    if (category) {
+      const matchingCategory = categories.find(
+        (c) => c.replace(/\s/g, "-").toLowerCase() === category.toLowerCase()
+      );
+      if (matchingCategory) {
+        setCategoryQuery(matchingCategory);
+      }
+    } else {
+      setCategoryQuery("all");
+    }
+    // eslint-disable-next-line
+  }, [category]);
 
   const { error } = useProductFilter();
 

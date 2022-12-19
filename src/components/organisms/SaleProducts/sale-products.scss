@@ -1,19 +1,19 @@
-#featured-products {
+#sale-products {
   min-height: 50vh;
   padding: 1rem 0;
 
-  .featured-products {
+  .sale-products-loader {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 0;
+  }
+
+  .sale-products-row {
     padding: 1rem 0;
     justify-content: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     place-items: center;
     gap: 1rem;
-  }
-
-  .featured-products-loader {
-    display: flex;
-    justify-content: center;
-    padding: 4rem 0;
   }
 }

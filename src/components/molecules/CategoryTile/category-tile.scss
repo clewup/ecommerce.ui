@@ -1,0 +1,12 @@
+@import './src/styles/colors';
+
+#category-tile {
+  height: 150px;
+  width: 150px;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  border: 0.2rem solid $branding-darkgrey;
+  cursor: pointer;
+}
