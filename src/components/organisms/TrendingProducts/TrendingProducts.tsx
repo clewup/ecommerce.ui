@@ -11,7 +11,7 @@ const TrendingProducts = () => {
   const { popularProducts, isLoading, error, getMostPopular } = useStatistics();
 
   useEffect(() => {
-    getMostPopular(5);
+    getMostPopular(4);
     // eslint-disable-next-line
   }, []);
 

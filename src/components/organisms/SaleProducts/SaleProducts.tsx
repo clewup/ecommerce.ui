@@ -13,7 +13,7 @@ const SaleProducts = () => {
     useStatistics();
 
   useEffect(() => {
-    getMostDiscounted(5);
+    getMostDiscounted(4);
     // eslint-disable-next-line
   }, []);
 

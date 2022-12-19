@@ -1,0 +1,18 @@
+#about {
+  .about-story {
+    display: flex;
+    .story-text {
+      width: 50%;
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .story-image {
+      width: 50%;
+      background-image: url("https://res.cloudinary.com/dliog6kq6/image/upload/v1671491270/ecommerce/photoholgic-iFEvKX0LC2k-unsplash_pafelo.jpg");
+      background-position: center;
+      background-size: cover;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@import '/src/styles/colors';
+
+#faq {
+  .faq-banner {
+    border: 0.2rem solid $branding-darkgrey;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .faq-categories {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem 0;
+
+    .faq-tile {
+      background-color: $branding-blue;
+      color: white;
+      height: 150px;
+      width: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+  .faq-unanswered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+
+    .faq-contact-methods {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 2rem 0;
+
+      .faq-tile {
+        background-color: $branding-darkgrey;
+        color: white;
+        height: 150px;
+        width: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ interface IProps {
   size?: string;
   color?: string;
   padding?: string;
+  align?: string;
 }
 
 export const subheadingSize = {
@@ -15,9 +16,15 @@ export const subheadingSize = {
   LARGE: "subheading-large",
 };
 
-const Subheading: React.FC<IProps> = ({ children, size, color, padding }) => {
+const Subheading: React.FC<IProps> = ({
+  children,
+  size,
+  color,
+  padding,
+  align,
+}) => {
   return (
-    <h3 className={classnames("subheading", size, color, padding)}>
+    <h3 className={classnames("subheading", size, color, padding, align)}>
       {children}
     </h3>
   );

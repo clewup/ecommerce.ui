@@ -1,0 +1,63 @@
+@import '/src/styles/colors';
+
+#contact {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 10rem 0;
+
+  .contact-email {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+
+    .email-icon {
+      height: 200px;
+      width: 200px;
+      background-color: $branding-darkgrey;
+      color: $branding-white;
+      font-size: 10rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .email-text {
+      background-color: $branding-lightgrey;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $branding-white;
+      width: 800px;
+    }
+  }
+
+  .contact-telephone {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+
+    .telephone-icon {
+      height: 200px;
+      width: 200px;
+      background-color: $branding-darkgrey;
+      color: $branding-white;
+      font-size: 10rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .telephone-text {
+      background-color: $branding-lightgrey;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $branding-white;
+      display: flex;
+      flex-direction: column;
+      width: 800px;
+
+    }
+  }
+}

@@ -14,6 +14,7 @@ import CreatableSelect from "react-select/creatable";
 import { ProductContext } from "../../../contexts/Product";
 import TextArea from "../../atoms/TextArea/TextArea";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import { fontAlign } from "../../../enums/fonts";
 
 const AddProductForm = () => {
   const [openAlert, setOpenAlert] = React.useState(false);
@@ -83,7 +84,9 @@ const AddProductForm = () => {
         return (
           <div id={"add-product-form"}>
             <Form>
-              <Subheading size={subheadingSize.SMALL}>Add Product</Subheading>
+              <Subheading size={subheadingSize.SMALL} align={fontAlign.CENTER}>
+                Add Product
+              </Subheading>
 
               <div className={"product-form-fields"}>
                 <div className={"product-form-half"}>
