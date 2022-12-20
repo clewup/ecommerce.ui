@@ -7,7 +7,7 @@ import Wrapper from "../../atoms/Wrapper/Wrapper";
 import AppError from "../../molecules/AppError/AppError";
 import React, { useContext, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
 import { LoadingButton } from "@mui/lab";
 import { ShoppingCart as AddToCartIcon } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
@@ -15,6 +15,7 @@ import { AuthContext } from "../../../contexts/Auth";
 import { CartContext } from "../../../contexts/Cart";
 import useCart from "../../../hooks/useCart";
 import Text from "../../atoms/Text/Text";
+import { subheadingSize } from "../../../enums/typography";
 
 const Product = () => {
   const { id } = useParams();

@@ -1,11 +1,12 @@
 import "./trending-products.scss";
 import { Divider } from "@mui/material";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
 import Loader from "../../atoms/Loader/Loader";
 import Product from "../../molecules/Product/Product";
 import useStatistics from "../../../hooks/useStatistics";
 import { useEffect } from "react";
 import AppError from "../../molecules/AppError/AppError";
+import { subheadingSize } from "../../../enums/typography";
 
 const TrendingProducts = () => {
   const { popularProducts, isLoading, error, getMostPopular } = useStatistics();

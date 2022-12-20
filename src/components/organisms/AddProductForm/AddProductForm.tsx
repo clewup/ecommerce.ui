@@ -3,7 +3,7 @@ import { Field, Form, Formik, FormikHelpers, FormikProps } from "formik";
 import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button, Snackbar } from "@mui/material";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
 import React, { useContext, useEffect } from "react";
 import useImageUpload from "../../../hooks/useImageUpload";
 import AppError from "../../molecules/AppError/AppError";
@@ -14,7 +14,7 @@ import CreatableSelect from "react-select/creatable";
 import { ProductContext } from "../../../contexts/Product";
 import TextArea from "../../atoms/TextArea/TextArea";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import { fontAlign } from "../../../enums/fonts";
+import { subheadingSize } from "../../../enums/typography";
 
 const AddProductForm = () => {
   const [openAlert, setOpenAlert] = React.useState(false);
@@ -84,7 +84,7 @@ const AddProductForm = () => {
         return (
           <div id={"add-product-form"}>
             <Form>
-              <Subheading size={subheadingSize.SMALL} align={fontAlign.CENTER}>
+              <Subheading size={subheadingSize.SMALL} align={"center"}>
                 Add Product
               </Subheading>
 

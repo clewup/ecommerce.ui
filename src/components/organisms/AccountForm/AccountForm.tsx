@@ -5,8 +5,8 @@ import "./account-form.scss";
 import Text from "../../atoms/Text/Text";
 
 import Input from "../../atoms/Input/Input";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
-import { fontAlign } from "../../../enums/fonts";
+import Subheading from "../../atoms/Subheading/Subheading";
+import { subheadingSize } from "../../../enums/typography";
 
 interface IProps {
   formik: FormikProps<IUser>;
@@ -18,7 +18,7 @@ const AccountForm: React.FC<IProps> = ({ formik, user, isEditing }) => {
   return (
     <div id={"account-form"}>
       <div className={"contact-info"}>
-        <Subheading size={subheadingSize.SMALL} align={fontAlign.CENTER}>
+        <Subheading size={subheadingSize.SMALL} align={"center"}>
           Contact Info
         </Subheading>
         <Field
@@ -49,7 +49,7 @@ const AccountForm: React.FC<IProps> = ({ formik, user, isEditing }) => {
 
       {user.lineOne && !isEditing ? (
         <div className={"address-info"}>
-          <Subheading size={subheadingSize.SMALL} align={fontAlign.CENTER}>
+          <Subheading size={subheadingSize.SMALL} align={"center"}>
             Address
           </Subheading>
           <div className={"existing-address"}>
@@ -64,7 +64,7 @@ const AccountForm: React.FC<IProps> = ({ formik, user, isEditing }) => {
         </div>
       ) : (
         <div className={"address-info"}>
-          <Subheading size={subheadingSize.SMALL} align={fontAlign.CENTER}>
+          <Subheading size={subheadingSize.SMALL} align={"center"}>
             Address
           </Subheading>
           <Field

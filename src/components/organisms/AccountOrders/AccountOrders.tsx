@@ -2,11 +2,12 @@ import "./account-orders.scss";
 import useOrder from "../../../hooks/useOrder";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../../contexts/User";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
 import OrderProduct from "../../molecules/OrderProduct/OrderProduct";
 import AppError from "../../molecules/AppError/AppError";
 import Loader from "../../atoms/Loader/Loader";
 import Text from "../../atoms/Text/Text";
+import { subheadingSize } from "../../../enums/typography";
 
 const AccountOrders = () => {
   const { orders, isLoading, error, getUserOrders } = useOrder();

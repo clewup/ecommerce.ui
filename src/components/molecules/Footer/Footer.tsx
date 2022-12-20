@@ -1,8 +1,8 @@
 import "./footer.scss";
 import Text from "../../atoms/Text/Text";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
 import { useNavigate } from "react-router-dom";
-import { fontPadding } from "../../../enums/fonts";
+import { fontPadding, subheadingSize } from "../../../enums/typography";
 
 const Footer = () => {
   const navigate = useNavigate();

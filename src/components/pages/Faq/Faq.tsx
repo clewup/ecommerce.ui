@@ -1,6 +1,7 @@
 import "./faq.scss";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
+import { subheadingSize } from "../../../enums/typography";
 
 const Faq = () => {
   return (

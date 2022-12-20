@@ -1,7 +1,8 @@
 import "./about.scss";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
-import Text, { textSize } from "../../atoms/Text/Text";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Text from "../../atoms/Text/Text";
+import Subheading from "../../atoms/Subheading/Subheading";
+import { subheadingSize, textSize } from "../../../enums/typography";
 
 // TODO: Add order/returns policies, methods of payment
 

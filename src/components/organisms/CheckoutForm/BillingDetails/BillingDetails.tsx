@@ -1,13 +1,12 @@
 import "./billing-details.scss";
-import Subheading, {
-  subheadingSize,
-} from "../../../atoms/Subheading/Subheading";
+import Subheading from "../../../atoms/Subheading/Subheading";
 import { Field, FormikProps } from "formik";
 import Input from "../../../atoms/Input/Input";
 import Checkbox from "../../../atoms/Checkbox/Checkbox";
 import { Button } from "@mui/material";
 import React from "react";
 import { ICheckoutFormValues } from "../../../../types/IOrder";
+import { subheadingSize } from "../../../../enums/typography";
 
 interface IProps {
   formik: FormikProps<ICheckoutFormValues>;

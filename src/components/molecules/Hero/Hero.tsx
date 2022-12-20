@@ -1,14 +1,15 @@
 import "./hero.scss";
-import Heading, { headingColor } from "../../atoms/Heading/Heading";
+import Heading from "../../atoms/Heading/Heading";
 import React from "react";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
+import { fontColor, subheadingSize } from "../../../enums/typography";
 
 const Hero = () => {
   return (
     <div id={"hero"}>
       <div className={"hero-text"}>
         <Subheading size={subheadingSize.SMALL}>Welcome To</Subheading>
-        <Heading color={headingColor.BLUE}>Ecommerce</Heading>
+        <Heading color={fontColor.BLUE}>Ecommerce</Heading>
       </div>
     </div>
   );

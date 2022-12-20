@@ -1,12 +1,11 @@
-import Subheading, {
-  subheadingSize,
-} from "../../../atoms/Subheading/Subheading";
+import Subheading from "../../../atoms/Subheading/Subheading";
 import "./delivery-details.scss";
 import { Field, FormikProps } from "formik";
 import Input from "../../../atoms/Input/Input";
 import React from "react";
 import { Button } from "@mui/material";
 import { ICheckoutFormValues } from "../../../../types/IOrder";
+import { subheadingSize } from "../../../../enums/typography";
 
 interface IProps {
   formik: FormikProps<ICheckoutFormValues>;

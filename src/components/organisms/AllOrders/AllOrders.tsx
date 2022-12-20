@@ -1,11 +1,12 @@
 import "./all-orders.scss";
 import useOrder from "../../../hooks/useOrder";
 import { useEffect } from "react";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
 import OrderProduct from "../../molecules/OrderProduct/OrderProduct";
 import AppError from "../../molecules/AppError/AppError";
 import Loader from "../../atoms/Loader/Loader";
 import Text from "../../atoms/Text/Text";
+import { subheadingSize } from "../../../enums/typography";
 
 const AllOrders = () => {
   const { orders, isLoading, error, getAllOrders } = useOrder();

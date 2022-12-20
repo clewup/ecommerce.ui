@@ -2,7 +2,8 @@ import "./contact.scss";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
+import { subheadingSize } from "../../../enums/typography";
 
 const Contact = () => {
   return (

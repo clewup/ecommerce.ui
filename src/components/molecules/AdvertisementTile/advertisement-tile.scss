@@ -1,0 +1,19 @@
+#advertisement-tile {
+  height: 280px;
+  width: 33%;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-around;
+
+  .advertisement-tile-text {
+    width: 50%;
+    padding: 1rem;
+  }
+
+  .advertisement-tile-actions {
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+  }
+}

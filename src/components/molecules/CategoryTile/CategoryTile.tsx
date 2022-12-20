@@ -1,6 +1,7 @@
 import "./category-tile.scss";
-import Subheading, { subheadingSize } from "../../atoms/Subheading/Subheading";
+import Subheading from "../../atoms/Subheading/Subheading";
 import { useNavigate } from "react-router-dom";
+import { subheadingSize } from "../../../enums/typography";
 
 interface IProps {
   category: string;
