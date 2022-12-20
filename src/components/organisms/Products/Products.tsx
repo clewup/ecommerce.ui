@@ -30,10 +30,11 @@ const Products: React.FC<IProps> = ({ products, isLoading, error }) => {
     <div id={"products"}>
       <InfiniteScroll
         next={loadMore}
-        hasMore={true}
+        hasMore={pagedProducts.length < products.length}
         loader={null}
         dataLength={pagedProducts.length}
         className={"products-grid"}
+        scrollThreshold={0.6}
       >
         {pagedProducts.map((product: IProduct) => {
           return (

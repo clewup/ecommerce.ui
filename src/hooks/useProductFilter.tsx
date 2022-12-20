@@ -3,7 +3,6 @@ import { AxiosError } from "axios";
 import { ProductContext } from "../contexts/Product";
 import { IProduct } from "../types/IProduct";
 import getProductsSearch from "../api/GetProductsSearch";
-import { useSearchParams } from "react-router-dom";
 
 interface IUseProductFilterProps {
   products: IProduct[];
@@ -12,7 +11,6 @@ interface IUseProductFilterProps {
 }
 
 const useProductFilter = (): IUseProductFilterProps => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<AxiosError | null>(null);
 
@@ -31,7 +29,7 @@ const useProductFilter = (): IUseProductFilterProps => {
   useEffect(() => {
     getProducts();
     // eslint-disable-next-line
-  }, [searchParams]);
+  }, [query]);
 
   const getProducts = () => {
     setLoading(true);
@@ -70,7 +68,6 @@ const useProductFilter = (): IUseProductFilterProps => {
 
     formattedQuery = "?" + formattedQuery.slice(1);
     setQuery(formattedQuery);
-    setSearchParams(formattedQuery);
     setLoading(false);
   };
 

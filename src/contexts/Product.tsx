@@ -1,4 +1,5 @@
 import React, { createContext, Dispatch, useState } from "react";
+import { queryDefaultValues } from "../enums/defaultValues";
 
 interface IProps {
   children: JSX.Element;
@@ -11,8 +12,8 @@ export interface IProductContextProps {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   categoryQuery: string;
   setCategoryQuery: React.Dispatch<React.SetStateAction<string>>;
-  priceQuery: number[] | null;
-  setPriceQuery: React.Dispatch<React.SetStateAction<number[] | null>>;
+  priceQuery: number[];
+  setPriceQuery: React.Dispatch<React.SetStateAction<number[]>>;
   saleQuery: boolean;
   setSaleQuery: React.Dispatch<React.SetStateAction<boolean>>;
   stockQuery: boolean;
@@ -24,17 +25,17 @@ export interface IProductContextProps {
 const initialProductContextProps: IProductContextProps = {
   categories: [],
   setCategories: (() => undefined) as Dispatch<any>,
-  searchQuery: "",
+  searchQuery: queryDefaultValues.SEARCH_QUERY,
   setSearchQuery: (() => undefined) as Dispatch<any>,
-  categoryQuery: "all",
+  categoryQuery: queryDefaultValues.CATEGORY_QUERY,
   setCategoryQuery: (() => undefined) as Dispatch<any>,
-  priceQuery: null,
+  priceQuery: queryDefaultValues.PRICE_QUERY,
   setPriceQuery: (() => undefined) as Dispatch<any>,
-  saleQuery: false,
+  saleQuery: queryDefaultValues.SALE_QUERY,
   setSaleQuery: (() => undefined) as Dispatch<any>,
-  stockQuery: false,
+  stockQuery: queryDefaultValues.STOCK_QUERY,
   setStockQuery: (() => undefined) as Dispatch<any>,
-  sortByQuery: "any",
+  sortByQuery: queryDefaultValues.SORT_BY_QUERY,
   setSortByQuery: (() => undefined) as Dispatch<any>,
 };
 
@@ -45,12 +46,24 @@ const ProductContext = createContext<IProductContextProps>(
 const ProductProvider: React.FC<IProps> = ({ children }) => {
   const [categories, setCategories] = useState<string[]>([]);
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [categoryQuery, setCategoryQuery] = useState<string>("all");
-  const [priceQuery, setPriceQuery] = useState<number[] | null>(null);
-  const [saleQuery, setSaleQuery] = useState<boolean>(false);
-  const [stockQuery, setStockQuery] = useState<boolean>(false);
-  const [sortByQuery, setSortByQuery] = useState<string>("any");
+  const [searchQuery, setSearchQuery] = useState(
+    queryDefaultValues.SEARCH_QUERY
+  );
+  const [categoryQuery, setCategoryQuery] = useState<string>(
+    queryDefaultValues.CATEGORY_QUERY
+  );
+  const [priceQuery, setPriceQuery] = useState<number[]>(
+    queryDefaultValues.PRICE_QUERY
+  );
+  const [saleQuery, setSaleQuery] = useState<boolean>(
+    queryDefaultValues.SALE_QUERY
+  );
+  const [stockQuery, setStockQuery] = useState<boolean>(
+    queryDefaultValues.STOCK_QUERY
+  );
+  const [sortByQuery, setSortByQuery] = useState<string>(
+    queryDefaultValues.SORT_BY_QUERY
+  );
 
   return (
     <ProductContext.Provider

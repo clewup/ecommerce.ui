@@ -14,7 +14,8 @@ import Text from "../../../atoms/Text/Text";
 
 const StoreDropdown = () => {
   const navigate = useNavigate();
-  const { categories, setCategories } = useContext(ProductContext);
+  const { categories, setCategories, setCategoryQuery } =
+    useContext(ProductContext);
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLParagraphElement>(null);
@@ -109,11 +110,8 @@ const StoreDropdown = () => {
                         key={category}
                         onClick={(e) => {
                           handleClose(e);
-                          navigate(
-                            `store/${category
-                              .replace(/\s/g, "-")
-                              .toLowerCase()}`
-                          );
+                          navigate("store");
+                          setCategoryQuery(category);
                         }}
                       >
                         {category}

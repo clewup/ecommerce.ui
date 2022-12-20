@@ -7,6 +7,7 @@ import SelectInput from "../../atoms/SelectInput/SelectInput";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
 import { InputLabel, MenuItem, Select, Slider } from "@mui/material";
 import AppError from "../AppError/AppError";
+import { queryDefaultValues } from "../../../enums/defaultValues";
 
 interface IProps {
   toggleDrawer: (isOpen: boolean) => void;
@@ -17,11 +18,12 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
 
   useEffect(() => {
     return () => {
-      setSearchQuery("");
-      setCategoryQuery("all");
-      setPriceQuery([0, 400]);
-      setSaleQuery(false);
-      setSortByQuery("any");
+      setSearchQuery(queryDefaultValues.SEARCH_QUERY);
+      setCategoryQuery(queryDefaultValues.CATEGORY_QUERY);
+      setPriceQuery(queryDefaultValues.PRICE_QUERY);
+      setSaleQuery(queryDefaultValues.SALE_QUERY);
+      setStockQuery(queryDefaultValues.STOCK_QUERY);
+      setSortByQuery(queryDefaultValues.SORT_BY_QUERY);
     };
     // eslint-disable-next-line
   }, []);
@@ -44,12 +46,12 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
 
   const priceQueryMarks = [
     {
-      value: 0,
-      label: "£0",
+      value: queryDefaultValues.PRICE_QUERY[0]!,
+      label: `£${queryDefaultValues.PRICE_QUERY[0]!}`,
     },
     {
-      value: 400,
-      label: "£400",
+      value: queryDefaultValues.PRICE_QUERY[1]!,
+      label: `£${queryDefaultValues.PRICE_QUERY[1]!}`,
     },
   ];
 
@@ -99,10 +101,10 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
       <InputLabel>Price</InputLabel>
       <Slider
         getAriaLabel={() => "Price"}
-        defaultValue={[0, 400]}
-        min={0}
-        max={400}
-        step={50}
+        defaultValue={queryDefaultValues.PRICE_QUERY}
+        min={queryDefaultValues.PRICE_QUERY[0]}
+        max={queryDefaultValues.PRICE_QUERY[1]}
+        step={queryDefaultValues.PRICE_QUERY[1]! / 10}
         marks={priceQueryMarks}
         onChange={(e, value) => setPriceQuery(value as number[])}
         valueLabelDisplay="auto"
