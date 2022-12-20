@@ -5,12 +5,11 @@ import ProductFilter from "../../molecules/ProductFilter/ProductFilter";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 import { useState } from "react";
 import useProductFilter from "../../../hooks/useProductFilter";
-import AppLoader from "../../atoms/AppLoader/AppLoader";
 import { Button } from "@mui/material";
 import Text from "../../atoms/Text/Text";
 
 const Store = () => {
-  const { filteredProducts, isLoading } = useProductFilter();
+  const { products, isLoading, error } = useProductFilter();
   const [isFilterOpen, setFilterOpen] = useState(false);
 
   const toggleDrawer =
@@ -28,28 +27,22 @@ const Store = () => {
 
   return (
     <Wrapper id={"store"}>
-      {isLoading ? (
-        <AppLoader />
-      ) : (
-        <>
-          <div className={"product-filter"}>
-            <Button onClick={toggleDrawer(true)}>Filters</Button>
-            <Text>Showing {filteredProducts.length} results.</Text>
+      <div className={"product-filter"}>
+        <Button onClick={toggleDrawer(true)}>Filters</Button>
+        <Text>Showing {products.length} results.</Text>
 
-            <SwipeableDrawer
-              anchor={"left"}
-              open={isFilterOpen}
-              onClose={toggleDrawer(false)}
-              onOpen={toggleDrawer(true)}
-            >
-              <ProductFilter toggleDrawer={toggleDrawer} />
-            </SwipeableDrawer>
-          </div>
-          <div className={"products"}>
-            <Products />
-          </div>
-        </>
-      )}
+        <SwipeableDrawer
+          anchor={"left"}
+          open={isFilterOpen}
+          onClose={toggleDrawer(false)}
+          onOpen={toggleDrawer(true)}
+        >
+          <ProductFilter toggleDrawer={toggleDrawer} />
+        </SwipeableDrawer>
+      </div>
+      <div className={"products"}>
+        <Products products={products} isLoading={isLoading} error={error} />
+      </div>
     </Wrapper>
   );
 };

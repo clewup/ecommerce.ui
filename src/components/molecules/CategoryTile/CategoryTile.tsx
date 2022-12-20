@@ -2,6 +2,8 @@ import "./category-tile.scss";
 import Subheading from "../../atoms/Subheading/Subheading";
 import { useNavigate } from "react-router-dom";
 import { subheadingSize } from "../../../enums/typography";
+import { useContext } from "react";
+import { ProductContext } from "../../../contexts/Product";
 
 interface IProps {
   category: string;
@@ -9,13 +11,15 @@ interface IProps {
 
 const CategoryTile: React.FC<IProps> = ({ category }) => {
   const navigate = useNavigate();
+  const { setCategoryQuery } = useContext(ProductContext);
 
   return (
     <div
       id={"category-tile"}
-      onClick={() =>
-        navigate(`store/${category.replace(/\s/g, "-").toLowerCase()}`)
-      }
+      onClick={() => {
+        setCategoryQuery(category);
+        navigate("store");
+      }}
     >
       <Subheading size={subheadingSize.XSMALL}>{category}</Subheading>
     </div>

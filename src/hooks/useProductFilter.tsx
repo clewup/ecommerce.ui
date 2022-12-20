@@ -2,103 +2,92 @@ import { useContext, useEffect, useState } from "react";
 import { AxiosError } from "axios";
 import { ProductContext } from "../contexts/Product";
 import { IProduct } from "../types/IProduct";
-import getProducts from "../api/GetProducts";
-import _ from "lodash";
+import getProductsSearch from "../api/GetProductsSearch";
+import { useSearchParams } from "react-router-dom";
 
 interface IUseProductFilterProps {
   products: IProduct[];
-  filteredProducts: IProduct[];
   isLoading: boolean;
   error: AxiosError | null;
 }
 
 const useProductFilter = (): IUseProductFilterProps => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<AxiosError | null>(null);
 
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+  const [query, setQuery] = useState("");
 
-  const { searchQuery, categoryQuery, priceQuery, saleQuery, sortByQuery } =
-    useContext(ProductContext);
-
-  useEffect(() => {
-    if (!filteredProducts || !filteredProducts.length) {
-      setLoading(true);
-      getProducts()
-        .then((res) => {
-          setProducts(res.data);
-          setFilteredProducts(res.data);
-        })
-        .catch((err) => setError(err))
-        .finally(() => setLoading(false));
-    }
-  }, []);
-
-  const filterBySearch = (joinedFilter: any[]) => {
-    return joinedFilter.filter(
-      (product: IProduct) => new RegExp(searchQuery, "i").test(product.name) // Case insensitive query.
-    );
-  };
-
-  const sortBy = (joinedFilter: any[]) => {
-    if (sortByQuery && sortByQuery !== "any") {
-      if (sortByQuery === "low-to-high") {
-        return _.sortBy(joinedFilter, "price");
-      }
-      if (sortByQuery === "high-to-low") {
-        return _.sortBy(joinedFilter, "price").reverse();
-      } else {
-        return joinedFilter;
-      }
-    } else {
-      return joinedFilter;
-    }
-  };
-
-  const filterByCategory = (joinedFilter: any[]) => {
-    if (categoryQuery && categoryQuery !== "all") {
-      return joinedFilter.filter(
-        (product: IProduct) => product.category === categoryQuery
-      );
-    } else {
-      return joinedFilter;
-    }
-  };
-
-  const filterByPrice = (joinedFilter: any[]) => {
-    if (priceQuery && priceQuery.length === 2) {
-      return joinedFilter.filter(
-        (product: IProduct) =>
-          product.price >= priceQuery[0]! && product.price <= priceQuery[1]!
-      );
-    } else {
-      return joinedFilter;
-    }
-  };
-
-  const filterBySale = (joinedFilter: any[]) => {
-    if (saleQuery) {
-      return joinedFilter.filter((product: IProduct) => product.discount);
-    } else {
-      return joinedFilter;
-    }
-  };
+  const {
+    searchQuery,
+    categoryQuery,
+    priceQuery,
+    saleQuery,
+    stockQuery,
+    sortByQuery,
+  } = useContext(ProductContext);
 
   useEffect(() => {
-    let joinedFilter = products;
-    joinedFilter = filterBySearch(joinedFilter);
-    joinedFilter = sortBy(joinedFilter);
-    joinedFilter = filterByCategory(joinedFilter);
-    joinedFilter = filterByPrice(joinedFilter);
-    joinedFilter = filterBySale(joinedFilter);
-    setFilteredProducts(joinedFilter);
+    getProducts();
     // eslint-disable-next-line
-  }, [searchQuery, categoryQuery, priceQuery, saleQuery, sortByQuery]);
+  }, [searchParams]);
+
+  const getProducts = () => {
+    setLoading(true);
+    getProductsSearch(query)
+      .then((res) => setProducts(res.data))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
+
+  const formatQuery = () => {
+    setLoading(true);
+    let formattedQuery = "";
+    if (searchQuery) {
+      formattedQuery = `&SearchTerm=${searchQuery}`;
+    }
+    if (categoryQuery && categoryQuery !== "all") {
+      formattedQuery = formattedQuery.concat(`&Category=${categoryQuery}`);
+    }
+    if (priceQuery) {
+      formattedQuery = formattedQuery.concat(
+        `&MinPrice=${priceQuery[0]}&MaxPrice=${priceQuery[1]}`
+      );
+    }
+    if (saleQuery) {
+      formattedQuery = formattedQuery.concat(`&OnSale=${saleQuery}`);
+    }
+    if (stockQuery) {
+      formattedQuery = formattedQuery.concat(`&InStock=${stockQuery}`);
+    }
+    if (sortByQuery && sortByQuery !== "any") {
+      const values = sortByQuery.split(" ");
+      formattedQuery = formattedQuery.concat(
+        `&SortBy=${values[0]}&SortVariation=${values[1]}`
+      );
+    }
+
+    formattedQuery = "?" + formattedQuery.slice(1);
+    setQuery(formattedQuery);
+    setSearchParams(formattedQuery);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    formatQuery();
+    // eslint-disable-next-line
+  }, [
+    searchQuery,
+    categoryQuery,
+    priceQuery,
+    saleQuery,
+    stockQuery,
+    sortByQuery,
+  ]);
 
   return {
     products,
-    filteredProducts,
     isLoading,
     error,
   };

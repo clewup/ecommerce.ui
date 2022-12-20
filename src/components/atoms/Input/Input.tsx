@@ -9,7 +9,10 @@ interface IProps {
   isPassword?: boolean;
   disabled?: boolean;
   value?: unknown;
-  onChange?: (e: any) => void;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLDivElement>) => void;
   width?: string;
 }
 
@@ -21,6 +24,7 @@ const Input: React.FC<IProps> = ({
   disabled = false,
   value,
   onChange,
+  onKeyDown,
   width,
 }) => {
   return (
@@ -38,8 +42,9 @@ const Input: React.FC<IProps> = ({
         label={label}
         type={isPassword ? "password" : "text"}
         disabled={disabled}
-        value={value ?? value}
-        onChange={onChange ?? onChange}
+        value={value}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
         sx={{
           marginTop: 1,
           marginBottom: 1,

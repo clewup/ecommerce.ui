@@ -15,7 +15,7 @@ const AppLoader = () => {
         <HashLoader
           color={"#ccc"}
           loading={true}
-          size={100}
+          size={75}
           data-testid="loader"
         />
       </div>

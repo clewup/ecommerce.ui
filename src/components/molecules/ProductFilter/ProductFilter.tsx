@@ -1,5 +1,5 @@
 import "./product-filter.scss";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../../contexts/Product";
 import useProductFilter from "../../../hooks/useProductFilter";
 import Input from "../../atoms/Input/Input";
@@ -7,41 +7,38 @@ import SelectInput from "../../atoms/SelectInput/SelectInput";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
 import { InputLabel, MenuItem, Select, Slider } from "@mui/material";
 import AppError from "../AppError/AppError";
-import { useParams } from "react-router-dom";
 
 interface IProps {
   toggleDrawer: (isOpen: boolean) => void;
 }
 
 const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
-  const { category } = useParams();
+  const [_searchQuery, _setSearchQuery] = useState("");
+
+  useEffect(() => {
+    return () => {
+      setSearchQuery("");
+      setCategoryQuery("all");
+      setPriceQuery([0, 400]);
+      setSaleQuery(false);
+      setSortByQuery("any");
+    };
+    // eslint-disable-next-line
+  }, []);
 
   const {
     categories,
-    searchQuery,
     setSearchQuery,
     categoryQuery,
     setCategoryQuery,
     setPriceQuery,
     saleQuery,
     setSaleQuery,
+    stockQuery,
+    setStockQuery,
     sortByQuery,
     setSortByQuery,
   } = useContext(ProductContext);
-
-  useEffect(() => {
-    if (category) {
-      const matchingCategory = categories.find(
-        (c) => c.replace(/\s/g, "-").toLowerCase() === category.toLowerCase()
-      );
-      if (matchingCategory) {
-        setCategoryQuery(matchingCategory);
-      }
-    } else {
-      setCategoryQuery("all");
-    }
-    // eslint-disable-next-line
-  }, [category]);
 
   const { error } = useProductFilter();
 
@@ -56,6 +53,12 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
     },
   ];
 
+  const handleSearch = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") {
+      setSearchQuery(_searchQuery);
+    }
+  };
+
   if (error) return <AppError error={error} />;
 
   return (
@@ -66,8 +69,9 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
     >
       <Input
         label={"Search"}
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        value={_searchQuery}
+        onChange={(e) => _setSearchQuery(e.target.value)}
+        onKeyDown={(e) => handleSearch(e)}
       />
       <InputLabel>Sort By</InputLabel>
       <Select
@@ -82,8 +86,8 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
         }}
       >
         <MenuItem value={"any"}>Any</MenuItem>
-        <MenuItem value={"low-to-high"}>£ Low-High</MenuItem>
-        <MenuItem value={"high-to-low"}>£ High-Low</MenuItem>
+        <MenuItem value={"price asc"}>£ Low-High</MenuItem>
+        <MenuItem value={"price desc"}>£ High-Low</MenuItem>
       </Select>
       <SelectInput
         label={"Category"}
@@ -108,6 +112,13 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
         label={"On Sale"}
         value={saleQuery}
         onChange={() => (saleQuery ? setSaleQuery(false) : setSaleQuery(true))}
+      />
+      <Checkbox
+        label={"In Stock"}
+        value={stockQuery}
+        onChange={() =>
+          stockQuery ? setStockQuery(false) : setStockQuery(true)
+        }
       />
     </div>
   );

@@ -15,6 +15,8 @@ export interface IProductContextProps {
   setPriceQuery: React.Dispatch<React.SetStateAction<number[] | null>>;
   saleQuery: boolean;
   setSaleQuery: React.Dispatch<React.SetStateAction<boolean>>;
+  stockQuery: boolean;
+  setStockQuery: React.Dispatch<React.SetStateAction<boolean>>;
   sortByQuery: string;
   setSortByQuery: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -30,6 +32,8 @@ const initialProductContextProps: IProductContextProps = {
   setPriceQuery: (() => undefined) as Dispatch<any>,
   saleQuery: false,
   setSaleQuery: (() => undefined) as Dispatch<any>,
+  stockQuery: false,
+  setStockQuery: (() => undefined) as Dispatch<any>,
   sortByQuery: "any",
   setSortByQuery: (() => undefined) as Dispatch<any>,
 };
@@ -40,10 +44,12 @@ const ProductContext = createContext<IProductContextProps>(
 
 const ProductProvider: React.FC<IProps> = ({ children }) => {
   const [categories, setCategories] = useState<string[]>([]);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryQuery, setCategoryQuery] = useState<string>("all");
   const [priceQuery, setPriceQuery] = useState<number[] | null>(null);
-  const [saleQuery, setSaleQuery] = useState(false);
+  const [saleQuery, setSaleQuery] = useState<boolean>(false);
+  const [stockQuery, setStockQuery] = useState<boolean>(false);
   const [sortByQuery, setSortByQuery] = useState<string>("any");
 
   return (
@@ -59,6 +65,8 @@ const ProductProvider: React.FC<IProps> = ({ children }) => {
         setPriceQuery,
         saleQuery,
         setSaleQuery,
+        stockQuery,
+        setStockQuery,
         sortByQuery,
         setSortByQuery,
       }}

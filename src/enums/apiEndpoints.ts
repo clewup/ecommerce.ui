@@ -7,6 +7,7 @@ export const apiEndpoints = {
 
   // ECOMMERCE
   PRODUCT: "product",
+  PRODUCT_SEARCH: (query: string) => `product/search${query}`,
   PRODUCT_CATEGORIES: "product/categories",
   PRODUCT_BY_ID: (id: Guid) => `product/${id}`,
   IMAGE_UPLOAD: "upload/image",
