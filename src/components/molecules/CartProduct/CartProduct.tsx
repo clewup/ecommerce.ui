@@ -48,7 +48,10 @@ const CartProduct: React.FC<IProps> = ({ cartProduct }) => {
         )}
       </div>
       <div className={"cart-product-remove"}>
-        <ClearIcon onClick={() => !isLoading && removeFromCart(cartProduct)} />
+        <ClearIcon
+          onClick={() => !isLoading && removeFromCart(cartProduct)}
+          className={"cart-product-remove-btn"}
+        />
       </div>
     </div>
   );
