@@ -1,13 +1,13 @@
 import { ICartProduct } from "../../../types/IProduct";
 import { Guid } from "guid-typescript";
 import { IImage } from "../../../types/IImage";
-import { screen, render, fireEvent } from "@testing-library/react";
-import CartProduct from "./CartProduct";
+import { screen, render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
+import OrderProduct from "./OrderProduct";
 
-const mockedCartProduct: ICartProduct = {
+const mockedOrderProduct: ICartProduct = {
   id: Guid.create(),
-  name: "CART_PRODUCT_NAME",
+  name: "ORDER_PRODUCT_NAME",
   images: [
     {
       title: "IMAGE_TITLE",
@@ -15,20 +15,20 @@ const mockedCartProduct: ICartProduct = {
       url: "HTTPS://IMAGE_URL.JPG",
     },
   ] as IImage[],
-  description: "CART_PRODUCT_DESCRIPTION",
-  category: "CART_PRODUCT_CATEGORY",
-  color: "CART_PRODUCT_COLOR",
+  description: "ORDER_PRODUCT_DESCRIPTION",
+  category: "ORDER_PRODUCT_CATEGORY",
+  color: "ORDER_PRODUCT_COLOR",
   price: 12.34,
   discount: 0,
 };
 
-describe("CartProduct", () => {
+describe("OrderProduct", () => {
   beforeEach(() => {});
 
   it("should render the product image", () => {
     const { container } = render(
       <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
+        <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
     );
 
@@ -41,49 +41,49 @@ describe("CartProduct", () => {
   it("should render the product name", () => {
     const { container } = render(
       <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
+        <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
     );
 
     const name = container.querySelectorAll(".text")[0];
 
     expect(name).toBeInTheDocument();
-    expect(name).toHaveTextContent("CART_PRODUCT_NAME");
+    expect(name).toHaveTextContent("ORDER_PRODUCT_NAME");
   });
 
   it("should shorten the name if more than 30 characters", () => {
-    mockedCartProduct.name =
-      "CART_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
+    mockedOrderProduct.name =
+      "ORDER_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
 
     const { container } = render(
       <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
+        <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
     );
 
     const name = container.querySelectorAll(".text")[0];
 
     expect(name).toBeInTheDocument();
-    expect(name).toHaveTextContent("CART_PRODUCT_NAME_MORE_THAN_TH...");
+    expect(name).toHaveTextContent("ORDER_PRODUCT_NAME_MORE_THAN_T...");
   });
 
   it("should render the product color", () => {
     const { container } = render(
       <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
+        <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
     );
 
     const color = container.querySelectorAll(".text")[1];
 
     expect(color).toBeInTheDocument();
-    expect(color).toHaveTextContent("CART_PRODUCT_COLOR");
+    expect(color).toHaveTextContent("ORDER_PRODUCT_COLOR");
   });
 
   it("should render the product price", () => {
     const { container } = render(
       <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
+        <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
     );
 
@@ -94,10 +94,10 @@ describe("CartProduct", () => {
   });
 
   it("should render the product discounted price if discounted", () => {
-    mockedCartProduct.discount = 50;
+    mockedOrderProduct.discount = 50;
     const { container } = render(
       <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
+        <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
     );
 
@@ -108,17 +108,5 @@ describe("CartProduct", () => {
     expect(price).toBeInTheDocument();
     expect(discountedPrice).toHaveTextContent("£24.68");
     expect(price).toHaveTextContent("£12.34");
-  });
-
-  it("should render the remove from cart button", () => {
-    const { container } = render(
-      <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
-      </Router>
-    );
-
-    const button = container.querySelector(".cart-product-remove-btn");
-
-    expect(button).toBeInTheDocument();
   });
 });

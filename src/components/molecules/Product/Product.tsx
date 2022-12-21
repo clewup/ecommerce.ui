@@ -63,6 +63,7 @@ const Product: React.FC<IProps> = ({ product }) => {
             variant={"contained"}
             loading={isLoading}
             disabled={product.stock === 0}
+            className={"add-to-cart-btn"}
             onClick={() => {
               !isAuthenticated ? navigate("/login") : addToCart(product);
             }}

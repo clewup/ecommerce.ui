@@ -17,7 +17,10 @@ const OrderProduct: React.FC<IProps> = ({ orderProduct }) => {
         />
       </div>
       <div className={"order-product-info"}>
-        <Text>{orderProduct.name}</Text>
+        <Text>
+          {orderProduct.name.substring(0, 30)}
+          {orderProduct.name.length >= 30 && "..."}
+        </Text>
         <Text>{orderProduct.color}</Text>
         {orderProduct.discount > 0 ? (
           <div className={"discounted-price"}>
