@@ -23,8 +23,6 @@ const mockedCartProduct: ICartProduct = {
 };
 
 describe("CartProduct", () => {
-  beforeEach(() => {});
-
   it("should render the product image", () => {
     const { container } = render(
       <Router>

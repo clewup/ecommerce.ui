@@ -1,12 +1,12 @@
-import { ICartProduct, IProduct } from "../../../types/IProduct";
+import { IProduct } from "../../../types/IProduct";
 import { Guid } from "guid-typescript";
 import { IImage } from "../../../types/IImage";
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Product from "./Product";
-import userEvent from "@testing-library/user-event";
 import useCart from "../../../hooks/useCart";
-import { AxiosError } from "axios";
+import userEvent from "@testing-library/user-event";
+import { renderHook } from "@testing-library/react-hooks";
 
 const mockedProduct: IProduct = {
   id: Guid.create(),

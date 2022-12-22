@@ -12,8 +12,6 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("CategoryTile", () => {
-  beforeEach(() => {});
-
   it("should render the category name", () => {
     const { container } = render(
       <Router>
