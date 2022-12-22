@@ -32,11 +32,11 @@ describe("CategoryTile", () => {
       </Router>
     );
 
-    const tile = container.querySelector("#category-tile");
+    const tile = container.querySelector("#category-tile") as Element;
 
     expect(tile).toBeInTheDocument();
 
-    userEvent.click(tile!);
+    userEvent.click(tile);
 
     expect(mockedUsedNavigate).toHaveBeenCalled();
     expect(mockedUsedNavigate).toHaveBeenCalledWith("store");

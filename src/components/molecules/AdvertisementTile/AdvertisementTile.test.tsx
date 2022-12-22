@@ -2,6 +2,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AdvertisementTile from "./AdvertisementTile";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
@@ -56,5 +57,20 @@ describe("AdvertisementTile", () => {
 
     expect(button).toBeInTheDocument();
     expect(button).toHaveTextContent("ADVERTISEMENT_BUTTON_TEXT");
+  });
+
+  it("should navigate to the store on button click", () => {
+    const { container } = render(
+      <Router>
+        <AdvertisementTile advertisement={mockAdvertisement} />
+      </Router>
+    );
+
+    const button = container.querySelector('[type="button"]') as Element;
+
+    userEvent.click(button);
+
+    expect(mockedUsedNavigate).toHaveBeenCalled();
+    expect(mockedUsedNavigate).toHaveBeenCalledWith("store");
   });
 });

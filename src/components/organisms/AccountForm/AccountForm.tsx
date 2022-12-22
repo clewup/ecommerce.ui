@@ -1,20 +1,22 @@
 import { Field, FormikProps } from "formik";
 import { IUser } from "../../../types/IUser";
-import React from "react";
+import React, { useState } from "react";
 import "./account-form.scss";
 import Text from "../../atoms/Text/Text";
 
 import Input from "../../atoms/Input/Input";
 import Subheading from "../../atoms/Subheading/Subheading";
 import { subheadingSize } from "../../../enums/typography";
+import { Button } from "@mui/material";
 
 interface IProps {
   formik: FormikProps<IUser>;
   user: IUser;
-  isEditing: boolean;
 }
 
-const AccountForm: React.FC<IProps> = ({ formik, user, isEditing }) => {
+const AccountForm: React.FC<IProps> = ({ formik, user }) => {
+  const [isEditing, setEditing] = useState(false);
+
   return (
     <div id={"account-form"}>
       <div className={"contact-info"}>
@@ -125,6 +127,32 @@ const AccountForm: React.FC<IProps> = ({ formik, user, isEditing }) => {
           />
         </div>
       )}
+      <div className={"account-footer"}>
+        <Button
+          variant={"contained"}
+          color={"info"}
+          size={"large"}
+          onClick={() => {
+            if (isEditing) {
+              formik.resetForm({ values: formik.initialValues });
+              setEditing(false);
+            } else {
+              setEditing(true);
+            }
+          }}
+        >
+          Edit
+        </Button>
+        <Button
+          type={"submit"}
+          variant={"contained"}
+          color={"success"}
+          size={"large"}
+          disabled={!isEditing || !formik.dirty}
+        >
+          Save
+        </Button>
+      </div>
     </div>
   );
 };

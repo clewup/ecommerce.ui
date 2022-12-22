@@ -4,9 +4,6 @@ import { IImage } from "../../../types/IImage";
 import { screen, render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Product from "./Product";
-import useCart from "../../../hooks/useCart";
-import userEvent from "@testing-library/user-event";
-import { renderHook } from "@testing-library/react-hooks";
 
 const mockedProduct: IProduct = {
   id: Guid.create(),
@@ -27,8 +24,6 @@ const mockedProduct: IProduct = {
 };
 
 describe("Product", () => {
-  beforeEach(() => {});
-
   it("should render the product image", () => {
     const { container } = render(
       <Router>

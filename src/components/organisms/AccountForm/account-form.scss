@@ -22,4 +22,11 @@
         text-align: center;
       }
     }
+
+  .account-footer {
+    justify-content: center;
+    display: flex;
+    gap: 1rem;
+    padding: 2rem 0;
+  }
 }

@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../contexts/User";
 import AccountForm from "../../organisms/AccountForm/AccountForm";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
-import AccountFooter from "../../molecules/AccountFooter/AccountFooter";
 import { Form, Formik } from "formik";
 import useUser from "../../../hooks/useUser";
 import AccountOrders from "../../organisms/AccountOrders/AccountOrders";
@@ -17,7 +16,6 @@ const Account = () => {
   const { validationSchema, updateUser } = useUser();
   const navigate = useNavigate();
 
-  const [isEditing, setEditing] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
 
   const handleTabChange = (event: React.SyntheticEvent, newTabIndex: any) => {
@@ -35,7 +33,6 @@ const Account = () => {
       validationSchema={validationSchema}
       onSubmit={(values) => {
         updateUser(values);
-        setEditing(false);
       }}
     >
       {(formik) => {
@@ -47,16 +44,7 @@ const Account = () => {
             </Tabs>
             {tabIndex === 0 && (
               <Form>
-                <AccountForm
-                  formik={formik}
-                  user={user}
-                  isEditing={isEditing}
-                />
-                <AccountFooter
-                  formik={formik}
-                  isEditing={isEditing}
-                  setEditing={setEditing}
-                />
+                <AccountForm formik={formik} user={user} />
               </Form>
             )}
             {tabIndex === 1 && <AccountOrders />}

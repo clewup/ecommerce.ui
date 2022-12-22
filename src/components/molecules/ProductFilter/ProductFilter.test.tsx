@@ -5,7 +5,6 @@ import userEvent from "@testing-library/user-event";
 const mockToggleDrawer = jest.fn().mockReturnValue(true);
 
 type TestElement = Document | Element | Window | Node;
-
 function hasInputValue(e: TestElement, inputValue: string) {
   return screen.getByDisplayValue(inputValue) === e;
 }

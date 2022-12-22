@@ -27,6 +27,7 @@
     "eslint": "^8.30.0",
     "formik": "^2.2.9",
     "guid-typescript": "^1.0.9",
+    "jest-preview": "^0.3.1",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
