@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import ProductFilter from "./ProductFilter";
-import userEvent from "@testing-library/user-event";
+import React from "react";
 
 const mockToggleDrawer = jest.fn().mockReturnValue(true);
 
@@ -10,6 +10,15 @@ function hasInputValue(e: TestElement, inputValue: string) {
 }
 
 describe("ProductFilter", () => {
+  it("should render the component", () => {
+    const { container } = render(
+      <ProductFilter toggleDrawer={mockToggleDrawer} />
+    );
+    const component = container.querySelector("#product-filter") as Element;
+
+    expect(component).toBeInTheDocument();
+  });
+
   it("should render an empty search bar", () => {
     const { container } = render(
       <ProductFilter toggleDrawer={mockToggleDrawer} />

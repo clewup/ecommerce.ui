@@ -2,7 +2,7 @@ import "./sale-products.scss";
 import { Divider } from "@mui/material";
 import Subheading from "../../atoms/Subheading/Subheading";
 import Loader from "../../atoms/Loader/Loader";
-import Product from "../../molecules/Product/Product";
+import ProductTile from "../../molecules/ProductTile/ProductTile";
 import useStatistics from "../../../hooks/useStatistics";
 import { useEffect } from "react";
 import AppError from "../../molecules/AppError/AppError";
@@ -35,7 +35,7 @@ const SaleProducts = () => {
           {discountedProducts.map((product) => {
             return (
               <div key={String(product.id)}>
-                <Product product={product} />
+                <ProductTile product={product} />
               </div>
             );
           })}{" "}

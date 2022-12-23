@@ -23,7 +23,17 @@ const mockedOrderProduct: ICartProduct = {
 };
 
 describe("OrderProduct", () => {
-  beforeEach(() => {});
+  it("should render the component", () => {
+    const { container } = render(
+      <Router>
+        <OrderProduct orderProduct={mockedOrderProduct} />
+      </Router>
+    );
+
+    const component = container.querySelector("#order-product") as Element;
+
+    expect(component).toBeInTheDocument();
+  });
 
   it("should render the product image", () => {
     const { container } = render(
@@ -32,7 +42,7 @@ describe("OrderProduct", () => {
       </Router>
     );
 
-    const image = screen.getByRole("img");
+    const image = screen.getByRole("img") as Element;
 
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute("src", "HTTPS://IMAGE_URL.JPG");
@@ -45,7 +55,7 @@ describe("OrderProduct", () => {
       </Router>
     );
 
-    const name = container.querySelectorAll(".text")[0];
+    const name = container.querySelectorAll(".text")[0] as Element;
 
     expect(name).toBeInTheDocument();
     expect(name).toHaveTextContent("ORDER_PRODUCT_NAME");
@@ -61,7 +71,7 @@ describe("OrderProduct", () => {
       </Router>
     );
 
-    const name = container.querySelectorAll(".text")[0];
+    const name = container.querySelectorAll(".text")[0] as Element;
 
     expect(name).toBeInTheDocument();
     expect(name).toHaveTextContent("ORDER_PRODUCT_NAME_MORE_THAN_T...");
@@ -74,7 +84,7 @@ describe("OrderProduct", () => {
       </Router>
     );
 
-    const color = container.querySelectorAll(".text")[1];
+    const color = container.querySelectorAll(".text")[1] as Element;
 
     expect(color).toBeInTheDocument();
     expect(color).toHaveTextContent("ORDER_PRODUCT_COLOR");
@@ -87,7 +97,7 @@ describe("OrderProduct", () => {
       </Router>
     );
 
-    const price = container.querySelectorAll(".text")[2];
+    const price = container.querySelectorAll(".text")[2] as Element;
 
     expect(price).toBeInTheDocument();
     expect(price).toHaveTextContent("£12.34");
@@ -101,7 +111,7 @@ describe("OrderProduct", () => {
       </Router>
     );
 
-    const discountedPrice = container.querySelectorAll(".text")[2];
+    const discountedPrice = container.querySelectorAll(".text")[2] as Element;
     const price = container.querySelectorAll(".text")[3];
 
     expect(discountedPrice).toBeInTheDocument();

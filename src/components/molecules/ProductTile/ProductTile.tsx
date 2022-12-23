@@ -1,4 +1,4 @@
-import "./product.scss";
+import "./product-tile.scss";
 import { IProduct } from "../../../types/IProduct";
 import React, { useContext } from "react";
 import useCart from "../../../hooks/useCart";
@@ -15,7 +15,7 @@ interface IProps {
   product: IProduct;
 }
 
-const Product: React.FC<IProps> = ({ product }) => {
+const ProductTile: React.FC<IProps> = ({ product }) => {
   const { isAuthenticated } = useContext(AuthContext);
   const { isLoading } = useContext(CartContext);
   const { addToCart } = useCart();
@@ -75,4 +75,4 @@ const Product: React.FC<IProps> = ({ product }) => {
     </div>
   );
 };
-export default Product;
+export default ProductTile;

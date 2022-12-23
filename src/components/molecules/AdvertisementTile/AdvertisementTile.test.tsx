@@ -20,13 +20,23 @@ const mockAdvertisement = {
 };
 
 describe("AdvertisementTile", () => {
+  it("should render the component", () => {
+    const { container } = render(
+      <Router>
+        <AdvertisementTile advertisement={mockAdvertisement} />
+      </Router>
+    );
+    const component = container.querySelector("#advertisement-tile") as Element;
+
+    expect(component).toBeInTheDocument();
+  });
+
   it("should render the advertisement title", () => {
     const { container } = render(
       <Router>
         <AdvertisementTile advertisement={mockAdvertisement} />
       </Router>
     );
-
     const title = container.querySelector(".subheading") as Element;
 
     expect(title).toBeInTheDocument();
@@ -39,7 +49,6 @@ describe("AdvertisementTile", () => {
         <AdvertisementTile advertisement={mockAdvertisement} />
       </Router>
     );
-
     const caption = container.querySelector(".text") as Element;
 
     expect(caption).toBeInTheDocument();
@@ -52,7 +61,6 @@ describe("AdvertisementTile", () => {
         <AdvertisementTile advertisement={mockAdvertisement} />
       </Router>
     );
-
     const button = container.querySelector('[type="button"]') as Element;
 
     expect(button).toBeInTheDocument();
@@ -65,7 +73,6 @@ describe("AdvertisementTile", () => {
         <AdvertisementTile advertisement={mockAdvertisement} />
       </Router>
     );
-
     const button = container.querySelector('[type="button"]') as Element;
 
     userEvent.click(button);

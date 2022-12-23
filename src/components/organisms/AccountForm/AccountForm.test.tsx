@@ -11,7 +11,6 @@ import { IUser } from "../../../types/IUser";
 import { Formik, FormikProps } from "formik";
 import { Guid } from "guid-typescript";
 import userEvent from "@testing-library/user-event";
-import { debug } from "jest-preview";
 
 const mockedOnSubmit = jest.fn();
 
@@ -35,7 +34,7 @@ function hasInputValue(e: TestElement, inputValue: string) {
 }
 
 describe("AccountForm", () => {
-  it("should render the account form", () => {
+  it("should render the component", () => {
     const { container } = render(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
@@ -44,12 +43,12 @@ describe("AccountForm", () => {
       </Formik>
     );
 
-    const form = container.querySelector("#account-form");
+    const component = container.querySelector("#account-form") as Element;
 
-    expect(form).toBeInTheDocument();
+    expect(component).toBeInTheDocument();
   });
 
-  it("should render the account form with pre populated user information", () => {
+  it("should render with pre populated user information", () => {
     const { container } = render(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
@@ -58,9 +57,9 @@ describe("AccountForm", () => {
       </Formik>
     );
 
-    const firstName = container.querySelector('[name="firstName"]');
-    const lastName = container.querySelector('[name="lastName"]');
-    const email = container.querySelector('[name="email"]');
+    const firstName = container.querySelector('[name="firstName"]') as Element;
+    const lastName = container.querySelector('[name="lastName"]') as Element;
+    const email = container.querySelector('[name="email"]') as Element;
 
     expect(firstName).toBeInTheDocument();
     expect(firstName).toHaveValue("USER_FIRST_NAME");
@@ -70,7 +69,7 @@ describe("AccountForm", () => {
     expect(email).toHaveValue("USER_EMAIL");
   });
 
-  it("should render the account form disabled if isEditing equals false", () => {
+  it("should render the inputs disabled if isEditing equals false", () => {
     const { container } = render(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
@@ -79,9 +78,9 @@ describe("AccountForm", () => {
       </Formik>
     );
 
-    const firstName = container.querySelector('[name="firstName"]');
-    const lastName = container.querySelector('[name="lastName"]');
-    const email = container.querySelector('[name="email"]');
+    const firstName = container.querySelector('[name="firstName"]') as Element;
+    const lastName = container.querySelector('[name="lastName"]') as Element;
+    const email = container.querySelector('[name="email"]') as Element;
 
     expect(firstName).toBeInTheDocument();
     expect(firstName).toBeDisabled();
@@ -91,7 +90,7 @@ describe("AccountForm", () => {
     expect(email).toBeDisabled();
   });
 
-  it("should enable the account form when the edit button is clicked", () => {
+  it("should enable the inputs when the edit button is clicked", () => {
     const { container } = render(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
@@ -101,9 +100,9 @@ describe("AccountForm", () => {
     );
 
     const editButton = container.querySelector('[type="button"]') as Element;
-    const firstName = container.querySelector('[name="firstName"]');
-    const lastName = container.querySelector('[name="lastName"]');
-    const email = container.querySelector('[name="email"]');
+    const firstName = container.querySelector('[name="firstName"]') as Element;
+    const lastName = container.querySelector('[name="lastName"]') as Element;
+    const email = container.querySelector('[name="email"]') as Element;
 
     userEvent.click(editButton);
 

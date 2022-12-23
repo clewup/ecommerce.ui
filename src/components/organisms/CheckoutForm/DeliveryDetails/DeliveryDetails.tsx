@@ -102,7 +102,7 @@ const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
           type={"button"}
           variant={"contained"}
           color={"success"}
-          disabled={!formik.isValid}
+          disabled={!formik.isValid || formik.errors > 0}
           onClick={() => setTabIndex(1)}
         >
           CONTINUE

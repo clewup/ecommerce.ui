@@ -4,6 +4,7 @@ import { IImage } from "../../../types/IImage";
 import { screen, render, fireEvent } from "@testing-library/react";
 import CartProduct from "./CartProduct";
 import { BrowserRouter as Router } from "react-router-dom";
+import useCart from "../../../hooks/useCart";
 
 const mockedCartProduct: ICartProduct = {
   id: Guid.create(),
@@ -22,15 +23,41 @@ const mockedCartProduct: ICartProduct = {
   discount: 0,
 };
 
+const mockedUseCart = {
+  getCart: jest.fn(),
+  addToCart: jest.fn(),
+  removeFromCart: jest.fn(),
+  error: null,
+};
+
+jest.mock("../../../hooks/useCart", () => {
+  return {
+    __esModule: true,
+    default: () => {
+      return mockedUseCart;
+    },
+  };
+});
+
 describe("CartProduct", () => {
+  it("should render the component", () => {
+    const { container } = render(
+      <Router>
+        <CartProduct cartProduct={mockedCartProduct} />
+      </Router>
+    );
+    const component = container.querySelector("#cart-product") as Element;
+
+    expect(component).toBeInTheDocument();
+  });
+
   it("should render the product image", () => {
     const { container } = render(
       <Router>
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
     );
-
-    const image = screen.getByRole("img");
+    const image = screen.getByRole("img") as Element;
 
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute("src", "HTTPS://IMAGE_URL.JPG");
@@ -42,8 +69,7 @@ describe("CartProduct", () => {
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
     );
-
-    const name = container.querySelectorAll(".text")[0];
+    const name = container.querySelectorAll(".text")[0] as Element;
 
     expect(name).toBeInTheDocument();
     expect(name).toHaveTextContent("CART_PRODUCT_NAME");
@@ -58,8 +84,7 @@ describe("CartProduct", () => {
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
     );
-
-    const name = container.querySelectorAll(".text")[0];
+    const name = container.querySelectorAll(".text")[0] as Element;
 
     expect(name).toBeInTheDocument();
     expect(name).toHaveTextContent("CART_PRODUCT_NAME_MORE_THAN_TH...");
@@ -71,8 +96,7 @@ describe("CartProduct", () => {
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
     );
-
-    const color = container.querySelectorAll(".text")[1];
+    const color = container.querySelectorAll(".text")[1] as Element;
 
     expect(color).toBeInTheDocument();
     expect(color).toHaveTextContent("CART_PRODUCT_COLOR");
@@ -84,8 +108,7 @@ describe("CartProduct", () => {
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
     );
-
-    const price = container.querySelectorAll(".text")[2];
+    const price = container.querySelectorAll(".text")[2] as Element;
 
     expect(price).toBeInTheDocument();
     expect(price).toHaveTextContent("£12.34");
@@ -93,14 +116,14 @@ describe("CartProduct", () => {
 
   it("should render the product discounted price if discounted", () => {
     mockedCartProduct.discount = 50;
+
     const { container } = render(
       <Router>
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
     );
-
-    const discountedPrice = container.querySelectorAll(".text")[2];
-    const price = container.querySelectorAll(".text")[3];
+    const discountedPrice = container.querySelectorAll(".text")[2] as Element;
+    const price = container.querySelectorAll(".text")[3] as Element;
 
     expect(discountedPrice).toBeInTheDocument();
     expect(price).toBeInTheDocument();
@@ -114,9 +137,25 @@ describe("CartProduct", () => {
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
     );
-
-    const button = container.querySelector(".cart-product-remove-btn");
+    const button = container.querySelector(
+      ".cart-product-remove-btn"
+    ) as Element;
 
     expect(button).toBeInTheDocument();
+  });
+
+  it("should remove the product from the cart on button click", () => {
+    const { container } = render(
+      <Router>
+        <CartProduct cartProduct={mockedCartProduct} />
+      </Router>
+    );
+    const button = container.querySelector(
+      ".cart-product-remove-btn"
+    ) as Element;
+
+    fireEvent.click(button);
+
+    expect(mockedUseCart.removeFromCart).toHaveBeenCalled();
   });
 });

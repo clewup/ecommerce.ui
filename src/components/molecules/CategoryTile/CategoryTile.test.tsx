@@ -12,6 +12,18 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("CategoryTile", () => {
+  it("should render the component", () => {
+    const { container } = render(
+      <Router>
+        <CategoryTile category={"CATEGORY"} />
+      </Router>
+    );
+
+    const component = container.querySelector("#category-tile") as Element;
+
+    expect(component).toBeInTheDocument();
+  });
+
   it("should render the category name", () => {
     const { container } = render(
       <Router>
@@ -19,7 +31,7 @@ describe("CategoryTile", () => {
       </Router>
     );
 
-    const name = container.querySelector(".subheading");
+    const name = container.querySelector(".subheading") as Element;
 
     expect(name).toBeInTheDocument();
     expect(name).toHaveTextContent("CATEGORY");

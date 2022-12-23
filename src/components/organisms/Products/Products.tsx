@@ -1,4 +1,4 @@
-import Product from "../../molecules/Product/Product";
+import ProductTile from "../../molecules/ProductTile/ProductTile";
 import "./products.scss";
 import { IProduct } from "../../../types/IProduct";
 import AppError from "../../molecules/AppError/AppError";
@@ -39,7 +39,7 @@ const Products: React.FC<IProps> = ({ products, isLoading, error }) => {
         {pagedProducts.map((product: IProduct) => {
           return (
             <div key={`product-${product.id}`}>
-              <Product product={product} />
+              <ProductTile product={product} />
             </div>
           );
         })}
