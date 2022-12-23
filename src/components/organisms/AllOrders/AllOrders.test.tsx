@@ -1,10 +1,10 @@
 import { render, waitFor } from "@testing-library/react";
-import AccountOrders from "./AccountOrders";
 import useOrder from "../../../hooks/useOrder";
 import { IOrder } from "../../../types/IOrder";
 import { Guid } from "guid-typescript";
 import { IImage } from "../../../types/IImage";
 import getAllOrders from "../../../api/GetAllOrders";
+import AllOrders from "./AllOrders";
 
 const mockedOrders: IOrder[] = [
   {
@@ -81,22 +81,22 @@ jest.mock("../../../hooks/useOrder", () => {
   };
 });
 
-describe("AccountOrders", () => {
+describe("AllOrders", () => {
   it("should render the component", () => {
-    const { container } = render(<AccountOrders />);
-    const component = container.querySelector("#account-orders") as Element;
+    const { container } = render(<AllOrders />);
+    const component = container.querySelector("#all-orders") as Element;
 
     expect(component).toBeInTheDocument();
   });
 
-  it("should fetch user orders", () => {
-    const { container } = render(<AccountOrders />);
+  it("should fetch all orders", () => {
+    const { container } = render(<AllOrders />);
 
-    expect(mockedUseOrder.getUserOrders).toHaveBeenCalled();
+    expect(mockedUseOrder.getAllOrders).toHaveBeenCalled();
   });
 
-  it("should render the user orders", () => {
-    const { container } = render(<AccountOrders />);
+  it("should render all user orders", () => {
+    const { container } = render(<AllOrders />);
     const orders = container.querySelector(".orders") as Element;
 
     expect(orders).toBeInTheDocument();
@@ -104,17 +104,17 @@ describe("AccountOrders", () => {
   });
 
   it("should render the order products", () => {
-    const { container } = render(<AccountOrders />);
+    const { container } = render(<AllOrders />);
     const orderProducts = container.querySelector(".order-products") as Element;
 
     expect(orderProducts).toBeInTheDocument();
     expect(orderProducts).toHaveTextContent("PRODUCT_NAME");
   });
 
-  it("should render nothing if no user orders", () => {
+  it("should render nothing if no orders", () => {
     mockedUseOrder.orders = [];
 
-    const { container } = render(<AccountOrders />);
+    const { container } = render(<AllOrders />);
     const orders = container.querySelector(".orders") as Element;
 
     expect(orders).toBeInTheDocument();
@@ -126,7 +126,7 @@ describe("AccountOrders", () => {
   it("should render the loader when loading", () => {
     mockedUseOrder.isLoading = true;
 
-    const { container } = render(<AccountOrders />);
+    const { container } = render(<AllOrders />);
     const loader = container.querySelector("#loader") as Element;
 
     expect(loader).toBeInTheDocument();

@@ -27,7 +27,7 @@ const AllOrders = () => {
         <div className={"orders"}>
           {orders.map((order) => {
             return (
-              <div className={`order order-${order.id}`}>
+              <div className={`order order-${order.id}`} key={String(order.id)}>
                 <div className={"order-info"}>
                   <Text className={"order-id"}>{String(order.id)}</Text>
                   <Text>{new Date(order.orderDate).toDateString()}</Text>
