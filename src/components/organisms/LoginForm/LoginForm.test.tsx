@@ -1,7 +1,6 @@
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Formik } from "formik";
-import userEvent from "@testing-library/user-event";
 import { initialLoginValues } from "../../../types/ILogin";
 import LoginForm from "./LoginForm";
 
@@ -37,19 +36,17 @@ describe("LoginForm", () => {
     const password = container.querySelector('[name="password"]') as Element;
     const button = container.querySelector('[type="submit"]') as Element;
 
-    act(() => {
-      waitFor(() =>
-        fireEvent.change(email, {
-          target: { value: "USER_EMAIL" },
-        })
-      );
-      waitFor(() =>
-        fireEvent.change(password, {
-          target: { value: "USER_PASSWORD" },
-        })
-      );
-      waitFor(() => userEvent.click(button));
-    });
+    waitFor(() =>
+      fireEvent.change(email, {
+        target: { value: "USER_EMAIL" },
+      })
+    );
+    waitFor(() =>
+      fireEvent.change(password, {
+        target: { value: "USER_PASSWORD" },
+      })
+    );
+    waitFor(() => fireEvent.click(button));
 
     waitFor(() => {
       expect(mockedOnSubmit).toHaveBeenCalled();

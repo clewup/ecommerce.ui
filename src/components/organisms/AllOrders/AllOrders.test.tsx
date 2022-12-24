@@ -34,10 +34,9 @@ describe("AllOrders", () => {
 
   it("should render all user orders", () => {
     const { container } = render(<AllOrders />);
-    const orders = container.querySelector(".orders") as Element;
+    const orders = container.querySelectorAll(".order");
 
-    expect(orders).toBeInTheDocument();
-    expect(orders).toHaveTextContent("831AAFCB-F559-4B5D-9F43-0A0389D653C8");
+    expect(orders).toHaveLength(3);
   });
 
   it("should render the order products", () => {

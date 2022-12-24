@@ -1,7 +1,6 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import CategoryTile from "./CategoryTile";
-import userEvent from "@testing-library/user-event";
 import React from "react";
 
 const mockedUsedNavigate = jest.fn();
@@ -48,7 +47,7 @@ describe("CategoryTile", () => {
 
     expect(tile).toBeInTheDocument();
 
-    userEvent.click(tile);
+    fireEvent.click(tile);
 
     expect(mockedUsedNavigate).toHaveBeenCalled();
     expect(mockedUsedNavigate).toHaveBeenCalledWith("store");

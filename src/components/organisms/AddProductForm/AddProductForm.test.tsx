@@ -2,7 +2,6 @@ import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { Formik } from "formik";
 import React from "react";
 import AddProductForm from "./AddProductForm";
-import userEvent from "@testing-library/user-event";
 import { mockedProductInitialValues } from "../../../data/mockData/productData";
 
 const mockedOnSubmit = jest.fn();
@@ -46,28 +45,26 @@ describe("AddProductForm", () => {
     const price = container.querySelector('[name="price"]') as Element;
     const discount = container.querySelector('[name="discount"]') as Element;
 
-    act(() => {
-      fireEvent.change(name, {
-        target: { value: "PRODUCT_NAME" },
-      });
-      fireEvent.change(description, {
-        target: { value: "PRODUCT_DESCRIPTION" },
-      });
-      fireEvent.change(color, {
-        target: { value: "PRODUCT_COLOR" },
-      });
-      fireEvent.change(stock, {
-        target: { value: 10 },
-      });
-      fireEvent.change(price, {
-        target: { value: 12.34 },
-      });
-      fireEvent.change(discount, {
-        target: { value: 23.45 },
-      });
+    fireEvent.change(name, {
+      target: { value: "PRODUCT_NAME" },
+    });
+    fireEvent.change(description, {
+      target: { value: "PRODUCT_DESCRIPTION" },
+    });
+    fireEvent.change(color, {
+      target: { value: "PRODUCT_COLOR" },
+    });
+    fireEvent.change(stock, {
+      target: { value: 10 },
+    });
+    fireEvent.change(price, {
+      target: { value: 12.34 },
+    });
+    fireEvent.change(discount, {
+      target: { value: 23.45 },
     });
 
-    userEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
     waitFor(() => {
       expect(mockedOnSubmit).toHaveBeenCalled();

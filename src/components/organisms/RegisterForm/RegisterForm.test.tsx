@@ -3,7 +3,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Formik } from "formik";
 import RegisterForm from "./RegisterForm";
 import { initialRegisterValues } from "../../../types/IRegister";
-import userEvent from "@testing-library/user-event";
 
 const mockedOnSubmit = jest.fn();
 
@@ -46,34 +45,32 @@ describe("RegisterForm", () => {
     ) as Element;
     const button = container.querySelector('[type="submit"]') as Element;
 
-    act(() => {
-      waitFor(() =>
-        fireEvent.change(firstName, {
-          target: { value: "USER_FIRST_NAME" },
-        })
-      );
-      waitFor(() =>
-        fireEvent.change(lastName, {
-          target: { value: "USER_LAST_NAME" },
-        })
-      );
-      waitFor(() =>
-        fireEvent.change(email, {
-          target: { value: "USER_EMAIL" },
-        })
-      );
-      waitFor(() =>
-        fireEvent.change(password, {
-          target: { value: "USER_PASSWORD" },
-        })
-      );
-      waitFor(() =>
-        fireEvent.change(confirmPassword, {
-          target: { value: "USER_PASSWORD" },
-        })
-      );
-      waitFor(() => userEvent.click(button));
-    });
+    waitFor(() =>
+      fireEvent.change(firstName, {
+        target: { value: "USER_FIRST_NAME" },
+      })
+    );
+    waitFor(() =>
+      fireEvent.change(lastName, {
+        target: { value: "USER_LAST_NAME" },
+      })
+    );
+    waitFor(() =>
+      fireEvent.change(email, {
+        target: { value: "USER_EMAIL" },
+      })
+    );
+    waitFor(() =>
+      fireEvent.change(password, {
+        target: { value: "USER_PASSWORD" },
+      })
+    );
+    waitFor(() =>
+      fireEvent.change(confirmPassword, {
+        target: { value: "USER_PASSWORD" },
+      })
+    );
+    waitFor(() => fireEvent.click(button));
 
     waitFor(() => {
       expect(mockedOnSubmit).toHaveBeenCalled();

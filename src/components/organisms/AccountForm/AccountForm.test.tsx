@@ -8,7 +8,6 @@ import {
 import React from "react";
 import AccountForm from "./AccountForm";
 import { Formik, FormikProps } from "formik";
-import userEvent from "@testing-library/user-event";
 import { mockedUser } from "data/mockData/userData";
 
 const mockedOnSubmit = jest.fn();
@@ -89,7 +88,7 @@ describe("AccountForm", () => {
     const lastName = container.querySelector('[name="lastName"]') as Element;
     const email = container.querySelector('[name="email"]') as Element;
 
-    userEvent.click(editButton);
+    fireEvent.click(editButton);
 
     expect(firstName).toBeInTheDocument();
     expect(firstName).toBeEnabled();
@@ -111,7 +110,7 @@ describe("AccountForm", () => {
     const editButton = container.querySelector('[type="button"]') as Element;
     const saveButton = container.querySelector('[type="submit"]') as Element;
 
-    userEvent.click(editButton);
+    fireEvent.click(editButton);
 
     expect(saveButton).toBeDisabled();
   });
@@ -129,14 +128,14 @@ describe("AccountForm", () => {
     const saveButton = container.querySelector('[type="submit"]') as Element;
     const firstName = container.querySelector('[name="firstName"]') as Element;
 
-    act(() => {
-      waitFor(() => userEvent.click(editButton));
-      waitFor(() =>
-        fireEvent.change(firstName, {
-          target: { value: "USER_FIRST_NAME_MORE" },
-        })
-      );
+    waitFor(() => {
+      fireEvent.click(editButton);
     });
+    waitFor(() =>
+      fireEvent.change(firstName, {
+        target: { value: "USER_FIRST_NAME_MORE" },
+      })
+    );
 
     expect(hasInputValue(firstName, "USER_FIRST_NAME_MORE")).toBe(true);
     expect(saveButton).toBeEnabled();
@@ -155,15 +154,13 @@ describe("AccountForm", () => {
     const saveButton = container.querySelector('[type="submit"]') as Element;
     const firstName = container.querySelector('[name="firstName"]') as Element;
 
-    act(() => {
-      waitFor(() => userEvent.click(editButton));
-      waitFor(() =>
-        fireEvent.change(firstName, {
-          target: { value: "USER_FIRST_NAME_MORE" },
-        })
-      );
-      waitFor(() => userEvent.click(saveButton));
-    });
+    waitFor(() => fireEvent.click(editButton));
+    waitFor(() =>
+      fireEvent.change(firstName, {
+        target: { value: "USER_FIRST_NAME_MORE" },
+      })
+    );
+    waitFor(() => fireEvent.click(saveButton));
 
     waitFor(() => {
       expect(mockedOnSubmit).toHaveBeenCalled();

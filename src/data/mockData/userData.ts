@@ -10,7 +10,7 @@ export const mockedUser: IUser = {
   id: Guid.parse("12345"),
   lastName: "USER_LAST_NAME",
   lineOne: "USER_LINE_ONE",
-  lineThree: "USER_LINE_TWO",
-  lineTwo: "USER_LINE_THREE",
+  lineThree: "USER_LINE_THREE",
+  lineTwo: "USER_LINE_TWO",
   postcode: "USER_POSTCODE",
 };
