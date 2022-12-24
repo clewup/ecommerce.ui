@@ -1,34 +1,11 @@
-import { ICartProduct } from "../../../types/IProduct";
-import { Guid } from "guid-typescript";
-import { IImage } from "../../../types/IImage";
 import { screen, render, fireEvent } from "@testing-library/react";
 import CartProduct from "./CartProduct";
 import { BrowserRouter as Router } from "react-router-dom";
-import useCart from "../../../hooks/useCart";
-
-const mockedCartProduct: ICartProduct = {
-  id: Guid.create(),
-  name: "CART_PRODUCT_NAME",
-  images: [
-    {
-      title: "IMAGE_TITLE",
-      description: "IMAGE_DESCRIPTION",
-      url: "HTTPS://IMAGE_URL.JPG",
-    },
-  ] as IImage[],
-  description: "CART_PRODUCT_DESCRIPTION",
-  category: "CART_PRODUCT_CATEGORY",
-  color: "CART_PRODUCT_COLOR",
-  price: 12.34,
-  discount: 0,
-};
-
-const mockedUseCart = {
-  getCart: jest.fn(),
-  addToCart: jest.fn(),
-  removeFromCart: jest.fn(),
-  error: null,
-};
+import {
+  mockedCartProduct,
+  mockedDiscountedCartProduct,
+} from "../../../data/mockData/cartProductData";
+import { mockedUseCart } from "../../../data/mockData/useCartData";
 
 jest.mock("../../../hooks/useCart", () => {
   return {
@@ -115,11 +92,9 @@ describe("CartProduct", () => {
   });
 
   it("should render the product discounted price if discounted", () => {
-    mockedCartProduct.discount = 50;
-
     const { container } = render(
       <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
+        <CartProduct cartProduct={mockedDiscountedCartProduct} />
       </Router>
     );
     const discountedPrice = container.querySelectorAll(".text")[2] as Element;

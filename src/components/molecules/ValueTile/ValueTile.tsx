@@ -3,19 +3,18 @@ import Text from "../../atoms/Text/Text";
 import { textSize } from "../../../enums/typography";
 import { Tooltip } from "@mui/material";
 import React from "react";
+import { IValue } from "../../../types/IValue";
 
 interface IProps {
-  icon: string;
-  text: string;
-  tooltip: string;
+  value: IValue;
 }
 
-const ValueTile: React.FC<IProps> = ({ icon, text, tooltip }) => {
+const ValueTile: React.FC<IProps> = ({ value }) => {
   return (
-    <Tooltip title={tooltip}>
+    <Tooltip title={value.tooltip}>
       <div id={"value-tile"}>
-        <img src={icon} alt={"icon"} />
-        <Text size={textSize.LARGE}>{text}</Text>
+        <img src={value.icon} alt={"icon"} />
+        <Text size={textSize.LARGE}>{value.text}</Text>
       </div>
     </Tooltip>
   );

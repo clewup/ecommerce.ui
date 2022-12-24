@@ -7,26 +7,11 @@ import {
 } from "@testing-library/react";
 import React from "react";
 import AccountForm from "./AccountForm";
-import { IUser } from "../../../types/IUser";
 import { Formik, FormikProps } from "formik";
-import { Guid } from "guid-typescript";
 import userEvent from "@testing-library/user-event";
+import { mockedUser } from "data/mockData/userData";
 
 const mockedOnSubmit = jest.fn();
-
-const mockedUser: IUser = {
-  city: "USER_CITY",
-  country: "USER_COUNTRY",
-  county: "USER_COUNTY",
-  email: "USER_EMAIL",
-  firstName: "USER_FIRST_NAME",
-  id: Guid.parse("12345"),
-  lastName: "USER_LAST_NAME",
-  lineOne: "USER_LINE_ONE",
-  lineThree: "USER_LINE_TWO",
-  lineTwo: "USER_LINE_THREE",
-  postcode: "USER_POSTCODE",
-};
 
 type TestElement = Document | Element | Window | Node;
 function hasInputValue(e: TestElement, inputValue: string) {

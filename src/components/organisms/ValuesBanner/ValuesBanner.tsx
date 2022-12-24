@@ -1,18 +1,14 @@
 import "./values-banner.scss";
 import ValueTile from "../../molecules/ValueTile/ValueTile";
-import { valuesData } from "../../../data/valuesData";
+import { valueData } from "../../../data/valueData";
 
 const ValuesBanner = () => {
   return (
     <div id={"values-banner"}>
-      {valuesData.map((value) => {
+      {valueData.map((value) => {
         return (
           <div key={value.text}>
-            <ValueTile
-              icon={value.icon}
-              text={value.text}
-              tooltip={value.tooltip}
-            />
+            <ValueTile value={value} />
           </div>
         );
       })}

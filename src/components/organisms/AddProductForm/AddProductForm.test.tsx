@@ -1,44 +1,36 @@
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { Formik } from "formik";
-import AccountForm from "../AccountForm/AccountForm";
 import React from "react";
 import AddProductForm from "./AddProductForm";
-import { IProduct } from "../../../types/IProduct";
-import { createGuid } from "../../../utils/CreateGuid";
 import userEvent from "@testing-library/user-event";
-
-const mockedInitialValues: IProduct = {
-  id: createGuid(),
-  name: "",
-  images: [],
-  description: "",
-  category: "",
-  color: "",
-  stock: 0,
-  price: 0,
-  discount: 0,
-};
+import { mockedProductInitialValues } from "../../../data/mockData/productData";
 
 const mockedOnSubmit = jest.fn();
 
 describe("AddProductForm", () => {
   it("should render the component", () => {
     const { container } = render(
-      <Formik initialValues={mockedInitialValues} onSubmit={mockedOnSubmit}>
+      <Formik
+        initialValues={mockedProductInitialValues}
+        onSubmit={mockedOnSubmit}
+      >
         {(formik) => {
           return <AddProductForm />;
         }}
       </Formik>
     );
 
-    const component = container.querySelector("#add-product -form") as Element;
+    const component = container.querySelector("#add-product-form") as Element;
 
     expect(component).toBeInTheDocument();
   });
 
   it("should submit the form on add product", () => {
     const { container } = render(
-      <Formik initialValues={mockedInitialValues} onSubmit={mockedOnSubmit}>
+      <Formik
+        initialValues={mockedProductInitialValues}
+        onSubmit={mockedOnSubmit}
+      >
         {(formik) => {
           return <AddProductForm />;
         }}

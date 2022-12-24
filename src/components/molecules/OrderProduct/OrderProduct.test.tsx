@@ -1,26 +1,10 @@
-import { ICartProduct } from "../../../types/IProduct";
-import { Guid } from "guid-typescript";
-import { IImage } from "../../../types/IImage";
 import { screen, render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import OrderProduct from "./OrderProduct";
-
-const mockedOrderProduct: ICartProduct = {
-  id: Guid.create(),
-  name: "ORDER_PRODUCT_NAME",
-  images: [
-    {
-      title: "IMAGE_TITLE",
-      description: "IMAGE_DESCRIPTION",
-      url: "HTTPS://IMAGE_URL.JPG",
-    },
-  ] as IImage[],
-  description: "ORDER_PRODUCT_DESCRIPTION",
-  category: "ORDER_PRODUCT_CATEGORY",
-  color: "ORDER_PRODUCT_COLOR",
-  price: 12.34,
-  discount: 0,
-};
+import {
+  mockedOrderProduct,
+  mockedDiscountedOrderProduct,
+} from "../../../data/mockData/orderProductData";
 
 describe("OrderProduct", () => {
   it("should render the component", () => {
@@ -104,10 +88,9 @@ describe("OrderProduct", () => {
   });
 
   it("should render the product discounted price if discounted", () => {
-    mockedOrderProduct.discount = 50;
     const { container } = render(
       <Router>
-        <OrderProduct orderProduct={mockedOrderProduct} />
+        <OrderProduct orderProduct={mockedDiscountedOrderProduct} />
       </Router>
     );
 

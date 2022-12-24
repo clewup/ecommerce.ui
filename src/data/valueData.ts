@@ -1,6 +1,6 @@
 import { IValue } from "../types/IValue";
 
-export const valuesData: IValue[] = [
+export const valueData: IValue[] = [
   {
     icon: "https://res.cloudinary.com/dliog6kq6/image/upload/v1671575492/ecommerce/british-pound-512_c7xh8y.png",
     text: "AFFORDABILITY",

@@ -1,75 +1,12 @@
 import { fireEvent, render } from "@testing-library/react";
 import CartProducts from "./CartProducts";
-import { IClaim } from "../../../types/IClaim";
 import { AuthContext } from "../../../contexts/Auth";
 import { CartContext } from "../../../contexts/Cart";
-import { Guid } from "guid-typescript";
-import { IImage } from "../../../types/IImage";
 import { BrowserRouter as Router } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
+import { mockedAuthContext } from "../../../data/mockData/authContextData";
+import { mockedCartContext } from "data/mockData/cartContextData";
+import { mockedUseCart } from "data/mockData/useCartData";
 
-const mockedAuthContext = {
-  isAuthenticated: true,
-  setAuthenticated: jest.fn(),
-  accessToken: "ACCESS_TOKEN",
-  setAccessToken: jest.fn(),
-  claims: [] as IClaim[],
-  setClaims: jest.fn(),
-  role: "ROLE",
-  setRole: jest.fn(),
-};
-
-const mockedCartContext = {
-  cart: {
-    id: Guid.create(),
-    userId: Guid.create(),
-    products: [
-      {
-        id: Guid.create(),
-        name: "PRODUCT_NAME",
-        images: [
-          {
-            title: "IMAGE_TITLE",
-            description: "IMAGE_DESCRIPTION",
-            url: "HTTPS://IMAGE_URL.JPG",
-          },
-        ] as IImage[],
-        description: "PRODUCT_DESCRIPTION",
-        category: "PRODUCT_CATEGORY",
-        color: "PRODUCT_COLOR",
-        price: 12.34,
-        discount: 0,
-      },
-      {
-        id: Guid.create(),
-        name: "PRODUCT_NAME",
-        images: [
-          {
-            title: "IMAGE_TITLE",
-            description: "IMAGE_DESCRIPTION",
-            url: "HTTPS://IMAGE_URL.JPG",
-          },
-        ] as IImage[],
-        description: "PRODUCT_DESCRIPTION",
-        category: "PRODUCT_CATEGORY",
-        color: "PRODUCT_COLOR",
-        price: 56.78,
-        discount: 0,
-      },
-    ],
-    total: 69.12,
-  },
-  setCart: jest.fn(),
-  isLoading: false,
-  setLoading: jest.fn(),
-};
-
-const mockedUseCart = {
-  getCart: jest.fn(),
-  addToCart: jest.fn(),
-  removeFromCart: jest.fn(),
-  error: null,
-};
 jest.mock("../../../hooks/useCart", () => {
   return {
     __esModule: true,
