@@ -1,14 +1,7 @@
 import { render } from "@testing-library/react";
 import AllOrders from "./AllOrders";
-import { mockedOrders } from "../../../data/mockData/orderData";
+import { mockedUseOrder } from "../../../data/mockData/useOrderData";
 
-const mockedUseOrder = {
-  orders: mockedOrders,
-  isLoading: false,
-  error: null,
-  getUserOrders: jest.fn(),
-  getAllOrders: jest.fn(),
-};
 jest.mock("../../../hooks/useOrder", () => {
   return {
     __esModule: true,

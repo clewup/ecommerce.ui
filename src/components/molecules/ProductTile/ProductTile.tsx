@@ -57,19 +57,21 @@ const ProductTile: React.FC<IProps> = ({ product }) => {
       </div>
       <div className={"product-actions"}>
         <Tooltip title={"Add to Cart"}>
-          <LoadingButton
-            color="success"
-            type={"button"}
-            variant={"contained"}
-            loading={isLoading}
-            disabled={product.stock === 0}
-            className={"add-to-cart-btn"}
-            onClick={() => {
-              !isAuthenticated ? navigate("/login") : addToCart(product);
-            }}
-          >
-            {product.stock !== 0 ? <AddToCartIcon /> : "OUT OF STOCK"}
-          </LoadingButton>
+          <span>
+            <LoadingButton
+              color="success"
+              type={"button"}
+              variant={"contained"}
+              loading={isLoading}
+              disabled={product.stock === 0}
+              className={"add-to-cart-btn"}
+              onClick={() => {
+                !isAuthenticated ? navigate("/login") : addToCart(product);
+              }}
+            >
+              {product.stock !== 0 ? <AddToCartIcon /> : "OUT OF STOCK"}
+            </LoadingButton>
+          </span>
         </Tooltip>
       </div>
     </div>
