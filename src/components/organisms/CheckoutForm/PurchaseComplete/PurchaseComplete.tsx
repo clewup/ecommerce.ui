@@ -27,7 +27,9 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
                 </div>
               );
             })}
-            <Text className={"order-total"}>£{order?.cart?.total}</Text>
+            <Text className={"order-total"}>
+              £{order?.cart?.total.toFixed(2)}
+            </Text>
           </div>
         </>
       )}

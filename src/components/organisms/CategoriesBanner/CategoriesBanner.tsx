@@ -11,7 +11,7 @@ const CategoriesBanner = () => {
       {categories?.map((category) => {
         return (
           <div key={category}>
-            <CategoryTile category={category} />;
+            <CategoryTile category={category} />
           </div>
         );
       })}
