@@ -16,7 +16,7 @@ jobs:
       - name: Run Unit Tests
         run: yarn test
       - name: Install Vercel CLI
-        run: npm install --global vercel@latest
+        run: yarn add --dev vercel
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
