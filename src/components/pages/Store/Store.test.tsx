@@ -31,6 +31,17 @@ describe("Store", () => {
     expect(component).toBeInTheDocument();
   });
 
+  it("should render the products", () => {
+    const { container } = render(
+      <Router>
+        <Store />
+      </Router>
+    );
+    const products = container.querySelector("#products") as Element;
+
+    expect(products).toBeInTheDocument();
+  });
+
   it("should render the filter button", () => {
     const { container } = render(
       <Router>
@@ -66,16 +77,5 @@ describe("Store", () => {
     const results = container.querySelectorAll(".text")[0] as Element;
 
     expect(results).toHaveTextContent("Showing 3 results.");
-  });
-
-  it("should render the products", () => {
-    const { container } = render(
-      <Router>
-        <Store />
-      </Router>
-    );
-    const products = container.querySelector("#products") as Element;
-
-    expect(products).toBeInTheDocument();
   });
 });
