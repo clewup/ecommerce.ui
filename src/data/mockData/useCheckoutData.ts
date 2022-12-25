@@ -16,7 +16,7 @@ export const mockedUseCheckout = {
 export const mockedUseCheckoutNoOrder = {
   initialValues: mockedCheckoutInitialValues,
   submitCheckout: jest.fn(),
-  order: [],
+  order: {},
   isLoading: false,
   error: null,
   validationSchema: {},
@@ -25,7 +25,7 @@ export const mockedUseCheckoutNoOrder = {
 export const mockedUseCheckoutLoading = {
   initialValues: mockedCheckoutInitialValues,
   submitCheckout: jest.fn(),
-  order: [],
+  order: {},
   isLoading: true,
   error: null,
   validationSchema: {},
@@ -34,7 +34,7 @@ export const mockedUseCheckoutLoading = {
 export const mockedUseCheckoutError = {
   initialValues: mockedCheckoutInitialValues,
   submitCheckout: jest.fn(),
-  order: [],
+  order: {},
   isLoading: false,
   error: {
     code: "ERROR_CODE",

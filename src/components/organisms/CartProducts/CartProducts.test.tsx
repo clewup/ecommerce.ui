@@ -16,11 +16,11 @@ jest.mock("../../../hooks/useCart", () => {
   };
 });
 
-const mockedUsedNavigate = jest.fn();
+const mockedUseNavigate = jest.fn();
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
-  useNavigate: () => mockedUsedNavigate,
+  useNavigate: () => mockedUseNavigate,
 }));
 
 describe("CartProducts", () => {
@@ -120,7 +120,7 @@ describe("CartProducts", () => {
 
     fireEvent.click(button);
 
-    expect(mockedUsedNavigate).toHaveBeenCalled();
-    expect(mockedUsedNavigate).toHaveBeenCalledWith("/checkout");
+    expect(mockedUseNavigate).toHaveBeenCalled();
+    expect(mockedUseNavigate).toHaveBeenCalledWith("/checkout");
   });
 });

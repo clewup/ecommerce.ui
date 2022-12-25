@@ -3,11 +3,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import CategoryTile from "./CategoryTile";
 import React from "react";
 
-const mockedUsedNavigate = jest.fn();
+const mockedUseNavigate = jest.fn();
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
-  useNavigate: () => mockedUsedNavigate,
+  useNavigate: () => mockedUseNavigate,
 }));
 
 describe("CategoryTile", () => {
@@ -49,7 +49,7 @@ describe("CategoryTile", () => {
 
     fireEvent.click(tile);
 
-    expect(mockedUsedNavigate).toHaveBeenCalled();
-    expect(mockedUsedNavigate).toHaveBeenCalledWith("store");
+    expect(mockedUseNavigate).toHaveBeenCalled();
+    expect(mockedUseNavigate).toHaveBeenCalledWith("store");
   });
 });

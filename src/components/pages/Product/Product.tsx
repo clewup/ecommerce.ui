@@ -54,7 +54,7 @@ const Product = () => {
                 autoPlay={false}
               >
                 {product.images.map((image) => (
-                  <img src={image.url!} alt={image.title} />
+                  <img src={image.url!} alt={image.title} key={image.url} />
                 ))}
               </Carousel>
             </div>
@@ -100,6 +100,7 @@ const Product = () => {
                   variant={"contained"}
                   loading={isCartLoading}
                   disabled={product.stock === 0}
+                  className={"add-to-cart-btn"}
                   onClick={() => {
                     !isAuthenticated ? navigate("/login") : addToCart(product);
                   }}

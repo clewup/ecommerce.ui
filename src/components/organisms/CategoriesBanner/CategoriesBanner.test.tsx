@@ -4,11 +4,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ProductContext } from "../../../contexts/Product";
 import { mockedProductContext } from "../../../data/mockData/productContextData";
 
-const mockedUsedNavigate = jest.fn();
+const mockedUseNavigate = jest.fn();
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
-  useNavigate: () => mockedUsedNavigate,
+  useNavigate: () => mockedUseNavigate,
 }));
 
 describe("CategoriesBanner", () => {

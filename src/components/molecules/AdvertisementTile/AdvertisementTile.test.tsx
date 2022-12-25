@@ -5,17 +5,17 @@ import AdvertisementTile from "./AdvertisementTile";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
-  useNavigate: () => mockedUsedNavigate,
+  useNavigate: () => mockedUseNavigate,
 }));
 
-const mockedUsedNavigate = jest.fn();
+const mockedUseNavigate = jest.fn();
 
 const mockAdvertisement = {
   title: "ADVERTISEMENT_TITLE",
   caption: "ADVERTISEMENT_CAPTION",
   image: "ADVERTISEMENT_IMAGE",
   buttonText: "ADVERTISEMENT_BUTTON_TEXT",
-  onClick: () => mockedUsedNavigate("store"),
+  onClick: () => mockedUseNavigate("store"),
 };
 
 describe("AdvertisementTile", () => {
@@ -76,7 +76,7 @@ describe("AdvertisementTile", () => {
 
     fireEvent.click(button);
 
-    expect(mockedUsedNavigate).toHaveBeenCalled();
-    expect(mockedUsedNavigate).toHaveBeenCalledWith("store");
+    expect(mockedUseNavigate).toHaveBeenCalled();
+    expect(mockedUseNavigate).toHaveBeenCalledWith("store");
   });
 });
