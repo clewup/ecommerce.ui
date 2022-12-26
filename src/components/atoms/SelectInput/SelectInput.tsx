@@ -2,14 +2,18 @@ import { FieldAttributes } from "formik";
 import { InputLabel, MenuItem, Select } from "@mui/material";
 import React from "react";
 
+export interface ISelectOption {
+  value: string;
+  label: string;
+}
+
 interface IProps {
   field?: FieldAttributes<any>;
   label?: string;
   disabled?: boolean;
   value?: unknown;
   onChange?: (e: any) => void;
-  options: any;
-  showAll?: boolean;
+  options: ISelectOption[];
   width?: string;
 }
 
@@ -20,7 +24,6 @@ const SelectInput: React.FC<IProps> = ({
   value,
   onChange,
   options,
-  showAll,
   width,
 }) => {
   return (
@@ -39,11 +42,15 @@ const SelectInput: React.FC<IProps> = ({
           width: width ?? "100%",
         }}
       >
-        {showAll && <MenuItem value={"all"}>All</MenuItem>}
-        {options?.map((option: string) => {
+        <MenuItem value={"select"}>Select</MenuItem>
+        {options?.map((option: ISelectOption) => {
           return (
-            <MenuItem key={option} value={option}>
-              {option}
+            <MenuItem
+              key={option.value}
+              value={option.value}
+              data-testid="select-option"
+            >
+              {option.label}
             </MenuItem>
           );
         })}

@@ -5,9 +5,11 @@ import useProductFilter from "../../../hooks/useProductFilter";
 import Input from "../../atoms/Input/Input";
 import SelectInput from "../../atoms/SelectInput/SelectInput";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
-import { InputLabel, MenuItem, Select, Slider } from "@mui/material";
+import { InputLabel, Slider } from "@mui/material";
 import AppError from "../AppError/AppError";
 import { queryDefaultValues } from "../../../enums/defaultValues";
+import { formatSelectOptions } from "../../../utils/formatSelectOptions";
+import { sortByOptions } from "../../../data/sortByData";
 
 interface IProps {
   toggleDrawer: (isOpen: boolean) => void;
@@ -75,28 +77,17 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
         onChange={(e) => _setSearchQuery(e.target.value)}
         onKeyDown={(e) => handleSearch(e)}
       />
-      <InputLabel>Sort By</InputLabel>
-      <Select
+      <SelectInput
+        label={"Sort By"}
         value={sortByQuery}
         onChange={(e) => setSortByQuery(e.target.value)}
-        sx={{
-          marginTop: 1,
-          marginBottom: 1,
-          backgroundColor: "white",
-          textAlign: "center",
-          width: "100%",
-        }}
-      >
-        <MenuItem value={"any"}>Any</MenuItem>
-        <MenuItem value={"price asc"}>£ Low-High</MenuItem>
-        <MenuItem value={"price desc"}>£ High-Low</MenuItem>
-      </Select>
+        options={sortByOptions}
+      />
       <SelectInput
         label={"Category"}
         value={categoryQuery}
         onChange={(e) => setCategoryQuery(e.target.value)}
-        options={categories}
-        showAll={true}
+        options={formatSelectOptions({ options: categories })}
       />
       <InputLabel>Price</InputLabel>
       <Slider

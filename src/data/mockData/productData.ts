@@ -1,7 +1,6 @@
 import { IProduct } from "../../types/IProduct";
 import { Guid } from "guid-typescript";
 import { IImage } from "../../types/IImage";
-import { createGuid } from "../../utils/CreateGuid";
 
 export const mockedProduct: IProduct = {
   id: Guid.create(),
@@ -47,7 +46,7 @@ export const mockedOutOfStockProduct: IProduct = {
 };
 
 export const mockedProductInitialValues: IProduct = {
-  id: createGuid(),
+  id: Guid.create(),
   name: "",
   images: [],
   description: "",

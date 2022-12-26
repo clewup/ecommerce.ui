@@ -45,7 +45,7 @@ const useProductFilter = (): IUseProductFilterProps => {
     if (searchQuery) {
       formattedQuery = `&SearchTerm=${searchQuery}`;
     }
-    if (categoryQuery && categoryQuery !== "all") {
+    if (categoryQuery && categoryQuery !== "select") {
       formattedQuery = formattedQuery.concat(`&Category=${categoryQuery}`);
     }
     if (priceQuery) {
@@ -59,7 +59,7 @@ const useProductFilter = (): IUseProductFilterProps => {
     if (stockQuery) {
       formattedQuery = formattedQuery.concat(`&InStock=${stockQuery}`);
     }
-    if (sortByQuery && sortByQuery !== "any") {
+    if (sortByQuery && sortByQuery !== "select") {
       const values = sortByQuery.split(" ");
       formattedQuery = formattedQuery.concat(
         `&SortBy=${values[0]}&SortVariation=${values[1]}`

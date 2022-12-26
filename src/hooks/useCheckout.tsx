@@ -5,8 +5,8 @@ import postOrder from "../api/PostOrder";
 import { AxiosError } from "axios";
 import { CartContext } from "../contexts/Cart";
 import * as Yup from "yup";
-import { createGuid } from "../utils/CreateGuid";
 import { ICart } from "../types/ICart";
+import { Guid } from "guid-typescript";
 
 interface IUseCheckoutProps {
   initialValues: ICheckoutFormValues;
@@ -61,7 +61,7 @@ const useCheckout = (): IUseCheckoutProps => {
 
   const submitCheckout = (values: ICheckoutFormValues) => {
     const order: IOrder = {
-      id: createGuid(),
+      id: Guid.create(),
       userId: user?.id!,
       firstName: values.firstName,
       lastName: values.lastName,
