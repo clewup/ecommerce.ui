@@ -1,6 +1,5 @@
 import "./advertisements-banner.scss";
 import AdvertisementTile from "../../molecules/AdvertisementTile/AdvertisementTile";
-import { useNavigate } from "react-router-dom";
 import { advertisementData } from "../../../data/advertisementData";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -17,7 +16,11 @@ const AdvertisementsBanner = () => {
         showThumbs={false}
       >
         {advertisementData.map((advertisement) => {
-          return <AdvertisementTile advertisement={advertisement} />;
+          return (
+            <div key={advertisement.title}>
+              <AdvertisementTile advertisement={advertisement} />
+            </div>
+          );
         })}
       </Carousel>
     </div>

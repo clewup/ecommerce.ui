@@ -5,7 +5,7 @@ export const advertisementData: IAdvertisement[] = [
     title: "BORN TO SKI",
     caption: "Essentials available for beginners and professionals.",
     image:
-      "https://res.cloudinary.com/dliog6kq6/image/upload/v1671403988/ecommerce/photo-1551698618-1dfe5d97d256_py7nts.png",
+      "https://res.cloudinary.com/dliog6kq6/image/upload/v1672092548/ecommerce/hendrik-morkel-ySQF5oENkrw-unsplash_ruruxg.jpg",
   },
   {
     title: "LIVE TO EXPLORE",
@@ -19,6 +19,6 @@ export const advertisementData: IAdvertisement[] = [
     caption: "Hit the slopes in style with the latest products of 2022.",
     captionColor: "#FFFFFF",
     image:
-      "https://res.cloudinary.com/dliog6kq6/image/upload/v1671407440/ecommerce/nicolai-berntsen-OyP-8El8vWk-unsplash_pjzbfz.jpg",
+      "https://res.cloudinary.com/dliog6kq6/image/upload/v1672092451/ecommerce/glade-optics-ttGLlNElbCc-unsplash_rwelgv.jpg",
   },
 ];
