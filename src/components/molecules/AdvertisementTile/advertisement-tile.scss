@@ -1,19 +1,21 @@
+@import '/src/styles/colors';
+
 #advertisement-tile {
-  height: 280px;
-  width: 33%;
+  height: 400px;
   display: flex;
-  gap: 2rem;
-  justify-content: space-around;
+  justify-content: right;
 
-  .advertisement-tile-text {
-    width: 50%;
+
+  .advertisement-information {
+    margin: 1rem;
+    width: 30%;
     padding: 1rem;
-  }
-
-  .advertisement-tile-actions {
-    width: 50%;
     display: flex;
-    align-items: flex-end;
-    padding: 1rem;
+    flex-direction: column;
+    text-transform: uppercase;
+
+    .discover-btn {
+      margin-top: 2rem;
+    }
   }
 }

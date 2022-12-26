@@ -1,0 +1,14 @@
+@import '/src/styles/colors';
+
+#range-tile {
+  height: 300px;
+  width: 420px;
+  display: flex;
+  justify-content: right;
+  align-items: flex-end;
+  background-color: $branding-darkgrey;
+
+  .range-tile-text {
+    padding: 2rem;
+  }
+}

@@ -1,8 +1,9 @@
 @import '/src/styles/colors';
+@import '/src/styles/borders';
 
 #product-tile {
   width: 270px;
-  border: 0.2rem solid $branding-darkgrey;
+  border: $border-light;
   text-align: center;
   padding: 1rem;
   background-color: white;

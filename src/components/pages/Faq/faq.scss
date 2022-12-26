@@ -1,8 +1,9 @@
 @import '/src/styles/colors';
+@import '/src/styles/borders';
 
 #faq {
   .faq-banner {
-    border: 0.2rem solid $branding-darkgrey;
+    border: $border-dark;
     height: 20vh;
     display: flex;
     justify-content: center;

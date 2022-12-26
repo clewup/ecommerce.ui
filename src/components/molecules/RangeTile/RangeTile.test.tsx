@@ -1,8 +1,8 @@
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import AdvertisementTile from "./AdvertisementTile";
-import { IAdvertisement } from "../../../types/IAdvertisement";
+import RangeTile from "./RangeTile";
+import { IRange } from "../../../types/IRange";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
@@ -11,52 +11,39 @@ jest.mock("react-router-dom", () => ({
 
 const mockedUseNavigate = jest.fn();
 
-const mockAdvertisement: IAdvertisement = {
-  title: "ADVERTISEMENT_TITLE",
-  caption: "ADVERTISEMENT_CAPTION",
-  image: "ADVERTISEMENT_IMAGE",
+const mockedRange: IRange = {
+  name: "RANGE_NAME",
+  image: "RANGE_IMAGE",
 };
 
-describe("AdvertisementTile", () => {
+describe("RangeTile", () => {
   it("should render the component", () => {
     const { container } = render(
       <Router>
-        <AdvertisementTile advertisement={mockAdvertisement} />
+        <RangeTile range={mockedRange} />
       </Router>
     );
-    const component = container.querySelector("#advertisement-tile") as Element;
+    const component = container.querySelector("#range-tile") as Element;
 
     expect(component).toBeInTheDocument();
   });
 
-  it("should render the advertisement title", () => {
+  it("should render the range name", () => {
     const { container } = render(
       <Router>
-        <AdvertisementTile advertisement={mockAdvertisement} />
+        <RangeTile range={mockedRange} />
       </Router>
     );
-    const title = container.querySelector(".subheading") as Element;
+    const name = container.querySelector(".subheading") as Element;
 
-    expect(title).toBeInTheDocument();
-    expect(title).toHaveTextContent("ADVERTISEMENT_TITLE");
-  });
-
-  it("should render the advertisement caption", () => {
-    const { container } = render(
-      <Router>
-        <AdvertisementTile advertisement={mockAdvertisement} />
-      </Router>
-    );
-    const caption = container.querySelector(".text") as Element;
-
-    expect(caption).toBeInTheDocument();
-    expect(caption).toHaveTextContent("ADVERTISEMENT_CAPTION");
+    expect(name).toBeInTheDocument();
+    expect(name).toHaveTextContent("RANGE_NAME");
   });
 
   it("should render the discover button", () => {
     const { container } = render(
       <Router>
-        <AdvertisementTile advertisement={mockAdvertisement} />
+        <RangeTile range={mockedRange} />
       </Router>
     );
     const button = container.querySelector('[type="button"]') as Element;
@@ -68,7 +55,7 @@ describe("AdvertisementTile", () => {
   it("should navigate to the store on button click", () => {
     const { container } = render(
       <Router>
-        <AdvertisementTile advertisement={mockAdvertisement} />
+        <RangeTile range={mockedRange} />
       </Router>
     );
     const button = container.querySelector('[type="button"]') as Element;

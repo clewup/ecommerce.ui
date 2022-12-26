@@ -20,22 +20,21 @@ describe("ValueTile", () => {
     expect(name).toBeInTheDocument();
   });
 
-  it("should render the value name", () => {
+  it("should render the value heading", () => {
     const { container } = render(<ValueTile value={mockedValue} />);
 
-    const name = container.querySelector(".text") as Element;
+    const heading = container.querySelectorAll(".text")[0] as Element;
 
-    expect(name).toBeInTheDocument();
-    expect(name).toHaveTextContent("VALUE_TEXT");
+    expect(heading).toBeInTheDocument();
+    expect(heading).toHaveTextContent("VALUE_HEADING");
   });
 
-  it("should render the value tooltip", () => {
+  it("should render the value text", () => {
     const { container } = render(<ValueTile value={mockedValue} />);
 
-    const name = container.querySelector(
-      '[aria-label="VALUE_TOOLTIP"]'
-    ) as Element;
+    const text = container.querySelectorAll(".text")[1] as Element;
 
-    expect(name).toBeInTheDocument();
+    expect(text).toBeInTheDocument();
+    expect(text).toHaveTextContent("VALUE_TEXT");
   });
 });

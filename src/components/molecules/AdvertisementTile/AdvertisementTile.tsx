@@ -4,13 +4,19 @@ import { Button } from "@mui/material";
 import Subheading from "../../atoms/Subheading/Subheading";
 import { IAdvertisement } from "../../../types/IAdvertisement";
 import React from "react";
-import { textSize } from "../../../enums/typography";
+import {
+  fontPadding,
+  subheadingSize,
+  textSize,
+} from "../../../enums/typography";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
   advertisement: IAdvertisement;
 }
 
 const AdvertisementTile: React.FC<IProps> = ({ advertisement }) => {
+  const navigate = useNavigate();
   return (
     <div
       id={"advertisement-tile"}
@@ -20,23 +26,26 @@ const AdvertisementTile: React.FC<IProps> = ({ advertisement }) => {
         backgroundPosition: "center",
       }}
     >
-      <div className={"advertisement-tile-text"}>
-        <Subheading color={advertisement.titleColor}>
+      <div className={"advertisement-information"}>
+        <Subheading
+          color={advertisement.titleColor}
+          size={subheadingSize.LARGE}
+          padding={fontPadding.NONE}
+        >
           {advertisement.title}
         </Subheading>
         <Text size={textSize.LARGE} color={advertisement.captionColor}>
           {advertisement.caption}
         </Text>
-      </div>
-      <div className={"advertisement-tile-actions"}>
         <Button
-          onClick={advertisement.onClick}
+          onClick={() => navigate("store")}
           size={"large"}
           type={"button"}
           variant={"contained"}
           color={"info"}
+          className={"discover-btn"}
         >
-          {advertisement.buttonText}
+          DISCOVER
         </Button>
       </div>
     </div>
