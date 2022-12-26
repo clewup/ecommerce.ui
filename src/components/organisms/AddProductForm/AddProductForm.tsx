@@ -96,6 +96,7 @@ const AddProductForm = () => {
                     indicators={false}
                     autoPlay={false}
                     height={"310px"}
+                    className={"carousel"}
                     sx={{
                       backgroundColor: "white",
                     }}

@@ -6,6 +6,10 @@ import {
   LocalPhone as PhoneIcon,
   LocalShipping as ShippingIcon,
   Landscape as EcommerceIcon,
+  AccountCircleOutlined as AccountIcon,
+  VpnKeyOutlined as RegisterIcon,
+  ShoppingCartOutlined as CartIcon,
+  AdminPanelSettingsOutlined as AdminIcon,
 } from "@mui/icons-material";
 import { roles } from "../../../enums/roles";
 import StoreDropdown from "./StoreDropdown/StoreDropdown";
@@ -23,23 +27,6 @@ const Header = () => {
           <Text>Ecommerce</Text>
         </div>
         <div className={"header-content"}>
-          <div className={"header-actions"}>
-            <span>
-              {isAuthenticated ? (
-                <Text onClick={() => navigate("account")}>ACCOUNT</Text>
-              ) : (
-                <>
-                  <Text onClick={() => navigate("login")}>LOGIN</Text>
-                  <Text onClick={() => navigate("register")}>REGISTER</Text>
-                </>
-              )}
-              {role &&
-                (role === roles.DEVELOPER || role === roles.EMPLOYEE) && (
-                  <Text onClick={() => navigate("admin")}>ADMIN</Text>
-                )}
-              <Text onClick={() => navigate("cart")}>CART</Text>
-            </span>
-          </div>
           <div className={"header-information"}>
             <div className={"header-shipping"}>
               <ShippingIcon />
@@ -54,6 +41,47 @@ const Header = () => {
                 <Text>UK +12 345678910</Text>
                 <Text>EU +10 987654321</Text>
               </div>
+            </div>
+          </div>
+          <div className={"header-actions"}>
+            {isAuthenticated ? (
+              <div
+                className={"header-action"}
+                onClick={() => navigate("account")}
+              >
+                <AccountIcon />
+                <Text>ACCOUNT</Text>
+              </div>
+            ) : (
+              <>
+                <div
+                  className={"header-action"}
+                  onClick={() => navigate("login")}
+                >
+                  <AccountIcon />
+                  <Text>LOGIN</Text>
+                </div>
+                <div
+                  className={"header-action"}
+                  onClick={() => navigate("register")}
+                >
+                  <RegisterIcon />
+                  <Text>REGISTER</Text>
+                </div>
+              </>
+            )}
+            {role && (role === roles.DEVELOPER || role === roles.EMPLOYEE) && (
+              <div
+                className={"header-action"}
+                onClick={() => navigate("admin")}
+              >
+                <AdminIcon />
+                <Text>ADMIN</Text>
+              </div>
+            )}
+            <div className={"header-action"} onClick={() => navigate("cart")}>
+              <CartIcon />
+              <Text>CART</Text>
             </div>
           </div>
         </div>

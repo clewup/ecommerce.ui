@@ -32,11 +32,11 @@ const OrderProduct: React.FC<IProps> = ({ orderProduct }) => {
               ).toFixed(2)}
             </Text>
             <Text className={"discounted-price-total"}>
-              £{orderProduct.price}
+              £{orderProduct.price.toFixed(2)}
             </Text>
           </div>
         ) : (
-          <Text>£{orderProduct.price}</Text>
+          <Text>£{orderProduct.price.toFixed(2)}</Text>
         )}
       </div>
     </div>
