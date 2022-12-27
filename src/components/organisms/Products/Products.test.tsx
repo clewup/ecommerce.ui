@@ -2,6 +2,7 @@ import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Products from "./Products";
 import { mockedProducts } from "../../../data/mockData/productData";
+import { mockedError } from "../../../data/mockData/errorData";
 
 describe("products", () => {
   it("should render the component", () => {
@@ -26,14 +27,25 @@ describe("products", () => {
     expect(products).toHaveLength(3);
   });
 
-  it("should render the loader if loading", () => {
+  it("should render the loader when loading", () => {
     const { container } = render(
       <Router>
-        <Products products={mockedProducts} isLoading={true} error={null} />
+        <Products products={[]} isLoading={true} error={null} />
       </Router>
     );
     const loader = container.querySelector("#loader") as Element;
 
     expect(loader).toBeInTheDocument();
+  });
+
+  it("should render the app error when there is an error", () => {
+    const { container } = render(
+      <Router>
+        <Products products={[]} isLoading={false} error={mockedError} />
+      </Router>
+    );
+    const appError = container.querySelector("#app-error") as Element;
+
+    expect(appError).toBeInTheDocument();
   });
 });

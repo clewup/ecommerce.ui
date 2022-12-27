@@ -1,13 +1,7 @@
-import {
-  render,
-  act,
-  screen,
-  fireEvent,
-  waitFor,
-} from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
 import AccountForm from "./AccountForm";
-import { Formik, FormikProps } from "formik";
+import { Formik } from "formik";
 import { mockedUser } from "data/mockData/userData";
 
 const mockedOnSubmit = jest.fn();

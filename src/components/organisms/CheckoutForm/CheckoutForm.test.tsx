@@ -1,11 +1,8 @@
 import { fireEvent, render } from "@testing-library/react";
 import CheckoutForm from "./CheckoutForm";
 import { mockedUseCheckout } from "../../../data/mockData/useCheckoutData";
-import { BrowserRouter as Router } from "react-router-dom";
-import { AuthContext } from "../../../contexts/Auth";
-import { mockedAuthContext } from "../../../data/mockData/authContextData";
-import Account from "../../pages/Account/Account";
 import React from "react";
+import { mockedError } from "../../../data/mockData/errorData";
 
 jest.mock("../../../hooks/useCheckout", () => {
   return {
@@ -43,5 +40,15 @@ describe("CheckoutForm", () => {
 
     expect(billingDetails).toBeInTheDocument();
     expect(deliveryDetails).not.toBeInTheDocument();
+  });
+
+  it("should render the app error when there is an error", () => {
+    // @ts-ignore
+    mockedUseCheckout.error = mockedError;
+    const { container } = render(<CheckoutForm />);
+
+    const appError = container.querySelector("#app-error") as Element;
+
+    expect(appError).toBeInTheDocument();
   });
 });

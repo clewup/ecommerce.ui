@@ -2,54 +2,30 @@
   .about-values {
     display: flex;
     .values-text {
-      width: 50%;
       padding: 4rem;
       display: flex;
       flex-direction: column;
       gap: 2rem;
-    }
-    .values-image {
-      width: 50%;
-      background-image: url("https://res.cloudinary.com/dliog6kq6/image/upload/v1671576213/ecommerce/photo-1659207802931-d26bb0a7fa10_c7ep6x.jpg");
-      background-position: center;
-      background-size: cover;
-      padding: 3rem;
     }
   }
 
   .about-story {
     display: flex;
     .story-text {
-      width: 70%;
       padding: 4rem;
       display: flex;
       flex-direction: column;
       gap: 2rem;
-    }
-    .story-image {
-      width: 30%;
-      background-image: url("https://res.cloudinary.com/dliog6kq6/image/upload/v1671491270/ecommerce/photoholgic-iFEvKX0LC2k-unsplash_pafelo.jpg");
-      background-position: center;
-      background-size: cover;
-      padding: 3rem;
     }
   }
 
   .about-sustainability {
     display: flex;
     .sustainability-text {
-      width: 70%;
       padding: 4rem;
       display: flex;
       flex-direction: column;
       gap: 2rem;
-    }
-    .sustainability-image {
-      width: 30%;
-      background-image: url("https://res.cloudinary.com/dliog6kq6/image/upload/v1671576887/ecommerce/gabriel-alenius-USXfF_ONUGo-unsplash_loo1jz.jpg");
-      background-position: center;
-      background-size: cover;
-      padding: 3rem;
     }
   }
 }

@@ -1,8 +1,16 @@
 @import '/src/styles/colors';
 
 #categories-banner {
-  display: flex;
-  gap: 2rem;
-  justify-content: space-between;
   padding-top: 2rem;
+
+  .categories {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+  .categories-banner-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

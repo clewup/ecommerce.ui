@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import AllOrders from "./AllOrders";
 import { mockedUseOrder } from "../../../data/mockData/useOrderData";
+import { mockedError } from "../../../data/mockData/errorData";
 
 jest.mock("../../../hooks/useOrder", () => {
   return {
@@ -40,16 +41,14 @@ describe("AllOrders", () => {
     expect(orderProducts).toHaveTextContent("PRODUCT_NAME");
   });
 
-  it("should render nothing if no orders", () => {
+  it("should render 'no orders found' if no user orders", () => {
     mockedUseOrder.orders = [];
 
     const { container } = render(<AllOrders />);
     const orders = container.querySelector(".orders") as Element;
 
     expect(orders).toBeInTheDocument();
-    expect(orders).not.toHaveTextContent(
-      "831AAFCB-F559-4B5D-9F43-0A0389D653C8"
-    );
+    expect(orders).toHaveTextContent("No orders found.");
   });
 
   it("should render the loader when loading", () => {
@@ -59,5 +58,15 @@ describe("AllOrders", () => {
     const loader = container.querySelector("#loader") as Element;
 
     expect(loader).toBeInTheDocument();
+  });
+
+  it("should render the app error when there is an error", () => {
+    // @ts-ignore
+    mockedUseOrder.error = mockedError;
+
+    const { container } = render(<AllOrders />);
+    const appError = container.querySelector("#app-error") as Element;
+
+    expect(appError).toBeInTheDocument();
   });
 });

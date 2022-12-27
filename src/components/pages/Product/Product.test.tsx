@@ -6,6 +6,7 @@ import { AuthContext } from "../../../contexts/Auth";
 import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import { mockedUseCart } from "../../../data/mockData/useCartData";
 import React from "react";
+import { mockedError } from "../../../data/mockData/errorData";
 
 const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
@@ -161,5 +162,30 @@ describe("Product", () => {
 
     expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith("/login");
+  });
+
+  it("should render the loader when loading", () => {
+    mockedUseProduct.isLoading = true;
+    const { container } = render(
+      <Router>
+        <Product />
+      </Router>
+    );
+    const loader = container.querySelector("#loader") as Element;
+
+    expect(loader).toBeInTheDocument();
+  });
+
+  it("should render the app error when there is an error", () => {
+    // @ts-ignore
+    mockedUseProduct.error = mockedError;
+    const { container } = render(
+      <Router>
+        <Product />
+      </Router>
+    );
+    const appError = container.querySelector("#app-error") as Element;
+
+    expect(appError).toBeInTheDocument();
   });
 });

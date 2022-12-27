@@ -1,9 +1,9 @@
 import { render } from "@testing-library/react";
 import { Formik } from "formik";
 import { mockedCheckoutInitialValues } from "../../../../data/mockData/checkoutData";
-import DeliveryDetails from "../DeliveryDetails/DeliveryDetails";
 import PurchaseComplete from "./PurchaseComplete";
 import { mockedOrder } from "../../../../data/mockData/orderData";
+import { IOrder } from "../../../../types/IOrder";
 
 const mockedOnSubmit = jest.fn();
 
@@ -77,5 +77,21 @@ describe("PurchaseComplete", () => {
 
     expect(total).toBeInTheDocument();
     expect(total).toHaveTextContent("£69.12");
+  });
+
+  it("should render the loader when loading", () => {
+    const { container } = render(
+      <Formik
+        initialValues={mockedCheckoutInitialValues}
+        onSubmit={mockedOnSubmit}
+      >
+        {(formik) => {
+          return <PurchaseComplete order={{} as IOrder} isLoading={true} />;
+        }}
+      </Formik>
+    );
+    const loader = container.querySelector("#loader") as Element;
+
+    expect(loader).toBeInTheDocument();
   });
 });

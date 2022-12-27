@@ -37,4 +37,18 @@ describe("CategoriesBanner", () => {
 
     expect(categories).toHaveLength(5);
   });
+
+  it("should render the loader when loading", () => {
+    mockedProductContext.categories = [];
+    const { container } = render(
+      <Router>
+        <ProductContext.Provider value={mockedProductContext}>
+          <CategoriesBanner />
+        </ProductContext.Provider>
+      </Router>
+    );
+    const loader = container.querySelector("#loader") as Element;
+
+    expect(loader).toBeInTheDocument();
+  });
 });

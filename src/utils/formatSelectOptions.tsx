@@ -5,7 +5,7 @@ interface IProps {
 }
 
 export const formatSelectOptions = ({ options }: IProps): ISelectOption[] => {
-  let formattedOptions: ISelectOption[] = [];
+  let formattedOptions: ISelectOption[];
 
   formattedOptions = options.map((option) => ({
     value: option,

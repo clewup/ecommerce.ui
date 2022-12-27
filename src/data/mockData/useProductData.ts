@@ -9,26 +9,3 @@ export const mockedUseProduct = {
   addProduct: jest.fn(),
   validationSchema: {},
 };
-
-export const mockedUseProductLoading = {
-  initialValues: mockedProductInitialValues,
-  product: {},
-  isLoading: true,
-  error: null,
-  getProduct: jest.fn(),
-  addProduct: jest.fn(),
-  validationSchema: {},
-};
-
-export const mockedUseProductError = {
-  initialValues: mockedProductInitialValues,
-  product: {},
-  isLoading: false,
-  error: {
-    code: "ERROR_CODE",
-    message: "ERROR_MESSAGE",
-  },
-  getProduct: jest.fn(),
-  addProduct: jest.fn(),
-  validationSchema: {},
-};

@@ -2,6 +2,7 @@ import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import TrendingProducts from "./TrendingProducts";
 import { mockedUseStatistics } from "data/mockData/useStatisticsData";
+import { mockedError } from "../../../data/mockData/errorData";
 
 jest.mock("../../../hooks/useStatistics", () => {
   return {
@@ -42,5 +43,30 @@ describe("TrendingProducts", () => {
     const products = container.querySelectorAll("#product-tile");
 
     expect(products).toHaveLength(3);
+  });
+
+  it("should render the loader when loading", () => {
+    mockedUseStatistics.isLoading = true;
+    const { container } = render(
+      <Router>
+        <TrendingProducts />
+      </Router>
+    );
+    const loader = container.querySelector("#loader") as Element;
+
+    expect(loader).toBeInTheDocument();
+  });
+
+  it("should render the app error when there is an error", () => {
+    // @ts-ignore
+    mockedUseStatistics.error = mockedError;
+    const { container } = render(
+      <Router>
+        <TrendingProducts />
+      </Router>
+    );
+    const appError = container.querySelector("#app-error") as Element;
+
+    expect(appError).toBeInTheDocument();
   });
 });

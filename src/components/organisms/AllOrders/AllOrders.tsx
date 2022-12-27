@@ -25,6 +25,8 @@ const AllOrders = () => {
         <Loader />
       ) : (
         <div className={"orders"}>
+          {!orders.length && <Text>No orders found.</Text>}
+
           {orders.map((order) => {
             return (
               <div className={`order order-${order.id}`} key={String(order.id)}>

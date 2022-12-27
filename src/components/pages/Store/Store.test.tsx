@@ -1,5 +1,5 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import Store from "./Store";
 import { mockedUseProductFilter } from "../../../data/mockData/useProductFilterData";
 import React from "react";

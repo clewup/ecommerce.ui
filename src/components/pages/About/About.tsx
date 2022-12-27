@@ -12,7 +12,6 @@ const About = () => {
   return (
     <Wrapper id={"about"}>
       <div className={"about-values"}>
-        <div className={"values-image"}></div>
         <div className={"values-text"}>
           <Subheading size={subheadingSize.SMALL}>OUR VALUES</Subheading>
           <Divider></Divider>
@@ -85,10 +84,8 @@ const About = () => {
             promote a more active lifestyle.
           </Text>
         </div>
-        <div className={"story-image"}></div>
       </div>
       <div className={"about-sustainability"}>
-        <div className={"sustainability-image"}></div>
         <div className={"sustainability-text"}>
           <Subheading size={subheadingSize.SMALL}>SUSTAINABILITY</Subheading>
           <Divider></Divider>

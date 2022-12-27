@@ -10,7 +10,6 @@ import { subheadingSize } from "../../../enums/typography";
 
 const TrendingProducts = () => {
   const { popularProducts, isLoading, error, getMostPopular } = useStatistics();
-
   useEffect(() => {
     getMostPopular(4);
     // eslint-disable-next-line

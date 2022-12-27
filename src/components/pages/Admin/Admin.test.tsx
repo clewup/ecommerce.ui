@@ -42,7 +42,7 @@ describe("Admin", () => {
     expect(component).toBeInTheDocument();
   });
 
-  it("should render the app error component if not developer or employee", () => {
+  it("should render the app error if not developer or employee", () => {
     const { container } = render(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>

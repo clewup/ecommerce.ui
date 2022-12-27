@@ -1,14 +1,10 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  act,
-} from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ProductFilter from "./ProductFilter";
 import React from "react";
 import { mockedProductContext } from "../../../data/mockData/productContextData";
 import { ProductContext } from "../../../contexts/Product";
+import { mockedUseProductFilter } from "../../../data/mockData/useProductFilterData";
+import { mockedError } from "../../../data/mockData/errorData";
 
 const mockToggleDrawer = jest.fn().mockReturnValue(true);
 
@@ -16,6 +12,15 @@ type TestElement = Document | Element | Window | Node;
 function hasInputValue(e: TestElement, inputValue: string) {
   return screen.getByDisplayValue(inputValue) === e;
 }
+
+jest.mock("../../../hooks/useProductFilter", () => {
+  return {
+    __esModule: true,
+    default: () => {
+      return mockedUseProductFilter;
+    },
+  };
+});
 
 describe("ProductFilter", () => {
   it("should render the component", () => {
@@ -175,5 +180,18 @@ describe("ProductFilter", () => {
     fireEvent.click(stock);
 
     expect(mockedProductContext.setStockQuery).toHaveBeenCalled();
+  });
+
+  it("should render the app error when there is an error", () => {
+    // @ts-ignore
+    mockedUseProductFilter.error = mockedError;
+    const { container } = render(
+      <ProductContext.Provider value={mockedProductContext}>
+        <ProductFilter toggleDrawer={mockToggleDrawer} />
+      </ProductContext.Provider>
+    );
+    const appError = container.querySelector("#app-error") as Element;
+
+    expect(appError).toBeInTheDocument();
   });
 });
