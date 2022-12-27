@@ -123,6 +123,32 @@ describe("ProductFilter", () => {
     expect(category).toHaveTextContent("Select");
   });
 
+  it("should render the range dropdown", () => {
+    const { container } = render(
+      <ProductContext.Provider value={mockedProductContext}>
+        <ProductFilter toggleDrawer={mockToggleDrawer} />
+      </ProductContext.Provider>
+    );
+    const range = container.querySelectorAll(
+      '[aria-haspopup="listbox"]'
+    )[2] as Element;
+
+    expect(range).toBeInTheDocument();
+  });
+
+  it("should render the range dropdown with a default value of 'select'", () => {
+    const { container } = render(
+      <ProductContext.Provider value={mockedProductContext}>
+        <ProductFilter toggleDrawer={mockToggleDrawer} />
+      </ProductContext.Provider>
+    );
+    const range = container.querySelectorAll(
+      '[aria-haspopup="listbox"]'
+    )[2] as Element;
+
+    expect(range).toHaveTextContent("Select");
+  });
+
   it("should render the price slider", () => {
     const { container } = render(
       <ProductContext.Provider value={mockedProductContext}>

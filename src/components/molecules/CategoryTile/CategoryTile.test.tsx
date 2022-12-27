@@ -2,6 +2,8 @@ import { fireEvent, render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import CategoryTile from "./CategoryTile";
 import React from "react";
+import { mockedProductContext } from "../../../data/mockData/productContextData";
+import { ProductContext } from "../../../contexts/Product";
 
 const mockedUseNavigate = jest.fn();
 
@@ -14,7 +16,9 @@ describe("CategoryTile", () => {
   it("should render the component", () => {
     const { container } = render(
       <Router>
-        <CategoryTile category={"CATEGORY"} />
+        <ProductContext.Provider value={mockedProductContext}>
+          <CategoryTile category={"CATEGORY"} />
+        </ProductContext.Provider>
       </Router>
     );
 
@@ -26,7 +30,9 @@ describe("CategoryTile", () => {
   it("should render the category name", () => {
     const { container } = render(
       <Router>
-        <CategoryTile category={"CATEGORY"} />
+        <ProductContext.Provider value={mockedProductContext}>
+          <CategoryTile category={"CATEGORY"} />
+        </ProductContext.Provider>
       </Router>
     );
 
@@ -39,7 +45,9 @@ describe("CategoryTile", () => {
   it("should navigate to the store on click", () => {
     const { container } = render(
       <Router>
-        <CategoryTile category={"CATEGORY"} />
+        <ProductContext.Provider value={mockedProductContext}>
+          <CategoryTile category={"CATEGORY"} />
+        </ProductContext.Provider>
       </Router>
     );
 
@@ -51,5 +59,26 @@ describe("CategoryTile", () => {
 
     expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith("store");
+  });
+
+  it("should update the category query on click", () => {
+    const { container } = render(
+      <Router>
+        <ProductContext.Provider value={mockedProductContext}>
+          <CategoryTile category={"CATEGORY"} />
+        </ProductContext.Provider>
+      </Router>
+    );
+
+    const tile = container.querySelector("#category-tile") as Element;
+
+    expect(tile).toBeInTheDocument();
+
+    fireEvent.click(tile);
+
+    expect(mockedProductContext.setCategoryQuery).toHaveBeenCalled();
+    expect(mockedProductContext.setCategoryQuery).toHaveBeenCalledWith(
+      "CATEGORY"
+    );
   });
 });

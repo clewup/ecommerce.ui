@@ -2,7 +2,9 @@ import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import RangeTile from "./RangeTile";
-import { IRange } from "../../../types/IRange";
+import { mockedProductContext } from "../../../data/mockData/productContextData";
+import { ProductContext } from "../../../contexts/Product";
+import { mockedRange } from "../../../data/mockData/rangeData";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
@@ -11,16 +13,13 @@ jest.mock("react-router-dom", () => ({
 
 const mockedUseNavigate = jest.fn();
 
-const mockedRange: IRange = {
-  name: "RANGE_NAME",
-  image: "RANGE_IMAGE",
-};
-
 describe("RangeTile", () => {
   it("should render the component", () => {
     const { container } = render(
       <Router>
-        <RangeTile range={mockedRange} />
+        <ProductContext.Provider value={mockedProductContext}>
+          <RangeTile range={mockedRange} />
+        </ProductContext.Provider>
       </Router>
     );
     const component = container.querySelector("#range-tile") as Element;
@@ -31,7 +30,9 @@ describe("RangeTile", () => {
   it("should render the range name", () => {
     const { container } = render(
       <Router>
-        <RangeTile range={mockedRange} />
+        <ProductContext.Provider value={mockedProductContext}>
+          <RangeTile range={mockedRange} />
+        </ProductContext.Provider>
       </Router>
     );
     const name = container.querySelector(".subheading") as Element;
@@ -43,7 +44,9 @@ describe("RangeTile", () => {
   it("should render the discover button", () => {
     const { container } = render(
       <Router>
-        <RangeTile range={mockedRange} />
+        <ProductContext.Provider value={mockedProductContext}>
+          <RangeTile range={mockedRange} />
+        </ProductContext.Provider>
       </Router>
     );
     const button = container.querySelector('[type="button"]') as Element;
@@ -55,7 +58,9 @@ describe("RangeTile", () => {
   it("should navigate to the store on button click", () => {
     const { container } = render(
       <Router>
-        <RangeTile range={mockedRange} />
+        <ProductContext.Provider value={mockedProductContext}>
+          <RangeTile range={mockedRange} />
+        </ProductContext.Provider>
       </Router>
     );
     const button = container.querySelector('[type="button"]') as Element;
@@ -64,5 +69,23 @@ describe("RangeTile", () => {
 
     expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith("store");
+  });
+
+  it("should update the range query on click", () => {
+    const { container } = render(
+      <Router>
+        <ProductContext.Provider value={mockedProductContext}>
+          <RangeTile range={mockedRange} />
+        </ProductContext.Provider>
+      </Router>
+    );
+    const button = container.querySelector('[type="button"]') as Element;
+
+    fireEvent.click(button);
+
+    expect(mockedProductContext.setRangeQuery).toHaveBeenCalled();
+    expect(mockedProductContext.setRangeQuery).toHaveBeenCalledWith(
+      "RANGE_NAME"
+    );
   });
 });
