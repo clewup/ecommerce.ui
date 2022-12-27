@@ -34,7 +34,6 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
   const {
     categories,
     ranges,
-    setRanges,
     setSearchQuery,
     categoryQuery,
     setCategoryQuery,
@@ -48,15 +47,6 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
     rangeQuery,
     setRangeQuery,
   } = useContext(ProductContext);
-
-  useEffect(() => {
-    if (ranges.length === 0 || !ranges.length) {
-      getProductRanges().then((res) => {
-        setRanges(res.data);
-      });
-    }
-    // eslint-disable-next-line
-  }, []);
 
   const { error } = useProductFilter();
 
