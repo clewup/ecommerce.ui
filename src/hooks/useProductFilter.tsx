@@ -3,6 +3,7 @@ import { AxiosError } from "axios";
 import { ProductContext } from "../contexts/Product";
 import { IProduct } from "../types/IProduct";
 import getProductsSearch from "../api/GetProductsSearch";
+import { queryDefaultValues } from "../enums/defaultValues";
 
 interface IUseProductFilterProps {
   products: IProduct[];
@@ -24,6 +25,7 @@ const useProductFilter = (): IUseProductFilterProps => {
     saleQuery,
     stockQuery,
     sortByQuery,
+    rangeQuery,
   } = useContext(ProductContext);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const useProductFilter = (): IUseProductFilterProps => {
     if (searchQuery) {
       formattedQuery = `&SearchTerm=${searchQuery}`;
     }
-    if (categoryQuery && categoryQuery !== "select") {
+    if (categoryQuery && categoryQuery !== queryDefaultValues.CATEGORY_QUERY) {
       formattedQuery = formattedQuery.concat(`&Category=${categoryQuery}`);
     }
     if (priceQuery) {
@@ -59,11 +61,14 @@ const useProductFilter = (): IUseProductFilterProps => {
     if (stockQuery) {
       formattedQuery = formattedQuery.concat(`&InStock=${stockQuery}`);
     }
-    if (sortByQuery && sortByQuery !== "select") {
+    if (sortByQuery && sortByQuery !== queryDefaultValues.SORT_BY_QUERY) {
       const values = sortByQuery.split(" ");
       formattedQuery = formattedQuery.concat(
         `&SortBy=${values[0]}&SortVariation=${values[1]}`
       );
+    }
+    if (rangeQuery && rangeQuery !== queryDefaultValues.RANGE_QUERY) {
+      formattedQuery = formattedQuery.concat(`&Range=${rangeQuery}`);
     }
 
     formattedQuery = "?" + formattedQuery.slice(1);
@@ -81,6 +86,7 @@ const useProductFilter = (): IUseProductFilterProps => {
     saleQuery,
     stockQuery,
     sortByQuery,
+    rangeQuery,
   ]);
 
   return {

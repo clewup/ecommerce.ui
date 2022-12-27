@@ -10,6 +10,7 @@ import AppError from "../AppError/AppError";
 import { queryDefaultValues } from "../../../enums/defaultValues";
 import { formatSelectOptions } from "../../../utils/formatSelectOptions";
 import { sortByOptions } from "../../../data/sortByData";
+import getProductRanges from "../../../api/GetProductRanges";
 
 interface IProps {
   toggleDrawer: (isOpen: boolean) => void;
@@ -32,6 +33,8 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
 
   const {
     categories,
+    ranges,
+    setRanges,
     setSearchQuery,
     categoryQuery,
     setCategoryQuery,
@@ -42,7 +45,18 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
     setStockQuery,
     sortByQuery,
     setSortByQuery,
+    rangeQuery,
+    setRangeQuery,
   } = useContext(ProductContext);
+
+  useEffect(() => {
+    if (ranges.length === 0 || !ranges.length) {
+      getProductRanges().then((res) => {
+        setRanges(res.data);
+      });
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const { error } = useProductFilter();
 
@@ -88,6 +102,12 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
         value={categoryQuery}
         onChange={(e) => setCategoryQuery(e.target.value)}
         options={formatSelectOptions({ options: categories })}
+      />
+      <SelectInput
+        label={"Range"}
+        value={rangeQuery}
+        onChange={(e) => setRangeQuery(e.target.value)}
+        options={formatSelectOptions({ options: ranges })}
       />
       <InputLabel>Price</InputLabel>
       <Slider

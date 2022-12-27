@@ -7,6 +7,7 @@ export interface IProduct {
   images: IImage[];
   description: string;
   category: string;
+  range: string;
   color: string;
   stock: number;
   price: number;

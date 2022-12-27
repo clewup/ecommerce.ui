@@ -8,6 +8,8 @@ interface IProps {
 export interface IProductContextProps {
   categories: string[];
   setCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  ranges: string[];
+  setRanges: React.Dispatch<React.SetStateAction<string[]>>;
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   categoryQuery: string;
@@ -20,11 +22,15 @@ export interface IProductContextProps {
   setStockQuery: React.Dispatch<React.SetStateAction<boolean>>;
   sortByQuery: string;
   setSortByQuery: React.Dispatch<React.SetStateAction<string>>;
+  rangeQuery: string;
+  setRangeQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const initialProductContextProps: IProductContextProps = {
   categories: [],
   setCategories: (() => undefined) as Dispatch<any>,
+  ranges: [],
+  setRanges: (() => undefined) as Dispatch<any>,
   searchQuery: queryDefaultValues.SEARCH_QUERY,
   setSearchQuery: (() => undefined) as Dispatch<any>,
   categoryQuery: queryDefaultValues.CATEGORY_QUERY,
@@ -37,6 +43,8 @@ const initialProductContextProps: IProductContextProps = {
   setStockQuery: (() => undefined) as Dispatch<any>,
   sortByQuery: queryDefaultValues.SORT_BY_QUERY,
   setSortByQuery: (() => undefined) as Dispatch<any>,
+  rangeQuery: queryDefaultValues.RANGE_QUERY,
+  setRangeQuery: (() => undefined) as Dispatch<any>,
 };
 
 const ProductContext = createContext<IProductContextProps>(
@@ -45,6 +53,7 @@ const ProductContext = createContext<IProductContextProps>(
 
 const ProductProvider: React.FC<IProps> = ({ children }) => {
   const [categories, setCategories] = useState<string[]>([]);
+  const [ranges, setRanges] = useState<string[]>([]);
 
   const [searchQuery, setSearchQuery] = useState(
     queryDefaultValues.SEARCH_QUERY
@@ -64,12 +73,17 @@ const ProductProvider: React.FC<IProps> = ({ children }) => {
   const [sortByQuery, setSortByQuery] = useState<string>(
     queryDefaultValues.SORT_BY_QUERY
   );
+  const [rangeQuery, setRangeQuery] = useState<string>(
+    queryDefaultValues.RANGE_QUERY
+  );
 
   return (
     <ProductContext.Provider
       value={{
         categories,
         setCategories,
+        ranges,
+        setRanges,
         searchQuery,
         setSearchQuery,
         categoryQuery,
@@ -82,6 +96,8 @@ const ProductProvider: React.FC<IProps> = ({ children }) => {
         setStockQuery,
         sortByQuery,
         setSortByQuery,
+        rangeQuery,
+        setRangeQuery,
       }}
     >
       {children}

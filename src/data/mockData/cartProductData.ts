@@ -14,6 +14,7 @@ export const mockedCartProduct: ICartProduct = {
   ] as IImage[],
   description: "CART_PRODUCT_DESCRIPTION",
   category: "CART_PRODUCT_CATEGORY",
+  range: "CART_PRODUCT_RANGE",
   color: "CART_PRODUCT_COLOR",
   price: 12.34,
   discount: 0,

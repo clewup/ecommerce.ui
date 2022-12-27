@@ -17,8 +17,8 @@ const CategoryTile: React.FC<IProps> = ({ category }) => {
     <div
       id={"category-tile"}
       onClick={() => {
-        setCategoryQuery(category);
         navigate("store");
+        setCategoryQuery(category);
       }}
     >
       <Subheading size={subheadingSize.XSMALL}>{category}</Subheading>

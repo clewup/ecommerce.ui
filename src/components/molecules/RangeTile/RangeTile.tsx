@@ -1,10 +1,11 @@
 import "./range-tile.scss";
 import Subheading from "../../atoms/Subheading/Subheading";
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IRange } from "../../../types/IRange";
 import { fontColor } from "../../../enums/typography";
+import { ProductContext } from "../../../contexts/Product";
 
 interface IProps {
   range: IRange;
@@ -12,6 +13,7 @@ interface IProps {
 
 const RangeTile: React.FC<IProps> = ({ range }) => {
   const navigate = useNavigate();
+  const { setRangeQuery } = useContext(ProductContext);
 
   return (
     <div
@@ -25,7 +27,10 @@ const RangeTile: React.FC<IProps> = ({ range }) => {
       <div className={"range-tile-text"}>
         <Subheading color={fontColor.WHITE}>{range.name}</Subheading>
         <Button
-          onClick={() => navigate("store")}
+          onClick={() => {
+            navigate("store");
+            setRangeQuery(range.name);
+          }}
           size={"large"}
           type={"button"}
           variant={"contained"}

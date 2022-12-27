@@ -28,6 +28,7 @@ const useProduct = (): IUseProductProps => {
     images: [],
     description: "",
     category: "",
+    range: "",
     color: "",
     stock: 0,
     price: 0,
@@ -39,6 +40,7 @@ const useProduct = (): IUseProductProps => {
     images: Yup.array().required("Required"),
     description: Yup.string().required("Required"),
     category: Yup.string().required("Required"),
+    range: Yup.string().required("Required"),
     color: Yup.string().required("Required"),
     stock: Yup.number()
       .integer("Must be a whole number")
@@ -71,6 +73,7 @@ const useProduct = (): IUseProductProps => {
       images: images,
       description: values.description,
       category: values.category,
+      range: values.range,
       color: values.color,
       stock: values.stock,
       price: values.price,

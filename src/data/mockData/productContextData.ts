@@ -9,6 +9,8 @@ export const mockedProductContext = {
     "CATEGORY_5",
   ],
   setCategories: jest.fn(),
+  ranges: ["RANGE_1", "RANGE_2", "RANGE_3", "RANGE_4", "RANGE_5"],
+  setRanges: jest.fn(),
   searchQuery: queryDefaultValues.SEARCH_QUERY,
   setSearchQuery: jest.fn(),
   categoryQuery: queryDefaultValues.CATEGORY_QUERY,
@@ -21,4 +23,6 @@ export const mockedProductContext = {
   setStockQuery: jest.fn(),
   sortByQuery: queryDefaultValues.SORT_BY_QUERY,
   setSortByQuery: jest.fn(),
+  rangeQuery: queryDefaultValues.RANGE_QUERY,
+  setRangeQuery: jest.fn(),
 };

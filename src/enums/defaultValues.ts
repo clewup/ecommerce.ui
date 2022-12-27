@@ -5,4 +5,5 @@ export const queryDefaultValues = {
   SALE_QUERY: false,
   STOCK_QUERY: false,
   SORT_BY_QUERY: "select",
+  RANGE_QUERY: "select",
 };
