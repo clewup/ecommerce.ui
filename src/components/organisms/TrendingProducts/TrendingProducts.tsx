@@ -1,12 +1,10 @@
 import "./trending-products.scss";
-import { Divider } from "@mui/material";
 import Subheading from "../../atoms/Subheading/Subheading";
 import Loader from "../../atoms/Loader/Loader";
 import ProductTile from "../../molecules/ProductTile/ProductTile";
 import useStatistics from "../../../hooks/useStatistics";
 import { useEffect } from "react";
 import AppError from "../../molecules/AppError/AppError";
-import { subheadingSize } from "../../../enums/typography";
 
 const TrendingProducts = () => {
   const { popularProducts, isLoading, error, getMostPopular } = useStatistics();
@@ -19,9 +17,7 @@ const TrendingProducts = () => {
 
   return (
     <div id={"trending-products"}>
-      <Divider>
-        <Subheading size={subheadingSize.SMALL}>TRENDING</Subheading>
-      </Divider>
+      <Subheading align={"center"}>We think you'll like</Subheading>
       {isLoading ? (
         <div className={"trending-products-loader"}>
           <Loader />

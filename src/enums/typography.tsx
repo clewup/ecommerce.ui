@@ -1,13 +1,3 @@
-export const fontColor = {
-  BLUE: "#00BFFFFF",
-  DARKBLUE: "#0098CC",
-  WHITE: "#FFFFFF",
-  LIGHTGREY: "#CCCCCC",
-  DARKGREY: "#63666A",
-  RED: "#EE4B2B",
-  BLACK: "#333333",
-};
-
 export const fontPadding = {
   NONE: "0",
   ONE: "1rem",

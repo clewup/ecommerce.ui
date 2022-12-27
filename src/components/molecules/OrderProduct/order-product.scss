@@ -1,9 +1,11 @@
+@import '/src/styles/colors';
+
 #order-product {
   border-radius: 1rem;
   display: flex;
   padding: 1rem 1rem;
   gap: 2rem;
-  background-color: white;
+  background-color: $color-white;
 
   .order-product-image {
     height: 5rem;
@@ -26,7 +28,7 @@
         text-decoration: line-through;
       }
       .discounted-price-total {
-        color: red;
+        color: $color-red;
       }
     }
   }

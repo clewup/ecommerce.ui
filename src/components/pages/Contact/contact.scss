@@ -14,20 +14,20 @@
     .email-icon {
       height: 200px;
       width: 200px;
-      background-color: $branding-darkgrey;
-      color: $branding-white;
+      background-color: $color-darkgrey;
+      color: $color-white;
       font-size: 10rem;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     .email-text {
-      background-color: $branding-lightgrey;
+      background-color: $color-lightgrey;
       height: 200px;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: $branding-white;
+      color: $color-white;
       width: 800px;
     }
   }
@@ -40,20 +40,20 @@
     .telephone-icon {
       height: 200px;
       width: 200px;
-      background-color: $branding-darkgrey;
-      color: $branding-white;
+      background-color: $color-darkgrey;
+      color: $color-white;
       font-size: 10rem;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     .telephone-text {
-      background-color: $branding-lightgrey;
+      background-color: $color-lightgrey;
       height: 200px;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: $branding-white;
+      color: $color-white;
       flex-direction: column;
       width: 800px;
 

@@ -10,7 +10,6 @@ import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import Loader from "../../atoms/Loader/Loader";
 import { AuthContext } from "../../../contexts/Auth";
 import Text from "../../atoms/Text/Text";
-import { subheadingSize } from "../../../enums/typography";
 
 const CartProducts = () => {
   const navigate = useNavigate();
@@ -27,9 +26,9 @@ const CartProducts = () => {
 
   return (
     <div id={"cart-products"}>
-      <Subheading size={subheadingSize.SMALL}>Cart</Subheading>
+      <Subheading align={"center"}>Cart</Subheading>
       {isLoading ? (
-        <Loader color={"#fff"} />
+        <Loader />
       ) : (
         <>
           {cart?.products?.length === 0 || cart == null || !cart.products ? (

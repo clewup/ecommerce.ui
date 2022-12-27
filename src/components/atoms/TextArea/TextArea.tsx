@@ -1,6 +1,7 @@
 import { TextField, Tooltip } from "@mui/material";
 import { FieldAttributes, FormikProps } from "formik";
 import React from "react";
+import { colors } from "../../../styles/colors";
 
 interface IProps {
   field?: FieldAttributes<any>;
@@ -47,7 +48,7 @@ const TextArea: React.FC<IProps> = ({
         sx={{
           marginTop: 1,
           marginBottom: 1,
-          backgroundColor: "white",
+          backgroundColor: colors.WHITE,
           textAlign: "center",
           width: width ?? "100%",
         }}

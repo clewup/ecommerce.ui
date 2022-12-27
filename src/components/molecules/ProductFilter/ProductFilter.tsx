@@ -10,7 +10,6 @@ import AppError from "../AppError/AppError";
 import { queryDefaultValues } from "../../../enums/defaultValues";
 import { formatSelectOptions } from "../../../utils/formatSelectOptions";
 import { sortByOptions } from "../../../data/sortByData";
-import getProductRanges from "../../../api/GetProductRanges";
 
 interface IProps {
   toggleDrawer: (isOpen: boolean) => void;

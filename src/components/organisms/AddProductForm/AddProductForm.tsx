@@ -14,7 +14,7 @@ import CreatableSelect from "react-select/creatable";
 import { ProductContext } from "../../../contexts/Product";
 import TextArea from "../../atoms/TextArea/TextArea";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import { subheadingSize } from "../../../enums/typography";
+import { colors } from "../../../styles/colors";
 
 const AddProductForm = () => {
   const [openAlert, setOpenAlert] = React.useState(false);
@@ -84,10 +84,6 @@ const AddProductForm = () => {
         return (
           <div id={"add-product-form"}>
             <Form>
-              <Subheading size={subheadingSize.SMALL} align={"center"}>
-                Add Product
-              </Subheading>
-
               <div className={"product-form-fields"}>
                 <div className={"product-form-half"}>
                   <Carousel
@@ -98,7 +94,7 @@ const AddProductForm = () => {
                     height={"310px"}
                     className={"carousel"}
                     sx={{
-                      backgroundColor: "white",
+                      backgroundColor: colors.WHITE,
                     }}
                   >
                     {images.map((image) => {
@@ -153,7 +149,7 @@ const AddProductForm = () => {
                   <Field
                     name={"description"}
                     component={TextArea}
-                    rows={8}
+                    rows={9.3}
                     label={"Description"}
                     onChange={formik.handleChange}
                   />

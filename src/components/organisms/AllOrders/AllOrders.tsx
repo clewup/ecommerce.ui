@@ -2,11 +2,10 @@ import "./all-orders.scss";
 import useOrder from "../../../hooks/useOrder";
 import { useEffect } from "react";
 import Subheading from "../../atoms/Subheading/Subheading";
-import OrderProduct from "../../molecules/OrderProduct/OrderProduct";
 import AppError from "../../molecules/AppError/AppError";
 import Loader from "../../atoms/Loader/Loader";
 import Text from "../../atoms/Text/Text";
-import { subheadingSize } from "../../../enums/typography";
+import Order from "../../molecules/Order/Order";
 
 const AllOrders = () => {
   const { orders, isLoading, error, getAllOrders } = useOrder();
@@ -20,30 +19,16 @@ const AllOrders = () => {
 
   return (
     <div id={"all-orders"}>
-      <Subheading size={subheadingSize.SMALL}>Orders</Subheading>
       {isLoading ? (
         <Loader />
       ) : (
         <div className={"orders"}>
-          {!orders.length && <Text>No orders found.</Text>}
+          {!orders.length && !isLoading && <Text>No orders found.</Text>}
 
           {orders.map((order) => {
             return (
-              <div className={`order order-${order.id}`} key={String(order.id)}>
-                <div className={"order-info"}>
-                  <Text className={"order-id"}>{String(order.id)}</Text>
-                  <Text>{new Date(order.orderDate).toDateString()}</Text>
-                  <Text>Total: £{order.cart.total}</Text>
-                </div>
-                <div className={"order-products"}>
-                  {order.cart.products.map((orderProduct) => {
-                    return (
-                      <div key={String(orderProduct.id)}>
-                        <OrderProduct orderProduct={orderProduct} />
-                      </div>
-                    );
-                  })}
-                </div>
+              <div key={String(order.id)}>
+                <Order order={order} />
               </div>
             );
           })}

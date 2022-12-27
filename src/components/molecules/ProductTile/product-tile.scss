@@ -6,7 +6,7 @@
   border: $border-light;
   text-align: center;
   padding: 1rem;
-  background-color: white;
+  background-color: $color-white;
 
   .product-title {
     padding: 1rem 0;
@@ -35,7 +35,7 @@
         text-decoration: line-through;
       }
       .discounted-price-total {
-        color: red;
+        color: $color-red;
       }
     }
 

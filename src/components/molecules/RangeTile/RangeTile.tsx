@@ -4,8 +4,8 @@ import React, { useContext } from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IRange } from "../../../types/IRange";
-import { fontColor } from "../../../enums/typography";
 import { ProductContext } from "../../../contexts/Product";
+import { colors } from "../../../styles/colors";
 
 interface IProps {
   range: IRange;
@@ -25,7 +25,7 @@ const RangeTile: React.FC<IProps> = ({ range }) => {
       }}
     >
       <div className={"range-tile-text"}>
-        <Subheading color={fontColor.WHITE}>{range.name}</Subheading>
+        <Subheading color={colors.WHITE}>{range.name}</Subheading>
         <Button
           onClick={() => {
             navigate("store");
@@ -34,7 +34,7 @@ const RangeTile: React.FC<IProps> = ({ range }) => {
           size={"large"}
           type={"button"}
           variant={"contained"}
-          color={"info"}
+          color={"_black"}
           className={"discover-btn"}
         >
           DISCOVER

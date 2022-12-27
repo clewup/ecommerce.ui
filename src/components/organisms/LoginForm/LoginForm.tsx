@@ -21,7 +21,7 @@ const LoginForm: React.FC<IProps> = ({ formik, isLoading, error }) => {
 
   return (
     <div id={"login-form"}>
-      <Subheading>Login</Subheading>
+      <Subheading align={"center"}>Login</Subheading>
       <Field
         name={"email"}
         component={Input}
@@ -40,6 +40,13 @@ const LoginForm: React.FC<IProps> = ({ formik, isLoading, error }) => {
       {error && <Text>{error.message}</Text>}
 
       <div className={"login-action-buttons"}>
+        <Button
+          type={"submit"}
+          color={"_black"}
+          onClick={() => navigate("/register")}
+        >
+          Register
+        </Button>
         <LoadingButton
           type={"submit"}
           variant={"contained"}
@@ -48,13 +55,6 @@ const LoginForm: React.FC<IProps> = ({ formik, isLoading, error }) => {
         >
           Login
         </LoadingButton>
-        <Button
-          type={"submit"}
-          color={"info"}
-          onClick={() => navigate("/register")}
-        >
-          Register
-        </Button>
       </div>
     </div>
   );

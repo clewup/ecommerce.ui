@@ -1,12 +1,11 @@
 import "./sale-products.scss";
-import { Divider } from "@mui/material";
 import Subheading from "../../atoms/Subheading/Subheading";
 import Loader from "../../atoms/Loader/Loader";
 import ProductTile from "../../molecules/ProductTile/ProductTile";
 import useStatistics from "../../../hooks/useStatistics";
 import { useEffect } from "react";
 import AppError from "../../molecules/AppError/AppError";
-import { fontColor, subheadingSize } from "../../../enums/typography";
+import { colors } from "../../../styles/colors";
 
 const SaleProducts = () => {
   const { discountedProducts, isLoading, error, getMostDiscounted } =
@@ -21,11 +20,9 @@ const SaleProducts = () => {
 
   return (
     <div id={"sale-products"}>
-      <Divider>
-        <Subheading size={subheadingSize.SMALL} color={fontColor.RED}>
-          SALE!
-        </Subheading>
-      </Divider>
+      <Subheading color={colors.RED} align={"center"}>
+        Sale!
+      </Subheading>
       {isLoading ? (
         <div className={"sale-products-loader"}>
           <Loader />

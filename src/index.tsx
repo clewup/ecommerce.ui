@@ -8,6 +8,8 @@ import { UserProvider } from "./contexts/User";
 import { ProductProvider } from "./contexts/Product";
 import { AuthProvider } from "./contexts/Auth";
 import { CartProvider } from "./contexts/Cart";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./styles/theme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,7 +20,9 @@ root.render(
       <UserProvider>
         <ProductProvider>
           <CartProvider>
-            <App />
+            <ThemeProvider theme={theme}>
+              <App />
+            </ThemeProvider>
           </CartProvider>
         </ProductProvider>
       </UserProvider>

@@ -15,8 +15,8 @@
     padding: 2rem 0;
 
     .faq-tile {
-      background-color: $branding-blue;
-      color: white;
+      background-color: $color-blue;
+      color: $color-white;
       height: 150px;
       width: 400px;
       display: flex;
@@ -66,8 +66,8 @@
       padding: 2rem 0;
 
       .faq-tile {
-        background-color: $branding-darkgrey;
-        color: white;
+        background-color: $color-darkgrey;
+        color: $color-white;
         height: 150px;
         width: 400px;
         display: flex;

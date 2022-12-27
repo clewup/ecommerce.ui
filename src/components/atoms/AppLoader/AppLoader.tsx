@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { HashLoader } from "react-spinners";
 import "./app-loader.scss";
 import disableScroll from "disable-scroll";
+import { colors } from "../../../styles/colors";
 
 const AppLoader = () => {
   useEffect(() => {
@@ -13,7 +14,7 @@ const AppLoader = () => {
     <div id={"app-loader"}>
       <div>
         <HashLoader
-          color={"#ccc"}
+          color={colors.LIGHT_GREY}
           loading={true}
           size={75}
           data-testid="loader"

@@ -1,3 +1,5 @@
+@import '/src/styles/colors';
+
 #product {
   display: flex;
   gap: 2rem;
@@ -51,7 +53,7 @@
           text-decoration: line-through;
         }
         .discounted-price-total {
-          color: red;
+          color: $color-red;
         }
       }
     }

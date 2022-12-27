@@ -17,7 +17,7 @@
       padding: 0 2rem;
 
       svg {
-        color: $branding-darkgrey;
+        color: $color-darkgrey;
       }
     }
 
@@ -44,7 +44,7 @@
 
         .header-bolded {
           font-weight: bold;
-          color: $branding-blue;
+          color: $color-blue;
         }
       }
 
@@ -68,8 +68,8 @@
     display: flex;
     justify-content: space-evenly;
     padding: 0.5rem 0;
-    background-color: $branding-blue;
-    color: $branding-white;
+    background-color: $color-blue;
+    color: $color-white;
 
     p {
       cursor: pointer;

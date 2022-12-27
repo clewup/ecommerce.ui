@@ -3,10 +3,8 @@ import { IUser } from "../../../types/IUser";
 import React, { useState } from "react";
 import "./account-form.scss";
 import Text from "../../atoms/Text/Text";
-
 import Input from "../../atoms/Input/Input";
 import Subheading from "../../atoms/Subheading/Subheading";
-import { subheadingSize } from "../../../enums/typography";
 import { Button } from "@mui/material";
 
 interface IProps {
@@ -20,9 +18,6 @@ const AccountForm: React.FC<IProps> = ({ formik, user }) => {
   return (
     <div id={"account-form"}>
       <div className={"contact-info"}>
-        <Subheading size={subheadingSize.SMALL} align={"center"}>
-          Contact Info
-        </Subheading>
         <Field
           name={"firstName"}
           component={Input}
@@ -51,9 +46,6 @@ const AccountForm: React.FC<IProps> = ({ formik, user }) => {
 
       {user.lineOne && !isEditing ? (
         <div className={"address-info"}>
-          <Subheading size={subheadingSize.SMALL} align={"center"}>
-            Address
-          </Subheading>
           <div className={"existing-address"}>
             <Text>{user.lineOne}</Text>
             <Text>{user.lineTwo}</Text>
@@ -66,9 +58,6 @@ const AccountForm: React.FC<IProps> = ({ formik, user }) => {
         </div>
       ) : (
         <div className={"address-info"}>
-          <Subheading size={subheadingSize.SMALL} align={"center"}>
-            Address
-          </Subheading>
           <Field
             name={"lineOne"}
             component={Input}
@@ -130,7 +119,7 @@ const AccountForm: React.FC<IProps> = ({ formik, user }) => {
       <div className={"account-footer"}>
         <Button
           variant={"contained"}
-          color={"info"}
+          color={"_black"}
           size={"large"}
           onClick={() => {
             if (isEditing) {

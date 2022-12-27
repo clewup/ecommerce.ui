@@ -37,7 +37,7 @@ const AdvertisementTile: React.FC<IProps> = ({ advertisement }) => {
           size={"large"}
           type={"button"}
           variant={"contained"}
-          color={"info"}
+          color={"_black"}
           className={"discover-btn"}
         >
           DISCOVER

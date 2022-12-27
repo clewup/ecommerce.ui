@@ -1,6 +1,7 @@
 import { FieldAttributes } from "formik";
 import { InputLabel, MenuItem, Select } from "@mui/material";
 import React from "react";
+import { colors } from "../../../styles/colors";
 
 export interface ISelectOption {
   value: string;
@@ -37,7 +38,7 @@ const SelectInput: React.FC<IProps> = ({
         sx={{
           marginTop: 1,
           marginBottom: 1,
-          backgroundColor: "white",
+          backgroundColor: colors.WHITE,
           textAlign: "center",
           width: width ?? "100%",
         }}

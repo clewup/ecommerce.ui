@@ -5,7 +5,6 @@ import Input from "../../../atoms/Input/Input";
 import React from "react";
 import { Button } from "@mui/material";
 import { ICheckoutFormValues } from "../../../../types/IOrder";
-import { subheadingSize } from "../../../../enums/typography";
 
 interface IProps {
   formik: FormikProps<ICheckoutFormValues>;
@@ -15,7 +14,7 @@ interface IProps {
 const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
   return (
     <div id={"delivery-details"}>
-      <Subheading size={subheadingSize.SMALL}>Delivery Details</Subheading>
+      <Subheading align={"center"}>Delivery Details</Subheading>
       <Field
         name={"firstName"}
         component={Input}

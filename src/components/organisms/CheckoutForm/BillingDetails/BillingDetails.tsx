@@ -6,7 +6,6 @@ import Checkbox from "../../../atoms/Checkbox/Checkbox";
 import { Button } from "@mui/material";
 import React from "react";
 import { ICheckoutFormValues } from "../../../../types/IOrder";
-import { subheadingSize } from "../../../../enums/typography";
 
 interface IProps {
   formik: FormikProps<ICheckoutFormValues>;
@@ -16,7 +15,7 @@ interface IProps {
 const BillingDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
   return (
     <div id={"billing-details"}>
-      <Subheading size={subheadingSize.SMALL}>Billing Details</Subheading>
+      <Subheading align={"center"}>Billing Details</Subheading>
 
       <Field
         name={"cardNumber"}
