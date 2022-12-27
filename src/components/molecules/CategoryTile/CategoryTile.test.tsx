@@ -4,6 +4,7 @@ import CategoryTile from "./CategoryTile";
 import React from "react";
 import { mockedProductContext } from "../../../data/mockData/productContextData";
 import { ProductContext } from "../../../contexts/Product";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedUseNavigate = jest.fn();
 
@@ -14,7 +15,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("CategoryTile", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <CategoryTile category={"CATEGORY"} />
@@ -28,7 +29,7 @@ describe("CategoryTile", () => {
   });
 
   it("should render the category name", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <CategoryTile category={"CATEGORY"} />
@@ -43,7 +44,7 @@ describe("CategoryTile", () => {
   });
 
   it("should navigate to the store on click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <CategoryTile category={"CATEGORY"} />
@@ -62,7 +63,7 @@ describe("CategoryTile", () => {
   });
 
   it("should update the category query on click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <CategoryTile category={"CATEGORY"} />

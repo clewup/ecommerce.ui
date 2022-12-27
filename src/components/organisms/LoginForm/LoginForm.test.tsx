@@ -3,12 +3,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Formik } from "formik";
 import { initialLoginValues } from "../../../types/ILogin";
 import LoginForm from "./LoginForm";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedOnSubmit = jest.fn();
 
 describe("LoginForm", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Formik initialValues={initialLoginValues} onSubmit={mockedOnSubmit}>
           {(formik) => {
@@ -23,7 +24,7 @@ describe("LoginForm", () => {
   });
 
   it("should login the user on button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Formik initialValues={initialLoginValues} onSubmit={mockedOnSubmit}>
           {(formik) => {

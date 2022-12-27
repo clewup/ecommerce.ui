@@ -3,7 +3,6 @@ import { Field, Form, Formik, FormikHelpers, FormikProps } from "formik";
 import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button, Snackbar } from "@mui/material";
-import Subheading from "../../atoms/Subheading/Subheading";
 import React, { useContext, useEffect } from "react";
 import useImageUpload from "../../../hooks/useImageUpload";
 import AppError from "../../molecules/AppError/AppError";

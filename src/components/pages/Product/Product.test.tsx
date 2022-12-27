@@ -7,6 +7,7 @@ import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import { mockedUseCart } from "../../../data/mockData/useCartData";
 import React from "react";
 import { mockedError } from "../../../data/mockData/errorData";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
@@ -34,7 +35,7 @@ jest.mock("../../../hooks/useCart", () => {
 
 describe("Product", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Product />
       </Router>
@@ -45,7 +46,7 @@ describe("Product", () => {
   });
 
   it("should render the product image", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Product />
@@ -60,7 +61,7 @@ describe("Product", () => {
   });
 
   it("should render the product name", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Product />
@@ -75,7 +76,7 @@ describe("Product", () => {
   });
 
   it("should render the product description", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Product />
@@ -90,7 +91,7 @@ describe("Product", () => {
   });
 
   it("should render the product color", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Product />
@@ -105,7 +106,7 @@ describe("Product", () => {
   });
 
   it("should render the product price", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Product />
@@ -120,7 +121,7 @@ describe("Product", () => {
   });
 
   it("should render the add to cart button", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Product />
@@ -134,7 +135,7 @@ describe("Product", () => {
   });
 
   it("should add the product to the cart if logged in on button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Product />
@@ -150,7 +151,7 @@ describe("Product", () => {
   });
 
   it("should navigate to the login page if not logged in on button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Product />
       </Router>
@@ -166,7 +167,7 @@ describe("Product", () => {
 
   it("should render the loader when loading", () => {
     mockedUseProduct.isLoading = true;
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Product />
       </Router>
@@ -179,7 +180,7 @@ describe("Product", () => {
   it("should render the app error when there is an error", () => {
     // @ts-ignore
     mockedUseProduct.error = mockedError;
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Product />
       </Router>

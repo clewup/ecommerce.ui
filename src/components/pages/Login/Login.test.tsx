@@ -3,6 +3,7 @@ import Login from "./Login";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContext } from "../../../contexts/Auth";
 import { mockedAuthContext } from "../../../data/mockData/authContextData";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
@@ -12,7 +13,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("Login", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Login />
       </Router>
@@ -23,7 +24,7 @@ describe("Login", () => {
   });
 
   it("should navigate to the previous page on login", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Login />

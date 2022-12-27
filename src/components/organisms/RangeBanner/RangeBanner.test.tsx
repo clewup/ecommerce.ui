@@ -1,10 +1,11 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import { render } from "@testing-library/react";
 import RangeBanner from "./RangeBanner";
+import renderHelper from "../../../utils/renderHelper";
 
 describe("RangeBanner", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <RangeBanner />
       </Router>
@@ -15,7 +16,7 @@ describe("RangeBanner", () => {
   });
 
   it("should render three ranges", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <RangeBanner />
       </Router>

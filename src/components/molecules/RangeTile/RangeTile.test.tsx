@@ -5,6 +5,9 @@ import RangeTile from "./RangeTile";
 import { mockedProductContext } from "../../../data/mockData/productContextData";
 import { ProductContext } from "../../../contexts/Product";
 import { mockedRange } from "../../../data/mockData/rangeData";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "../../../styles/theme";
+import renderHelper from "../../../utils/renderHelper";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
@@ -15,7 +18,7 @@ const mockedUseNavigate = jest.fn();
 
 describe("RangeTile", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <RangeTile range={mockedRange} />
@@ -28,7 +31,7 @@ describe("RangeTile", () => {
   });
 
   it("should render the range name", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <RangeTile range={mockedRange} />
@@ -42,7 +45,7 @@ describe("RangeTile", () => {
   });
 
   it("should render the discover button", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <RangeTile range={mockedRange} />
@@ -56,7 +59,7 @@ describe("RangeTile", () => {
   });
 
   it("should navigate to the store on button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <RangeTile range={mockedRange} />
@@ -72,7 +75,7 @@ describe("RangeTile", () => {
   });
 
   it("should update the range query on click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <RangeTile range={mockedRange} />

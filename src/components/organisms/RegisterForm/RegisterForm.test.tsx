@@ -3,12 +3,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Formik } from "formik";
 import RegisterForm from "./RegisterForm";
 import { initialRegisterValues } from "../../../types/IRegister";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedOnSubmit = jest.fn();
 
 describe("RegisterForm", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Formik initialValues={initialRegisterValues} onSubmit={mockedOnSubmit}>
           {(formik) => {
@@ -25,7 +26,7 @@ describe("RegisterForm", () => {
   });
 
   it("should register the user on button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Formik initialValues={initialRegisterValues} onSubmit={mockedOnSubmit}>
           {(formik) => {

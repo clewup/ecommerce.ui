@@ -3,6 +3,7 @@ import { fireEvent, render } from "@testing-library/react";
 import Store from "./Store";
 import { mockedUseProductFilter } from "../../../data/mockData/useProductFilterData";
 import React from "react";
+import renderHelper from "../../../utils/renderHelper";
 
 jest.mock("../../../hooks/useProductFilter", () => {
   return {
@@ -21,7 +22,7 @@ const mockedUseStateFilterOpen: any = (initState: any) => [
 
 describe("Store", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Store />
       </Router>
@@ -32,7 +33,7 @@ describe("Store", () => {
   });
 
   it("should render the products", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Store />
       </Router>
@@ -43,7 +44,7 @@ describe("Store", () => {
   });
 
   it("should render the filter button", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Store />
       </Router>
@@ -55,7 +56,7 @@ describe("Store", () => {
 
   it("should open the product filter on filter button click", () => {
     jest.spyOn(React, "useState").mockImplementation(mockedUseStateFilterOpen);
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Store />
       </Router>
@@ -69,7 +70,7 @@ describe("Store", () => {
 
   it("should render the total amount of queried products", () => {
     jest.spyOn(React, "useState").mockImplementation(mockedUseStateFilterOpen);
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Store />
       </Router>

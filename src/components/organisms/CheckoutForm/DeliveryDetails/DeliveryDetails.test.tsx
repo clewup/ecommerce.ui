@@ -2,13 +2,14 @@ import { fireEvent, render, waitFor } from "@testing-library/react";
 import { Formik } from "formik";
 import { mockedCheckoutInitialValues } from "../../../../data/mockData/checkoutData";
 import DeliveryDetails from "./DeliveryDetails";
+import renderHelper from "../../../../utils/renderHelper";
 
 const mockedSetTabIndex = jest.fn();
 const mockedOnSubmit = jest.fn();
 
 describe("DeliveryDetails", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -26,7 +27,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render and pre populate the first name input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -45,7 +46,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render and pre populate the last name input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -64,7 +65,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render and pre populate the email input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -83,7 +84,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render and pre populate the line one input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -102,7 +103,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render and pre populate the line two input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -121,7 +122,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render and pre populate the line three input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -140,7 +141,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render and pre populate the postcode input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -159,7 +160,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render and pre populate the city input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -178,7 +179,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render and pre populate the county input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -197,7 +198,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render and pre populate the country input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -216,7 +217,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should render the continue button", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -237,7 +238,7 @@ describe("DeliveryDetails", () => {
   });
 
   it("should update the tab index on continue button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}

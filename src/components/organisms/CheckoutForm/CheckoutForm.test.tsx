@@ -3,6 +3,7 @@ import CheckoutForm from "./CheckoutForm";
 import { mockedUseCheckout } from "../../../data/mockData/useCheckoutData";
 import React from "react";
 import { mockedError } from "../../../data/mockData/errorData";
+import renderHelper from "../../../utils/renderHelper";
 
 jest.mock("../../../hooks/useCheckout", () => {
   return {
@@ -15,21 +16,21 @@ jest.mock("../../../hooks/useCheckout", () => {
 
 describe("CheckoutForm", () => {
   it("should render the component", () => {
-    const { container } = render(<CheckoutForm />);
+    const { container } = renderHelper(<CheckoutForm />);
     const component = container.querySelector("#checkout-form") as Element;
 
     expect(component).toBeInTheDocument();
   });
 
   it("should render the tabs", () => {
-    const { container } = render(<CheckoutForm />);
+    const { container } = renderHelper(<CheckoutForm />);
     const tabs = container.querySelector('[role="tablist"]');
 
     expect(tabs).toBeInTheDocument();
   });
 
   it("should update the tab index on tab click", () => {
-    const { container } = render(<CheckoutForm />);
+    const { container } = renderHelper(<CheckoutForm />);
     const tabs = container.querySelectorAll('[role="tab"]');
     const billingTab = tabs[1] as Element;
 
@@ -45,7 +46,7 @@ describe("CheckoutForm", () => {
   it("should render the app error when there is an error", () => {
     // @ts-ignore
     mockedUseCheckout.error = mockedError;
-    const { container } = render(<CheckoutForm />);
+    const { container } = renderHelper(<CheckoutForm />);
 
     const appError = container.querySelector("#app-error") as Element;
 

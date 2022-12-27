@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AdvertisementTile from "./AdvertisementTile";
 import { IAdvertisement } from "../../../types/IAdvertisement";
+import renderHelper from "../../../utils/renderHelper";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
@@ -19,7 +20,7 @@ const mockAdvertisement: IAdvertisement = {
 
 describe("AdvertisementTile", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AdvertisementTile advertisement={mockAdvertisement} />
       </Router>
@@ -30,7 +31,7 @@ describe("AdvertisementTile", () => {
   });
 
   it("should render the advertisement title", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AdvertisementTile advertisement={mockAdvertisement} />
       </Router>
@@ -42,7 +43,7 @@ describe("AdvertisementTile", () => {
   });
 
   it("should render the advertisement caption", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AdvertisementTile advertisement={mockAdvertisement} />
       </Router>
@@ -54,7 +55,7 @@ describe("AdvertisementTile", () => {
   });
 
   it("should render the discover button", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AdvertisementTile advertisement={mockAdvertisement} />
       </Router>
@@ -66,7 +67,7 @@ describe("AdvertisementTile", () => {
   });
 
   it("should navigate to the store on button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AdvertisementTile advertisement={mockAdvertisement} />
       </Router>

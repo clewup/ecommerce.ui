@@ -5,6 +5,7 @@ import { mockedProductContext } from "../../../data/mockData/productContextData"
 import { ProductContext } from "../../../contexts/Product";
 import { mockedUseProductFilter } from "../../../data/mockData/useProductFilterData";
 import { mockedError } from "../../../data/mockData/errorData";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockToggleDrawer = jest.fn().mockReturnValue(true);
 
@@ -24,7 +25,7 @@ jest.mock("../../../hooks/useProductFilter", () => {
 
 describe("ProductFilter", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -35,7 +36,7 @@ describe("ProductFilter", () => {
   });
 
   it("should render an empty search bar", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -47,7 +48,7 @@ describe("ProductFilter", () => {
   });
 
   it("should update the search bar on text input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -59,7 +60,7 @@ describe("ProductFilter", () => {
   });
 
   it("should update the search query on 'enter' key down", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -72,7 +73,7 @@ describe("ProductFilter", () => {
   });
 
   it("should render the sort by dropdown", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -85,7 +86,7 @@ describe("ProductFilter", () => {
   });
 
   it("should render the sort by dropdown with a default value of 'select'", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -98,7 +99,7 @@ describe("ProductFilter", () => {
   });
 
   it("should render the category dropdown", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -111,7 +112,7 @@ describe("ProductFilter", () => {
   });
 
   it("should render the category dropdown with a default value of 'select'", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -124,7 +125,7 @@ describe("ProductFilter", () => {
   });
 
   it("should render the range dropdown", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -137,7 +138,7 @@ describe("ProductFilter", () => {
   });
 
   it("should render the range dropdown with a default value of 'select'", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -150,7 +151,7 @@ describe("ProductFilter", () => {
   });
 
   it("should render the price slider", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -161,7 +162,7 @@ describe("ProductFilter", () => {
   });
 
   it("should render the sale checkbox", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -172,7 +173,7 @@ describe("ProductFilter", () => {
   });
 
   it("should update the sale query on click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -185,7 +186,7 @@ describe("ProductFilter", () => {
   });
 
   it("should render the stock checkbox", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -196,7 +197,7 @@ describe("ProductFilter", () => {
   });
 
   it("should update the sale query on click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>
@@ -211,7 +212,7 @@ describe("ProductFilter", () => {
   it("should render the app error when there is an error", () => {
     // @ts-ignore
     mockedUseProductFilter.error = mockedError;
-    const { container } = render(
+    const { container } = renderHelper(
       <ProductContext.Provider value={mockedProductContext}>
         <ProductFilter toggleDrawer={mockToggleDrawer} />
       </ProductContext.Provider>

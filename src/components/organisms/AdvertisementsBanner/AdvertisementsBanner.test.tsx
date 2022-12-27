@@ -1,10 +1,11 @@
 import AdvertisementsBanner from "./AdvertisementsBanner";
 import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
+import renderHelper from "../../../utils/renderHelper";
 
 describe("AdvertisementsBanner", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AdvertisementsBanner />
       </Router>
@@ -17,7 +18,7 @@ describe("AdvertisementsBanner", () => {
   });
 
   it("should render three advertisements", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AdvertisementsBanner />
       </Router>

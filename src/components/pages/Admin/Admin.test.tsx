@@ -8,6 +8,7 @@ import {
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import Admin from "./Admin";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
@@ -17,7 +18,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("Admin", () => {
   it("should render the component if developer", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedDeveloperAuthContext}>
           <Admin />
@@ -30,7 +31,7 @@ describe("Admin", () => {
   });
 
   it("should render the component if employee", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedEmployeeAuthContext}>
           <Admin />
@@ -43,7 +44,7 @@ describe("Admin", () => {
   });
 
   it("should render the app error if not developer or employee", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Admin />
@@ -59,7 +60,7 @@ describe("Admin", () => {
   });
 
   it("should navigate to the login page if not logged in", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Admin />
       </Router>
@@ -70,7 +71,7 @@ describe("Admin", () => {
   });
 
   it("should render the add product tab by default", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedDeveloperAuthContext}>
           <Admin />
@@ -85,7 +86,7 @@ describe("Admin", () => {
   });
 
   it("should render the tabs", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedDeveloperAuthContext}>
           <Admin />
@@ -98,7 +99,7 @@ describe("Admin", () => {
   });
 
   it("should update the tab index on tab click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedDeveloperAuthContext}>
           <Admin />

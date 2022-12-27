@@ -4,6 +4,7 @@ import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import React from "react";
 import Account from "./Account";
 import { fireEvent, render } from "@testing-library/react";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
@@ -13,7 +14,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("Account", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Account />
@@ -26,7 +27,7 @@ describe("Account", () => {
   });
 
   it("should navigate to the login page if not logged in", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Account />
       </Router>
@@ -37,7 +38,7 @@ describe("Account", () => {
   });
 
   it("should render the account form tab by default", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Account />
@@ -52,7 +53,7 @@ describe("Account", () => {
   });
 
   it("should render the tabs", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Account />
@@ -65,7 +66,7 @@ describe("Account", () => {
   });
 
   it("should update the tab index on tab click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Account />

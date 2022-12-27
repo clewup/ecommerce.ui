@@ -5,10 +5,11 @@ import {
   mockedOrderProduct,
   mockedDiscountedOrderProduct,
 } from "../../../data/mockData/orderProductData";
+import renderHelper from "../../../utils/renderHelper";
 
 describe("OrderProduct", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
@@ -20,7 +21,7 @@ describe("OrderProduct", () => {
   });
 
   it("should render the product image", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
@@ -33,7 +34,7 @@ describe("OrderProduct", () => {
   });
 
   it("should render the product name", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
@@ -49,7 +50,7 @@ describe("OrderProduct", () => {
     mockedOrderProduct.name =
       "ORDER_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
 
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
@@ -62,7 +63,7 @@ describe("OrderProduct", () => {
   });
 
   it("should render the product color", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
@@ -75,7 +76,7 @@ describe("OrderProduct", () => {
   });
 
   it("should render the product price", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <OrderProduct orderProduct={mockedOrderProduct} />
       </Router>
@@ -88,7 +89,7 @@ describe("OrderProduct", () => {
   });
 
   it("should render the product discounted price if discounted", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <OrderProduct orderProduct={mockedDiscountedOrderProduct} />
       </Router>

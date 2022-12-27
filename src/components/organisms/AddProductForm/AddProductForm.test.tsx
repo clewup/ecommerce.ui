@@ -3,12 +3,13 @@ import { Formik } from "formik";
 import React from "react";
 import AddProductForm from "./AddProductForm";
 import { mockedProductInitialValues } from "../../../data/mockData/productData";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedOnSubmit = jest.fn();
 
 describe("AddProductForm", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedProductInitialValues}
         onSubmit={mockedOnSubmit}
@@ -25,7 +26,7 @@ describe("AddProductForm", () => {
   });
 
   it("should submit the form on add product", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedProductInitialValues}
         onSubmit={mockedOnSubmit}

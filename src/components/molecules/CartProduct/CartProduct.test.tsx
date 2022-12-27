@@ -6,6 +6,7 @@ import {
   mockedDiscountedCartProduct,
 } from "../../../data/mockData/cartProductData";
 import { mockedUseCart } from "../../../data/mockData/useCartData";
+import renderHelper from "../../../utils/renderHelper";
 
 jest.mock("../../../hooks/useCart", () => {
   return {
@@ -18,7 +19,7 @@ jest.mock("../../../hooks/useCart", () => {
 
 describe("CartProduct", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
@@ -29,7 +30,7 @@ describe("CartProduct", () => {
   });
 
   it("should render the product image", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
@@ -41,7 +42,7 @@ describe("CartProduct", () => {
   });
 
   it("should render the product name", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
@@ -56,7 +57,7 @@ describe("CartProduct", () => {
     mockedCartProduct.name =
       "CART_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
 
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
@@ -68,7 +69,7 @@ describe("CartProduct", () => {
   });
 
   it("should render the product color", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
@@ -80,7 +81,7 @@ describe("CartProduct", () => {
   });
 
   it("should render the product price", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
@@ -92,7 +93,7 @@ describe("CartProduct", () => {
   });
 
   it("should render the product discounted price if discounted", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <CartProduct cartProduct={mockedDiscountedCartProduct} />
       </Router>
@@ -107,7 +108,7 @@ describe("CartProduct", () => {
   });
 
   it("should render the remove from cart button", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>
@@ -120,7 +121,7 @@ describe("CartProduct", () => {
   });
 
   it("should remove the product from the cart on button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <CartProduct cartProduct={mockedCartProduct} />
       </Router>

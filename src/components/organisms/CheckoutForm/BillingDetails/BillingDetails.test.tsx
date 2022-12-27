@@ -2,13 +2,14 @@ import { fireEvent, render, waitFor } from "@testing-library/react";
 import { Formik } from "formik";
 import BillingDetails from "./BillingDetails";
 import { mockedCheckoutInitialValues } from "../../../../data/mockData/checkoutData";
+import renderHelper from "../../../../utils/renderHelper";
 
 const mockedSetTabIndex = jest.fn();
 const mockedOnSubmit = jest.fn();
 
 describe("BillingDetails", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -26,7 +27,7 @@ describe("BillingDetails", () => {
   });
 
   it("should render and pre populate the card number input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -47,7 +48,7 @@ describe("BillingDetails", () => {
   });
 
   it("should render and pre populate the expiry month input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -68,7 +69,7 @@ describe("BillingDetails", () => {
   });
 
   it("should render and pre populate the expiry year input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -89,7 +90,7 @@ describe("BillingDetails", () => {
   });
 
   it("should render and pre populate the cvc input", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -108,7 +109,7 @@ describe("BillingDetails", () => {
   });
 
   it("should render and pre populate the billing address checkbox", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -127,7 +128,7 @@ describe("BillingDetails", () => {
   });
 
   it("should render the complete purchase button", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -148,7 +149,7 @@ describe("BillingDetails", () => {
   });
 
   it("should submit the form on complete purchase button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -172,7 +173,7 @@ describe("BillingDetails", () => {
   });
 
   it("should update the tab index on complete purchase button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}

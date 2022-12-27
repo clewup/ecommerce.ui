@@ -1,7 +1,6 @@
 import "./all-orders.scss";
 import useOrder from "../../../hooks/useOrder";
 import { useEffect } from "react";
-import Subheading from "../../atoms/Subheading/Subheading";
 import AppError from "../../molecules/AppError/AppError";
 import Loader from "../../atoms/Loader/Loader";
 import Text from "../../atoms/Text/Text";

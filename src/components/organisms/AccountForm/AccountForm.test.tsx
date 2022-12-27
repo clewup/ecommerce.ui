@@ -3,6 +3,9 @@ import React from "react";
 import AccountForm from "./AccountForm";
 import { Formik } from "formik";
 import { mockedUser } from "data/mockData/userData";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "../../../styles/theme";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedOnSubmit = jest.fn();
 
@@ -13,7 +16,7 @@ function hasInputValue(e: TestElement, inputValue: string) {
 
 describe("AccountForm", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return <AccountForm formik={formik} user={mockedUser} />;
@@ -27,7 +30,7 @@ describe("AccountForm", () => {
   });
 
   it("should render with pre populated user information", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return <AccountForm formik={formik} user={mockedUser} />;
@@ -48,7 +51,7 @@ describe("AccountForm", () => {
   });
 
   it("should render the inputs disabled if isEditing equals false", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return <AccountForm formik={formik} user={mockedUser} />;
@@ -69,7 +72,7 @@ describe("AccountForm", () => {
   });
 
   it("should enable the inputs when the edit button is clicked", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return <AccountForm formik={formik} user={mockedUser} />;
@@ -93,7 +96,7 @@ describe("AccountForm", () => {
   });
 
   it("should keep the save button disabled when there are no value changes", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return <AccountForm formik={formik} user={mockedUser} />;
@@ -110,7 +113,7 @@ describe("AccountForm", () => {
   });
 
   it("should enable the save button when there are value changes", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return <AccountForm formik={formik} user={mockedUser} />;
@@ -136,7 +139,7 @@ describe("AccountForm", () => {
   });
 
   it("should submit the form on save", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return <AccountForm formik={formik} user={mockedUser} />;

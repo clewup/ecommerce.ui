@@ -4,6 +4,7 @@ import React from "react";
 import Checkout from "./Checkout";
 import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import { AuthContext } from "../../../contexts/Auth";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
@@ -13,7 +14,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("Cart", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <Checkout />
@@ -26,7 +27,7 @@ describe("Cart", () => {
   });
 
   it("should navigate to the login page if not logged in", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Checkout />
       </Router>

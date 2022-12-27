@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import TrendingProducts from "./TrendingProducts";
 import { mockedUseStatistics } from "data/mockData/useStatisticsData";
 import { mockedError } from "../../../data/mockData/errorData";
+import renderHelper from "../../../utils/renderHelper";
 
 jest.mock("../../../hooks/useStatistics", () => {
   return {
@@ -15,7 +16,7 @@ jest.mock("../../../hooks/useStatistics", () => {
 
 describe("TrendingProducts", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <TrendingProducts />
       </Router>
@@ -26,7 +27,7 @@ describe("TrendingProducts", () => {
   });
 
   it("should fetch the popular products", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <TrendingProducts />
       </Router>
@@ -35,7 +36,7 @@ describe("TrendingProducts", () => {
   });
 
   it("should render the products", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <TrendingProducts />
       </Router>
@@ -47,7 +48,7 @@ describe("TrendingProducts", () => {
 
   it("should render the loader when loading", () => {
     mockedUseStatistics.isLoading = true;
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <TrendingProducts />
       </Router>
@@ -60,7 +61,7 @@ describe("TrendingProducts", () => {
   it("should render the app error when there is an error", () => {
     // @ts-ignore
     mockedUseStatistics.error = mockedError;
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <TrendingProducts />
       </Router>

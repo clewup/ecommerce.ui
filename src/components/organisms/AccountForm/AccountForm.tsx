@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import "./account-form.scss";
 import Text from "../../atoms/Text/Text";
 import Input from "../../atoms/Input/Input";
-import Subheading from "../../atoms/Subheading/Subheading";
 import { Button } from "@mui/material";
 
 interface IProps {

@@ -3,6 +3,7 @@ import CategoriesBanner from "./CategoriesBanner";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ProductContext } from "../../../contexts/Product";
 import { mockedProductContext } from "../../../data/mockData/productContextData";
+import renderHelper from "../../../utils/renderHelper";
 
 const mockedUseNavigate = jest.fn();
 
@@ -13,7 +14,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("CategoriesBanner", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <CategoriesBanner />
@@ -26,7 +27,7 @@ describe("CategoriesBanner", () => {
   });
 
   it("should render the categories", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <CategoriesBanner />
@@ -40,7 +41,7 @@ describe("CategoriesBanner", () => {
 
   it("should render the loader when loading", () => {
     mockedProductContext.categories = [];
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductContext.Provider value={mockedProductContext}>
           <CategoriesBanner />

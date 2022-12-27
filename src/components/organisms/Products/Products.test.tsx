@@ -3,10 +3,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Products from "./Products";
 import { mockedProducts } from "../../../data/mockData/productData";
 import { mockedError } from "../../../data/mockData/errorData";
+import renderHelper from "../../../utils/renderHelper";
 
 describe("products", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Products products={mockedProducts} isLoading={false} error={null} />
       </Router>
@@ -17,7 +18,7 @@ describe("products", () => {
   });
 
   it("should render the products", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Products products={mockedProducts} isLoading={false} error={null} />
       </Router>
@@ -28,7 +29,7 @@ describe("products", () => {
   });
 
   it("should render the loader when loading", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Products products={[]} isLoading={true} error={null} />
       </Router>
@@ -39,7 +40,7 @@ describe("products", () => {
   });
 
   it("should render the app error when there is an error", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <Products products={[]} isLoading={false} error={mockedError} />
       </Router>

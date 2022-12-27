@@ -2,7 +2,7 @@ import "./category-tile.scss";
 import Subheading from "../../atoms/Subheading/Subheading";
 import { useNavigate } from "react-router-dom";
 import { subheadingSize } from "../../../enums/typography";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { ProductContext } from "../../../contexts/Product";
 
 interface IProps {

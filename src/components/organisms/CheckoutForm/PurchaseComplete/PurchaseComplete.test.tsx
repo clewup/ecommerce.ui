@@ -4,12 +4,13 @@ import { mockedCheckoutInitialValues } from "../../../../data/mockData/checkoutD
 import PurchaseComplete from "./PurchaseComplete";
 import { mockedOrder } from "../../../../data/mockData/orderData";
 import { IOrder } from "../../../../types/IOrder";
+import renderHelper from "../../../../utils/renderHelper";
 
 const mockedOnSubmit = jest.fn();
 
 describe("PurchaseComplete", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -25,7 +26,7 @@ describe("PurchaseComplete", () => {
   });
 
   it("should render the order id", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -43,7 +44,7 @@ describe("PurchaseComplete", () => {
   });
 
   it("should render the order cart items", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -63,7 +64,7 @@ describe("PurchaseComplete", () => {
   });
 
   it("should render the order total", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}
@@ -80,7 +81,7 @@ describe("PurchaseComplete", () => {
   });
 
   it("should render the loader when loading", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Formik
         initialValues={mockedCheckoutInitialValues}
         onSubmit={mockedOnSubmit}

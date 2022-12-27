@@ -10,6 +10,7 @@ import {
 } from "../../../data/mockData/productData";
 import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import { mockedUseCart } from "../../../data/mockData/useCartData";
+import renderHelper from "../../../utils/renderHelper";
 
 jest.mock("../../../hooks/useCart", () => {
   return {
@@ -28,7 +29,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("ProductTile", () => {
   it("should render the component", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <ProductTile product={mockedProduct} />
@@ -42,7 +43,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the product image", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <ProductTile product={mockedProduct} />
@@ -57,7 +58,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the product name", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <ProductTile product={mockedProduct} />
@@ -72,7 +73,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the product color", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <ProductTile product={mockedProduct} />
@@ -87,7 +88,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the product price", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <ProductTile product={mockedProduct} />
@@ -103,7 +104,7 @@ describe("ProductTile", () => {
 
   it("should render the product price to two decimal places", () => {
     mockedProduct.price = 12.345;
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <ProductTile product={mockedProduct} />
@@ -118,7 +119,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the product discounted price if discounted", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <ProductTile product={mockedDiscountedProduct} />
@@ -136,7 +137,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the add to cart button", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <ProductTile product={mockedProduct} />
@@ -150,7 +151,7 @@ describe("ProductTile", () => {
   });
 
   it("should disable the add to cart button when stock equals 0", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <ProductTile product={mockedOutOfStockProduct} />
@@ -165,7 +166,7 @@ describe("ProductTile", () => {
   });
 
   it("should add the product to the cart if logged in on button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <AuthContext.Provider value={mockedAuthContext}>
           <ProductTile product={mockedProduct} />
@@ -181,7 +182,7 @@ describe("ProductTile", () => {
   });
 
   it("should navigate to the login page if not logged in on button click", () => {
-    const { container } = render(
+    const { container } = renderHelper(
       <Router>
         <ProductTile product={mockedProduct} />
       </Router>
