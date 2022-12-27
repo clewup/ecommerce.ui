@@ -17,6 +17,7 @@ interface IProps {
 
 const AdvertisementTile: React.FC<IProps> = ({ advertisement }) => {
   const navigate = useNavigate();
+
   return (
     <div
       id={"advertisement-tile"}
@@ -27,16 +28,10 @@ const AdvertisementTile: React.FC<IProps> = ({ advertisement }) => {
       }}
     >
       <div className={"advertisement-information"}>
-        <Subheading
-          color={advertisement.titleColor}
-          size={subheadingSize.LARGE}
-          padding={fontPadding.NONE}
-        >
+        <Subheading size={subheadingSize.LARGE} padding={fontPadding.NONE}>
           {advertisement.title}
         </Subheading>
-        <Text size={textSize.LARGE} color={advertisement.captionColor}>
-          {advertisement.caption}
-        </Text>
+        <Text size={textSize.LARGE}>{advertisement.caption}</Text>
         <Button
           onClick={() => navigate("store")}
           size={"large"}
