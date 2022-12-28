@@ -35,24 +35,14 @@ jest.mock("../../../hooks/useCart", () => {
 
 describe("Product", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <Product />
-      </Router>
-    );
+    const { container } = renderHelper(<Product />);
     const component = container.querySelector("#product");
 
     expect(component).toBeInTheDocument();
   });
 
   it("should render the product image", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Product />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Product />);
 
     const image = screen.getByRole("img") as Element;
 
@@ -61,13 +51,7 @@ describe("Product", () => {
   });
 
   it("should render the product name", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Product />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Product />);
 
     const name = container.querySelector(".subheading") as Element;
 
@@ -76,13 +60,7 @@ describe("Product", () => {
   });
 
   it("should render the product description", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Product />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Product />);
 
     const description = container.querySelectorAll(".text")[0] as Element;
 
@@ -91,13 +69,7 @@ describe("Product", () => {
   });
 
   it("should render the product color", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Product />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Product />);
 
     const color = container.querySelectorAll(".text")[1] as Element;
 
@@ -106,13 +78,7 @@ describe("Product", () => {
   });
 
   it("should render the product price", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Product />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Product />);
 
     const price = container.querySelectorAll(".text")[2] as Element;
 
@@ -121,13 +87,7 @@ describe("Product", () => {
   });
 
   it("should render the add to cart button", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Product />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Product />);
 
     const button = container.querySelector(".add-to-cart-btn") as Element;
 
@@ -135,13 +95,7 @@ describe("Product", () => {
   });
 
   it("should add the product to the cart if logged in on button click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Product />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Product />);
 
     const button = container.querySelector(".add-to-cart-btn") as Element;
 
@@ -151,11 +105,8 @@ describe("Product", () => {
   });
 
   it("should navigate to the login page if not logged in on button click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <Product />
-      </Router>
-    );
+    mockedAuthContext.isAuthenticated = false;
+    const { container } = renderHelper(<Product />);
 
     const button = container.querySelector(".add-to-cart-btn") as Element;
 
@@ -167,11 +118,7 @@ describe("Product", () => {
 
   it("should render the loader when loading", () => {
     mockedUseProduct.isLoading = true;
-    const { container } = renderHelper(
-      <Router>
-        <Product />
-      </Router>
-    );
+    const { container } = renderHelper(<Product />);
     const loader = container.querySelector("#loader") as Element;
 
     expect(loader).toBeInTheDocument();
@@ -180,11 +127,7 @@ describe("Product", () => {
   it("should render the app error when there is an error", () => {
     // @ts-ignore
     mockedUseProduct.error = mockedError;
-    const { container } = renderHelper(
-      <Router>
-        <Product />
-      </Router>
-    );
+    const { container } = renderHelper(<Product />);
     const appError = container.querySelector("#app-error") as Element;
 
     expect(appError).toBeInTheDocument();

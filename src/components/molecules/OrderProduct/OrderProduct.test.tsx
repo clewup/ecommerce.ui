@@ -10,9 +10,7 @@ import renderHelper from "../../../utils/renderHelper";
 describe("OrderProduct", () => {
   it("should render the component", () => {
     const { container } = renderHelper(
-      <Router>
-        <OrderProduct orderProduct={mockedOrderProduct} />
-      </Router>
+      <OrderProduct orderProduct={mockedOrderProduct} />
     );
 
     const component = container.querySelector("#order-product") as Element;
@@ -22,9 +20,7 @@ describe("OrderProduct", () => {
 
   it("should render the product image", () => {
     const { container } = renderHelper(
-      <Router>
-        <OrderProduct orderProduct={mockedOrderProduct} />
-      </Router>
+      <OrderProduct orderProduct={mockedOrderProduct} />
     );
 
     const image = screen.getByRole("img") as Element;
@@ -35,9 +31,7 @@ describe("OrderProduct", () => {
 
   it("should render the product name", () => {
     const { container } = renderHelper(
-      <Router>
-        <OrderProduct orderProduct={mockedOrderProduct} />
-      </Router>
+      <OrderProduct orderProduct={mockedOrderProduct} />
     );
 
     const name = container.querySelectorAll(".text")[0] as Element;
@@ -51,9 +45,7 @@ describe("OrderProduct", () => {
       "ORDER_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
 
     const { container } = renderHelper(
-      <Router>
-        <OrderProduct orderProduct={mockedOrderProduct} />
-      </Router>
+      <OrderProduct orderProduct={mockedOrderProduct} />
     );
 
     const name = container.querySelectorAll(".text")[0] as Element;
@@ -64,9 +56,7 @@ describe("OrderProduct", () => {
 
   it("should render the product color", () => {
     const { container } = renderHelper(
-      <Router>
-        <OrderProduct orderProduct={mockedOrderProduct} />
-      </Router>
+      <OrderProduct orderProduct={mockedOrderProduct} />
     );
 
     const color = container.querySelectorAll(".text")[1] as Element;
@@ -77,9 +67,7 @@ describe("OrderProduct", () => {
 
   it("should render the product price", () => {
     const { container } = renderHelper(
-      <Router>
-        <OrderProduct orderProduct={mockedOrderProduct} />
-      </Router>
+      <OrderProduct orderProduct={mockedOrderProduct} />
     );
 
     const price = container.querySelectorAll(".text")[2] as Element;
@@ -90,9 +78,7 @@ describe("OrderProduct", () => {
 
   it("should render the product discounted price if discounted", () => {
     const { container } = renderHelper(
-      <Router>
-        <OrderProduct orderProduct={mockedDiscountedOrderProduct} />
-      </Router>
+      <OrderProduct orderProduct={mockedDiscountedOrderProduct} />
     );
 
     const discountedPrice = container.querySelectorAll(".text")[2] as Element;

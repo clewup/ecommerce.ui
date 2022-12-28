@@ -5,22 +5,14 @@ import renderHelper from "../../../utils/renderHelper";
 
 describe("RangeBanner", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <RangeBanner />
-      </Router>
-    );
+    const { container } = renderHelper(<RangeBanner />);
     const component = container.querySelector("#range-banner");
 
     expect(component).toBeInTheDocument();
   });
 
   it("should render three ranges", () => {
-    const { container } = renderHelper(
-      <Router>
-        <RangeBanner />
-      </Router>
-    );
+    const { container } = renderHelper(<RangeBanner />);
     const ranges = container.querySelectorAll("#range-tile");
 
     expect(ranges).toHaveLength(3);

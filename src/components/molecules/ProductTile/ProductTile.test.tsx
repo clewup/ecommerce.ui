@@ -29,13 +29,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("ProductTile", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <ProductTile product={mockedProduct} />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
 
     const component = container.querySelector("#product-tile") as Element;
 
@@ -43,13 +37,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the product image", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <ProductTile product={mockedProduct} />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
 
     const image = screen.getByRole("img") as Element;
 
@@ -58,13 +46,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the product name", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <ProductTile product={mockedProduct} />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
 
     const name = container.querySelector(".product-title") as Element;
 
@@ -73,13 +55,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the product color", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <ProductTile product={mockedProduct} />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
 
     const color = container.querySelectorAll(".text")[0] as Element;
 
@@ -88,13 +64,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the product price", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <ProductTile product={mockedProduct} />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
 
     const price = container.querySelectorAll(".text")[1] as Element;
 
@@ -104,13 +74,7 @@ describe("ProductTile", () => {
 
   it("should render the product price to two decimal places", () => {
     mockedProduct.price = 12.345;
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <ProductTile product={mockedProduct} />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
 
     const price = container.querySelectorAll(".text")[1] as Element;
 
@@ -120,11 +84,7 @@ describe("ProductTile", () => {
 
   it("should render the product discounted price if discounted", () => {
     const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <ProductTile product={mockedDiscountedProduct} />
-        </AuthContext.Provider>
-      </Router>
+      <ProductTile product={mockedDiscountedProduct} />
     );
 
     const discountedPrice = container.querySelectorAll(".text")[1] as Element;
@@ -137,13 +97,7 @@ describe("ProductTile", () => {
   });
 
   it("should render the add to cart button", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <ProductTile product={mockedProduct} />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
 
     const button = container.querySelector(".add-to-cart-btn") as Element;
 
@@ -152,11 +106,7 @@ describe("ProductTile", () => {
 
   it("should disable the add to cart button when stock equals 0", () => {
     const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <ProductTile product={mockedOutOfStockProduct} />
-        </AuthContext.Provider>
-      </Router>
+      <ProductTile product={mockedOutOfStockProduct} />
     );
 
     const button = container.querySelector(".add-to-cart-btn") as Element;
@@ -166,13 +116,7 @@ describe("ProductTile", () => {
   });
 
   it("should add the product to the cart if logged in on button click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <ProductTile product={mockedProduct} />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
 
     const button = container.querySelector(".add-to-cart-btn") as Element;
 
@@ -182,11 +126,8 @@ describe("ProductTile", () => {
   });
 
   it("should navigate to the login page if not logged in on button click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductTile product={mockedProduct} />
-      </Router>
-    );
+    mockedAuthContext.isAuthenticated = false;
+    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
 
     const button = container.querySelector(".add-to-cart-btn") as Element;
 

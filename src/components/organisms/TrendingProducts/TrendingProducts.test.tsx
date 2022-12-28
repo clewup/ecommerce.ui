@@ -16,31 +16,19 @@ jest.mock("../../../hooks/useStatistics", () => {
 
 describe("TrendingProducts", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <TrendingProducts />
-      </Router>
-    );
+    const { container } = renderHelper(<TrendingProducts />);
     const component = container.querySelector("#trending-products") as Element;
 
     expect(component).toBeInTheDocument();
   });
 
   it("should fetch the popular products", () => {
-    const { container } = renderHelper(
-      <Router>
-        <TrendingProducts />
-      </Router>
-    );
+    const { container } = renderHelper(<TrendingProducts />);
     expect(mockedUseStatistics.getMostPopular).toHaveBeenCalled();
   });
 
   it("should render the products", () => {
-    const { container } = renderHelper(
-      <Router>
-        <TrendingProducts />
-      </Router>
-    );
+    const { container } = renderHelper(<TrendingProducts />);
     const products = container.querySelectorAll("#product-tile");
 
     expect(products).toHaveLength(3);
@@ -48,11 +36,7 @@ describe("TrendingProducts", () => {
 
   it("should render the loader when loading", () => {
     mockedUseStatistics.isLoading = true;
-    const { container } = renderHelper(
-      <Router>
-        <TrendingProducts />
-      </Router>
-    );
+    const { container } = renderHelper(<TrendingProducts />);
     const loader = container.querySelector("#loader") as Element;
 
     expect(loader).toBeInTheDocument();
@@ -61,11 +45,7 @@ describe("TrendingProducts", () => {
   it("should render the app error when there is an error", () => {
     // @ts-ignore
     mockedUseStatistics.error = mockedError;
-    const { container } = renderHelper(
-      <Router>
-        <TrendingProducts />
-      </Router>
-    );
+    const { container } = renderHelper(<TrendingProducts />);
     const appError = container.querySelector("#app-error") as Element;
 
     expect(appError).toBeInTheDocument();

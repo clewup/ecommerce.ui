@@ -18,26 +18,14 @@ const mockedUseNavigate = jest.fn();
 
 describe("RangeTile", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <RangeTile range={mockedRange} />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<RangeTile range={mockedRange} />);
     const component = container.querySelector("#range-tile") as Element;
 
     expect(component).toBeInTheDocument();
   });
 
   it("should render the range name", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <RangeTile range={mockedRange} />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<RangeTile range={mockedRange} />);
     const name = container.querySelector(".subheading") as Element;
 
     expect(name).toBeInTheDocument();
@@ -45,13 +33,7 @@ describe("RangeTile", () => {
   });
 
   it("should render the discover button", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <RangeTile range={mockedRange} />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<RangeTile range={mockedRange} />);
     const button = container.querySelector('[type="button"]') as Element;
 
     expect(button).toBeInTheDocument();
@@ -59,13 +41,7 @@ describe("RangeTile", () => {
   });
 
   it("should navigate to the store on button click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <RangeTile range={mockedRange} />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<RangeTile range={mockedRange} />);
     const button = container.querySelector('[type="button"]') as Element;
 
     fireEvent.click(button);
@@ -75,13 +51,7 @@ describe("RangeTile", () => {
   });
 
   it("should update the range query on click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <RangeTile range={mockedRange} />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<RangeTile range={mockedRange} />);
     const button = container.querySelector('[type="button"]') as Element;
 
     fireEvent.click(button);

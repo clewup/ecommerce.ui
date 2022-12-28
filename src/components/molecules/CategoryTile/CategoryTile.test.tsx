@@ -15,13 +15,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("CategoryTile", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <CategoryTile category={"CATEGORY"} />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CategoryTile category={"CATEGORY"} />);
 
     const component = container.querySelector("#category-tile") as Element;
 
@@ -29,13 +23,7 @@ describe("CategoryTile", () => {
   });
 
   it("should render the category name", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <CategoryTile category={"CATEGORY"} />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CategoryTile category={"CATEGORY"} />);
 
     const name = container.querySelector(".subheading") as Element;
 
@@ -44,13 +32,7 @@ describe("CategoryTile", () => {
   });
 
   it("should navigate to the store on click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <CategoryTile category={"CATEGORY"} />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CategoryTile category={"CATEGORY"} />);
 
     const tile = container.querySelector("#category-tile") as Element;
 
@@ -63,13 +45,7 @@ describe("CategoryTile", () => {
   });
 
   it("should update the category query on click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <CategoryTile category={"CATEGORY"} />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CategoryTile category={"CATEGORY"} />);
 
     const tile = container.querySelector("#category-tile") as Element;
 

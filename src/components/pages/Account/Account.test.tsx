@@ -14,37 +14,22 @@ jest.mock("react-router-dom", () => ({
 
 describe("Account", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Account />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Account />);
     const component = container.querySelector("#account");
 
     expect(component).toBeInTheDocument();
   });
 
   it("should navigate to the login page if not logged in", () => {
-    const { container } = renderHelper(
-      <Router>
-        <Account />
-      </Router>
-    );
+    mockedAuthContext.isAuthenticated = false;
+    const { container } = renderHelper(<Account />);
 
     expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith("/login");
   });
 
   it("should render the account form tab by default", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Account />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Account />);
     const accountForm = container.querySelector("#account-form");
     const accountOrders = container.querySelector("#account-orders");
 
@@ -53,26 +38,14 @@ describe("Account", () => {
   });
 
   it("should render the tabs", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Account />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Account />);
     const tabs = container.querySelector('[role="tablist"]');
 
     expect(tabs).toBeInTheDocument();
   });
 
   it("should update the tab index on tab click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Account />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Account />);
     const tabs = container.querySelectorAll('[role="tab"]');
     const ordersTab = tabs[1] as Element;
 

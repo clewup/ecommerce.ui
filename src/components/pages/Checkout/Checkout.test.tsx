@@ -14,24 +14,15 @@ jest.mock("react-router-dom", () => ({
 
 describe("Cart", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Checkout />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Checkout />);
     const component = container.querySelector("#checkout");
 
     expect(component).toBeInTheDocument();
   });
 
   it("should navigate to the login page if not logged in", () => {
-    const { container } = renderHelper(
-      <Router>
-        <Checkout />
-      </Router>
-    );
+    mockedAuthContext.isAuthenticated = false;
+    const { container } = renderHelper(<Checkout />);
 
     expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith("/login");

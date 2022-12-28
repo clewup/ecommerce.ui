@@ -1,5 +1,4 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
 import { Formik } from "formik";
 import { initialLoginValues } from "../../../types/ILogin";
 import LoginForm from "./LoginForm";
@@ -10,13 +9,11 @@ const mockedOnSubmit = jest.fn();
 describe("LoginForm", () => {
   it("should render the component", () => {
     const { container } = renderHelper(
-      <Router>
-        <Formik initialValues={initialLoginValues} onSubmit={mockedOnSubmit}>
-          {(formik) => {
-            return <LoginForm formik={formik} isLoading={false} error={null} />;
-          }}
-        </Formik>
-      </Router>
+      <Formik initialValues={initialLoginValues} onSubmit={mockedOnSubmit}>
+        {(formik) => {
+          return <LoginForm formik={formik} isLoading={false} error={null} />;
+        }}
+      </Formik>
     );
     const component = container.querySelector("#login-form") as Element;
 
@@ -25,13 +22,11 @@ describe("LoginForm", () => {
 
   it("should login the user on button click", () => {
     const { container } = renderHelper(
-      <Router>
-        <Formik initialValues={initialLoginValues} onSubmit={mockedOnSubmit}>
-          {(formik) => {
-            return <LoginForm formik={formik} isLoading={false} error={null} />;
-          }}
-        </Formik>
-      </Router>
+      <Formik initialValues={initialLoginValues} onSubmit={mockedOnSubmit}>
+        {(formik) => {
+          return <LoginForm formik={formik} isLoading={false} error={null} />;
+        }}
+      </Formik>
     );
     const email = container.querySelector('[name="email"]') as Element;
     const password = container.querySelector('[name="password"]') as Element;

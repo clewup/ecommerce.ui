@@ -6,11 +6,7 @@ import renderHelper from "../../../utils/renderHelper";
 
 describe("Cart", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <Cart />
-      </Router>
-    );
+    const { container } = renderHelper(<Cart />);
     const component = container.querySelector("#cart");
 
     expect(component).toBeInTheDocument();

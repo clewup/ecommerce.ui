@@ -14,26 +14,14 @@ jest.mock("react-router-dom", () => ({
 
 describe("CategoriesBanner", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <CategoriesBanner />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CategoriesBanner />);
     const component = container.querySelector("#categories-banner");
 
     expect(component).toBeInTheDocument();
   });
 
   it("should render the categories", () => {
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <CategoriesBanner />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CategoriesBanner />);
     const categories = container.querySelectorAll("#category-tile");
 
     expect(categories).toHaveLength(5);
@@ -41,13 +29,7 @@ describe("CategoriesBanner", () => {
 
   it("should render the loader when loading", () => {
     mockedProductContext.categories = [];
-    const { container } = renderHelper(
-      <Router>
-        <ProductContext.Provider value={mockedProductContext}>
-          <CategoriesBanner />
-        </ProductContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CategoriesBanner />);
     const loader = container.querySelector("#loader") as Element;
 
     expect(loader).toBeInTheDocument();

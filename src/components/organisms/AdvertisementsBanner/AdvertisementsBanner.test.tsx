@@ -5,11 +5,7 @@ import renderHelper from "../../../utils/renderHelper";
 
 describe("AdvertisementsBanner", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AdvertisementsBanner />
-      </Router>
-    );
+    const { container } = renderHelper(<AdvertisementsBanner />);
     const component = container.querySelector(
       "#advertisement-banner"
     ) as Element;
@@ -18,11 +14,7 @@ describe("AdvertisementsBanner", () => {
   });
 
   it("should render three advertisements", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AdvertisementsBanner />
-      </Router>
-    );
+    const { container } = renderHelper(<AdvertisementsBanner />);
     const advertisements = document.querySelectorAll("#advertisement-tile");
 
     expect(advertisements).toHaveLength(3);

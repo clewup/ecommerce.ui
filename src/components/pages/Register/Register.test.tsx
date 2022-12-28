@@ -13,24 +13,14 @@ jest.mock("react-router-dom", () => ({
 
 describe("Register", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <Register />
-      </Router>
-    );
+    const { container } = renderHelper(<Register />);
     const component = container.querySelector("#register");
 
     expect(component).toBeInTheDocument();
   });
 
   it("should navigate to the home page on register", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Register />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Register />);
 
     expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith("/");

@@ -26,30 +26,14 @@ jest.mock("react-router-dom", () => ({
 
 describe("CartProducts", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <CartContext.Provider value={mockedCartContext}>
-            <CartProducts />
-          </CartContext.Provider>
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CartProducts />);
     const component = container.querySelector("#cart-products") as Element;
 
     expect(component).toBeInTheDocument();
   });
 
   it("should render the cart products", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <CartContext.Provider value={mockedCartContext}>
-            <CartProducts />
-          </CartContext.Provider>
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CartProducts />);
 
     const cartProducts = document.querySelectorAll("#cart-product");
 
@@ -57,15 +41,7 @@ describe("CartProducts", () => {
   });
 
   it("should render the cart total", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <CartContext.Provider value={mockedCartContext}>
-            <CartProducts />
-          </CartContext.Provider>
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CartProducts />);
     const total = container.querySelector(".cart-total") as Element;
 
     expect(total).toBeInTheDocument();
@@ -74,15 +50,7 @@ describe("CartProducts", () => {
 
   it("should render the cart total to two decimal places", () => {
     mockedCartContext.cart.total = 69.1222222;
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <CartContext.Provider value={mockedCartContext}>
-            <CartProducts />
-          </CartContext.Provider>
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CartProducts />);
     const total = container.querySelector(".cart-total") as Element;
 
     expect(total).toBeInTheDocument();
@@ -92,15 +60,7 @@ describe("CartProducts", () => {
 
   it("should render the checkout button", () => {
     mockedCartContext.cart.total = 69.1222222;
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <CartContext.Provider value={mockedCartContext}>
-            <CartProducts />
-          </CartContext.Provider>
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CartProducts />);
     const button = container.querySelector('[type="submit"]') as Element;
 
     expect(button).toBeInTheDocument();
@@ -108,15 +68,7 @@ describe("CartProducts", () => {
   });
 
   it("should navigate to checkout on button click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <CartContext.Provider value={mockedCartContext}>
-            <CartProducts />
-          </CartContext.Provider>
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<CartProducts />);
     const button = container.querySelector('[type="submit"]') as Element;
 
     fireEvent.click(button);

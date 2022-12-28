@@ -10,15 +10,13 @@ const mockedOnSubmit = jest.fn();
 describe("RegisterForm", () => {
   it("should render the component", () => {
     const { container } = renderHelper(
-      <Router>
-        <Formik initialValues={initialRegisterValues} onSubmit={mockedOnSubmit}>
-          {(formik) => {
-            return (
-              <RegisterForm formik={formik} isLoading={false} error={null} />
-            );
-          }}
-        </Formik>
-      </Router>
+      <Formik initialValues={initialRegisterValues} onSubmit={mockedOnSubmit}>
+        {(formik) => {
+          return (
+            <RegisterForm formik={formik} isLoading={false} error={null} />
+          );
+        }}
+      </Formik>
     );
     const component = container.querySelector("#register-form") as Element;
 
@@ -27,15 +25,13 @@ describe("RegisterForm", () => {
 
   it("should register the user on button click", () => {
     const { container } = renderHelper(
-      <Router>
-        <Formik initialValues={initialRegisterValues} onSubmit={mockedOnSubmit}>
-          {(formik) => {
-            return (
-              <RegisterForm formik={formik} isLoading={false} error={null} />
-            );
-          }}
-        </Formik>
-      </Router>
+      <Formik initialValues={initialRegisterValues} onSubmit={mockedOnSubmit}>
+        {(formik) => {
+          return (
+            <RegisterForm formik={formik} isLoading={false} error={null} />
+          );
+        }}
+      </Formik>
     );
     const firstName = container.querySelector('[name="firstName"]') as Element;
     const lastName = container.querySelector('[name="lastName"]') as Element;

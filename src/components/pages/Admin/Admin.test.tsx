@@ -1,10 +1,4 @@
-import { BrowserRouter as Router } from "react-router-dom";
-import { AuthContext } from "../../../contexts/Auth";
-import {
-  mockedAuthContext,
-  mockedDeveloperAuthContext,
-  mockedEmployeeAuthContext,
-} from "../../../data/mockData/authContextData";
+import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import Admin from "./Admin";
@@ -17,40 +11,8 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("Admin", () => {
-  it("should render the component if developer", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedDeveloperAuthContext}>
-          <Admin />
-        </AuthContext.Provider>
-      </Router>
-    );
-    const component = container.querySelector("#admin");
-
-    expect(component).toBeInTheDocument();
-  });
-
-  it("should render the component if employee", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedEmployeeAuthContext}>
-          <Admin />
-        </AuthContext.Provider>
-      </Router>
-    );
-    const component = container.querySelector("#admin");
-
-    expect(component).toBeInTheDocument();
-  });
-
   it("should render the app error if not developer or employee", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Admin />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Admin />);
     const appError = container.querySelector("#app-error");
 
     expect(appError).toBeInTheDocument();
@@ -60,24 +22,32 @@ describe("Admin", () => {
   });
 
   it("should navigate to the login page if not logged in", () => {
-    const { container } = renderHelper(
-      <Router>
-        <Admin />
-      </Router>
-    );
+    mockedAuthContext.isAuthenticated = false;
+    const { container } = renderHelper(<Admin />);
 
     expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith("/login");
   });
 
+  it("should render the component if developer", () => {
+    mockedAuthContext.role = "Developer";
+    const { container } = renderHelper(<Admin />);
+    const component = container.querySelector("#admin");
+
+    expect(component).toBeInTheDocument();
+  });
+
+  it("should render the component if employee", () => {
+    mockedAuthContext.role = "Employee";
+    const { container } = renderHelper(<Admin />);
+    const component = container.querySelector("#admin");
+
+    expect(component).toBeInTheDocument();
+  });
+
   it("should render the add product tab by default", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedDeveloperAuthContext}>
-          <Admin />
-        </AuthContext.Provider>
-      </Router>
-    );
+    mockedAuthContext.role = "Developer";
+    const { container } = renderHelper(<Admin />);
     const addProductForm = container.querySelector("#add-product-form");
     const allOrders = container.querySelector("#all-orders");
 
@@ -86,26 +56,16 @@ describe("Admin", () => {
   });
 
   it("should render the tabs", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedDeveloperAuthContext}>
-          <Admin />
-        </AuthContext.Provider>
-      </Router>
-    );
+    mockedAuthContext.role = "Developer";
+    const { container } = renderHelper(<Admin />);
     const tabs = container.querySelector('[role="tablist"]');
 
     expect(tabs).toBeInTheDocument();
   });
 
   it("should update the tab index on tab click", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedDeveloperAuthContext}>
-          <Admin />
-        </AuthContext.Provider>
-      </Router>
-    );
+    mockedAuthContext.role = "Developer";
+    const { container } = renderHelper(<Admin />);
     const tabs = container.querySelectorAll('[role="tab"]');
     const allOrdersTab = tabs[1] as Element;
 

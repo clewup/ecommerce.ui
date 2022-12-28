@@ -20,9 +20,7 @@ jest.mock("../../../hooks/useCart", () => {
 describe("CartProduct", () => {
   it("should render the component", () => {
     const { container } = renderHelper(
-      <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
-      </Router>
+      <CartProduct cartProduct={mockedCartProduct} />
     );
     const component = container.querySelector("#cart-product") as Element;
 
@@ -31,9 +29,7 @@ describe("CartProduct", () => {
 
   it("should render the product image", () => {
     const { container } = renderHelper(
-      <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
-      </Router>
+      <CartProduct cartProduct={mockedCartProduct} />
     );
     const image = screen.getByRole("img") as Element;
 
@@ -43,9 +39,7 @@ describe("CartProduct", () => {
 
   it("should render the product name", () => {
     const { container } = renderHelper(
-      <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
-      </Router>
+      <CartProduct cartProduct={mockedCartProduct} />
     );
     const name = container.querySelectorAll(".text")[0] as Element;
 
@@ -58,9 +52,7 @@ describe("CartProduct", () => {
       "CART_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
 
     const { container } = renderHelper(
-      <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
-      </Router>
+      <CartProduct cartProduct={mockedCartProduct} />
     );
     const name = container.querySelectorAll(".text")[0] as Element;
 
@@ -70,9 +62,7 @@ describe("CartProduct", () => {
 
   it("should render the product color", () => {
     const { container } = renderHelper(
-      <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
-      </Router>
+      <CartProduct cartProduct={mockedCartProduct} />
     );
     const color = container.querySelectorAll(".text")[1] as Element;
 
@@ -82,9 +72,7 @@ describe("CartProduct", () => {
 
   it("should render the product price", () => {
     const { container } = renderHelper(
-      <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
-      </Router>
+      <CartProduct cartProduct={mockedCartProduct} />
     );
     const price = container.querySelectorAll(".text")[2] as Element;
 
@@ -94,9 +82,7 @@ describe("CartProduct", () => {
 
   it("should render the product discounted price if discounted", () => {
     const { container } = renderHelper(
-      <Router>
-        <CartProduct cartProduct={mockedDiscountedCartProduct} />
-      </Router>
+      <CartProduct cartProduct={mockedDiscountedCartProduct} />
     );
     const discountedPrice = container.querySelectorAll(".text")[2] as Element;
     const price = container.querySelectorAll(".text")[3] as Element;
@@ -109,9 +95,7 @@ describe("CartProduct", () => {
 
   it("should render the remove from cart button", () => {
     const { container } = renderHelper(
-      <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
-      </Router>
+      <CartProduct cartProduct={mockedCartProduct} />
     );
     const button = container.querySelector(
       ".cart-product-remove-btn"
@@ -122,9 +106,7 @@ describe("CartProduct", () => {
 
   it("should remove the product from the cart on button click", () => {
     const { container } = renderHelper(
-      <Router>
-        <CartProduct cartProduct={mockedCartProduct} />
-      </Router>
+      <CartProduct cartProduct={mockedCartProduct} />
     );
     const button = container.querySelector(
       ".cart-product-remove-btn"

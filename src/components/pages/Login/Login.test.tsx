@@ -13,24 +13,14 @@ jest.mock("react-router-dom", () => ({
 
 describe("Login", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(
-      <Router>
-        <Login />
-      </Router>
-    );
+    const { container } = renderHelper(<Login />);
     const component = container.querySelector("#login");
 
     expect(component).toBeInTheDocument();
   });
 
   it("should navigate to the previous page on login", () => {
-    const { container } = renderHelper(
-      <Router>
-        <AuthContext.Provider value={mockedAuthContext}>
-          <Login />
-        </AuthContext.Provider>
-      </Router>
-    );
+    const { container } = renderHelper(<Login />);
 
     expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith(-1);
