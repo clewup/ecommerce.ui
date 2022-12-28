@@ -25,7 +25,7 @@ const RangeTile: React.FC<IProps> = ({ range }) => {
       }}
     >
       <div className={"range-tile-text"}>
-        <Subheading color={colors.WHITE}>{range.name}</Subheading>
+        <Subheading color={colors.WHITE}>{range.name.toUpperCase()}</Subheading>
         <Button
           onClick={() => {
             navigate("store");

@@ -11,7 +11,7 @@ const Footer = () => {
     <div id={"footer"}>
       <div className={"footer-group"}>
         <Subheading size={subheadingSize.SMALL} padding={fontPadding.NONE}>
-          Help and Information
+          HELP AND INFORMATION
         </Subheading>
         <Text onClick={() => navigate("account")}>Your orders</Text>
         <Text onClick={() => navigate("faq")}>Returns</Text>
@@ -19,14 +19,14 @@ const Footer = () => {
       </div>
       <div className={"footer-group"}>
         <Subheading size={subheadingSize.SMALL} padding={fontPadding.NONE}>
-          About Ecommerce
+          ABOUT ECOMMERCE
         </Subheading>
         <Text onClick={() => navigate("about-us")}>About us</Text>
         <Text onClick={() => navigate("about-us")}>Conservation efforts</Text>
       </div>
       <div className={"footer-group"}>
         <Subheading size={subheadingSize.SMALL} padding={fontPadding.NONE}>
-          More from Ecommerce
+          MORE FROM ECOMMERCE
         </Subheading>
         <Text>Gift vouchers</Text>
       </div>
