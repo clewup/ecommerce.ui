@@ -1,0 +1,24 @@
+@import '/src/styles/colors';
+
+#promotion-banner {
+  background-color: $color-darkblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $color-white;
+  height: 40vh;
+  margin: 1rem 0;
+  gap: 2rem;
+  position: relative;
+
+  .promotion-title {
+    padding: 0 5rem;
+  }
+    .promotion-discount {
+      font-size: 5rem;
+      width: 40%;
+      padding: 0 2rem;
+      color: $color-darkred;
+      font-weight: bold;
+    }
+}

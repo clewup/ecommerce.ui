@@ -20,9 +20,6 @@ const SaleProducts = () => {
 
   return (
     <div id={"sale-products"}>
-      <Subheading color={colors.RED} align={"center"}>
-        Sale!
-      </Subheading>
       {isLoading ? (
         <div className={"sale-products-loader"}>
           <Loader />

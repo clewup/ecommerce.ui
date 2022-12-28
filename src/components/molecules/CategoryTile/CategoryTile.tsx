@@ -21,7 +21,9 @@ const CategoryTile: React.FC<IProps> = ({ category }) => {
         setCategoryQuery(category);
       }}
     >
-      <Subheading size={subheadingSize.SMALL}>{category}</Subheading>
+      <Subheading size={subheadingSize.SMALL}>
+        {category.toUpperCase()}
+      </Subheading>
     </div>
   );
 };
