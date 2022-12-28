@@ -8,19 +8,25 @@ import { mockedProductContext } from "../data/mockData/productContextData";
 import { ProductContext } from "../contexts/Product";
 import { mockedCartContext } from "../data/mockData/cartContextData";
 import { CartContext } from "../contexts/Cart";
+import { UserContext } from "../contexts/User";
+import { mockedUserContext } from "../data/mockData/userContextData";
 
+/*
+Provides contexts for unit tests.
+New contexts should be added here to support testing.
+ */
 const renderHelper = (children: any) => {
   return render(
     <Router>
-      <ThemeProvider theme={theme}>
-        <AuthContext.Provider value={mockedAuthContext}>
+      <AuthContext.Provider value={mockedAuthContext}>
+        <UserContext.Provider value={mockedUserContext}>
           <ProductContext.Provider value={mockedProductContext}>
             <CartContext.Provider value={mockedCartContext}>
-              {children}
+              <ThemeProvider theme={theme}>{children}</ThemeProvider>
             </CartContext.Provider>
           </ProductContext.Provider>
-        </AuthContext.Provider>
-      </ThemeProvider>
+        </UserContext.Provider>
+      </AuthContext.Provider>
     </Router>
   );
 };
