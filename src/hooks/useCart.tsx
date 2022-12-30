@@ -8,6 +8,7 @@ import { AxiosError } from "axios";
 import putCart from "../api/PutCart";
 import postCart from "../api/PostCart";
 import { Guid } from "guid-typescript";
+import { createGuid } from "../utils/createGuid";
 
 interface IUseCartProps {
   getCart: () => void;
@@ -58,7 +59,7 @@ const useCart = (): IUseCartProps => {
     } else {
       // Create the cart.
       const createdCart: ICart = {
-        id: Guid.create(),
+        id: createGuid() as Guid,
         userId: user?.id!,
         products: [product],
         total: 0,

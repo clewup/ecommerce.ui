@@ -48,16 +48,6 @@ describe("CartProducts", () => {
     expect(total).toHaveTextContent("£69.12");
   });
 
-  it("should render the cart total to two decimal places", () => {
-    mockedCartContext.cart.total = 69.1222222;
-    const { container } = renderHelper(<CartProducts />);
-    const total = container.querySelector(".cart-total") as Element;
-
-    expect(total).toBeInTheDocument();
-    expect(total).toHaveTextContent("£69.12");
-    expect(total).not.toHaveTextContent("£69.1222222");
-  });
-
   it("should render the checkout button", () => {
     mockedCartContext.cart.total = 69.1222222;
     const { container } = renderHelper(<CartProducts />);

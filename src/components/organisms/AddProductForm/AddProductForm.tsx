@@ -182,14 +182,17 @@ const AddProductForm = () => {
                   />
                 </div>
               </div>
-              <Button
-                type={"submit"}
-                variant={"contained"}
-                color={"success"}
-                disabled={formik.isSubmitting || productLoading}
-              >
-                Add Product
-              </Button>
+              <div className={"product-form-action-buttons"}>
+                <Button
+                  type={"submit"}
+                  variant={"contained"}
+                  color={"success"}
+                  disabled={formik.isSubmitting || productLoading}
+                  size={"large"}
+                >
+                  Add Product
+                </Button>
+              </div>
             </Form>
             <Snackbar
               open={openAlert}

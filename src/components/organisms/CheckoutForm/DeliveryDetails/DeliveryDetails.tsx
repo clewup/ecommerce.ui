@@ -14,7 +14,6 @@ interface IProps {
 const DeliveryDetails: React.FC<IProps> = ({ formik, setTabIndex }) => {
   return (
     <div id={"delivery-details"}>
-      <Subheading align={"center"}>Delivery Details</Subheading>
       <Field
         name={"firstName"}
         component={Input}

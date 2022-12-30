@@ -5,7 +5,6 @@ import ProductTile from "../../molecules/ProductTile/ProductTile";
 import useStatistics from "../../../hooks/useStatistics";
 import { useEffect } from "react";
 import AppError from "../../molecules/AppError/AppError";
-import { colors } from "../../../styles/colors";
 
 const SaleProducts = () => {
   const { discountedProducts, isLoading, error, getMostDiscounted } =
@@ -20,6 +19,7 @@ const SaleProducts = () => {
 
   return (
     <div id={"sale-products"}>
+      <Subheading align={"center"}>Don't miss out!</Subheading>
       {isLoading ? (
         <div className={"sale-products-loader"}>
           <Loader />

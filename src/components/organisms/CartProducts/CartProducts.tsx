@@ -47,7 +47,7 @@ const CartProducts = () => {
           })}
 
           <div className={"cart-total"}>
-            <Text>Cart Total: £{cart?.total?.toFixed(2) || "0"}</Text>
+            <Text>Cart Total: £{cart?.total || "0"}</Text>
           </div>
           <div className={"cart-action-buttons"}>
             <Button

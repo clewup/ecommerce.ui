@@ -1,6 +1,5 @@
 #trending-products {
   min-height: 50vh;
-  padding-top: 1rem;
 
   .trending-products-loader {
     display: flex;
@@ -9,7 +8,6 @@
   }
 
   .trending-products-row {
-    padding: 1rem 0;
     justify-content: space-between;
     display: flex;
     gap: 1rem;

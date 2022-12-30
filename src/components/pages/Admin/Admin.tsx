@@ -34,11 +34,11 @@ const Admin = () => {
   return (
     <Wrapper id={"admin"}>
       <Tabs value={tabIndex} onChange={handleTabChange} centered>
-        <Tab label="Add Product" />
         <Tab label="Orders" />
+        <Tab label="Add Product" />
       </Tabs>
-      {tabIndex === 0 && <AddProductForm />}
-      {tabIndex === 1 && <AllOrders />}
+      {tabIndex === 0 && <AllOrders />}
+      {tabIndex === 1 && <AddProductForm />}
     </Wrapper>
   );
 };

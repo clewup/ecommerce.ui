@@ -2,6 +2,7 @@ import "./order-product.scss";
 import React from "react";
 import { ICartProduct } from "../../../types/IProduct";
 import Text from "../../atoms/Text/Text";
+import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
 
 interface IProps {
   orderProduct: ICartProduct;
@@ -26,17 +27,17 @@ const OrderProduct: React.FC<IProps> = ({ orderProduct }) => {
           <div className={"discounted-price"}>
             <Text className="discounted-price-striked">
               £
-              {(
-                (orderProduct.price / (100 - orderProduct.discount)) *
-                100
-              ).toFixed(2)}
+              {calculatePriceBeforeDiscount(
+                orderProduct.price,
+                orderProduct.discount
+              )}
             </Text>
             <Text className={"discounted-price-total"}>
-              £{orderProduct.price.toFixed(2)}
+              £{orderProduct.price}
             </Text>
           </div>
         ) : (
-          <Text>£{orderProduct.price.toFixed(2)}</Text>
+          <Text>£{orderProduct.price}</Text>
         )}
       </div>
     </div>

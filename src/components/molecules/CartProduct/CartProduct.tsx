@@ -6,6 +6,7 @@ import { ICartProduct } from "../../../types/IProduct";
 import { CartContext } from "../../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
 import Text from "../../atoms/Text/Text";
+import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
 
 interface IProps {
   cartProduct: ICartProduct;
@@ -34,13 +35,13 @@ const CartProduct: React.FC<IProps> = ({ cartProduct }) => {
           <div className={"discounted-price"}>
             <Text className="discounted-price-striked">
               £
-              {(
-                (cartProduct.price / (100 - cartProduct.discount)) *
-                100
-              ).toFixed(2)}
+              {calculatePriceBeforeDiscount(
+                cartProduct.price,
+                cartProduct.discount
+              )}
             </Text>
             <Text className={"discounted-price-total"}>
-              £{cartProduct.price.toFixed(2)}
+              £{cartProduct.price}
             </Text>
           </div>
         ) : (

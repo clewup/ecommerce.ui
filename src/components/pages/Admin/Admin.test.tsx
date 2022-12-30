@@ -45,14 +45,14 @@ describe("Admin", () => {
     expect(component).toBeInTheDocument();
   });
 
-  it("should render the add product tab by default", () => {
+  it("should render the orders tab by default", () => {
     mockedAuthContext.role = "Developer";
     const { container } = renderHelper(<Admin />);
     const addProductForm = container.querySelector("#add-product-form");
     const allOrders = container.querySelector("#all-orders");
 
-    expect(addProductForm).toBeInTheDocument();
-    expect(allOrders).not.toBeInTheDocument();
+    expect(allOrders).toBeInTheDocument();
+    expect(addProductForm).not.toBeInTheDocument();
   });
 
   it("should render the tabs", () => {
@@ -74,7 +74,7 @@ describe("Admin", () => {
     const addProductForm = container.querySelector("#add-product-form");
     const allOrders = container.querySelector("#all-orders");
 
-    expect(allOrders).toBeInTheDocument();
-    expect(addProductForm).not.toBeInTheDocument();
+    expect(addProductForm).toBeInTheDocument();
+    expect(allOrders).not.toBeInTheDocument();
   });
 });

@@ -16,6 +16,7 @@ import { CartContext } from "../../../contexts/Cart";
 import useCart from "../../../hooks/useCart";
 import Text from "../../atoms/Text/Text";
 import { subheadingSize } from "../../../enums/typography";
+import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
 
 const Product = () => {
   const { id } = useParams();
@@ -76,12 +77,13 @@ const Product = () => {
                 <div className={"discounted-price"}>
                   <Text className="discounted-price-striked">
                     £
-                    {((product.price / (100 - product.discount)) * 100).toFixed(
-                      2
+                    {calculatePriceBeforeDiscount(
+                      product.price,
+                      product.discount
                     )}
                   </Text>
                   <Text className={"discounted-price-total"}>
-                    £{product.price.toFixed(2)}
+                    £{product.price}
                   </Text>
                 </div>
               ) : (

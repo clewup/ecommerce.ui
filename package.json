@@ -9,6 +9,7 @@
     "@mui/lab": "^5.0.0-alpha.109",
     "@mui/material": "^5.10.14",
     "@mui/styled-engine-sc": "^5.10.14",
+    "@mui/x-data-grid": "^5.17.17",
     "@react-three/drei": "^9.40.5",
     "@react-three/fiber": "^8.9.1",
     "@testing-library/jest-dom": "^5.14.1",

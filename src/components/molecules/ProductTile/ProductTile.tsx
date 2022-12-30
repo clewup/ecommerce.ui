@@ -10,6 +10,7 @@ import { LoadingButton } from "@mui/lab";
 import { Tooltip } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import Text from "../../atoms/Text/Text";
+import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
 
 interface IProps {
   product: IProduct;
@@ -45,14 +46,12 @@ const ProductTile: React.FC<IProps> = ({ product }) => {
         {product.discount > 0 ? (
           <div className={"discounted-price"}>
             <Text className="discounted-price-striked">
-              £{((product.price / (100 - product.discount)) * 100).toFixed(2)}
+              £{calculatePriceBeforeDiscount(product.price, product.discount)}
             </Text>
-            <Text className={"discounted-price-total"}>
-              £{product.price.toFixed(2)}
-            </Text>
+            <Text className={"discounted-price-total"}>£{product.price}</Text>
           </div>
         ) : (
-          <Text>£{product.price.toFixed(2)}</Text>
+          <Text>£{product.price}</Text>
         )}
       </div>
       <div className={"product-actions"}>

@@ -17,7 +17,7 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
         <Loader />
       ) : (
         <>
-          <Subheading>Your order is complete!</Subheading>
+          <Subheading align={"center"}>Your order is complete!</Subheading>
           <Text className={"order-details"}>{String(order.id)}</Text>
           <div className={"order-cart-items"}>
             {order?.cart?.products.map((orderProduct) => {
@@ -27,9 +27,7 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
                 </div>
               );
             })}
-            <Text className={"order-total"}>
-              £{order?.cart?.total.toFixed(2)}
-            </Text>
+            <Text className={"order-total"}>£{order?.cart?.total}</Text>
           </div>
         </>
       )}

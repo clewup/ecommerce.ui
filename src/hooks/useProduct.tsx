@@ -6,6 +6,7 @@ import { AxiosError } from "axios";
 import { IImage } from "../types/IImage";
 import postProduct from "../api/PostProduct";
 import * as Yup from "yup";
+import { createGuid } from "../utils/createGuid";
 
 interface IUseProductProps {
   initialValues: IProduct;
@@ -23,7 +24,7 @@ const useProduct = (): IUseProductProps => {
   const [error, setError] = useState<AxiosError | null>(null);
 
   const initialValues: IProduct = {
-    id: Guid.create(),
+    id: createGuid(),
     name: "",
     images: [],
     description: "",

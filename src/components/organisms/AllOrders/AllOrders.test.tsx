@@ -31,27 +31,9 @@ describe("AllOrders", () => {
 
   it("should render all user orders", () => {
     const { container } = renderHelper(<AllOrders />);
-    const orders = container.querySelectorAll("#order");
-
-    expect(orders).toHaveLength(3);
-  });
-
-  it("should render the order products", () => {
-    const { container } = renderHelper(<AllOrders />);
-    const orderProducts = container.querySelector(".order-products") as Element;
-
-    expect(orderProducts).toBeInTheDocument();
-    expect(orderProducts).toHaveTextContent("PRODUCT_NAME");
-  });
-
-  it("should render 'no orders found' if no user orders", () => {
-    mockedUseOrder.orders = [];
-
-    const { container } = renderHelper(<AllOrders />);
-    const orders = container.querySelector(".orders") as Element;
+    const orders = container.querySelector("table");
 
     expect(orders).toBeInTheDocument();
-    expect(orders).toHaveTextContent("No orders found.");
   });
 
   it("should render the loader when loading", () => {

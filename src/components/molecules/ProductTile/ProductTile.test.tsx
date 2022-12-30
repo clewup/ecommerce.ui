@@ -72,30 +72,6 @@ describe("ProductTile", () => {
     expect(price).toHaveTextContent("£12.34");
   });
 
-  it("should render the product price to two decimal places", () => {
-    mockedProduct.price = 12.345;
-    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
-
-    const price = container.querySelectorAll(".text")[1] as Element;
-
-    expect(price).toBeInTheDocument();
-    expect(price).toHaveTextContent("£12.35");
-  });
-
-  it("should render the product discounted price if discounted", () => {
-    const { container } = renderHelper(
-      <ProductTile product={mockedDiscountedProduct} />
-    );
-
-    const discountedPrice = container.querySelectorAll(".text")[1] as Element;
-    const price = container.querySelectorAll(".text")[2] as Element;
-
-    expect(discountedPrice).toBeInTheDocument();
-    expect(price).toBeInTheDocument();
-    expect(discountedPrice).toHaveTextContent("£24.68");
-    expect(price).toHaveTextContent("£12.34");
-  });
-
   it("should render the add to cart button", () => {
     const { container } = renderHelper(<ProductTile product={mockedProduct} />);
 
