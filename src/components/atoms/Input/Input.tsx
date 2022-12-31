@@ -47,8 +47,7 @@ const Input: React.FC<IProps> = ({
         onChange={onChange}
         onKeyDown={onKeyDown}
         sx={{
-          marginTop: 1,
-          marginBottom: 1,
+          margin: "0.2rem 0",
           backgroundColor: colors.WHITE,
           textAlign: "center",
           width: width ?? "100%",

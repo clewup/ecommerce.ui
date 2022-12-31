@@ -12,10 +12,7 @@ const OrderProduct: React.FC<IProps> = ({ orderProduct }) => {
   return (
     <div id={"order-product"}>
       <div className={"order-product-image"}>
-        <img
-          src={orderProduct.images![0]!.url!}
-          alt={String(orderProduct.id)}
-        />
+        <img src={orderProduct.images![0]!} alt={orderProduct.images![0]!} />
       </div>
       <div className={"order-product-info"}>
         <Text>

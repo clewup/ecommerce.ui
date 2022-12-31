@@ -1,5 +1,4 @@
 import { Guid } from "guid-typescript";
-import { IImage } from "../../types/IImage";
 
 export const mockedCartContext = {
   cart: {
@@ -9,13 +8,7 @@ export const mockedCartContext = {
       {
         id: Guid.create(),
         name: "PRODUCT_NAME",
-        images: [
-          {
-            title: "IMAGE_TITLE",
-            description: "IMAGE_DESCRIPTION",
-            url: "HTTPS://IMAGE_URL.JPG",
-          },
-        ] as IImage[],
+        images: ["HTTPS://IMAGE_URL.JPG"] as string[],
         description: "PRODUCT_DESCRIPTION",
         category: "PRODUCT_CATEGORY",
         range: "PRODUCT_RANGE",
@@ -26,13 +19,7 @@ export const mockedCartContext = {
       {
         id: Guid.create(),
         name: "PRODUCT_NAME",
-        images: [
-          {
-            title: "IMAGE_TITLE",
-            description: "IMAGE_DESCRIPTION",
-            url: "HTTPS://IMAGE_URL.JPG",
-          },
-        ] as IImage[],
+        images: ["HTTPS://IMAGE_URL.JPG"] as string[],
         description: "PRODUCT_DESCRIPTION",
         category: "PRODUCT_CATEGORY",
         range: "PRODUCT_RANGE",

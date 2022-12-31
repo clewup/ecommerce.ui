@@ -1,17 +1,10 @@
 import { ICartProduct } from "../../types/IProduct";
 import { Guid } from "guid-typescript";
-import { IImage } from "../../types/IImage";
 
 export const mockedCartProduct: ICartProduct = {
   id: Guid.create(),
   name: "CART_PRODUCT_NAME",
-  images: [
-    {
-      title: "IMAGE_TITLE",
-      description: "IMAGE_DESCRIPTION",
-      url: "HTTPS://IMAGE_URL.JPG",
-    },
-  ] as IImage[],
+  images: ["HTTPS://IMAGE_URL.JPG"] as string[],
   description: "CART_PRODUCT_DESCRIPTION",
   category: "CART_PRODUCT_CATEGORY",
   range: "CART_PRODUCT_RANGE",

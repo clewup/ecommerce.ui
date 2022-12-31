@@ -48,11 +48,11 @@ describe("Admin", () => {
   it("should render the orders tab by default", () => {
     mockedAuthContext.role = "Developer";
     const { container } = renderHelper(<Admin />);
-    const addProductForm = container.querySelector("#add-product-form");
+    const productForm = container.querySelector("#product-form");
     const allOrders = container.querySelector("#all-orders");
 
     expect(allOrders).toBeInTheDocument();
-    expect(addProductForm).not.toBeInTheDocument();
+    expect(productForm).not.toBeInTheDocument();
   });
 
   it("should render the tabs", () => {
@@ -71,10 +71,10 @@ describe("Admin", () => {
 
     fireEvent.click(allOrdersTab);
 
-    const addProductForm = container.querySelector("#add-product-form");
+    const productForm = container.querySelector("#product-form");
     const allOrders = container.querySelector("#all-orders");
 
-    expect(addProductForm).toBeInTheDocument();
+    expect(productForm).toBeInTheDocument();
     expect(allOrders).not.toBeInTheDocument();
   });
 });

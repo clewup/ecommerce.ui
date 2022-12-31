@@ -1,9 +1,6 @@
-import { render } from "@testing-library/react";
-import AccountOrders from "./AccountOrders";
+import UserOrders from "./UserOrders";
 import { mockedUseOrder } from "../../../data/mockData/useOrderData";
 import { mockedError } from "../../../data/mockData/errorData";
-import { theme } from "../../../styles/theme";
-import { ThemeProvider } from "@mui/material";
 import renderHelper from "../../../utils/renderHelper";
 
 jest.mock("../../../hooks/useOrder", () => {
@@ -15,29 +12,29 @@ jest.mock("../../../hooks/useOrder", () => {
   };
 });
 
-describe("AccountOrders", () => {
+describe("UserOrders", () => {
   it("should render the component", () => {
-    const { container } = renderHelper(<AccountOrders />);
-    const component = container.querySelector("#account-orders") as Element;
+    const { container } = renderHelper(<UserOrders />);
+    const component = container.querySelector("#user-orders") as Element;
 
     expect(component).toBeInTheDocument();
   });
 
   it("should fetch user orders", () => {
-    const { container } = renderHelper(<AccountOrders />);
+    const { container } = renderHelper(<UserOrders />);
 
     expect(mockedUseOrder.getUserOrders).toHaveBeenCalled();
   });
 
   it("should render the user orders", () => {
-    const { container } = renderHelper(<AccountOrders />);
+    const { container } = renderHelper(<UserOrders />);
     const orders = container.querySelectorAll("#order");
 
     expect(orders).toHaveLength(3);
   });
 
   it("should render the order products", () => {
-    const { container } = renderHelper(<AccountOrders />);
+    const { container } = renderHelper(<UserOrders />);
     const orderProducts = container.querySelector(".order-products") as Element;
 
     expect(orderProducts).toBeInTheDocument();
@@ -47,8 +44,8 @@ describe("AccountOrders", () => {
   it("should render 'no orders found' if no user orders", () => {
     mockedUseOrder.orders = [];
 
-    const { container } = renderHelper(<AccountOrders />);
-    const orders = container.querySelector(".orders") as Element;
+    const { container } = renderHelper(<UserOrders />);
+    const orders = container.querySelector("#user-orders") as Element;
 
     expect(orders).toBeInTheDocument();
     expect(orders).toHaveTextContent("No orders found.");
@@ -57,7 +54,7 @@ describe("AccountOrders", () => {
   it("should render the loader when loading", () => {
     mockedUseOrder.isLoading = true;
 
-    const { container } = renderHelper(<AccountOrders />);
+    const { container } = renderHelper(<UserOrders />);
     const loader = container.querySelector("#loader") as Element;
 
     expect(loader).toBeInTheDocument();
@@ -67,7 +64,7 @@ describe("AccountOrders", () => {
     // @ts-ignore
     mockedUseOrder.error = mockedError;
 
-    const { container } = renderHelper(<AccountOrders />);
+    const { container } = renderHelper(<UserOrders />);
     const appError = container.querySelector("#app-error") as Element;
 
     expect(appError).toBeInTheDocument();

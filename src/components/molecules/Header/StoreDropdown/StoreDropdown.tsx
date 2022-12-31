@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { ProductContext } from "../../../../contexts/Product";
 import getProductCategories from "../../../../api/GetProductCategories";
 import Text from "../../../atoms/Text/Text";
+import getProductRanges from "../../../../api/GetProductRanges";
 
 const StoreDropdown = () => {
   const navigate = useNavigate();
-  const { categories, setCategories, setCategoryQuery } =
+  const { categories, setCategories, ranges, setRanges, setCategoryQuery } =
     useContext(ProductContext);
 
   const [open, setOpen] = React.useState(false);
@@ -24,6 +25,11 @@ const StoreDropdown = () => {
     if (categories.length === 0 || !categories.length) {
       getProductCategories().then((res) => {
         setCategories(res.data);
+      });
+    }
+    if (ranges.length === 0 || !ranges.length) {
+      getProductRanges().then((res) => {
+        setRanges(res.data);
       });
     }
     // eslint-disable-next-line

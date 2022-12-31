@@ -28,13 +28,13 @@ describe("Account", () => {
     expect(mockedUseNavigate).toHaveBeenCalledWith("/login");
   });
 
-  it("should render the account form tab by default", () => {
+  it("should render the user form tab by default", () => {
     const { container } = renderHelper(<Account />);
-    const accountForm = container.querySelector("#account-form");
-    const accountOrders = container.querySelector("#account-orders");
+    const userForm = container.querySelector("#user-form");
+    const userOrders = container.querySelector("#user-orders");
 
-    expect(accountForm).toBeInTheDocument();
-    expect(accountOrders).not.toBeInTheDocument();
+    expect(userForm).toBeInTheDocument();
+    expect(userOrders).not.toBeInTheDocument();
   });
 
   it("should render the tabs", () => {
@@ -51,10 +51,10 @@ describe("Account", () => {
 
     fireEvent.click(ordersTab);
 
-    const accountForm = container.querySelector("#account-form");
-    const accountOrders = container.querySelector("#account-orders");
+    const userForm = container.querySelector("#user-form");
+    const userOrders = container.querySelector("#user-orders");
 
-    expect(accountOrders).toBeInTheDocument();
-    expect(accountForm).not.toBeInTheDocument();
+    expect(userOrders).toBeInTheDocument();
+    expect(userForm).not.toBeInTheDocument();
   });
 });

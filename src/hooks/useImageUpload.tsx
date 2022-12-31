@@ -1,10 +1,9 @@
 import { useState } from "react";
 import postImage from "../api/PostImage";
 import { AxiosError, AxiosResponse } from "axios";
-import { IImage } from "../types/IImage";
 
 interface IUseImageUpload {
-  images: IImage[];
+  images: string[];
   isLoading: boolean;
   error: AxiosError | null;
   uploadImages: (files: FileList) => void;
@@ -12,7 +11,7 @@ interface IUseImageUpload {
 }
 
 const useImageUpload = (): IUseImageUpload => {
-  const [images, setImages] = useState<IImage[]>([]);
+  const [images, setImages] = useState<string[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
@@ -21,8 +20,8 @@ const useImageUpload = (): IUseImageUpload => {
     for (let i = 0; i < files.length; i++) {
       const image: File = files[i]!;
       postImage(image)
-        .then((res: AxiosResponse<IImage>) =>
-          setImages((prev: IImage[]) => {
+        .then((res: AxiosResponse<string>) =>
+          setImages((prev: string[]) => {
             return [...prev, res.data];
           })
         )

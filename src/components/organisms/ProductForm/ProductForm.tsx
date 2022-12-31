@@ -1,4 +1,4 @@
-import "./add-product-form.scss";
+import "./product-form.scss";
 import { Field, Form, Formik, FormikHelpers, FormikProps } from "formik";
 import { IProduct } from "../../../types/IProduct";
 import Input from "../../atoms/Input/Input";
@@ -9,13 +9,15 @@ import AppError from "../../molecules/AppError/AppError";
 import useProduct from "../../../hooks/useProduct";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Carousel from "react-material-ui-carousel";
-import CreatableSelect from "react-select/creatable";
 import { ProductContext } from "../../../contexts/Product";
 import TextArea from "../../atoms/TextArea/TextArea";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { colors } from "../../../styles/colors";
+import { formatSelectOptions } from "../../../utils/formatSelectOptions";
+import CreatableSelect from "react-select/creatable";
+import classnames from "classnames";
 
-const AddProductForm = () => {
+const ProductForm = () => {
   const [openAlert, setOpenAlert] = React.useState(false);
 
   const {
@@ -33,28 +35,12 @@ const AddProductForm = () => {
     uploadImages,
   } = useImageUpload();
 
-  const { categories } = useContext(ProductContext);
+  const { categories, ranges } = useContext(ProductContext);
 
   useEffect(() => {
     clearImages();
     // eslint-disable-next-line
   }, []);
-
-  interface ISelectOption {
-    value: string;
-    label: string;
-  }
-
-  const formatCategoryOptions = (categories: string[]) => {
-    const formatted: ISelectOption[] = [];
-    categories.forEach((category) => {
-      formatted.push({
-        label: category,
-        value: category,
-      });
-    });
-    return formatted;
-  };
 
   const handleSubmit = (values: IProduct, actions: FormikHelpers<IProduct>) => {
     addProduct(values, images);
@@ -80,24 +66,40 @@ const AddProductForm = () => {
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
       {(formik: FormikProps<IProduct>) => {
+        if (formik.touched.category && formik.errors.category) {
+          const element = document.querySelectorAll(
+            " div[class*='control']"
+          )[0];
+          element?.classList.add("form-error");
+        }
+
+        if (formik.touched.range && formik.errors.range) {
+          const element = document.querySelectorAll(
+            " div[class*='control']"
+          )[1];
+          element?.classList.add("form-error");
+        }
+
         return (
-          <div id={"add-product-form"}>
+          <div id={"product-form"}>
             <Form>
               <div className={"product-form-fields"}>
-                <div className={"product-form-half"}>
+                <div className={"product-form-third"}>
                   <Carousel
                     animation={"slide"}
                     swipe={false}
                     indicators={false}
                     autoPlay={false}
                     height={"310px"}
-                    className={"carousel"}
                     sx={{
                       backgroundColor: colors.WHITE,
                     }}
+                    className={classnames("carousel", {
+                      "form-error": formik.errors.images,
+                    })}
                   >
                     {images.map((image) => {
-                      return <img src={image.url} alt={image.url} />;
+                      return <img src={image} alt={image} key={image} />;
                     })}
                   </Carousel>
 
@@ -119,7 +121,9 @@ const AddProductForm = () => {
                       }}
                     />
                   </Button>
+                </div>
 
+                <div className={"product-form-third"}>
                   <Field
                     name={"name"}
                     component={Input}
@@ -127,9 +131,19 @@ const AddProductForm = () => {
                     onChange={formik.handleChange}
                   />
 
+                  <Field
+                    name={"description"}
+                    component={TextArea}
+                    rows={11.7}
+                    label={"Description"}
+                    onChange={formik.handleChange}
+                  />
+                </div>
+
+                <div className={"product-form-third"}>
                   <CreatableSelect
                     isClearable
-                    options={formatCategoryOptions(categories)}
+                    options={formatSelectOptions({ options: categories })}
                     onChange={(category) =>
                       formik.setFieldValue("category", category?.value)
                     }
@@ -138,19 +152,25 @@ const AddProductForm = () => {
                       control: (baseStyles, state) => ({
                         ...baseStyles,
                         height: "55px",
-                        margin: "0.5rem 0",
+                        margin: "0.2rem 0",
                       }),
                     }}
                   />
-                </div>
 
-                <div className={"product-form-half"}>
-                  <Field
-                    name={"description"}
-                    component={TextArea}
-                    rows={9.3}
-                    label={"Description"}
-                    onChange={formik.handleChange}
+                  <CreatableSelect
+                    isClearable
+                    options={formatSelectOptions({ options: ranges })}
+                    onChange={(range) =>
+                      formik.setFieldValue("range", range?.value)
+                    }
+                    placeholder={"Range"}
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        height: "55px",
+                        margin: "0.2rem 0",
+                      }),
+                    }}
                   />
 
                   <Field
@@ -187,7 +207,9 @@ const AddProductForm = () => {
                   type={"submit"}
                   variant={"contained"}
                   color={"success"}
-                  disabled={formik.isSubmitting || productLoading}
+                  disabled={
+                    formik.isSubmitting || productLoading || !formik.isValid
+                  }
                   size={"large"}
                 >
                   Add Product
@@ -213,4 +235,4 @@ const AddProductForm = () => {
     </Formik>
   );
 };
-export default AddProductForm;
+export default ProductForm;

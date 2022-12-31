@@ -1,7 +1,7 @@
 @import '/src/styles/colors';
 
 
-#account-form {
+#user-form {
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@
       }
     }
 
-  .account-footer {
+  .user-footer {
     justify-content: center;
     display: flex;
     gap: 1rem;

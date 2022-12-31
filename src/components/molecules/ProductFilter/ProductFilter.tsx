@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../../contexts/Product";
 import useProductFilter from "../../../hooks/useProductFilter";
 import Input from "../../atoms/Input/Input";
-import SelectInput from "../../atoms/SelectInput/SelectInput";
+import Select from "../../atoms/Select/Select";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
 import { InputLabel, Slider } from "@mui/material";
 import AppError from "../AppError/AppError";
@@ -80,19 +80,19 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
         onChange={(e) => _setSearchQuery(e.target.value)}
         onKeyDown={(e) => handleSearch(e)}
       />
-      <SelectInput
+      <Select
         label={"Sort By"}
         value={sortByQuery}
         onChange={(e) => setSortByQuery(e.target.value)}
         options={sortByOptions}
       />
-      <SelectInput
+      <Select
         label={"Category"}
         value={categoryQuery}
         onChange={(e) => setCategoryQuery(e.target.value)}
         options={formatSelectOptions({ options: categories })}
       />
-      <SelectInput
+      <Select
         label={"Range"}
         value={rangeQuery}
         onChange={(e) => setRangeQuery(e.target.value)}

@@ -1,5 +1,5 @@
 import "./admin.scss";
-import AddProductForm from "../../organisms/AddProductForm/AddProductForm";
+import ProductForm from "../../organisms/ProductForm/ProductForm";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 import AllOrders from "../../organisms/AllOrders/AllOrders";
 import { Tab, Tabs } from "@mui/material";
@@ -38,7 +38,7 @@ const Admin = () => {
         <Tab label="Add Product" />
       </Tabs>
       {tabIndex === 0 && <AllOrders />}
-      {tabIndex === 1 && <AddProductForm />}
+      {tabIndex === 1 && <ProductForm />}
     </Wrapper>
   );
 };

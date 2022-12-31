@@ -4,7 +4,6 @@ import { ProductContext } from "../contexts/Product";
 import { IProduct } from "../types/IProduct";
 import getProductsSearch from "../api/GetProductsSearch";
 import { queryDefaultValues } from "../enums/defaultValues";
-import getProductRanges from "../api/GetProductRanges";
 
 interface IUseProductFilterProps {
   products: IProduct[];
@@ -20,8 +19,6 @@ const useProductFilter = (): IUseProductFilterProps => {
   const [query, setQuery] = useState("");
 
   const {
-    ranges,
-    setRanges,
     searchQuery,
     categoryQuery,
     priceQuery,
@@ -35,15 +32,6 @@ const useProductFilter = (): IUseProductFilterProps => {
     getProducts();
     // eslint-disable-next-line
   }, [query]);
-
-  useEffect(() => {
-    if (ranges.length === 0 || !ranges.length) {
-      getProductRanges().then((res) => {
-        setRanges(res.data);
-      });
-    }
-    // eslint-disable-next-line
-  }, []);
 
   const getProducts = () => {
     setLoading(true);

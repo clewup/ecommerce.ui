@@ -1,4 +1,4 @@
-import { ISelectOption } from "../components/atoms/SelectInput/SelectInput";
+import { ISelectOption } from "../components/atoms/Select/Select";
 
 export const sortByOptions: ISelectOption[] = [
   {

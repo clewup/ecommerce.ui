@@ -1,13 +1,13 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { Formik } from "formik";
 import React from "react";
-import AddProductForm from "./AddProductForm";
+import ProductForm from "./ProductForm";
 import { mockedProductInitialValues } from "../../../data/mockData/productData";
 import renderHelper from "../../../utils/renderHelper";
 
 const mockedOnSubmit = jest.fn();
 
-describe("AddProductForm", () => {
+describe("ProductForm", () => {
   it("should render the component", () => {
     const { container } = renderHelper(
       <Formik
@@ -15,24 +15,24 @@ describe("AddProductForm", () => {
         onSubmit={mockedOnSubmit}
       >
         {(formik) => {
-          return <AddProductForm />;
+          return <ProductForm />;
         }}
       </Formik>
     );
 
-    const component = container.querySelector("#add-product-form") as Element;
+    const component = container.querySelector("#product-form") as Element;
 
     expect(component).toBeInTheDocument();
   });
 
-  it("should submit the form on add product", () => {
+  it("should submit the form on add product button click", () => {
     const { container } = renderHelper(
       <Formik
         initialValues={mockedProductInitialValues}
         onSubmit={mockedOnSubmit}
       >
         {(formik) => {
-          return <AddProductForm />;
+          return <ProductForm />;
         }}
       </Formik>
     );

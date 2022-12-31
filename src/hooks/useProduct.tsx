@@ -3,7 +3,6 @@ import { IProduct } from "../types/IProduct";
 import { Guid } from "guid-typescript";
 import getProductById from "../api/GetProductById";
 import { AxiosError } from "axios";
-import { IImage } from "../types/IImage";
 import postProduct from "../api/PostProduct";
 import * as Yup from "yup";
 import { createGuid } from "../utils/createGuid";
@@ -14,7 +13,7 @@ interface IUseProductProps {
   isLoading: boolean;
   error: AxiosError | null;
   getProduct: (id: Guid) => void;
-  addProduct: (product: IProduct, images: IImage[]) => void;
+  addProduct: (product: IProduct, images: string[]) => void;
   validationSchema: Yup.ObjectSchema<any>;
 }
 
@@ -38,7 +37,10 @@ const useProduct = (): IUseProductProps => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
-    images: Yup.array().required("Required"),
+    images: Yup.array()
+      .of(Yup.string())
+      .min(1, "Must be at least one image.")
+      .required("Required"),
     description: Yup.string().required("Required"),
     category: Yup.string().required("Required"),
     range: Yup.string().required("Required"),
@@ -57,7 +59,8 @@ const useProduct = (): IUseProductProps => {
       })
       .required("Required"),
     discount: Yup.number()
-      .moreThan(-1, "Must be 0 or greater")
+      .moreThan(0, "Must be 0 or greater")
+      .lessThan(75, "Must be less than 75")
       .test("is-decimal", "Maximum two decimal places", (value: any) => {
         if (value !== undefined) {
           return /^[0-9]*(\.[0-9]{0,2})?$/.test(value);
@@ -67,7 +70,7 @@ const useProduct = (): IUseProductProps => {
       .required("Required"),
   });
 
-  const formatProduct = (values: IProduct, images: IImage[]) => {
+  const formatProduct = (values: IProduct, images: string[]) => {
     return {
       id: values.id,
       name: values.name,
@@ -82,7 +85,7 @@ const useProduct = (): IUseProductProps => {
     } as IProduct;
   };
 
-  const addProduct = (product: IProduct, images: IImage[]) => {
+  const addProduct = (product: IProduct, images: string[]) => {
     const formattedProduct = formatProduct(product, images);
 
     setLoading(true);

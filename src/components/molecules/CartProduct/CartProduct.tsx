@@ -23,7 +23,7 @@ const CartProduct: React.FC<IProps> = ({ cartProduct }) => {
         className={"cart-product-image"}
         onClick={() => navigate(`/product/${cartProduct.id}`)}
       >
-        <img src={cartProduct.images![0]!.url!} alt={cartProduct.name} />
+        <img src={cartProduct.images![0]!} alt={cartProduct.images![0]!} />
       </div>
       <div className={"cart-product-info"}>
         <Text>

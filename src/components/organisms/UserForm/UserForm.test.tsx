@@ -1,10 +1,8 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
-import AccountForm from "./AccountForm";
+import UserForm from "./UserForm";
 import { Formik } from "formik";
 import { mockedUser } from "data/mockData/userData";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "../../../styles/theme";
 import renderHelper from "../../../utils/renderHelper";
 
 const mockedOnSubmit = jest.fn();
@@ -14,17 +12,17 @@ function hasInputValue(e: TestElement, inputValue: string) {
   return screen.getByDisplayValue(inputValue) === e;
 }
 
-describe("AccountForm", () => {
+describe("UserForm", () => {
   it("should render the component", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <AccountForm formik={formik} user={mockedUser} />;
+          return <UserForm formik={formik} user={mockedUser} />;
         }}
       </Formik>
     );
 
-    const component = container.querySelector("#account-form") as Element;
+    const component = container.querySelector("#user-form") as Element;
 
     expect(component).toBeInTheDocument();
   });
@@ -33,7 +31,7 @@ describe("AccountForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <AccountForm formik={formik} user={mockedUser} />;
+          return <UserForm formik={formik} user={mockedUser} />;
         }}
       </Formik>
     );
@@ -54,7 +52,7 @@ describe("AccountForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <AccountForm formik={formik} user={mockedUser} />;
+          return <UserForm formik={formik} user={mockedUser} />;
         }}
       </Formik>
     );
@@ -75,7 +73,7 @@ describe("AccountForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <AccountForm formik={formik} user={mockedUser} />;
+          return <UserForm formik={formik} user={mockedUser} />;
         }}
       </Formik>
     );
@@ -99,7 +97,7 @@ describe("AccountForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <AccountForm formik={formik} user={mockedUser} />;
+          return <UserForm formik={formik} user={mockedUser} />;
         }}
       </Formik>
     );
@@ -116,7 +114,7 @@ describe("AccountForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <AccountForm formik={formik} user={mockedUser} />;
+          return <UserForm formik={formik} user={mockedUser} />;
         }}
       </Formik>
     );
@@ -142,7 +140,7 @@ describe("AccountForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <AccountForm formik={formik} user={mockedUser} />;
+          return <UserForm formik={formik} user={mockedUser} />;
         }}
       </Formik>
     );

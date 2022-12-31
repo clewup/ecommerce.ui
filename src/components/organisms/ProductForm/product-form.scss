@@ -1,9 +1,9 @@
 @import '/src/styles/borders';
 
-#add-product-form {
+#product-form {
   display: flex;
   flex-direction: column;
-  width: 40vw;
+  width: 60vw;
 
   Form {
     display: flex;
@@ -14,14 +14,16 @@
       display: flex;
       gap: 1rem;
 
-      .product-form-half {
-        width: 50%;
+      .product-form-third {
+        width: 33%;
         display: flex;
         flex-direction: column;
 
         .carousel {
           border: $border-light;
+          border-radius: 5px;
         }
+
         .upload-button {
           margin: 0.5rem 0;
           height: 50px;
@@ -29,11 +31,20 @@
           gap: 1rem;
         }
 
-          img {
-            width: 310px;
-            height: 310px;
-            object-fit: cover;
-          }
+        .form-error {
+          border: $border-validation;
+          border-radius: 5px;
+        }
+
+        div[id*='listbox']{
+          z-index: 999;
+        }
+
+        img {
+          width: 310px;
+          height: 310px;
+          object-fit: cover;
+        }
       }
     }
 

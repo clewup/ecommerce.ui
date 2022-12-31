@@ -1,11 +1,11 @@
 import "./account.scss";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../contexts/User";
-import AccountForm from "../../organisms/AccountForm/AccountForm";
+import UserForm from "../../organisms/UserForm/UserForm";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 import { Form, Formik } from "formik";
 import useUser from "../../../hooks/useUser";
-import AccountOrders from "../../organisms/AccountOrders/AccountOrders";
+import UserOrders from "../../organisms/UserOrders/UserOrders";
 import { Tab, Tabs } from "@mui/material";
 import { AuthContext } from "../../../contexts/Auth";
 import { useNavigate } from "react-router-dom";
@@ -44,10 +44,10 @@ const Account = () => {
             </Tabs>
             {tabIndex === 0 && (
               <Form>
-                <AccountForm formik={formik} user={user} />
+                <UserForm formik={formik} user={user} />
               </Form>
             )}
-            {tabIndex === 1 && <AccountOrders />}
+            {tabIndex === 1 && <UserOrders />}
           </Wrapper>
         );
       }}

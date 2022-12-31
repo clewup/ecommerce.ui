@@ -1,7 +1,7 @@
 import { Field, FormikProps } from "formik";
 import { IUser } from "../../../types/IUser";
 import React, { useState } from "react";
-import "./account-form.scss";
+import "./user-form.scss";
 import Text from "../../atoms/Text/Text";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
@@ -11,11 +11,11 @@ interface IProps {
   user: IUser;
 }
 
-const AccountForm: React.FC<IProps> = ({ formik, user }) => {
+const UserForm: React.FC<IProps> = ({ formik, user }) => {
   const [isEditing, setEditing] = useState(false);
 
   return (
-    <div id={"account-form"}>
+    <div id={"user-form"}>
       <div className={"contact-info"}>
         <Field
           name={"firstName"}
@@ -115,7 +115,7 @@ const AccountForm: React.FC<IProps> = ({ formik, user }) => {
           />
         </div>
       )}
-      <div className={"account-footer"}>
+      <div className={"user-footer"}>
         <Button
           variant={"contained"}
           color={"_black"}
@@ -144,4 +144,4 @@ const AccountForm: React.FC<IProps> = ({ formik, user }) => {
     </div>
   );
 };
-export default AccountForm;
+export default UserForm;

@@ -14,15 +14,16 @@ interface IProps {
 }
 
 const Products: React.FC<IProps> = ({ products, isLoading, error }) => {
+  const defaultPagedAmount = 10;
   const [pagedProducts, setPagedProducts] = useState<IProduct[]>([]);
-  const [pagedAmount, setPagedAmount] = useState(10);
+  const [pagedAmount, setPagedAmount] = useState(defaultPagedAmount);
 
   useEffect(() => {
     setPagedProducts(products.slice(0, pagedAmount));
   }, [products, pagedAmount]);
 
   const loadMore = () => {
-    setPagedAmount(pagedAmount + 10);
+    setPagedAmount(pagedAmount + defaultPagedAmount);
   };
 
   if (error) return <AppError error={error} />;

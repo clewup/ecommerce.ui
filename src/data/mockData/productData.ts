@@ -1,17 +1,10 @@
 import { IProduct } from "../../types/IProduct";
 import { Guid } from "guid-typescript";
-import { IImage } from "../../types/IImage";
 
 export const mockedProduct: IProduct = {
   id: Guid.create(),
   name: "PRODUCT_NAME",
-  images: [
-    {
-      title: "IMAGE_TITLE",
-      description: "IMAGE_DESCRIPTION",
-      url: "HTTPS://IMAGE_URL.JPG",
-    },
-  ] as IImage[],
+  images: ["HTTPS://IMAGE_URL.JPG"] as string[],
   description: "PRODUCT_DESCRIPTION",
   category: "PRODUCT_CATEGORY",
   range: "PRODUCT_RANGE",
