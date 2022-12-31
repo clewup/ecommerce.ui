@@ -6,4 +6,6 @@ export interface ICart {
   userId: Guid;
   products: ICartProduct[];
   total: number;
+  discountedTotal?: number;
+  totalSavings?: number;
 }

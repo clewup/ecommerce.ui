@@ -28,6 +28,7 @@ const useProduct = (): IUseProductProps => {
     images: [],
     description: "",
     category: "",
+    subcategory: "",
     range: "",
     color: "",
     stock: 0,

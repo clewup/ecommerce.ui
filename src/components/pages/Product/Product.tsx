@@ -17,6 +17,7 @@ import useCart from "../../../hooks/useCart";
 import Text from "../../atoms/Text/Text";
 import { subheadingSize } from "../../../enums/typography";
 import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
+import { IProduct } from "../../../types/IProduct";
 
 const Product = () => {
   const { id } = useParams();
@@ -37,6 +38,26 @@ const Product = () => {
     }
     // eslint-disable-next-line
   }, [id]);
+
+  useEffect(() => {
+    const recentlyViewed = localStorage.rvp;
+
+    // If there is already an existing recently viewed array, modify it.
+    if (recentlyViewed && Object.values(product).length) {
+      let products: IProduct[] = JSON.parse(recentlyViewed);
+
+      products = products.splice(0, 3);
+      products.unshift(product);
+
+      localStorage.rvp = JSON.stringify(products);
+
+      // If no recently viewed array, create one.
+    } else if (Object.values(product).length) {
+      const products = [product];
+
+      localStorage.rvp = JSON.stringify(products);
+    }
+  }, [product]);
 
   if (error) return <AppError error={error} />;
 

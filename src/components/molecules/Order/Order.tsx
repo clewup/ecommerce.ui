@@ -14,10 +14,10 @@ const Order: React.FC<IProps> = ({ order }) => {
       <div className={"order-info"}>
         <Text className={"order-id"}>{String(order.id)}</Text>
         <Text>{new Date(order.orderDate).toDateString()}</Text>
-        <Text>Total: £{order.cart.total}</Text>
+        <Text>Total: £{order.total}</Text>
       </div>
       <div className={"order-products"}>
-        {order.cart.products.map((orderProduct) => {
+        {order.products.map((orderProduct) => {
           return (
             <div key={String(orderProduct.id)}>
               <OrderProduct orderProduct={orderProduct} />

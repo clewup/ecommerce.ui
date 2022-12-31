@@ -7,6 +7,7 @@ export const mockedCartProduct: ICartProduct = {
   images: ["HTTPS://IMAGE_URL.JPG"] as string[],
   description: "CART_PRODUCT_DESCRIPTION",
   category: "CART_PRODUCT_CATEGORY",
+  subcategory: "CART_PRODUCT_SUBCATEGORY",
   range: "CART_PRODUCT_RANGE",
   color: "CART_PRODUCT_COLOR",
   price: 12.34,

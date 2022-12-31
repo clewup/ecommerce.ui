@@ -6,6 +6,7 @@ import AdvertisementsBanner from "../../organisms/AdvertisementsBanner/Advertise
 import CategoriesBanner from "../../organisms/CategoriesBanner/CategoriesBanner";
 import RangeBanner from "../../organisms/RangeBanner/RangeBanner";
 import PromotionBanner from "../../molecules/PromotionBanner/PromotionBanner";
+import RecentlyViewedProducts from "../../organisms/RecentlyViewedProducts/RecentlyViewedProducts";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
         <CategoriesBanner />
         <RangeBanner />
         <TrendingProducts />
+        <RecentlyViewedProducts />
       </div>
       <PromotionBanner />
       <div className={"bottom-section"}>

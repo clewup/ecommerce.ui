@@ -17,12 +17,8 @@ export const mockedOrder: IOrder = {
     country: "ORDER_COUNTRY",
     county: "ORDER_COUNTY",
   },
-  cart: {
-    id: Guid.create(),
-    userId: Guid.create(),
-    products: mockedCartProducts,
-    total: 69.12,
-  },
+  products: mockedCartProducts,
+  total: 99.99,
   orderDate: new Date(),
 };
 

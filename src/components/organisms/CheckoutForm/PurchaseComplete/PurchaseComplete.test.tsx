@@ -77,7 +77,7 @@ describe("PurchaseComplete", () => {
     const total = container.querySelector(".order-total") as Element;
 
     expect(total).toBeInTheDocument();
-    expect(total).toHaveTextContent("£69.12");
+    expect(total).toHaveTextContent("£99.99");
   });
 
   it("should render the loader when loading", () => {

@@ -20,14 +20,14 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
           <Subheading align={"center"}>Your order is complete!</Subheading>
           <Text className={"order-details"}>{String(order.id)}</Text>
           <div className={"order-cart-items"}>
-            {order?.cart?.products.map((orderProduct) => {
+            {order?.products.map((orderProduct) => {
               return (
                 <div key={String(orderProduct.id)}>
                   <OrderProduct orderProduct={orderProduct} />
                 </div>
               );
             })}
-            <Text className={"order-total"}>£{order?.cart?.total}</Text>
+            <Text className={"order-total"}>£{order?.total}</Text>
           </div>
         </>
       )}

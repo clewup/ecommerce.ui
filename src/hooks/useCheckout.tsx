@@ -75,7 +75,8 @@ const useCheckout = (): IUseCheckoutProps => {
         county: values.county,
         country: values.country,
       },
-      cart: cart!,
+      products: cart.products,
+      total: 1,
       orderDate: new Date(),
     };
 

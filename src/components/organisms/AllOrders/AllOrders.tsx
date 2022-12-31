@@ -59,7 +59,7 @@ const AllOrders = () => {
                 >
                   <TableCell>{String(order.id)}</TableCell>
                   <TableCell>{String(order.userId)}</TableCell>
-                  <TableCell>£{order.cart.total}</TableCell>
+                  <TableCell>£{order.total}</TableCell>
                   <TableCell>
                     {new Date(order.orderDate).toLocaleDateString()}
                   </TableCell>
@@ -105,7 +105,7 @@ const AllOrders = () => {
             <Text>{selectedOrder?.deliveryAddress?.country}</Text>
           </div>
           <div>
-            {selectedOrder?.cart.products.map((orderProduct) => {
+            {selectedOrder?.products.map((orderProduct) => {
               return (
                 <div key={String(orderProduct.id)}>
                   <OrderProduct orderProduct={orderProduct} />

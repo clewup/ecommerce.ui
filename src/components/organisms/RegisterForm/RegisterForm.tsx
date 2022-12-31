@@ -21,7 +21,6 @@ const RegisterForm: React.FC<IProps> = ({ formik, isLoading, error }) => {
 
   return (
     <div id={"register-form"}>
-      <Subheading align={"center"}>Register</Subheading>
       <Field
         name={"firstName"}
         component={Input}

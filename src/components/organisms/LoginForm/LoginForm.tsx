@@ -21,7 +21,6 @@ const LoginForm: React.FC<IProps> = ({ formik, isLoading, error }) => {
 
   return (
     <div id={"login-form"}>
-      <Subheading align={"center"}>Login</Subheading>
       <Field
         name={"email"}
         component={Input}
