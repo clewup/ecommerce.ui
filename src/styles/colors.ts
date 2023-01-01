@@ -14,4 +14,7 @@ export const colors = {
   BLACK: "#333333",
   LIGHT_BLACK: "#454545",
   DARK_BLACK: "#242323",
+  ORANGE: "#FFB52E",
+  LIGHT_ORANGE: "#FFC55C",
+  DARK_ORANGE: "#FFA500",
 };

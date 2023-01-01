@@ -2,10 +2,10 @@
 
 #footer {
   display: flex;
-  padding-bottom: 1rem;
   justify-content: space-around;
   background-color: $color-darkgrey;
   color: $color-white;
+  padding: 1rem 0;
 
   .footer-group {
     display: flex;

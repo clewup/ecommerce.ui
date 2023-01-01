@@ -3,13 +3,15 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Products from "../../organisms/Products/Products";
 import ProductFilter from "../../molecules/ProductFilter/ProductFilter";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
-import { useState } from "react";
+import React, { useState } from "react";
 import useProductFilter from "../../../hooks/useProductFilter";
 import { Button } from "@mui/material";
 import Text from "../../atoms/Text/Text";
+import Loader from "../../atoms/Loader/Loader";
+import AppLoader from "../../atoms/AppLoader/AppLoader";
 
 const Store = () => {
-  const { products, isLoading, error } = useProductFilter();
+  const { products, isLoading, isQuerying, error } = useProductFilter();
   const [isFilterOpen, setFilterOpen] = useState(false);
 
   const toggleDrawer =
@@ -41,7 +43,11 @@ const Store = () => {
         </SwipeableDrawer>
       </div>
       <div className={"products"}>
-        <Products products={products} isLoading={isLoading} error={error} />
+        {isLoading || isQuerying ? (
+          <AppLoader />
+        ) : (
+          <Products products={products} isLoading={isLoading} error={error} />
+        )}
       </div>
     </Wrapper>
   );

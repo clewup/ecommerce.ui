@@ -8,12 +8,14 @@ import { queryDefaultValues } from "../enums/defaultValues";
 interface IUseProductFilterProps {
   products: IProduct[];
   isLoading: boolean;
+  isQuerying: boolean;
   error: AxiosError | null;
 }
 
 const useProductFilter = (): IUseProductFilterProps => {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<AxiosError | null>(null);
+  const [isQuerying, setQuerying] = useState(false);
 
   const [products, setProducts] = useState<IProduct[]>([]);
   const [query, setQuery] = useState("");
@@ -42,7 +44,7 @@ const useProductFilter = (): IUseProductFilterProps => {
   };
 
   const formatQuery = () => {
-    setLoading(true);
+    setQuerying(true);
     let formattedQuery = "";
     if (searchQuery) {
       formattedQuery = `&SearchTerm=${searchQuery}`;
@@ -73,7 +75,7 @@ const useProductFilter = (): IUseProductFilterProps => {
 
     formattedQuery = "?" + formattedQuery.slice(1);
     setQuery(formattedQuery);
-    setLoading(false);
+    setQuerying(false);
   };
 
   useEffect(() => {
@@ -92,6 +94,7 @@ const useProductFilter = (): IUseProductFilterProps => {
   return {
     products,
     isLoading,
+    isQuerying,
     error,
   };
 };

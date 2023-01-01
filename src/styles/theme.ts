@@ -46,6 +46,12 @@ export const theme = createTheme({
       dark: colors.DARK_BLACK,
       contrastText: colors.WHITE,
     },
+    _orange: {
+      main: colors.ORANGE,
+      light: colors.LIGHT_ORANGE,
+      dark: colors.DARK_ORANGE,
+      contrastText: colors.BLACK,
+    },
   },
   text: {
     primary: {
@@ -83,6 +89,7 @@ declare module "@mui/material/styles" {
     _grey: Palette["primary"];
     _red: Palette["primary"];
     _black: Palette["primary"];
+    _orange: Palette["primary"];
   }
   interface PaletteOptions {
     _blue: Palette["primary"];
@@ -90,6 +97,7 @@ declare module "@mui/material/styles" {
     _grey: Palette["primary"];
     _red: Palette["primary"];
     _black: Palette["primary"];
+    _orange: Palette["primary"];
   }
 }
 
@@ -100,5 +108,6 @@ declare module "@mui/material/Button" {
     _grey: true;
     _red: true;
     _black: true;
+    _orange: true;
   }
 }

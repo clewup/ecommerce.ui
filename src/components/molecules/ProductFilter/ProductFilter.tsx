@@ -22,6 +22,7 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
     return () => {
       setSearchQuery(queryDefaultValues.SEARCH_QUERY);
       setCategoryQuery(queryDefaultValues.CATEGORY_QUERY);
+      setRangeQuery(queryDefaultValues.RANGE_QUERY);
       setPriceQuery(queryDefaultValues.PRICE_QUERY);
       setSaleQuery(queryDefaultValues.SALE_QUERY);
       setStockQuery(queryDefaultValues.STOCK_QUERY);

@@ -89,7 +89,6 @@ const Header = () => {
       <div className={"header-bottom"}>
         <Text onClick={() => navigate("/")}>HOME</Text>
         <StoreDropdown />
-        <Text onClick={() => navigate("about-us")}>ABOUT US</Text>
         <Text onClick={() => navigate("faq")}>FAQ</Text>
         <Text onClick={() => navigate("contact-us")}>CONTACT US</Text>
       </div>
