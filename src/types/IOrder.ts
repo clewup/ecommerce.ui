@@ -1,7 +1,6 @@
 import { Guid } from "guid-typescript";
-import { ICart } from "./ICart";
 import { IAddress } from "./IAddress";
-import { ICartProduct, IProduct } from "./IProduct";
+import { IProduct } from "./IProduct";
 
 export interface IOrder {
   id: Guid;
@@ -10,7 +9,7 @@ export interface IOrder {
   lastName: string;
   email: string;
   deliveryAddress: IAddress;
-  products: ICartProduct[];
+  products: IProduct[];
   total: number;
   discountedTotal?: number;
   totalSavings?: number;

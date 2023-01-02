@@ -2,7 +2,7 @@ import "./footer.scss";
 import Text from "../../atoms/Text/Text";
 import Subheading from "../../atoms/Subheading/Subheading";
 import { useNavigate } from "react-router-dom";
-import { fontPadding, subheadingSize } from "../../../enums/typography";
+import { fontSpacing, subheadingSize } from "../../../enums/typography";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -12,8 +12,8 @@ const Footer = () => {
       <div className={"footer-group"}>
         <Subheading
           size={subheadingSize.SMALL}
-          padding={"0rem"}
-          margin={"0rem"}
+          padding={fontSpacing.NONE}
+          margin={fontSpacing.NONE}
         >
           HELP AND INFORMATION
         </Subheading>
@@ -24,8 +24,8 @@ const Footer = () => {
       <div className={"footer-group"}>
         <Subheading
           size={subheadingSize.SMALL}
-          padding={"0rem"}
-          margin={"0rem"}
+          padding={fontSpacing.NONE}
+          margin={fontSpacing.NONE}
         >
           ABOUT ECOMMERCE
         </Subheading>
@@ -35,8 +35,8 @@ const Footer = () => {
       <div className={"footer-group"}>
         <Subheading
           size={subheadingSize.SMALL}
-          padding={"0rem"}
-          margin={"0rem"}
+          padding={fontSpacing.NONE}
+          margin={fontSpacing.NONE}
         >
           MORE FROM ECOMMERCE
         </Subheading>

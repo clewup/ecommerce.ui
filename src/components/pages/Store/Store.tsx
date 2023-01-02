@@ -7,7 +7,6 @@ import React, { useState } from "react";
 import useProductFilter from "../../../hooks/useProductFilter";
 import { Button } from "@mui/material";
 import Text from "../../atoms/Text/Text";
-import Loader from "../../atoms/Loader/Loader";
 import AppLoader from "../../atoms/AppLoader/AppLoader";
 
 const Store = () => {

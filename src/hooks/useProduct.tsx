@@ -25,13 +25,16 @@ const useProduct = (): IUseProductProps => {
   const initialValues: IProduct = {
     id: createGuid(),
     name: "",
-    images: [],
     description: "",
+    color: "",
+    images: [],
+
     category: "",
     subcategory: "",
     range: "",
-    color: "",
-    stock: 0,
+
+    oneSize: true,
+    sizes: [],
     price: 0,
     discount: 0,
   };
@@ -75,12 +78,16 @@ const useProduct = (): IUseProductProps => {
     return {
       id: values.id,
       name: values.name,
-      images: images,
       description: values.description,
-      category: values.category,
-      range: values.range,
       color: values.color,
-      stock: values.stock,
+      images: images,
+
+      category: values.category,
+      subcategory: values.subcategory,
+      range: values.range,
+
+      oneSize: values.oneSize,
+      sizes: values.sizes,
       price: values.price,
       discount: values.discount,
     } as IProduct;

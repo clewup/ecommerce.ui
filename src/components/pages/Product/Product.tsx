@@ -122,13 +122,15 @@ const Product = () => {
                   type={"button"}
                   variant={"contained"}
                   loading={isCartLoading}
-                  disabled={product.stock === 0}
+                  //TODO: Disable on size out of stock
+                  //disabled={product.stock === 0}
                   className={"add-to-cart-btn"}
                   onClick={() => {
                     !isAuthenticated ? navigate("/login") : addToCart(product);
                   }}
                 >
-                  {product.stock !== 0 ? <AddToCartIcon /> : "OUT OF STOCK"}
+                  <AddToCartIcon />
+                  {/*{product.stock !== 0 ? <AddToCartIcon /> : "OUT OF STOCK"}*/}
                 </LoadingButton>
               </Tooltip>
             </div>

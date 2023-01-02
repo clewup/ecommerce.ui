@@ -23,11 +23,12 @@ const useProductFilter = (): IUseProductFilterProps => {
   const {
     searchQuery,
     categoryQuery,
+    subcategoryQuery,
+    rangeQuery,
     priceQuery,
     saleQuery,
     stockQuery,
     sortByQuery,
-    rangeQuery,
   } = useContext(ProductContext);
 
   useEffect(() => {
@@ -52,6 +53,17 @@ const useProductFilter = (): IUseProductFilterProps => {
     if (categoryQuery && categoryQuery !== queryDefaultValues.CATEGORY_QUERY) {
       formattedQuery = formattedQuery.concat(`&Category=${categoryQuery}`);
     }
+    if (
+      subcategoryQuery &&
+      subcategoryQuery !== queryDefaultValues.SUBCATEGORY_QUERY
+    ) {
+      formattedQuery = formattedQuery.concat(
+        `&Subcategory=${subcategoryQuery}`
+      );
+    }
+    if (rangeQuery && rangeQuery !== queryDefaultValues.RANGE_QUERY) {
+      formattedQuery = formattedQuery.concat(`&Range=${rangeQuery}`);
+    }
     if (priceQuery) {
       formattedQuery = formattedQuery.concat(
         `&MinPrice=${priceQuery[0]}&MaxPrice=${priceQuery[1]}`
@@ -69,9 +81,6 @@ const useProductFilter = (): IUseProductFilterProps => {
         `&SortBy=${values[0]}&SortVariation=${values[1]}`
       );
     }
-    if (rangeQuery && rangeQuery !== queryDefaultValues.RANGE_QUERY) {
-      formattedQuery = formattedQuery.concat(`&Range=${rangeQuery}`);
-    }
 
     formattedQuery = "?" + formattedQuery.slice(1);
     setQuery(formattedQuery);
@@ -84,11 +93,12 @@ const useProductFilter = (): IUseProductFilterProps => {
   }, [
     searchQuery,
     categoryQuery,
+    subcategoryQuery,
+    rangeQuery,
     priceQuery,
     saleQuery,
     stockQuery,
     sortByQuery,
-    rangeQuery,
   ]);
 
   return {

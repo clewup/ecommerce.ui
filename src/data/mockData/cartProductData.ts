@@ -1,25 +1,50 @@
-import { ICartProduct } from "../../types/IProduct";
 import { Guid } from "guid-typescript";
+import { IProduct } from "../../types/IProduct";
 
-export const mockedCartProduct: ICartProduct = {
+export const mockedCartProduct: IProduct = {
   id: Guid.create(),
   name: "CART_PRODUCT_NAME",
-  images: ["HTTPS://IMAGE_URL.JPG"] as string[],
   description: "CART_PRODUCT_DESCRIPTION",
+  color: "CART_PRODUCT_COLOR",
+  images: ["HTTPS://IMAGE_URL.JPG"] as string[],
+
   category: "CART_PRODUCT_CATEGORY",
   subcategory: "CART_PRODUCT_SUBCATEGORY",
   range: "CART_PRODUCT_RANGE",
-  color: "CART_PRODUCT_COLOR",
+
+  oneSize: false,
+  sizes: [
+    {
+      size: "XSmall",
+      stock: 10,
+    },
+    {
+      size: "Small",
+      stock: 10,
+    },
+    {
+      size: "Medium",
+      stock: 10,
+    },
+    {
+      size: "Large",
+      stock: 10,
+    },
+    {
+      size: "XLarge",
+      stock: 10,
+    },
+  ],
   price: 12.34,
   discount: 0,
 };
 
-export const mockedDiscountedCartProduct: ICartProduct = {
+export const mockedDiscountedCartProduct: IProduct = {
   ...mockedCartProduct,
   discount: 50,
 };
 
-export const mockedCartProducts: ICartProduct[] = [
+export const mockedCartProducts: IProduct[] = [
   {
     ...mockedCartProduct,
     id: Guid.parse("96D80925-C3F5-44CE-8AF1-BC4EB60E6C76"),

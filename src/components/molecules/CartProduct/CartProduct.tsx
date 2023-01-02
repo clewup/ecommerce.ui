@@ -2,14 +2,14 @@ import "./cart-product.scss";
 import ClearIcon from "@mui/icons-material/Clear";
 import useCart from "../../../hooks/useCart";
 import React, { useContext } from "react";
-import { ICartProduct } from "../../../types/IProduct";
 import { CartContext } from "../../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
 import Text from "../../atoms/Text/Text";
 import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
+import { IProduct } from "../../../types/IProduct";
 
 interface IProps {
-  cartProduct: ICartProduct;
+  cartProduct: IProduct;
 }
 
 const CartProduct: React.FC<IProps> = ({ cartProduct }) => {

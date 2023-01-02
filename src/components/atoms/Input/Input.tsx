@@ -1,4 +1,4 @@
-import { TextField, Tooltip } from "@mui/material";
+import { InputAdornment, TextField, Tooltip } from "@mui/material";
 import { FieldAttributes, FormikProps } from "formik";
 import React from "react";
 import { colors } from "../../../styles/colors";
@@ -15,6 +15,8 @@ interface IProps {
   ) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLDivElement>) => void;
   width?: string;
+  icon?: JSX.Element;
+  iconPosition?: "start" | "end";
 }
 
 const Input: React.FC<IProps> = ({
@@ -27,6 +29,8 @@ const Input: React.FC<IProps> = ({
   onChange,
   onKeyDown,
   width,
+  icon,
+  iconPosition,
 }) => {
   return (
     <Tooltip
@@ -51,6 +55,11 @@ const Input: React.FC<IProps> = ({
           backgroundColor: colors.WHITE,
           textAlign: "center",
           width: width ?? "100%",
+        }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position={"end"}>{icon}</InputAdornment>
+          ),
         }}
       />
     </Tooltip>

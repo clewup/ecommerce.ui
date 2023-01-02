@@ -5,7 +5,7 @@ import Subheading from "../../atoms/Subheading/Subheading";
 import { IAdvertisement } from "../../../types/IAdvertisement";
 import React from "react";
 import {
-  fontPadding,
+  fontSpacing,
   subheadingSize,
   textSize,
 } from "../../../enums/typography";
@@ -28,7 +28,11 @@ const AdvertisementTile: React.FC<IProps> = ({ advertisement }) => {
       }}
     >
       <div className={"advertisement-information"}>
-        <Subheading size={subheadingSize.LARGE} padding={fontPadding.NONE}>
+        <Subheading
+          size={subheadingSize.LARGE}
+          padding={fontSpacing.NONE}
+          margin={fontSpacing.NONE}
+        >
           {advertisement.title}
         </Subheading>
         <Text size={textSize.LARGE}>{advertisement.caption}</Text>
