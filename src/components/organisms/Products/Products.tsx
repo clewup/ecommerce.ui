@@ -40,6 +40,7 @@ const Products: React.FC<IProps> = ({ products, isLoading, error }) => {
           dataLength={pagedProducts.length}
           className={"products-grid"}
           scrollThreshold={0.6}
+          style={{ overflow: "hidden" }}
         >
           {pagedProducts.map((product: IProduct) => {
             return (

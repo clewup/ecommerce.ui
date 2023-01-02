@@ -1,5 +1,5 @@
 export interface IAdvertisement {
   title: string;
-  caption: string;
+  caption?: string;
   image: string;
 }

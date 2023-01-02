@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { IRange } from "../../../types/IRange";
 import { ProductContext } from "../../../contexts/Product";
 import { colors } from "../../../styles/colors";
+import ScaleAnimation from "../../../lib/FramerMotion/ScaleAnimation";
 
 interface IProps {
   range: IRange;
@@ -24,22 +25,26 @@ const RangeTile: React.FC<IProps> = ({ range }) => {
         backgroundPosition: "center",
       }}
     >
-      <div className={"range-tile-text"}>
-        <Subheading color={colors.WHITE}>{range.name.toUpperCase()}</Subheading>
-        <Button
-          onClick={() => {
-            navigate("store");
-            setRangeQuery(range.name);
-          }}
-          size={"large"}
-          type={"button"}
-          variant={"contained"}
-          color={"_black"}
-          className={"discover-btn"}
-        >
-          DISCOVER
-        </Button>
-      </div>
+      <ScaleAnimation>
+        <div className={"range-tile-text"}>
+          <Subheading color={colors.WHITE}>
+            {range.name.toUpperCase()}
+          </Subheading>
+          <Button
+            onClick={() => {
+              navigate("store");
+              setRangeQuery(range.name);
+            }}
+            size={"large"}
+            type={"button"}
+            variant={"contained"}
+            color={"_black"}
+            className={"discover-btn"}
+          >
+            DISCOVER
+          </Button>
+        </div>
+      </ScaleAnimation>
     </div>
   );
 };

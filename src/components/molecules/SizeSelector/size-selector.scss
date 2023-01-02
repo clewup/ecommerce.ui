@@ -1,0 +1,28 @@
+@import '/src/styles/borders';
+@import '/src/styles/colors';
+
+#size-selector {
+  display: flex;
+  gap: 0.2rem;
+
+  .size {
+    width: 2rem;
+    height: 2rem;
+    border: $border-dark;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .selected-size {
+    background-color:$color-black;
+    color: $color-white;
+  }
+
+  .out-of-stock-size {
+    cursor: not-allowed;
+    background-color: $color-lightgrey;
+    border: $border-light;
+  }
+}

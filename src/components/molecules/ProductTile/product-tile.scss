@@ -47,6 +47,13 @@
     align-items: center;
     gap: 1rem;
 
+    .one-size {
+      height: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .add-to-cart-btn {
       display: flex;
       gap: 1rem;

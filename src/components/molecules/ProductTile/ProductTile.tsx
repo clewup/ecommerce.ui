@@ -10,7 +10,9 @@ import { LoadingButton } from "@mui/lab";
 import Carousel from "react-material-ui-carousel";
 import Text from "../../atoms/Text/Text";
 import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
-import Select, { ISelectOption } from "../../atoms/Select/Select";
+import SizeSelector from "../SizeSelector/SizeSelector";
+import BounceAnimation from "../../../lib/FramerMotion/BounceAnimation";
+import ScaleAnimation from "../../../lib/FramerMotion/ScaleAnimation";
 
 interface IProps {
   product: IProduct;
@@ -23,7 +25,9 @@ const ProductTile: React.FC<IProps> = ({ product }) => {
   const navigate = useNavigate();
 
   const [isOutOfStock, setOutOfStock] = useState(false);
-  const [selectedSize, setSelectedSize] = useState("select");
+  const [selectedSize, setSelectedSize] = useState<ISize | undefined>(
+    product.sizes?.filter((size) => size.stock > 0)[0]
+  );
 
   useEffect(() => {
     if (product.sizes && product.oneSize === false) {
@@ -34,85 +38,81 @@ const ProductTile: React.FC<IProps> = ({ product }) => {
       });
       setOutOfStock(outOfStockCount === product.sizes.length);
     }
-  }, [product.sizes]);
-
-  const formatSizeSelectOptions = (options: ISize[]) => {
-    let formattedOptions: ISelectOption[];
-
-    formattedOptions = options.map((option) => ({
-      value: option.size,
-      label: option.size,
-    }));
-
-    return formattedOptions;
-  };
+  }, [product.oneSize, product.sizes]);
 
   return (
     <div id={"product-tile"}>
-      <div className={"product-title"}>{product.name}</div>
+      <BounceAnimation>
+        <div className={"product-title"}>{product.name}</div>
 
-      <div
-        className={"product-image"}
-        onClick={() => navigate(`/product/${product.id}`)}
-      >
-        <Carousel
-          animation={"slide"}
-          swipe={false}
-          indicators={false}
-          autoPlay={false}
+        <div
+          className={"product-image"}
+          onClick={() => navigate(`/product/${product.id}`)}
         >
-          {product.images.map((image) => (
-            <img src={image} alt={image} key={image} />
-          ))}
-        </Carousel>
-      </div>
-      <div className={"product-info"}>
-        <Text>{product.color}</Text>
-        {product.discount > 0 ? (
-          <div className={"discounted-price"}>
-            <Text className="discounted-price-striked">
-              £{calculatePriceBeforeDiscount(product.price, product.discount)}
-            </Text>
-            <Text className={"discounted-price-total"}>£{product.price}</Text>
-          </div>
-        ) : (
-          <Text>£{product.price}</Text>
-        )}
-      </div>
-      <div className={"product-actions"}>
-        {product.oneSize === false && (
-          <Select
-            options={formatSizeSelectOptions(product.sizes)}
-            value={selectedSize}
-            onChange={(e) => setSelectedSize(e.target.value)}
-            selectText={"Select Size"}
-          />
-        )}
-
-        <LoadingButton
-          color="success"
-          type={"button"}
-          variant={"contained"}
-          loading={isLoading}
-          disabled={isOutOfStock}
-          className={"add-to-cart-btn"}
-          onClick={() => {
-            !isAuthenticated ? navigate("/login") : addToCart(product);
-          }}
-        >
-          {!isOutOfStock ? (
-            <>
-              <AddToCartIcon />
-              Add to Cart
-            </>
+          <Carousel
+            animation={"slide"}
+            swipe={false}
+            indicators={false}
+            autoPlay={false}
+          >
+            {product.images.map((image) => (
+              <img src={image} alt={image} key={image} />
+            ))}
+          </Carousel>
+        </div>
+        <div className={"product-info"}>
+          <Text>{product.color}</Text>
+          {product.discount > 0 ? (
+            <div className={"discounted-price"}>
+              <Text className="discounted-price-striked">
+                £{calculatePriceBeforeDiscount(product.price, product.discount)}
+              </Text>
+              <Text className={"discounted-price-total"}>£{product.price}</Text>
+            </div>
           ) : (
-            <>
-              <AddToCartIcon />
-              Out of Stock
-            </>
+            <Text>£{product.price}</Text>
           )}
-        </LoadingButton>
-      </div>
+        </div>
+        <div className={"product-actions"}>
+          {product.oneSize === false ? (
+            <SizeSelector
+              sizes={product.sizes}
+              selectedSize={selectedSize}
+              setSelectedSize={setSelectedSize}
+            />
+          ) : (
+            <div className={"one-size"}>
+              <Text>One Size</Text>
+            </div>
+          )}
+
+          <ScaleAnimation>
+            <LoadingButton
+              color="success"
+              type={"button"}
+              variant={"contained"}
+              loading={isLoading}
+              disabled={isOutOfStock}
+              className={"add-to-cart-btn"}
+              onClick={() => {
+                !isAuthenticated ? navigate("/login") : addToCart(product);
+              }}
+            >
+              {!isOutOfStock ? (
+                <>
+                  <AddToCartIcon />
+                  Add to Cart
+                </>
+              ) : (
+                <>
+                  <AddToCartIcon />
+                  Out of Stock
+                </>
+              )}
+            </LoadingButton>
+          </ScaleAnimation>
+        </div>
+      </BounceAnimation>
     </div>
   );
 };
