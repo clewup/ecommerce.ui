@@ -6,34 +6,30 @@ import {
   Paper,
   Popper,
 } from "@mui/material";
-import React, { useContext, useEffect } from "react";
+import React, { SetStateAction, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ProductContext } from "../../../../contexts/Product";
-import getProductCategories from "../../../../api/GetProductCategories";
 import Text from "../../../atoms/Text/Text";
-import getProductRanges from "../../../../api/GetProductRanges";
+import { ProductContext } from "../../../../contexts/Product";
 
-const StoreDropdown = () => {
+interface IProps {
+  header: string;
+  options: string[];
+  headerAction?: React.Dispatch<SetStateAction<string>>;
+  optionAction?: React.Dispatch<SetStateAction<string>>;
+}
+
+const StoreDropdown: React.FC<IProps> = ({
+  header,
+  options,
+  headerAction,
+  optionAction,
+}) => {
   const navigate = useNavigate();
-  const { categories, setCategories, ranges, setRanges, setCategoryQuery } =
-    useContext(ProductContext);
+
+  const { resetQueries } = useContext(ProductContext);
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLParagraphElement>(null);
-
-  useEffect(() => {
-    if (categories.length === 0 || !categories.length) {
-      getProductCategories().then((res) => {
-        setCategories(res.data);
-      });
-    }
-    if (ranges.length === 0 || !ranges.length) {
-      getProductRanges().then((res) => {
-        setRanges(res.data);
-      });
-    }
-    // eslint-disable-next-line
-  }, []);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -78,11 +74,12 @@ const StoreDropdown = () => {
         aria-haspopup="true"
         onMouseEnter={handleToggle}
         onClick={() => {
+          resetQueries();
           navigate("store");
-          handleToggle();
+          headerAction?.(header);
         }}
       >
-        STORE
+        {header}
       </Text>
       <Popper
         open={open}
@@ -97,7 +94,7 @@ const StoreDropdown = () => {
           <Grow
             {...TransitionProps}
             style={{
-              marginTop: "0.5rem",
+              marginTop: "0.7rem",
               transformOrigin:
                 placement === "bottom-start" ? "left top" : "left bottom",
             }}
@@ -110,18 +107,20 @@ const StoreDropdown = () => {
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
                 >
-                  {categories.map((category) => {
+                  {options.map((option) => {
                     return (
-                      <MenuItem
-                        key={category}
-                        onClick={(e) => {
-                          handleClose(e);
-                          navigate("store");
-                          setCategoryQuery(category);
-                        }}
-                      >
-                        {category}
-                      </MenuItem>
+                      <div key={option}>
+                        <MenuItem
+                          onClick={(e) => {
+                            handleClose(e);
+                            resetQueries();
+                            navigate("store");
+                            optionAction?.(option);
+                          }}
+                        >
+                          {option}
+                        </MenuItem>
+                      </div>
                     );
                   })}
                 </MenuList>

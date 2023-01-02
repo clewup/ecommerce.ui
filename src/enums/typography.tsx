@@ -1,5 +1,5 @@
-export const fontPadding = {
-  NONE: "0",
+export const fontSpacing = {
+  NONE: "0rem",
   ONE: "1rem",
   TWO: "2rem",
 };

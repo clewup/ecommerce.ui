@@ -8,8 +8,12 @@ export const apiEndpoints = {
   // ECOMMERCE
   PRODUCT: "product",
   PRODUCT_SEARCH: (query: string) => `product/search${query}`,
-  PRODUCT_CATEGORIES: "product/categories",
-  PRODUCT_RANGES: "product/ranges",
+  CATEGORIES: "category",
+  SUBCATEGORIES: "category/subcategories",
+  LINKED_SUBCATEGORIES: "category/linkedsubcategories",
+  SUBCATEGORIES_BY_CATEGORY: (category: string) =>
+    `category/subcategories/${category}`,
+  RANGES: "category/ranges",
   PRODUCT_BY_ID: (id: Guid) => `product/${id}`,
   IMAGE_UPLOAD: "upload/image",
   CART: "cart",

@@ -1,11 +1,11 @@
 import "./order-product.scss";
 import React from "react";
-import { ICartProduct } from "../../../types/IProduct";
 import Text from "../../atoms/Text/Text";
 import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
+import { IProduct } from "../../../types/IProduct";
 
 interface IProps {
-  orderProduct: ICartProduct;
+  orderProduct: IProduct;
 }
 
 const OrderProduct: React.FC<IProps> = ({ orderProduct }) => {

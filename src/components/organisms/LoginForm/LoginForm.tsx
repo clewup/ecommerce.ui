@@ -1,7 +1,6 @@
 import "./login-form.scss";
 import React from "react";
 import { Field, FormikProps } from "formik";
-import Subheading from "../../atoms/Subheading/Subheading";
 import Input from "../../atoms/Input/Input";
 import Text from "../../atoms/Text/Text";
 import { LoadingButton } from "@mui/lab";

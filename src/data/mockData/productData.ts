@@ -4,15 +4,39 @@ import { Guid } from "guid-typescript";
 export const mockedProduct: IProduct = {
   id: Guid.create(),
   name: "PRODUCT_NAME",
-  images: ["HTTPS://IMAGE_URL.JPG"] as string[],
   description: "PRODUCT_DESCRIPTION",
+  color: "PRODUCT_COLOR",
+  images: ["HTTPS://IMAGE_URL.JPG"] as string[],
+
   category: "PRODUCT_CATEGORY",
   subcategory: "PRODUCT_SUBCATEGORY",
   range: "PRODUCT_RANGE",
-  color: "PRODUCT_COLOR",
+
+  oneSize: false,
+  size: [
+    {
+      size: "XSmall",
+      count: 10,
+    },
+    {
+      size: "Small",
+      count: 10,
+    },
+    {
+      size: "Medium",
+      count: 10,
+    },
+    {
+      size: "Large",
+      count: 10,
+    },
+    {
+      size: "XLarge",
+      count: 10,
+    },
+  ],
   price: 12.34,
   discount: 0,
-  stock: 10,
 };
 
 export const mockedProducts: IProduct[] = [
@@ -37,19 +61,27 @@ export const mockedDiscountedProduct: IProduct = {
 
 export const mockedOutOfStockProduct: IProduct = {
   ...mockedProduct,
-  stock: 0,
+  size: [
+    {
+      size: "XSmall",
+      count: 0,
+    },
+  ],
 };
 
 export const mockedProductInitialValues: IProduct = {
   id: Guid.create(),
   name: "",
-  images: [],
   description: "",
+  color: "",
+  images: [],
+
   category: "",
   subcategory: "",
   range: "",
-  color: "",
-  stock: 0,
+
+  oneSize: false,
+  size: [],
   price: 0,
   discount: 0,
 };

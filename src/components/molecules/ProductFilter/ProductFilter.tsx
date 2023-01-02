@@ -20,23 +20,22 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
 
   useEffect(() => {
     return () => {
-      setSearchQuery(queryDefaultValues.SEARCH_QUERY);
-      setCategoryQuery(queryDefaultValues.CATEGORY_QUERY);
-      setRangeQuery(queryDefaultValues.RANGE_QUERY);
-      setPriceQuery(queryDefaultValues.PRICE_QUERY);
-      setSaleQuery(queryDefaultValues.SALE_QUERY);
-      setStockQuery(queryDefaultValues.STOCK_QUERY);
-      setSortByQuery(queryDefaultValues.SORT_BY_QUERY);
+      resetQueries();
     };
     // eslint-disable-next-line
   }, []);
 
   const {
     categories,
+    subcategories,
     ranges,
     setSearchQuery,
     categoryQuery,
     setCategoryQuery,
+    subcategoryQuery,
+    setSubcategoryQuery,
+    rangeQuery,
+    setRangeQuery,
     setPriceQuery,
     saleQuery,
     setSaleQuery,
@@ -44,8 +43,7 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
     setStockQuery,
     sortByQuery,
     setSortByQuery,
-    rangeQuery,
-    setRangeQuery,
+    resetQueries,
   } = useContext(ProductContext);
 
   const { error } = useProductFilter();
@@ -92,6 +90,12 @@ const ProductFilter: React.FC<IProps> = ({ toggleDrawer }) => {
         value={categoryQuery}
         onChange={(e) => setCategoryQuery(e.target.value)}
         options={formatSelectOptions({ options: categories })}
+      />
+      <Select
+        label={"Subcategory"}
+        value={subcategoryQuery}
+        onChange={(e) => setSubcategoryQuery(e.target.value)}
+        options={formatSelectOptions({ options: subcategories })}
       />
       <Select
         label={"Range"}

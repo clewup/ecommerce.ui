@@ -1,6 +1,6 @@
 import "./header.scss";
 import { useNavigate } from "react-router-dom";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../contexts/Auth";
 import {
   LocalPhone as PhoneIcon,
@@ -14,10 +14,64 @@ import {
 import { roles } from "../../../enums/roles";
 import StoreDropdown from "./StoreDropdown/StoreDropdown";
 import Text from "../../atoms/Text/Text";
+import getCategories from "../../../api/GetCategories";
+import getSubcategories from "../../../api/GetSubcategories";
+import getLinkedSubcategories from "../../../api/GetLinkedSubcategories";
+import getRanges from "../../../api/GetRanges";
+import { ProductContext } from "../../../contexts/Product";
+import Input from "../../atoms/Input/Input";
 
 const Header = () => {
   const { isAuthenticated, role } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const [_searchQuery, _setSearchQuery] = useState("");
+
+  const {
+    categories,
+    setCategories,
+    subcategories,
+    setSubcategories,
+    linkedSubcategories,
+    setLinkedSubcategories,
+    ranges,
+    setRanges,
+    setCategoryQuery,
+    setSubcategoryQuery,
+    setRangeQuery,
+    setSearchQuery,
+  } = useContext(ProductContext);
+
+  useEffect(() => {
+    if (categories.length === 0 || !categories.length) {
+      getCategories().then((res) => {
+        setCategories(res.data);
+      });
+    }
+    if (subcategories.length === 0 || !subcategories.length) {
+      getSubcategories().then((res) => {
+        setSubcategories(res.data);
+      });
+    }
+    if (linkedSubcategories.length === 0 || !linkedSubcategories.length) {
+      getLinkedSubcategories().then((res) => {
+        setLinkedSubcategories(res.data);
+      });
+    }
+    if (ranges.length === 0 || !ranges.length) {
+      getRanges().then((res) => {
+        setRanges(res.data);
+      });
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  const handleSearch = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") {
+      navigate("store");
+      setSearchQuery(_searchQuery);
+    }
+  };
 
   return (
     <div id={"header"}>
@@ -27,21 +81,14 @@ const Header = () => {
           <Text>Ecommerce</Text>
         </div>
         <div className={"header-content"}>
-          <div className={"header-information"}>
-            <div className={"header-shipping"}>
-              <ShippingIcon />
-              <div>
-                <Text className={"header-bolded"}>FREE SHIPPING</Text>
-                <Text>STORE WIDE</Text>
-              </div>
-            </div>
-            <div className={"header-telephone"}>
-              <PhoneIcon />
-              <div>
-                <Text>UK +12 345678910</Text>
-                <Text>EU +10 987654321</Text>
-              </div>
-            </div>
+          <div className={"header-search"}>
+            <Input
+              label={"Search"}
+              value={_searchQuery}
+              onChange={(e) => _setSearchQuery(e.target.value)}
+              onKeyDown={(e) => handleSearch(e)}
+              width={"500px"}
+            />
           </div>
           <div className={"header-actions"}>
             {isAuthenticated ? (
@@ -87,10 +134,24 @@ const Header = () => {
         </div>
       </div>
       <div className={"header-bottom"}>
-        <Text onClick={() => navigate("/")}>HOME</Text>
-        <StoreDropdown />
-        <Text onClick={() => navigate("faq")}>FAQ</Text>
-        <Text onClick={() => navigate("contact-us")}>CONTACT US</Text>
+        <Text onClick={() => navigate("/")}>Home</Text>
+        {linkedSubcategories.map((linkedSubcategory) => {
+          return (
+            <div key={linkedSubcategory.category}>
+              <StoreDropdown
+                header={linkedSubcategory.category}
+                options={linkedSubcategory.subcategories}
+                headerAction={setCategoryQuery}
+                optionAction={setSubcategoryQuery}
+              />
+            </div>
+          );
+        })}
+        <StoreDropdown
+          header={"Ranges"}
+          options={ranges.slice(0, 10)}
+          optionAction={setRangeQuery}
+        />
       </div>
     </div>
   );

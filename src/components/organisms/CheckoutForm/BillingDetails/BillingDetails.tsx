@@ -1,5 +1,4 @@
 import "./billing-details.scss";
-import Subheading from "../../../atoms/Subheading/Subheading";
 import { Field, FormikProps } from "formik";
 import Input from "../../../atoms/Input/Input";
 import Checkbox from "../../../atoms/Checkbox/Checkbox";

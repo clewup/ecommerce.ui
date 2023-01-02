@@ -1,10 +1,10 @@
 import { Guid } from "guid-typescript";
-import { ICartProduct } from "./IProduct";
+import { IProduct } from "./IProduct";
 
 export interface ICart {
   id: Guid;
   userId: Guid;
-  products: ICartProduct[];
+  products: IProduct[];
   total: number;
   discountedTotal?: number;
   totalSavings?: number;

@@ -1,5 +1,4 @@
 import { ICart } from "../types/ICart";
-import { ICartProduct } from "../types/IProduct";
 import { useContext, useState } from "react";
 import { CartContext } from "../contexts/Cart";
 import { UserContext } from "../contexts/User";
@@ -9,11 +8,12 @@ import putCart from "../api/PutCart";
 import postCart from "../api/PostCart";
 import { Guid } from "guid-typescript";
 import { createGuid } from "../utils/createGuid";
+import { IProduct } from "../types/IProduct";
 
 interface IUseCartProps {
   getCart: () => void;
-  addToCart: (product: ICartProduct) => void;
-  removeFromCart: (product: ICartProduct) => void;
+  addToCart: (product: IProduct) => void;
+  removeFromCart: (product: IProduct) => void;
   error: AxiosError | null;
 }
 
@@ -36,12 +36,12 @@ const useCart = (): IUseCartProps => {
     }
   };
 
-  const addToCart = (product: ICartProduct) => {
+  const addToCart = (product: IProduct) => {
     if (cart.id) {
       const updatedCart: ICart = cart;
       if (updatedCart.products.some((prod) => prod.id === product.id)) {
         // Update the cart.
-        const existingProduct: ICartProduct = cart.products.find(
+        const existingProduct: IProduct = cart.products.find(
           (prod) => prod.id === product.id
         )!;
         updatedCart.products = [
@@ -72,7 +72,7 @@ const useCart = (): IUseCartProps => {
     }
   };
 
-  const removeFromCart = (product: ICartProduct) => {
+  const removeFromCart = (product: IProduct) => {
     if (cart.id) {
       const updatedCart = cart;
       updatedCart.products = cart.products.filter(
