@@ -13,26 +13,26 @@ export const mockedProduct: IProduct = {
   range: "PRODUCT_RANGE",
 
   oneSize: false,
-  size: [
+  sizes: [
     {
       size: "XSmall",
-      count: 10,
+      stock: 10,
     },
     {
       size: "Small",
-      count: 10,
+      stock: 10,
     },
     {
       size: "Medium",
-      count: 10,
+      stock: 10,
     },
     {
       size: "Large",
-      count: 10,
+      stock: 10,
     },
     {
       size: "XLarge",
-      count: 10,
+      stock: 10,
     },
   ],
   price: 12.34,
@@ -61,10 +61,10 @@ export const mockedDiscountedProduct: IProduct = {
 
 export const mockedOutOfStockProduct: IProduct = {
   ...mockedProduct,
-  size: [
+  sizes: [
     {
       size: "XSmall",
-      count: 0,
+      stock: 0,
     },
   ],
 };
@@ -81,7 +81,7 @@ export const mockedProductInitialValues: IProduct = {
   range: "",
 
   oneSize: false,
-  size: [],
+  sizes: [],
   price: 0,
   discount: 0,
 };

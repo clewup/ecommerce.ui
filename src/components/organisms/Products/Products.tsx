@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import { AxiosError } from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "../../atoms/Loader/Loader";
-import Text from "../../atoms/Text/Text";
 
 interface IProps {
   products: IProduct[];

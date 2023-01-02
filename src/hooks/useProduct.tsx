@@ -34,7 +34,7 @@ const useProduct = (): IUseProductProps => {
     range: "",
 
     oneSize: true,
-    size: [],
+    sizes: [],
     price: 0,
     discount: 0,
   };
@@ -87,7 +87,7 @@ const useProduct = (): IUseProductProps => {
       range: values.range,
 
       oneSize: values.oneSize,
-      size: values.size,
+      sizes: values.sizes,
       price: values.price,
       discount: values.discount,
     } as IProduct;

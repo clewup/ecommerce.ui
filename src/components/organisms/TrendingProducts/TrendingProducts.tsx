@@ -17,7 +17,7 @@ const TrendingProducts = () => {
 
   return (
     <div id={"trending-products"}>
-      <Subheading align={"center"}>We think you'll like</Subheading>
+      <Subheading align={"center"}>Top rated</Subheading>
       {isLoading ? (
         <div className={"trending-products-loader"}>
           <Loader />

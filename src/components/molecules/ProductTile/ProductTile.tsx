@@ -1,16 +1,16 @@
 import "./product-tile.scss";
-import { IProduct } from "../../../types/IProduct";
-import React, { useContext } from "react";
+import { IProduct, ISize } from "../../../types/IProduct";
+import React, { useContext, useEffect, useState } from "react";
 import useCart from "../../../hooks/useCart";
 import { ShoppingCart as AddToCartIcon } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/Auth";
 import { CartContext } from "../../../contexts/Cart";
 import { LoadingButton } from "@mui/lab";
-import { Tooltip } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import Text from "../../atoms/Text/Text";
 import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
+import Select, { ISelectOption } from "../../atoms/Select/Select";
 
 interface IProps {
   product: IProduct;
@@ -21,6 +21,31 @@ const ProductTile: React.FC<IProps> = ({ product }) => {
   const { isLoading } = useContext(CartContext);
   const { addToCart } = useCart();
   const navigate = useNavigate();
+
+  const [isOutOfStock, setOutOfStock] = useState(false);
+  const [selectedSize, setSelectedSize] = useState("select");
+
+  useEffect(() => {
+    if (product.sizes && product.oneSize === false) {
+      let outOfStockCount = 0;
+
+      product.sizes.forEach((size) => {
+        if (size.stock === 0) outOfStockCount += 1;
+      });
+      setOutOfStock(outOfStockCount === product.sizes.length);
+    }
+  }, [product.sizes]);
+
+  const formatSizeSelectOptions = (options: ISize[]) => {
+    let formattedOptions: ISelectOption[];
+
+    formattedOptions = options.map((option) => ({
+      value: option.size,
+      label: option.size,
+    }));
+
+    return formattedOptions;
+  };
 
   return (
     <div id={"product-tile"}>
@@ -55,25 +80,38 @@ const ProductTile: React.FC<IProps> = ({ product }) => {
         )}
       </div>
       <div className={"product-actions"}>
-        <Tooltip title={"Add to Cart"}>
-          <span>
-            <LoadingButton
-              color="success"
-              type={"button"}
-              variant={"contained"}
-              loading={isLoading}
-              //TODO: Disable on size out of stock
-              //disabled={product.stock === 0}
-              className={"add-to-cart-btn"}
-              onClick={() => {
-                !isAuthenticated ? navigate("/login") : addToCart(product);
-              }}
-            >
+        {product.oneSize === false && (
+          <Select
+            options={formatSizeSelectOptions(product.sizes)}
+            value={selectedSize}
+            onChange={(e) => setSelectedSize(e.target.value)}
+            selectText={"Select Size"}
+          />
+        )}
+
+        <LoadingButton
+          color="success"
+          type={"button"}
+          variant={"contained"}
+          loading={isLoading}
+          disabled={isOutOfStock}
+          className={"add-to-cart-btn"}
+          onClick={() => {
+            !isAuthenticated ? navigate("/login") : addToCart(product);
+          }}
+        >
+          {!isOutOfStock ? (
+            <>
               <AddToCartIcon />
-              {/*{product.stock !== 0 ? <AddToCartIcon /> : "OUT OF STOCK"}*/}
-            </LoadingButton>
-          </span>
-        </Tooltip>
+              Add to Cart
+            </>
+          ) : (
+            <>
+              <AddToCartIcon />
+              Out of Stock
+            </>
+          )}
+        </LoadingButton>
       </div>
     </div>
   );

@@ -1,12 +1,14 @@
 @import '../../../styles/colors';
+@import '../../../styles/borders';
 
 #header {
   position: relative;
   z-index: 999;
+
   .header-top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    border-bottom: $border-light;
 
     .header-logo {
       display: flex;
@@ -14,10 +16,10 @@
       gap: 1rem;
       font-size: 2rem;
       font-weight: bold;
-      padding: 0 2rem;
+      padding: 0 1rem;
+      cursor: pointer;
 
       svg {
-        color: $color-black;
       }
     }
 
@@ -44,16 +46,28 @@
       }
     }
   }
+
   .header-bottom {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 0.7rem 0;
-    font-size: 1rem;
+    padding: 1rem 10rem;
     background-color: $color-darkgrey;
     color: $color-white;
 
-    p {
-      cursor: pointer;
+    .header-store-links {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .dropdown-header{
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .header-store-link {
+        cursor: pointer;
+        height: 90%;
+        display: flex;
+        align-items: center;
+      }
     }
   }
 }

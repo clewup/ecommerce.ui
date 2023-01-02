@@ -22,6 +22,7 @@ interface IProps {
   onChange?: (e: any) => void;
   options: ISelectOption[];
   width?: string;
+  selectText?: string;
 }
 
 const Select: React.FC<IProps> = ({
@@ -33,6 +34,7 @@ const Select: React.FC<IProps> = ({
   onChange,
   options,
   width,
+  selectText = "Select",
 }) => {
   return (
     <>
@@ -60,7 +62,7 @@ const Select: React.FC<IProps> = ({
               width: width ?? "100%",
             }}
           >
-            <MenuItem value={"select"}>Select</MenuItem>
+            <MenuItem value={"select"}>{selectText}</MenuItem>
             {options?.map((option: ISelectOption) => {
               return (
                 <MenuItem

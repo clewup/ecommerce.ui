@@ -3,13 +3,12 @@ import { useNavigate } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../contexts/Auth";
 import {
-  LocalPhone as PhoneIcon,
-  LocalShipping as ShippingIcon,
   Landscape as EcommerceIcon,
   AccountCircleOutlined as AccountIcon,
   VpnKeyOutlined as RegisterIcon,
   ShoppingCartOutlined as CartIcon,
   AdminPanelSettingsOutlined as AdminIcon,
+  Search as SearchIcon,
 } from "@mui/icons-material";
 import { roles } from "../../../enums/roles";
 import StoreDropdown from "./StoreDropdown/StoreDropdown";
@@ -40,6 +39,7 @@ const Header = () => {
     setSubcategoryQuery,
     setRangeQuery,
     setSearchQuery,
+    resetQueries,
   } = useContext(ProductContext);
 
   useEffect(() => {
@@ -68,6 +68,7 @@ const Header = () => {
 
   const handleSearch = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter") {
+      resetQueries();
       navigate("store");
       setSearchQuery(_searchQuery);
     }
@@ -76,18 +77,20 @@ const Header = () => {
   return (
     <div id={"header"}>
       <div className={"header-top"}>
-        <div className={"header-logo"}>
+        <div className={"header-logo"} onClick={() => navigate("/")}>
           <EcommerceIcon fontSize={"inherit"} />
-          <Text>Ecommerce</Text>
+          <Text>ECOMMERCE</Text>
         </div>
+
         <div className={"header-content"}>
           <div className={"header-search"}>
             <Input
-              label={"Search"}
               value={_searchQuery}
               onChange={(e) => _setSearchQuery(e.target.value)}
               onKeyDown={(e) => handleSearch(e)}
               width={"500px"}
+              icon={<SearchIcon />}
+              iconPosition={"end"}
             />
           </div>
           <div className={"header-actions"}>
@@ -134,24 +137,30 @@ const Header = () => {
         </div>
       </div>
       <div className={"header-bottom"}>
-        <Text onClick={() => navigate("/")}>Home</Text>
-        {linkedSubcategories.map((linkedSubcategory) => {
-          return (
-            <div key={linkedSubcategory.category}>
-              <StoreDropdown
-                header={linkedSubcategory.category}
-                options={linkedSubcategory.subcategories}
-                headerAction={setCategoryQuery}
-                optionAction={setSubcategoryQuery}
-              />
-            </div>
-          );
-        })}
-        <StoreDropdown
-          header={"Ranges"}
-          options={ranges.slice(0, 10)}
-          optionAction={setRangeQuery}
-        />
+        <div className={"header-store-links"}>
+          {linkedSubcategories.map((linkedSubcategory) => {
+            return (
+              <div
+                key={linkedSubcategory.category}
+                className={"header-store-link"}
+              >
+                <StoreDropdown
+                  header={linkedSubcategory.category}
+                  options={linkedSubcategory.subcategories}
+                  headerAction={setCategoryQuery}
+                  optionAction={setSubcategoryQuery}
+                />
+              </div>
+            );
+          })}
+          <div className={"header-store-link"}>
+            <StoreDropdown
+              header={"Ranges"}
+              options={ranges.slice(0, 10)}
+              optionAction={setRangeQuery}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

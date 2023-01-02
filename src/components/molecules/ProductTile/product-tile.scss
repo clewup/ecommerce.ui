@@ -3,7 +3,6 @@
 
 #product-tile {
   width: 270px;
-  border: $border-light;
   text-align: center;
   padding: 1rem;
   background-color: $color-white;
@@ -42,13 +41,15 @@
   }
   .product-actions {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 1rem;
     align-items: center;
     gap: 1rem;
 
-    input {
-      text-align: center;
+    .add-to-cart-btn {
+      display: flex;
+      gap: 1rem;
     }
   }
 }

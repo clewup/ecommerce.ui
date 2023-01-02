@@ -13,26 +13,26 @@ export const mockedOrderProduct: IProduct = {
   range: "ORDER_PRODUCT_RANGE",
 
   oneSize: false,
-  size: [
+  sizes: [
     {
       size: "XSmall",
-      count: 10,
+      stock: 10,
     },
     {
       size: "Small",
-      count: 10,
+      stock: 10,
     },
     {
       size: "Medium",
-      count: 10,
+      stock: 10,
     },
     {
       size: "Large",
-      count: 10,
+      stock: 10,
     },
     {
       size: "XLarge",
-      count: 10,
+      stock: 10,
     },
   ],
   price: 12.34,

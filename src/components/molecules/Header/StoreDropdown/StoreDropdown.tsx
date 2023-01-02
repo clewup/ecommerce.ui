@@ -78,6 +78,7 @@ const StoreDropdown: React.FC<IProps> = ({
           navigate("store");
           headerAction?.(header);
         }}
+        className={"dropdown-header"}
       >
         {header}
       </Text>

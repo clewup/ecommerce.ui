@@ -2,7 +2,7 @@ import { Guid } from "guid-typescript";
 
 export interface ISize {
   size: string;
-  count: number;
+  stock: number;
 }
 
 export interface IProduct {
@@ -17,7 +17,7 @@ export interface IProduct {
   range: string;
 
   oneSize: boolean;
-  size: ISize[];
+  sizes: ISize[];
 
   price: number;
   discount: number;
