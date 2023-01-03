@@ -17,8 +17,9 @@ const RecentlyViewedProducts = () => {
   return (
     <div id={"recently-viewed-products"}>
       <Subheading align={"center"}>Recently viewed</Subheading>
+      {!products.length && <Text align={"center"}>No products found.</Text>}
+
       <div className={"recently-viewed-row"}>
-        {!products.length && <Text align={"center"}>No products found.</Text>}
         {products.map((product) => {
           return (
             <div key={String(product.id)}>
