@@ -90,7 +90,6 @@ const Header = () => {
               onKeyDown={(e) => handleSearch(e)}
               width={"500px"}
               icon={<SearchIcon />}
-              iconPosition={"end"}
             />
           </div>
           <div className={"header-actions"}>

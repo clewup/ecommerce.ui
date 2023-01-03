@@ -7,6 +7,16 @@
   flex-direction: column;
   gap: 2rem;
 
+    .user-avatar {
+      display: flex;
+      justify-content: center;
+      img {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+      }
+    }
+
     .contact-info {
       display: flex;
       flex-direction: column;
@@ -30,6 +40,6 @@
     justify-content: center;
     display: flex;
     gap: 1rem;
-    padding: 2rem 0;
+    padding-bottom: 2rem;
   }
 }

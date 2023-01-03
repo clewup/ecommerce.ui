@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 
 interface IProps {
   text: string;
+  size?: string;
 }
 
-const CharacterAnimation: React.FC<IProps> = ({ text }) => {
+const CharacterAnimation: React.FC<IProps> = ({ text, size }) => {
   // splitting text into letters
   const letters = Array.from(text);
 
@@ -47,7 +48,7 @@ const CharacterAnimation: React.FC<IProps> = ({ text }) => {
       style={{
         overflow: "hidden",
         display: "flex",
-        fontSize: "2rem",
+        fontSize: size ?? "2rem",
         justifyContent: "center",
         padding: "2rem",
       }}

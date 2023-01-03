@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 
 interface IProps {
   text: string;
+  size?: string;
 }
 
-const TextAnimation: React.FC<IProps> = ({ text }) => {
+const TextAnimation: React.FC<IProps> = ({ text, size }) => {
   // This will split the text into an array of word
   const words = text.split(" ");
 
@@ -45,7 +46,7 @@ const TextAnimation: React.FC<IProps> = ({ text }) => {
       style={{
         overflow: "hidden",
         display: "flex",
-        fontSize: "2rem",
+        fontSize: size ?? "2rem",
         justifyContent: "center",
         padding: "2rem",
       }}

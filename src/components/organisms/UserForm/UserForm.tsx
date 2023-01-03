@@ -16,6 +16,13 @@ const UserForm: React.FC<IProps> = ({ formik, user }) => {
 
   return (
     <div id={"user-form"}>
+      <div className={"user-avatar"}>
+        <img
+          src={
+            "https://durantarms.co.uk/wp-content/plugins/divi-pixel/includes/modules/Testimonial/avatar.png"
+          }
+        />
+      </div>
       <div className={"contact-info"}>
         <Field
           name={"firstName"}

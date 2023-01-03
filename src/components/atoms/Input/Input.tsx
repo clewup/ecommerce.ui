@@ -16,7 +16,7 @@ interface IProps {
   onKeyDown?: (e: React.KeyboardEvent<HTMLDivElement>) => void;
   width?: string;
   icon?: JSX.Element;
-  iconPosition?: "start" | "end";
+  placeholder?: string;
 }
 
 const Input: React.FC<IProps> = ({
@@ -30,7 +30,7 @@ const Input: React.FC<IProps> = ({
   onKeyDown,
   width,
   icon,
-  iconPosition,
+  placeholder,
 }) => {
   return (
     <Tooltip
@@ -50,6 +50,7 @@ const Input: React.FC<IProps> = ({
         value={value}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        placeholder={placeholder}
         sx={{
           margin: "0.2rem 0",
           backgroundColor: colors.WHITE,

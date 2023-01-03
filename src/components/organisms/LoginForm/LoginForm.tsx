@@ -23,14 +23,14 @@ const LoginForm: React.FC<IProps> = ({ formik, isLoading, error }) => {
       <Field
         name={"email"}
         component={Input}
-        label={"Email"}
+        placeholder={"Email"}
         onChange={formik.handleChange}
       />
 
       <Field
         name={"password"}
         component={Input}
-        label={"Password"}
+        placeholder={"Password"}
         isPassword={true}
         onChange={formik.handleChange}
       />

@@ -23,28 +23,28 @@ const RegisterForm: React.FC<IProps> = ({ formik, isLoading, error }) => {
       <Field
         name={"firstName"}
         component={Input}
-        label={"First Name"}
+        placeholder={"First Name"}
         onChange={formik.handleChange}
       />
 
       <Field
         name={"lastName"}
         component={Input}
-        label={"Last Name"}
+        placeholder={"Last Name"}
         onChange={formik.handleChange}
       />
 
       <Field
         name={"email"}
         component={Input}
-        label={"Email"}
+        placeholder={"Email"}
         onChange={formik.handleChange}
       />
 
       <Field
         name={"password"}
         component={Input}
-        label={"Password"}
+        placeholder={"Password"}
         isPassword={true}
         onChange={formik.handleChange}
       />
@@ -52,7 +52,7 @@ const RegisterForm: React.FC<IProps> = ({ formik, isLoading, error }) => {
       <Field
         name={"confirmPassword"}
         component={Input}
-        label={"Confirm Password"}
+        placeholder={"Confirm Password"}
         isPassword={true}
         onChange={formik.handleChange}
       />

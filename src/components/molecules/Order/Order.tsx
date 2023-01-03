@@ -3,6 +3,7 @@ import Text from "../../atoms/Text/Text";
 import OrderProduct from "../OrderProduct/OrderProduct";
 import { IOrder } from "../../../types/IOrder";
 import React from "react";
+import { Button } from "@mui/material";
 
 interface IProps {
   order: IOrder;
@@ -25,6 +26,14 @@ const Order: React.FC<IProps> = ({ order }) => {
           );
         })}
       </div>
+      <Button
+        size={"large"}
+        type={"button"}
+        variant={"contained"}
+        color={"success"}
+      >
+        TRACK
+      </Button>
     </div>
   );
 };
