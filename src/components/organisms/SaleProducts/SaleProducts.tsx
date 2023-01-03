@@ -5,6 +5,7 @@ import ProductTile from "../../molecules/ProductTile/ProductTile";
 import useStatistics from "../../../hooks/useStatistics";
 import { useEffect } from "react";
 import AppError from "../../molecules/AppError/AppError";
+import Text from "../../atoms/Text/Text";
 
 const SaleProducts = () => {
   const { discountedProducts, isLoading, error, getMostDiscounted } =
@@ -20,6 +21,10 @@ const SaleProducts = () => {
   return (
     <div id={"sale-products"}>
       <Subheading align={"center"}>Don't miss out!</Subheading>
+      {!discountedProducts.length && !isLoading && (
+        <Text align={"center"}>No products found.</Text>
+      )}
+
       {isLoading ? (
         <div className={"sale-products-loader"}>
           <Loader />
