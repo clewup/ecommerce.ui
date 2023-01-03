@@ -1,7 +1,6 @@
 import "./order-product.scss";
 import React from "react";
 import Text from "../../atoms/Text/Text";
-import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
 import { IProduct } from "../../../types/IProduct";
 
 interface IProps {
@@ -20,17 +19,13 @@ const OrderProduct: React.FC<IProps> = ({ orderProduct }) => {
           {orderProduct.name.length >= 30 && "..."}
         </Text>
         <Text>{orderProduct.color}</Text>
-        {orderProduct.discount > 0 ? (
+        {orderProduct.discountedPrice ? (
           <div className={"discounted-price"}>
             <Text className="discounted-price-striked">
-              £
-              {calculatePriceBeforeDiscount(
-                orderProduct.price,
-                orderProduct.discount
-              )}
+              £{orderProduct.price}
             </Text>
             <Text className={"discounted-price-total"}>
-              £{orderProduct.price}
+              £{orderProduct.discountedPrice}
             </Text>
           </div>
         ) : (

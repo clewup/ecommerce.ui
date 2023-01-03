@@ -95,7 +95,7 @@ const StoreDropdown: React.FC<IProps> = ({
           <Grow
             {...TransitionProps}
             style={{
-              marginTop: "0.7rem",
+              marginTop: "1rem",
               transformOrigin:
                 placement === "bottom-start" ? "left top" : "left bottom",
             }}

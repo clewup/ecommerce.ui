@@ -11,7 +11,7 @@ export const theme = createTheme({
     },
     MuiTabs: {
       styleOverrides: {
-        root: { color: colors.BLACK, paddingBottom: "2rem" },
+        root: { color: colors.BLACK, padding: "2rem 0" },
       },
     },
   },

@@ -5,7 +5,6 @@ import React, { useContext } from "react";
 import { CartContext } from "../../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
 import Text from "../../atoms/Text/Text";
-import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
 import { IProduct } from "../../../types/IProduct";
 
 interface IProps {
@@ -31,17 +30,13 @@ const CartProduct: React.FC<IProps> = ({ cartProduct }) => {
           {cartProduct.name.length >= 30 && "..."}
         </Text>
         <Text>{cartProduct.color}</Text>
-        {cartProduct.discount > 0 ? (
+        {cartProduct.discountedPrice ? (
           <div className={"discounted-price"}>
             <Text className="discounted-price-striked">
-              £
-              {calculatePriceBeforeDiscount(
-                cartProduct.price,
-                cartProduct.discount
-              )}
+              £{cartProduct.price}
             </Text>
             <Text className={"discounted-price-total"}>
-              £{cartProduct.price}
+              £{cartProduct.discountedPrice}
             </Text>
           </div>
         ) : (

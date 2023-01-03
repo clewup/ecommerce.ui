@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { IProduct } from "../types/IProduct";
+import { IProduct, ISize } from "../types/IProduct";
 import { Guid } from "guid-typescript";
 import getProductById from "../api/GetProductById";
 import { AxiosError } from "axios";
 import postProduct from "../api/PostProduct";
 import * as Yup from "yup";
 import { createGuid } from "../utils/createGuid";
+import { productSizes } from "../enums/productSizes";
 
 interface IUseProductProps {
   initialValues: IProduct;
@@ -22,6 +23,14 @@ const useProduct = (): IUseProductProps => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
+  const sizeInitialValues: ISize[] = [];
+  Object.values(productSizes).map((size) => {
+    sizeInitialValues.push({
+      size: size,
+      stock: 0,
+    });
+  });
+
   const initialValues: IProduct = {
     id: createGuid(),
     name: "",
@@ -33,26 +42,27 @@ const useProduct = (): IUseProductProps => {
     subcategory: "",
     range: "",
 
-    oneSize: true,
-    sizes: [],
+    oneSize: false,
+    sizes: sizeInitialValues,
     price: 0,
     discount: 0,
   };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
-    images: Yup.array()
-      .of(Yup.string())
-      .min(1, "Must be at least one image.")
-      .required("Required"),
     description: Yup.string().required("Required"),
     category: Yup.string().required("Required"),
     range: Yup.string().required("Required"),
     color: Yup.string().required("Required"),
-    stock: Yup.number()
-      .integer("Must be a whole number")
-      .positive("Must be greater than 0")
-      .required("Required"),
+    sizes: Yup.array().of(
+      Yup.object().shape({
+        size: Yup.string(),
+        stock: Yup.number()
+          .integer("Must be a whole number")
+          .positive("Must be greater than 0")
+          .required("Required"),
+      })
+    ),
     price: Yup.number()
       .positive("Must be greater than 0")
       .test("is-decimal", "Maximum two decimal places", (value: any) => {

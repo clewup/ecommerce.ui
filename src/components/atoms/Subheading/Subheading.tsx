@@ -33,7 +33,7 @@ const Subheading: React.FC<IProps> = React.forwardRef(
     },
     ref
   ) => (
-    <h3
+    <p
       className={classnames("subheading", className)}
       onClick={onClick}
       ref={ref}
@@ -48,7 +48,7 @@ const Subheading: React.FC<IProps> = React.forwardRef(
       }}
     >
       {children}
-    </h3>
+    </p>
   )
 );
 export default Subheading;

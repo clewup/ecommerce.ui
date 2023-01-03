@@ -1,6 +1,7 @@
 import { FieldAttributes } from "formik";
 import { Checkbox as CheckboxInput, InputLabel } from "@mui/material";
 import React from "react";
+import "./checkbox.scss";
 
 interface IProps {
   field?: FieldAttributes<any>;
@@ -18,7 +19,7 @@ const Checkbox: React.FC<IProps> = ({
   onChange,
 }) => {
   return (
-    <>
+    <div id={"checkbox-form-group"}>
       <InputLabel>{label}</InputLabel>
       <CheckboxInput
         {...field}
@@ -27,7 +28,7 @@ const Checkbox: React.FC<IProps> = ({
         onChange={onChange ?? onChange}
         inputProps={{ "aria-label": "controlled" }}
       />
-    </>
+    </div>
   );
 };
 export default Checkbox;

@@ -9,7 +9,6 @@ import { CartContext } from "../../../contexts/Cart";
 import { LoadingButton } from "@mui/lab";
 import Carousel from "react-material-ui-carousel";
 import Text from "../../atoms/Text/Text";
-import { calculatePriceBeforeDiscount } from "../../../utils/calculatePriceBeforeDiscount";
 import SizeSelector from "../SizeSelector/SizeSelector";
 import BounceAnimation from "../../../lib/FramerMotion/BounceAnimation";
 import ScaleAnimation from "../../../lib/FramerMotion/ScaleAnimation";
@@ -62,12 +61,12 @@ const ProductTile: React.FC<IProps> = ({ product }) => {
         </div>
         <div className={"product-info"}>
           <Text>{product.color}</Text>
-          {product.discount > 0 ? (
+          {product.discountedPrice ? (
             <div className={"discounted-price"}>
-              <Text className="discounted-price-striked">
-                £{calculatePriceBeforeDiscount(product.price, product.discount)}
+              <Text className="discounted-price-striked">£{product.price}</Text>
+              <Text className={"discounted-price-total"}>
+                £{product.discountedPrice}
               </Text>
-              <Text className={"discounted-price-total"}>£{product.price}</Text>
             </div>
           ) : (
             <Text>£{product.price}</Text>

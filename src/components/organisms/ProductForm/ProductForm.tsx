@@ -16,6 +16,7 @@ import { colors } from "../../../styles/colors";
 import { formatSelectOptions } from "../../../utils/formatSelectOptions";
 import CreatableSelect from "react-select/creatable";
 import classnames from "classnames";
+import Checkbox from "../../atoms/Checkbox/Checkbox";
 
 const ProductForm = () => {
   const [openAlert, setOpenAlert] = React.useState(false);
@@ -35,7 +36,7 @@ const ProductForm = () => {
     uploadImages,
   } = useImageUpload();
 
-  const { categories, ranges } = useContext(ProductContext);
+  const { categories, subcategories, ranges } = useContext(ProductContext);
 
   useEffect(() => {
     clearImages();
@@ -138,9 +139,7 @@ const ProductForm = () => {
                     label={"Description"}
                     onChange={formik.handleChange}
                   />
-                </div>
 
-                <div className={"product-form-third"}>
                   <CreatableSelect
                     isClearable
                     options={formatSelectOptions({ options: categories })}
@@ -148,6 +147,22 @@ const ProductForm = () => {
                       formik.setFieldValue("category", category?.value)
                     }
                     placeholder={"Category"}
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        height: "55px",
+                        margin: "0.2rem 0",
+                      }),
+                    }}
+                  />
+
+                  <CreatableSelect
+                    isClearable
+                    options={formatSelectOptions({ options: subcategories })}
+                    onChange={(subcategory) =>
+                      formik.setFieldValue("subcategory", subcategory?.value)
+                    }
+                    placeholder={"Subcategory"}
                     styles={{
                       control: (baseStyles, state) => ({
                         ...baseStyles,
@@ -172,18 +187,32 @@ const ProductForm = () => {
                       }),
                     }}
                   />
+                </div>
+
+                <div className={"product-form-third"}>
+                  <Field
+                    name={"oneSize"}
+                    component={Checkbox}
+                    label={"One Size"}
+                    onChange={formik.handleChange}
+                  />
+
+                  {initialValues.sizes.map((size, index) => {
+                    return (
+                      <Field
+                        name={`sizes.${index}.stock`}
+                        component={Input}
+                        label={size.size}
+                        onChange={formik.handleChange}
+                        disabled={formik.values.oneSize === true}
+                      />
+                    );
+                  })}
 
                   <Field
                     name={"color"}
                     component={Input}
                     label={"Color"}
-                    onChange={formik.handleChange}
-                  />
-
-                  <Field
-                    name={"stock"}
-                    component={Input}
-                    label={"Stock"}
                     onChange={formik.handleChange}
                   />
 
