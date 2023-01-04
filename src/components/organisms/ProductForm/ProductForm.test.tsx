@@ -42,7 +42,6 @@ describe("ProductForm", () => {
       '[name="description"]'
     ) as Element;
     const color = container.querySelector('[name="color"]') as Element;
-    const stock = container.querySelector('[name="stock"]') as Element;
     const price = container.querySelector('[name="price"]') as Element;
     const discount = container.querySelector('[name="discount"]') as Element;
 
@@ -54,9 +53,6 @@ describe("ProductForm", () => {
     });
     fireEvent.change(color, {
       target: { value: "PRODUCT_COLOR" },
-    });
-    fireEvent.change(stock, {
-      target: { value: 10 },
     });
     fireEvent.change(price, {
       target: { value: 12.34 },

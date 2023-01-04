@@ -86,7 +86,7 @@ describe("OrderProduct", () => {
 
     expect(discountedPrice).toBeInTheDocument();
     expect(price).toBeInTheDocument();
-    expect(discountedPrice).toHaveTextContent("£24.68");
-    expect(price).toHaveTextContent("£12.34");
+    expect(discountedPrice).toHaveTextContent("£12.34");
+    expect(price).toHaveTextContent("£6.17");
   });
 });

@@ -37,7 +37,7 @@ describe("CartProducts", () => {
 
     const cartProducts = document.querySelectorAll("#cart-product");
 
-    expect(cartProducts).toHaveLength(2);
+    expect(cartProducts).toHaveLength(3);
   });
 
   it("should render the cart total", () => {

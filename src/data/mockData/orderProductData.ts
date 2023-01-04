@@ -42,4 +42,5 @@ export const mockedOrderProduct: IProduct = {
 export const mockedDiscountedOrderProduct: IProduct = {
   ...mockedOrderProduct,
   discount: 50,
+  discountedPrice: 6.17,
 };

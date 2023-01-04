@@ -57,6 +57,7 @@ export const mockedProducts: IProduct[] = [
 export const mockedDiscountedProduct: IProduct = {
   ...mockedProduct,
   discount: 50,
+  discountedPrice: 6.17,
 };
 
 export const mockedOutOfStockProduct: IProduct = {
