@@ -1,10 +1,9 @@
 import "./promotion-banner.scss";
-import Subheading from "../../atoms/Subheading/Subheading";
-import Text from "../../atoms/Text/Text";
-import { subheadingSize, textSize } from "../../../enums/typography";
 import Snowfall from "react-snowfall";
-import TextAnimation from "../../../lib/FramerMotion/TextAnimation";
-import CharacterAnimation from "../../../lib/FramerMotion/CharacterAnimation";
+import {
+  CharacterAnimation,
+  TextAnimation,
+} from "../../../lib/FramerMotion/animations";
 
 const PromotionBanner = () => {
   return (
@@ -16,13 +15,13 @@ const PromotionBanner = () => {
         radius={[0.5, 2]}
       />
       <div className={"promotion-title"}>
-        <TextAnimation text={"WINTER WONDERLAND SALE"} size={"3rem"} />
-        <TextAnimation
-          text={"Discount on selected ski equipment and clothing."}
-        />
+        <TextAnimation size={"3rem"}>WINTER WONDERLAND SALE</TextAnimation>
+        <TextAnimation>
+          Discount on selected ski equipment and clothing.
+        </TextAnimation>
       </div>
       <div className={"promotion-discount"}>
-        <CharacterAnimation text={"20%-50% off!"} size={"5rem"} />
+        <CharacterAnimation size={"5rem"}>20%-50% off!</CharacterAnimation>
       </div>
     </div>
   );

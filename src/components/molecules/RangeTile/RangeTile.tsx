@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { IRange } from "../../../types/IRange";
 import { ProductContext } from "../../../contexts/Product";
 import { colors } from "../../../styles/colors";
-import ScaleAnimation from "../../../lib/FramerMotion/ScaleAnimation";
+import { ScaleAnimation } from "../../../lib/FramerMotion/animations";
 
 interface IProps {
   range: IRange;

@@ -10,8 +10,10 @@ import { LoadingButton } from "@mui/lab";
 import Carousel from "react-material-ui-carousel";
 import Text from "../../atoms/Text/Text";
 import SizeSelector from "../SizeSelector/SizeSelector";
-import BounceAnimation from "../../../lib/FramerMotion/BounceAnimation";
-import ScaleAnimation from "../../../lib/FramerMotion/ScaleAnimation";
+import {
+  BounceAnimation,
+  ScaleAnimation,
+} from "../../../lib/FramerMotion/animations";
 
 interface IProps {
   product: IProduct;
