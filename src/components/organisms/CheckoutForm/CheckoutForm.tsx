@@ -8,16 +8,13 @@ import BillingDetails from "../../molecules/BillingDetails/BillingDetails";
 import PurchaseComplete from "../../molecules/PurchaseComplete/PurchaseComplete";
 import AppError from "../../molecules/AppError/AppError";
 import { ICheckoutFormValues } from "../../../types/IOrder";
+import {
+  checkoutInitialValues,
+  checkoutValidationSchema,
+} from "./utils/schema";
 
 const CheckoutForm = () => {
-  const {
-    initialValues,
-    validationSchema,
-    submitCheckout,
-    order,
-    isLoading,
-    error,
-  } = useCheckout();
+  const { submitCheckout, order, isLoading, error } = useCheckout();
   const [tabIndex, setTabIndex] = useState(0);
 
   const handleTabChange = (event: React.SyntheticEvent, newTabIndex: any) => {
@@ -40,8 +37,8 @@ const CheckoutForm = () => {
         <Tab label="Complete" disabled />
       </Tabs>
       <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
+        initialValues={checkoutInitialValues}
+        validationSchema={checkoutValidationSchema}
         onSubmit={(values) => {
           submitCheckout(values);
         }}

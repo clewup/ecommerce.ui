@@ -1,15 +1,14 @@
 import { screen, render } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
 import OrderProduct from "./OrderProduct";
-import {
-  mockedOrderProduct,
-  mockedDiscountedOrderProduct,
-} from "../../../data/mockData/orderProductData";
 import renderHelper from "../../../utils/renderHelper";
+import {
+  mockedDiscountedProduct,
+  mockedProduct,
+} from "../../../types/IProduct";
 
 describe("OrderProduct", () => {
   it("should render the component with the expected values", async () => {
-    renderHelper(<OrderProduct orderProduct={mockedOrderProduct} />);
+    renderHelper(<OrderProduct orderProduct={mockedProduct} />);
 
     expect(await screen.getByRole("img")).toHaveAttribute(
       "src",
@@ -21,9 +20,8 @@ describe("OrderProduct", () => {
   });
 
   it("should shorten the name if more than 30 characters", async () => {
-    mockedOrderProduct.name =
-      "ORDER_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
-    renderHelper(<OrderProduct orderProduct={mockedOrderProduct} />);
+    mockedProduct.name = "ORDER_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
+    renderHelper(<OrderProduct orderProduct={mockedProduct} />);
 
     expect(
       await screen.getByText("ORDER_PRODUCT_NAME_MORE_THAN_T...")
@@ -31,7 +29,7 @@ describe("OrderProduct", () => {
   });
 
   it("should render the product discounted price if discounted", async () => {
-    renderHelper(<OrderProduct orderProduct={mockedDiscountedOrderProduct} />);
+    renderHelper(<OrderProduct orderProduct={mockedDiscountedProduct} />);
 
     expect(await screen.getByText("£12.34")).toBeInTheDocument();
     expect(await screen.getByText("£6.17")).toBeInTheDocument();

@@ -1,9 +1,9 @@
 import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Products from "./Products";
-import { mockedProducts } from "../../../data/mockData/productData";
-import { mockedError } from "../../../data/mockData/errorData";
 import renderHelper from "../../../utils/renderHelper";
+import { mockedProducts } from "../../../types/IProduct";
+import { AxiosError } from "axios";
 
 describe("products", () => {
   it("should render the component", () => {
@@ -35,7 +35,11 @@ describe("products", () => {
 
   it("should render the app error when there is an error", () => {
     const { container } = renderHelper(
-      <Products products={[]} isLoading={false} error={mockedError} />
+      <Products
+        products={[]}
+        isLoading={false}
+        error={{ code: "ERROR_CODE", message: "ERROR_MESSAGE" } as AxiosError}
+      />
     );
     const appError = container.querySelector("#app-error") as Element;
 

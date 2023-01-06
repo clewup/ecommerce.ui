@@ -1,7 +1,16 @@
 import UserOrders from "./UserOrders";
-import { mockedUseOrder } from "../../../data/mockData/useOrderData";
-import { mockedError } from "../../../data/mockData/errorData";
 import renderHelper from "../../../utils/renderHelper";
+import { IOrder, mockedOrders } from "../../../types/IOrder";
+import { AxiosError } from "axios";
+import { Guid } from "guid-typescript";
+
+const mockedUseOrder = {
+  orders: mockedOrders,
+  isLoading: false,
+  error: null,
+  getUserOrders: jest.fn(),
+  getAllOrders: jest.fn(),
+};
 
 jest.mock("../../../hooks/useOrder", () => {
   return {

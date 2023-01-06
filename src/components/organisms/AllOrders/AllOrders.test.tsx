@@ -1,10 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import AllOrders from "./AllOrders";
-import { mockedUseOrder } from "../../../data/mockData/useOrderData";
-import { mockedError } from "../../../data/mockData/errorData";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "../../../styles/theme";
 import renderHelper from "../../../utils/renderHelper";
+import { mockedOrders } from "../../../types/IOrder";
+
+const mockedUseOrder = {
+  orders: mockedOrders,
+  isLoading: false,
+  error: null,
+  getUserOrders: jest.fn(),
+  getAllOrders: jest.fn(),
+};
 
 jest.mock("../../../hooks/useOrder", () => {
   return {

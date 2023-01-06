@@ -1,9 +1,9 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Formik } from "formik";
-import { mockedCheckoutInitialValues } from "../../../data/mockData/checkoutData";
 import DeliveryDetails from "./DeliveryDetails";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
+import { checkoutInitialValues } from "../../organisms/CheckoutForm/utils/schema";
 
 const mockedSetTabIndex = jest.fn();
 const mockedOnSubmit = jest.fn();
@@ -11,10 +11,7 @@ const mockedOnSubmit = jest.fn();
 describe("DeliveryDetails", () => {
   it("should render the component with the expected values", () => {
     const { container } = renderHelper(
-      <Formik
-        initialValues={mockedCheckoutInitialValues}
-        onSubmit={mockedOnSubmit}
-      >
+      <Formik initialValues={checkoutInitialValues} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return (
             <DeliveryDetails formik={formik} setTabIndex={mockedSetTabIndex} />
@@ -54,10 +51,7 @@ describe("DeliveryDetails", () => {
 
   it("should pre populate the fields", () => {
     renderHelper(
-      <Formik
-        initialValues={mockedCheckoutInitialValues}
-        onSubmit={mockedOnSubmit}
-      >
+      <Formik initialValues={checkoutInitialValues} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return (
             <DeliveryDetails formik={formik} setTabIndex={mockedSetTabIndex} />
@@ -100,10 +94,7 @@ describe("DeliveryDetails", () => {
 
   it("should update the tab index on continue button click", () => {
     renderHelper(
-      <Formik
-        initialValues={mockedCheckoutInitialValues}
-        onSubmit={mockedOnSubmit}
-      >
+      <Formik initialValues={checkoutInitialValues} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return (
             <DeliveryDetails formik={formik} setTabIndex={mockedSetTabIndex} />

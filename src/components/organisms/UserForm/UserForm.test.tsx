@@ -2,8 +2,8 @@ import { screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
 import UserForm from "./UserForm";
 import { Formik } from "formik";
-import { mockedUser } from "data/mockData/userData";
 import renderHelper from "../../../utils/renderHelper";
+import { mockedUser } from "types/IUser";
 
 const mockedOnSubmit = jest.fn();
 
@@ -17,7 +17,7 @@ describe("UserForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <UserForm formik={formik} user={mockedUser} />;
+          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
         }}
       </Formik>
     );
@@ -31,7 +31,7 @@ describe("UserForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <UserForm formik={formik} user={mockedUser} />;
+          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
         }}
       </Formik>
     );
@@ -52,7 +52,7 @@ describe("UserForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <UserForm formik={formik} user={mockedUser} />;
+          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
         }}
       </Formik>
     );
@@ -73,7 +73,7 @@ describe("UserForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <UserForm formik={formik} user={mockedUser} />;
+          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
         }}
       </Formik>
     );
@@ -97,7 +97,7 @@ describe("UserForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <UserForm formik={formik} user={mockedUser} />;
+          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
         }}
       </Formik>
     );
@@ -114,7 +114,7 @@ describe("UserForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <UserForm formik={formik} user={mockedUser} />;
+          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
         }}
       </Formik>
     );
@@ -140,7 +140,7 @@ describe("UserForm", () => {
     const { container } = renderHelper(
       <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <UserForm formik={formik} user={mockedUser} />;
+          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
         }}
       </Formik>
     );

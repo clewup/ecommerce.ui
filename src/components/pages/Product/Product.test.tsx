@@ -1,19 +1,25 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Product from "./Product";
-import { BrowserRouter as Router } from "react-router-dom";
-import { mockedUseProduct } from "../../../data/mockData/useProductData";
-import { AuthContext } from "../../../contexts/Auth";
 import { mockedAuthContext } from "../../../data/mockData/authContextData";
-import { mockedUseCart } from "../../../data/mockData/useCartData";
 import React from "react";
-import { mockedError } from "../../../data/mockData/errorData";
 import renderHelper from "../../../utils/renderHelper";
+import { IProduct, mockedProduct } from "../../../types/IProduct";
+import { AxiosError } from "axios";
+import { Guid } from "guid-typescript";
 
 const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
   useNavigate: () => mockedUseNavigate,
 }));
+
+const mockedUseProduct = {
+  product: mockedProduct,
+  isLoading: false,
+  error: null,
+  getProduct: jest.fn(),
+  addProduct: jest.fn(),
+};
 
 jest.mock("../../../hooks/useProduct", () => {
   return {
@@ -23,6 +29,13 @@ jest.mock("../../../hooks/useProduct", () => {
     },
   };
 });
+
+const mockedUseCart = {
+  getCart: jest.fn(),
+  addToCart: jest.fn(),
+  removeFromCart: jest.fn(),
+  error: null,
+};
 
 jest.mock("../../../hooks/useCart", () => {
   return {

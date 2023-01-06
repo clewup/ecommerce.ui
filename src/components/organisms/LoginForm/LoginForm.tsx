@@ -1,6 +1,6 @@
 import "./login-form.scss";
 import React from "react";
-import { Field, FormikProps } from "formik";
+import { Field, Form, Formik } from "formik";
 import Input from "../../atoms/Input/Input";
 import Text from "../../atoms/Text/Text";
 import { LoadingButton } from "@mui/lab";
@@ -8,53 +8,66 @@ import { Button } from "@mui/material";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { ILogin } from "../../../types/ILogin";
+import { loginInitialValues, loginValidationSchema } from "./utils/schema";
 
 interface IProps {
-  formik: FormikProps<ILogin>;
   isLoading: boolean;
   error: AxiosError | null;
+  loginUser: (login: ILogin) => void;
 }
 
-const LoginForm: React.FC<IProps> = ({ formik, isLoading, error }) => {
+const LoginForm: React.FC<IProps> = ({ isLoading, error, loginUser }) => {
   const navigate = useNavigate();
 
   return (
-    <div id={"login-form"}>
-      <Field
-        name={"email"}
-        component={Input}
-        placeholder={"Email"}
-        onChange={formik.handleChange}
-      />
+    <Formik
+      initialValues={loginInitialValues}
+      validationSchema={loginValidationSchema}
+      onSubmit={(values) => loginUser(values)}
+    >
+      {(formik) => {
+        return (
+          <Form>
+            <div id={"login-form"}>
+              <Field
+                name={"email"}
+                component={Input}
+                placeholder={"Email"}
+                onChange={formik.handleChange}
+              />
 
-      <Field
-        name={"password"}
-        component={Input}
-        placeholder={"Password"}
-        isPassword={true}
-        onChange={formik.handleChange}
-      />
+              <Field
+                name={"password"}
+                component={Input}
+                placeholder={"Password"}
+                isPassword={true}
+                onChange={formik.handleChange}
+              />
 
-      {error && <Text>{error.message}</Text>}
+              {error && <Text>{error.response?.data}</Text>}
 
-      <div className={"login-action-buttons"}>
-        <Button
-          type={"submit"}
-          color={"_black"}
-          onClick={() => navigate("/register")}
-        >
-          Register
-        </Button>
-        <LoadingButton
-          type={"submit"}
-          variant={"contained"}
-          color={"success"}
-          loading={isLoading}
-        >
-          Login
-        </LoadingButton>
-      </div>
-    </div>
+              <div className={"login-action-buttons"}>
+                <Button
+                  type={"button"}
+                  color={"_black"}
+                  onClick={() => navigate("/register")}
+                >
+                  Register
+                </Button>
+                <LoadingButton
+                  type={"submit"}
+                  variant={"contained"}
+                  color={"success"}
+                  loading={isLoading}
+                >
+                  Login
+                </LoadingButton>
+              </div>
+            </div>
+          </Form>
+        );
+      }}
+    </Formik>
   );
 };
 export default LoginForm;

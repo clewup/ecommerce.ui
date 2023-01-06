@@ -1,8 +1,16 @@
 import { fireEvent } from "@testing-library/react";
 import Store from "./Store";
-import { mockedUseProductFilter } from "../../../data/mockData/useProductFilterData";
 import React from "react";
 import renderHelper from "../../../utils/renderHelper";
+import { IProduct, mockedProducts } from "../../../types/IProduct";
+import { AxiosError } from "axios";
+
+const mockedUseProductFilter = {
+  products: mockedProducts,
+  isLoading: false,
+  isQuerying: false,
+  error: null,
+};
 
 jest.mock("../../../hooks/useProductFilter", () => {
   return {

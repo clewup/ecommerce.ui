@@ -2,8 +2,8 @@ import { screen } from "@testing-library/react";
 import React from "react";
 import AdvertisementTile from "./AdvertisementTile";
 import renderHelper from "../../../utils/renderHelper";
-import { mockedAdvertisement } from "../../../data/mockData/advertisementData";
 import userEvent from "@testing-library/user-event";
+import { mockedAdvertisement } from "../../../types/IAdvertisement";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),

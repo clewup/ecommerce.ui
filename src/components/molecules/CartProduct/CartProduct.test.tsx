@@ -1,12 +1,18 @@
 import { screen } from "@testing-library/react";
 import CartProduct from "./CartProduct";
-import {
-  mockedCartProduct,
-  mockedDiscountedCartProduct,
-} from "../../../data/mockData/cartProductData";
-import { mockedUseCart } from "../../../data/mockData/useCartData";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
+import {
+  mockedDiscountedProduct,
+  mockedProduct,
+} from "../../../types/IProduct";
+
+const mockedUseCart = {
+  getCart: jest.fn(),
+  addToCart: jest.fn(),
+  removeFromCart: jest.fn(),
+  error: null,
+};
 
 jest.mock("../../../hooks/useCart", () => {
   return {
@@ -19,7 +25,7 @@ jest.mock("../../../hooks/useCart", () => {
 
 describe("CartProduct", () => {
   it("should render the component with the expected values", async () => {
-    renderHelper(<CartProduct cartProduct={mockedCartProduct} />);
+    renderHelper(<CartProduct cartProduct={mockedProduct} />);
 
     expect(screen.getByText("CART_PRODUCT_NAME")).toBeInTheDocument();
     expect(screen.getByRole("img")).toHaveAttribute(
@@ -32,9 +38,8 @@ describe("CartProduct", () => {
   });
 
   it("should shorten the name if more than 30 characters", async () => {
-    mockedCartProduct.name =
-      "CART_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
-    renderHelper(<CartProduct cartProduct={mockedCartProduct} />);
+    mockedProduct.name = "CART_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
+    renderHelper(<CartProduct cartProduct={mockedProduct} />);
 
     expect(
       screen.getByText("CART_PRODUCT_NAME_MORE_THAN_TH...")
@@ -42,14 +47,14 @@ describe("CartProduct", () => {
   });
 
   it("should render the product discounted price if discounted", async () => {
-    renderHelper(<CartProduct cartProduct={mockedDiscountedCartProduct} />);
+    renderHelper(<CartProduct cartProduct={mockedDiscountedProduct} />);
 
     expect(screen.getByText("£12.34")).toBeInTheDocument();
     expect(screen.getByText("£6.17")).toBeInTheDocument();
   });
 
   it("should remove the product from the cart on button click", async () => {
-    renderHelper(<CartProduct cartProduct={mockedCartProduct} />);
+    renderHelper(<CartProduct cartProduct={mockedProduct} />);
 
     userEvent.click(screen.getByTestId("ClearIcon"));
 

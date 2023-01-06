@@ -17,13 +17,12 @@ import { formatSelectOptions } from "../../../utils/formatSelectOptions";
 import CreatableSelect from "react-select/creatable";
 import classnames from "classnames";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
+import { productInitialValues, productValidationSchema } from "./utils/schema";
 
 const ProductForm = () => {
   const [openAlert, setOpenAlert] = React.useState(false);
 
   const {
-    initialValues,
-    validationSchema,
     isLoading: productLoading,
     error: productError,
     addProduct,
@@ -47,7 +46,7 @@ const ProductForm = () => {
     addProduct(values, images);
     clearImages();
     setOpenAlert(true);
-    actions.resetForm({ values: initialValues });
+    actions.resetForm({ values: productInitialValues });
   };
 
   if (productError || imagesError)
@@ -62,8 +61,8 @@ const ProductForm = () => {
 
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
+      initialValues={productInitialValues}
+      validationSchema={productValidationSchema}
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
       {(formik: FormikProps<IProduct>) => {
@@ -197,7 +196,7 @@ const ProductForm = () => {
                     onChange={formik.handleChange}
                   />
 
-                  {initialValues.sizes.map((size, index) => {
+                  {formik.initialValues.sizes.map((size, index) => {
                     return (
                       <div key={size.size}>
                         <Field

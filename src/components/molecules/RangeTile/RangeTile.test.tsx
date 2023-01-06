@@ -2,9 +2,9 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import RangeTile from "./RangeTile";
 import { mockedProductContext } from "../../../data/mockData/productContextData";
-import { mockedRange } from "../../../data/mockData/rangeData";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
+import { mockedRange } from "../../../types/IRange";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),

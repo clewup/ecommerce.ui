@@ -1,10 +1,16 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import CheckoutForm from "./CheckoutForm";
-import { mockedUseCheckout } from "../../../data/mockData/useCheckoutData";
 import React from "react";
-import { mockedError } from "../../../data/mockData/errorData";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
+import { mockedOrder } from "../../../types/IOrder";
+
+const mockedUseCheckout = {
+  submitCheckout: jest.fn(),
+  order: mockedOrder,
+  isLoading: false,
+  error: null,
+};
 
 jest.mock("../../../hooks/useCheckout", () => {
   return {

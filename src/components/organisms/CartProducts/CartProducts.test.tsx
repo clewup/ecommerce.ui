@@ -1,13 +1,14 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import CartProducts from "./CartProducts";
-import { AuthContext } from "../../../contexts/Auth";
-import { CartContext } from "../../../contexts/Cart";
-import { BrowserRouter as Router } from "react-router-dom";
-import { mockedAuthContext } from "../../../data/mockData/authContextData";
-import { mockedCartContext } from "data/mockData/cartContextData";
-import { mockedUseCart } from "data/mockData/useCartData";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
+
+const mockedUseCart = {
+  getCart: jest.fn(),
+  addToCart: jest.fn(),
+  removeFromCart: jest.fn(),
+  error: null,
+};
 
 jest.mock("../../../hooks/useCart", () => {
   return {

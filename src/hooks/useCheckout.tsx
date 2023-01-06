@@ -4,17 +4,14 @@ import { ICheckoutFormValues, IOrder } from "../types/IOrder";
 import postOrder from "../api/PostOrder";
 import { AxiosError } from "axios";
 import { CartContext } from "../contexts/Cart";
-import * as Yup from "yup";
 import { ICart } from "../types/ICart";
 import { createGuid } from "../utils/createGuid";
 
 interface IUseCheckoutProps {
-  initialValues: ICheckoutFormValues;
   submitCheckout: (values: ICheckoutFormValues) => void;
   order: IOrder;
   isLoading: boolean;
   error: AxiosError | null;
-  validationSchema: Yup.ObjectSchema<any>;
 }
 
 const useCheckout = (): IUseCheckoutProps => {
@@ -23,41 +20,6 @@ const useCheckout = (): IUseCheckoutProps => {
   const [order, setOrder] = useState<IOrder>({} as IOrder);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
-
-  const initialValues: ICheckoutFormValues = {
-    firstName: user?.firstName || "",
-    lastName: user?.lastName || "",
-    email: user?.email || "",
-    lineOne: user?.lineOne || "",
-    lineTwo: user?.lineTwo || "",
-    lineThree: user?.lineThree || "",
-    postcode: user?.postcode || "",
-    city: user?.city || "",
-    county: user?.county || "",
-    country: user?.country || "",
-    cardNumber: "1234-5678-9101-1121",
-    expiryMonth: "12",
-    expiryYear: "34",
-    cvc: "567",
-  };
-
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("Required"),
-    lastName: Yup.string().required("Required"),
-    email: Yup.string().email("Must be a valid email").required("Required"),
-    lineOne: Yup.string().required("Required"),
-    lineTwo: Yup.string(),
-    lineThree: Yup.string(),
-    postcode: Yup.string()
-      .matches(
-        /^[a-z]{1,2}\d[a-z\d]?\s*\d[a-z]{2}$/i,
-        "Must be a valid postcode"
-      )
-      .required("Required"),
-    city: Yup.string().required("Required"),
-    county: Yup.string(),
-    country: Yup.string().required("Required"),
-  });
 
   const submitCheckout = (values: ICheckoutFormValues) => {
     const order: IOrder = {
@@ -91,8 +53,6 @@ const useCheckout = (): IUseCheckoutProps => {
   };
 
   return {
-    initialValues,
-    validationSchema,
     submitCheckout,
     order,
     isLoading,

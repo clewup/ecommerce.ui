@@ -1,4 +1,4 @@
-import { mockedUser } from "./userData";
+import { mockedUser } from "../../types/IUser";
 
 export const mockedUserContext = {
   user: mockedUser,

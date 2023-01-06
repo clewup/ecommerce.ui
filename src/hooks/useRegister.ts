@@ -3,31 +3,17 @@ import { IRegister } from "../types/IRegister";
 import postRegister from "../api/PostRegister";
 import { AxiosError } from "axios";
 import useLogin from "./useLogin";
-import * as Yup from "yup";
 
 interface IUseRegisterProps {
   isLoading: boolean;
   error: AxiosError | null;
   registerUser: (register: IRegister) => void;
-  validationSchema: Yup.ObjectSchema<any>;
 }
 
 const useRegister = (): IUseRegisterProps => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
   const { loginUser } = useLogin();
-
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("Required"),
-    lastName: Yup.string().required("Required"),
-    email: Yup.string().email("Must be a valid email.").required("Required"),
-    password: Yup.string()
-      .min(5, "Must be at least 5 characters.")
-      .required("Required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords do not match")
-      .required("Required"),
-  });
 
   const registerUser = (register: IRegister) => {
     postRegister(register)
@@ -38,6 +24,6 @@ const useRegister = (): IUseRegisterProps => {
       .finally(() => setLoading(false));
   };
 
-  return { isLoading, error, validationSchema, registerUser };
+  return { isLoading, error, registerUser };
 };
 export default useRegister;

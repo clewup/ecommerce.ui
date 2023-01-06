@@ -1,9 +1,18 @@
 import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import TrendingProducts from "./TrendingProducts";
-import { mockedUseStatistics } from "data/mockData/useStatisticsData";
-import { mockedError } from "../../../data/mockData/errorData";
 import renderHelper from "../../../utils/renderHelper";
+import { IProduct, mockedProducts } from "../../../types/IProduct";
+import { AxiosError } from "axios";
+
+const mockedUseStatistics = {
+  popularProducts: mockedProducts,
+  discountedProducts: mockedProducts,
+  isLoading: false,
+  error: null,
+  getMostDiscounted: jest.fn(),
+  getMostPopular: jest.fn(),
+};
 
 jest.mock("../../../hooks/useStatistics", () => {
   return {

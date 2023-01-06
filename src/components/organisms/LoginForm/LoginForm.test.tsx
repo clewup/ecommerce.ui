@@ -1,51 +1,75 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
-import { Formik } from "formik";
-import { initialLoginValues } from "../../../types/ILogin";
+import { screen, waitFor } from "@testing-library/react";
 import LoginForm from "./LoginForm";
 import renderHelper from "../../../utils/renderHelper";
+import userEvent from "@testing-library/user-event";
+import { AxiosError } from "axios";
+import { ILogin } from "../../../types/ILogin";
 
-const mockedOnSubmit = jest.fn();
+const mockedUseLogin = {
+  isLoading: false,
+  error: null,
+  loginUser: jest.fn(),
+};
+
+jest.mock("../../../hooks/useLogin", () => {
+  return {
+    __esModule: true,
+    default: () => {
+      return mockedUseLogin;
+    },
+  };
+});
 
 describe("LoginForm", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(
-      <Formik initialValues={initialLoginValues} onSubmit={mockedOnSubmit}>
-        {(formik) => {
-          return <LoginForm formik={formik} isLoading={false} error={null} />;
-        }}
-      </Formik>
+  it("should render the component with the expected values", () => {
+    renderHelper(
+      <LoginForm
+        isLoading={mockedUseLogin.isLoading}
+        error={mockedUseLogin.error}
+        loginUser={mockedUseLogin.loginUser}
+      />
     );
-    const component = container.querySelector("#login-form") as Element;
 
-    expect(component).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Email")).toHaveValue("");
+    expect(screen.getByPlaceholderText("Password")).toHaveValue("");
+    expect(
+      screen.getByText("Register", { selector: 'button[type="button"]' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Login", { selector: 'button[type="submit"]' })
+    ).toBeInTheDocument();
   });
 
   it("should login the user on button click", () => {
-    const { container } = renderHelper(
-      <Formik initialValues={initialLoginValues} onSubmit={mockedOnSubmit}>
-        {(formik) => {
-          return <LoginForm formik={formik} isLoading={false} error={null} />;
-        }}
-      </Formik>
+    renderHelper(
+      <LoginForm
+        isLoading={mockedUseLogin.isLoading}
+        error={mockedUseLogin.error}
+        loginUser={mockedUseLogin.loginUser}
+      />
     );
-    const email = container.querySelector('[name="email"]') as Element;
-    const password = container.querySelector('[name="password"]') as Element;
-    const button = container.querySelector('[type="submit"]') as Element;
 
-    waitFor(() =>
-      fireEvent.change(email, {
-        target: { value: "USER_EMAIL" },
-      })
+    userEvent.type(screen.getByPlaceholderText("Email"), "USER_EMAIL");
+    userEvent.type(screen.getByPlaceholderText("Password"), "USER_PASSWORD");
+    userEvent.click(
+      screen.getByText("Login", { selector: 'button[type="submit"]' })
     );
-    waitFor(() =>
-      fireEvent.change(password, {
-        target: { value: "USER_PASSWORD" },
-      })
-    );
-    waitFor(() => fireEvent.click(button));
 
-    waitFor(() => {
-      expect(mockedOnSubmit).toHaveBeenCalled();
-    });
+    waitFor(() => expect(mockedUseLogin.loginUser).toHaveBeenCalled());
+  });
+
+  it("should display an error message if incorrect credentials", () => {
+    // @ts-ignore
+    mockedUseLogin.error = mockedError;
+
+    renderHelper(
+      <LoginForm
+        isLoading={mockedUseLogin.isLoading}
+        error={mockedUseLogin.error}
+        loginUser={mockedUseLogin.loginUser}
+      />
+    );
+
+    expect(screen.getByText("CUSTOM_ERROR_MESSAGE")).toBeInTheDocument();
   });
 });

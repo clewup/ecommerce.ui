@@ -1,15 +1,21 @@
 import { screen } from "@testing-library/react";
 import ProductTile from "./ProductTile";
 import React from "react";
+import { mockedAuthContext } from "../../../data/mockData/authContextData";
+import renderHelper from "../../../utils/renderHelper";
+import userEvent from "@testing-library/user-event";
 import {
   mockedDiscountedProduct,
   mockedOutOfStockProduct,
   mockedProduct,
-} from "../../../data/mockData/productData";
-import { mockedAuthContext } from "../../../data/mockData/authContextData";
-import { mockedUseCart } from "../../../data/mockData/useCartData";
-import renderHelper from "../../../utils/renderHelper";
-import userEvent from "@testing-library/user-event";
+} from "../../../types/IProduct";
+
+const mockedUseCart = {
+  getCart: jest.fn(),
+  addToCart: jest.fn(),
+  removeFromCart: jest.fn(),
+  error: null,
+};
 
 jest.mock("../../../hooks/useCart", () => {
   return {

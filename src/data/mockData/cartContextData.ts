@@ -1,13 +1,7 @@
-import { Guid } from "guid-typescript";
-import { mockedProducts } from "./productData";
+import { mockedCart } from "../../types/ICart";
 
 export const mockedCartContext = {
-  cart: {
-    id: Guid.create(),
-    userId: Guid.create(),
-    products: mockedProducts,
-    total: 69.12,
-  },
+  cart: mockedCart,
   setCart: jest.fn(),
   isLoading: false,
   setLoading: jest.fn(),

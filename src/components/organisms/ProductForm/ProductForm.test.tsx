@@ -1,70 +1,125 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  act,
+} from "@testing-library/react";
 import { Formik } from "formik";
 import React from "react";
 import ProductForm from "./ProductForm";
-import { mockedProductInitialValues } from "../../../data/mockData/productData";
 import renderHelper from "../../../utils/renderHelper";
+import userEvent from "@testing-library/user-event";
+import { mockedProduct } from "../../../types/IProduct";
+import { AxiosError } from "axios";
+import { productInitialValues } from "./utils/schema";
 
-const mockedOnSubmit = jest.fn();
+const mockedUseProduct = {
+  product: mockedProduct,
+  isLoading: false,
+  error: null,
+  getProduct: jest.fn(),
+  addProduct: jest.fn(),
+};
+
+jest.mock("../../../hooks/useProduct", () => {
+  return {
+    __esModule: true,
+    default: () => {
+      return mockedUseProduct;
+    },
+  };
+});
+
+const mockedUseImageUpload = {
+  images: [],
+  isLoading: false,
+  error: null,
+  uploadImages: jest.fn(),
+  clearImages: jest.fn(),
+};
+
+jest.mock("../../../hooks/useImageUpload", () => {
+  return {
+    __esModule: true,
+    default: () => {
+      return mockedUseImageUpload;
+    },
+  };
+});
 
 describe("ProductForm", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(
-      <Formik
-        initialValues={mockedProductInitialValues}
-        onSubmit={mockedOnSubmit}
-      >
-        {(formik) => {
-          return <ProductForm />;
-        }}
-      </Formik>
-    );
+  it("should render the component with the expected values", () => {
+    renderHelper(<ProductForm />);
 
-    const component = container.querySelector("#product-form") as Element;
+    expect(
+      screen.getByRole("button", { name: "Upload Images" })
+    ).toBeInTheDocument();
 
-    expect(component).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Name" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("textbox", { name: "Description" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Category", { selector: 'div[id*="react-select"]' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Subcategory", { selector: 'div[id*="react-select"]' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Range", { selector: 'div[id*="react-select"]' })
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByRole("checkbox", { name: "controlled" })
+    ).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "XSmall" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Small" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Medium" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Large" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "XLarge" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Color" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Price" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("textbox", { name: "Discount" })
+    ).toBeInTheDocument();
+
+    expect(screen.getByRole("button", { name: "Add Product" })).toBeDisabled();
   });
 
-  it("should submit the form on add product button click", () => {
-    const { container } = renderHelper(
-      <Formik
-        initialValues={mockedProductInitialValues}
-        onSubmit={mockedOnSubmit}
-      >
-        {(formik) => {
-          return <ProductForm />;
-        }}
-      </Formik>
-    );
-    const submitButton = container.querySelector('[type="submit"]') as Element;
-    const name = container.querySelector('[name="name"]') as Element;
-    const description = container.querySelector(
-      '[name="description"]'
-    ) as Element;
-    const color = container.querySelector('[name="color"]') as Element;
-    const price = container.querySelector('[name="price"]') as Element;
-    const discount = container.querySelector('[name="discount"]') as Element;
+  it("should submit the form on completion and add product button click", async () => {
+    renderHelper(<ProductForm />);
 
-    fireEvent.change(name, {
-      target: { value: "PRODUCT_NAME" },
-    });
-    fireEvent.change(description, {
-      target: { value: "PRODUCT_DESCRIPTION" },
-    });
-    fireEvent.change(color, {
-      target: { value: "PRODUCT_COLOR" },
-    });
-    fireEvent.change(price, {
-      target: { value: 12.34 },
-    });
-    fireEvent.change(discount, {
-      target: { value: 23.45 },
+    await act(async () => {
+      userEvent.type(
+        screen.getByRole("textbox", { name: "Name" }),
+        "PRODUCT_NAME"
+      );
+      userEvent.type(
+        screen.getByRole("textbox", { name: "Description" }),
+        "PRODUCT_DESCRIPTION"
+      );
+      userEvent.type(screen.getByRole("textbox", { name: "XSmall" }), "10");
+      userEvent.type(screen.getByRole("textbox", { name: "Small" }), "10");
+      userEvent.type(screen.getByRole("textbox", { name: "Medium" }), "10");
+      userEvent.type(screen.getByRole("textbox", { name: "Large" }), "10");
+      userEvent.type(screen.getByRole("textbox", { name: "XLarge" }), "10");
+
+      userEvent.type(
+        screen.getByRole("textbox", { name: "Color" }),
+        "PRODUCT_COLOR"
+      );
+      userEvent.type(screen.getByRole("textbox", { name: "Price" }), "49.99");
+      userEvent.type(
+        screen.getByRole("textbox", { name: "Discount" }),
+        "12.50"
+      );
     });
 
-    fireEvent.click(submitButton);
+    userEvent.click(screen.getByRole("button", { name: "Add Product" }));
 
     waitFor(() => {
-      expect(mockedOnSubmit).toHaveBeenCalled();
+      expect(mockedUseProduct.addProduct).toHaveBeenCalled();
     });
   });
 });

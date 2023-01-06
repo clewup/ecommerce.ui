@@ -5,11 +5,3 @@ export interface IRegister {
   password: string;
   confirmPassword: string;
 }
-
-export const initialRegisterValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};

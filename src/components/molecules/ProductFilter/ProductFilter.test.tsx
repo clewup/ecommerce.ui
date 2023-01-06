@@ -3,12 +3,19 @@ import ProductFilter from "./ProductFilter";
 import React from "react";
 import { mockedProductContext } from "../../../data/mockData/productContextData";
 import { ProductContext } from "../../../contexts/Product";
-import { mockedUseProductFilter } from "../../../data/mockData/useProductFilterData";
-import { mockedError } from "../../../data/mockData/errorData";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
+import { IProduct, mockedProducts } from "../../../types/IProduct";
+import { AxiosError } from "axios";
 
 const mockToggleDrawer = jest.fn().mockReturnValue(true);
+
+const mockedUseProductFilter = {
+  products: mockedProducts,
+  isLoading: false,
+  isQuerying: false,
+  error: null,
+};
 
 jest.mock("../../../hooks/useProductFilter", () => {
   return {
