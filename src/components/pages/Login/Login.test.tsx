@@ -1,8 +1,4 @@
-import { render } from "@testing-library/react";
 import Login from "./Login";
-import { BrowserRouter as Router } from "react-router-dom";
-import { AuthContext } from "../../../contexts/Auth";
-import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import renderHelper from "../../../utils/renderHelper";
 
 const mockedUseNavigate = jest.fn();

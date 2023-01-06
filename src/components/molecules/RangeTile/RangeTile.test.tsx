@@ -1,8 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import RangeTile from "./RangeTile";
-import { mockedProductContext } from "../../../data/mockData/productContextData";
-import renderHelper from "../../../utils/renderHelper";
+import renderHelper, {
+  mockedProductContext,
+} from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
 import { mockedRange } from "../../../types/IRange";
 

@@ -44,7 +44,7 @@ describe("AllOrders", () => {
 
   it("should render the app error when there is an error", () => {
     // @ts-ignore
-    mockedUseOrder.error = mockedError;
+    mockedUseOrder.error = { code: "ERROR_CODE", message: "ERROR_MESSAGE" };
     const { container } = renderHelper(<AllOrders />);
 
     expect(container.querySelector("#app-error")).toBeInTheDocument();

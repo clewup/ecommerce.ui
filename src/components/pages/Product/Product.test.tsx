@@ -1,11 +1,8 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import Product from "./Product";
-import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import React from "react";
-import renderHelper from "../../../utils/renderHelper";
-import { IProduct, mockedProduct } from "../../../types/IProduct";
-import { AxiosError } from "axios";
-import { Guid } from "guid-typescript";
+import renderHelper, { mockedAuthContext } from "../../../utils/renderHelper";
+import { mockedProduct } from "../../../types/IProduct";
 
 const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
@@ -96,7 +93,7 @@ describe("Product", () => {
     const price = container.querySelectorAll(".text")[2] as Element;
 
     expect(price).toBeInTheDocument();
-    expect(price).toHaveTextContent("£12.34");
+    expect(price).toHaveTextContent("£33.33");
   });
 
   it("should render the add to cart button", () => {
@@ -139,7 +136,7 @@ describe("Product", () => {
 
   it("should render the app error when there is an error", () => {
     // @ts-ignore
-    mockedUseProduct.error = mockedError;
+    mockedUseProduct.error = { code: "ERROR_CODE", message: "ERROR_MESSAGE" };
     const { container } = renderHelper(<Product />);
     const appError = container.querySelector("#app-error") as Element;
 

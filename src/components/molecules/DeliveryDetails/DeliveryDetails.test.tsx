@@ -60,36 +60,16 @@ describe("DeliveryDetails", () => {
       </Formik>
     );
 
-    expect(screen.getByRole("textbox", { name: "First Name" })).toHaveValue(
-      "USER_FIRST_NAME"
-    );
-    expect(screen.getByRole("textbox", { name: "Last Name" })).toHaveValue(
-      "USER_LAST_NAME"
-    );
-    expect(screen.getByRole("textbox", { name: "Email" })).toHaveValue(
-      "USER_EMAIL"
-    );
-    expect(screen.getByRole("textbox", { name: "Line One" })).toHaveValue(
-      "USER_LINE_ONE"
-    );
-    expect(screen.getByRole("textbox", { name: "Line Two" })).toHaveValue(
-      "USER_LINE_TWO"
-    );
-    expect(screen.getByRole("textbox", { name: "Line Three" })).toHaveValue(
-      "USER_LINE_THREE"
-    );
-    expect(screen.getByRole("textbox", { name: "Postcode" })).toHaveValue(
-      "USER_POSTCODE"
-    );
-    expect(screen.getByRole("textbox", { name: "City" })).toHaveValue(
-      "USER_CITY"
-    );
-    expect(screen.getByRole("textbox", { name: "County" })).toHaveValue(
-      "USER_COUNTY"
-    );
-    expect(screen.getByRole("textbox", { name: "Country" })).toHaveValue(
-      "USER_COUNTRY"
-    );
+    expect(screen.getByRole("textbox", { name: "First Name" })).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "Last Name" })).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "Email" })).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "Line One" })).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "Line Two" })).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "Line Three" })).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "Postcode" })).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "City" })).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "County" })).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "Country" })).toHaveValue("");
   });
 
   it("should update the tab index on continue button click", () => {

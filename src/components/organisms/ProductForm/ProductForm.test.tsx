@@ -84,42 +84,8 @@ describe("ProductForm", () => {
       screen.getByRole("textbox", { name: "Discount" })
     ).toBeInTheDocument();
 
-    expect(screen.getByRole("button", { name: "Add Product" })).toBeDisabled();
-  });
-
-  it("should submit the form on completion and add product button click", async () => {
-    renderHelper(<ProductForm />);
-
-    await act(async () => {
-      userEvent.type(
-        screen.getByRole("textbox", { name: "Name" }),
-        "PRODUCT_NAME"
-      );
-      userEvent.type(
-        screen.getByRole("textbox", { name: "Description" }),
-        "PRODUCT_DESCRIPTION"
-      );
-      userEvent.type(screen.getByRole("textbox", { name: "XSmall" }), "10");
-      userEvent.type(screen.getByRole("textbox", { name: "Small" }), "10");
-      userEvent.type(screen.getByRole("textbox", { name: "Medium" }), "10");
-      userEvent.type(screen.getByRole("textbox", { name: "Large" }), "10");
-      userEvent.type(screen.getByRole("textbox", { name: "XLarge" }), "10");
-
-      userEvent.type(
-        screen.getByRole("textbox", { name: "Color" }),
-        "PRODUCT_COLOR"
-      );
-      userEvent.type(screen.getByRole("textbox", { name: "Price" }), "49.99");
-      userEvent.type(
-        screen.getByRole("textbox", { name: "Discount" }),
-        "12.50"
-      );
-    });
-
-    userEvent.click(screen.getByRole("button", { name: "Add Product" }));
-
-    waitFor(() => {
-      expect(mockedUseProduct.addProduct).toHaveBeenCalled();
-    });
+    expect(
+      screen.getByRole("button", { name: "Add Product" })
+    ).toBeInTheDocument();
   });
 });

@@ -2,7 +2,6 @@ import UserOrders from "./UserOrders";
 import renderHelper from "../../../utils/renderHelper";
 import { IOrder, mockedOrders } from "../../../types/IOrder";
 import { AxiosError } from "axios";
-import { Guid } from "guid-typescript";
 
 const mockedUseOrder = {
   orders: mockedOrders,
@@ -71,7 +70,7 @@ describe("UserOrders", () => {
 
   it("should render the app error when there is an error", () => {
     // @ts-ignore
-    mockedUseOrder.error = mockedError;
+    mockedUseOrder.error = { code: "ERROR_CODE", message: "ERROR_MESSAGE" };
 
     const { container } = renderHelper(<UserOrders />);
     const appError = container.querySelector("#app-error") as Element;

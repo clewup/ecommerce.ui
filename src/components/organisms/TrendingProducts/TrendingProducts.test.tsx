@@ -53,7 +53,10 @@ describe("TrendingProducts", () => {
 
   it("should render the app error when there is an error", () => {
     // @ts-ignore
-    mockedUseStatistics.error = mockedError;
+    mockedUseStatistics.error = {
+      code: "ERROR_CODE",
+      message: "ERROR_MESSAGE",
+    };
     const { container } = renderHelper(<TrendingProducts />);
     const appError = container.querySelector("#app-error") as Element;
 

@@ -1,8 +1,7 @@
 import { screen } from "@testing-library/react";
 import ProductTile from "./ProductTile";
 import React from "react";
-import { mockedAuthContext } from "../../../data/mockData/authContextData";
-import renderHelper from "../../../utils/renderHelper";
+import renderHelper, { mockedAuthContext } from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
 import {
   mockedDiscountedProduct,
@@ -42,7 +41,7 @@ describe("ProductTile", () => {
     );
     expect(screen.getByText("PRODUCT_NAME")).toBeInTheDocument();
     expect(screen.getByText("PRODUCT_COLOR")).toBeInTheDocument();
-    expect(screen.getByText("£12.34")).toBeInTheDocument();
+    expect(screen.getByText("£33.33")).toBeInTheDocument();
     expect(
       screen.getByText("Add to Cart", {
         selector: 'button[type="button"]',
@@ -53,8 +52,8 @@ describe("ProductTile", () => {
   it("should render the product discounted price if discounted", async () => {
     renderHelper(<ProductTile product={mockedDiscountedProduct} />);
 
-    expect(screen.getByText("£12.34")).toBeInTheDocument();
-    expect(screen.getByText("£6.17")).toBeInTheDocument();
+    expect(screen.getByText("£33.33")).toBeInTheDocument();
+    expect(screen.getByText("£30")).toBeInTheDocument();
   });
 
   it("should disable the add to cart button when stock equals 0", () => {

@@ -1,8 +1,7 @@
-import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import Admin from "./Admin";
-import renderHelper from "../../../utils/renderHelper";
+import renderHelper, { mockedAuthContext } from "../../../utils/renderHelper";
 
 const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({

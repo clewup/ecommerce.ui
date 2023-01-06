@@ -60,7 +60,11 @@ describe("LoginForm", () => {
 
   it("should display an error message if incorrect credentials", () => {
     // @ts-ignore
-    mockedUseLogin.error = mockedError;
+    mockedUseLogin.error = {
+      code: "ERROR_CODE",
+      message: "ERROR_MESSAGE",
+      response: { data: "CUSTOM_ERROR_MESSAGE" },
+    };
 
     renderHelper(
       <LoginForm

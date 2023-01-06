@@ -1,7 +1,3 @@
-import { render } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
-import { AuthContext } from "../../../contexts/Auth";
-import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import Register from "./Register";
 import renderHelper from "../../../utils/renderHelper";
 

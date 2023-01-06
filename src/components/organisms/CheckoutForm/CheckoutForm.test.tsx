@@ -41,7 +41,7 @@ describe("CheckoutForm", () => {
 
   it("should render the app error when there is an error", () => {
     // @ts-ignore
-    mockedUseCheckout.error = mockedError;
+    mockedUseCheckout.error = { code: "ERROR_CODE", message: "ERROR_MESSAGE" };
     const { container } = renderHelper(<CheckoutForm />);
 
     const appError = container.querySelector("#app-error") as Element;

@@ -27,30 +27,30 @@ describe("CartProduct", () => {
   it("should render the component with the expected values", async () => {
     renderHelper(<CartProduct cartProduct={mockedProduct} />);
 
-    expect(screen.getByText("CART_PRODUCT_NAME")).toBeInTheDocument();
+    expect(screen.getByText("PRODUCT_NAME")).toBeInTheDocument();
     expect(screen.getByRole("img")).toHaveAttribute(
       "src",
       "HTTPS://IMAGE_URL.JPG"
     );
-    expect(screen.getByText("CART_PRODUCT_COLOR")).toBeInTheDocument();
-    expect(screen.getByText("£12.34")).toBeInTheDocument();
+    expect(screen.getByText("PRODUCT_COLOR")).toBeInTheDocument();
+    expect(screen.getByText("£33.33")).toBeInTheDocument();
     expect(screen.getByTestId("ClearIcon")).toBeInTheDocument();
   });
 
   it("should shorten the name if more than 30 characters", async () => {
-    mockedProduct.name = "CART_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
+    mockedProduct.name = "PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
     renderHelper(<CartProduct cartProduct={mockedProduct} />);
 
     expect(
-      screen.getByText("CART_PRODUCT_NAME_MORE_THAN_TH...")
+      screen.getByText("PRODUCT_NAME_MORE_THAN_THIRTY_...")
     ).toBeInTheDocument();
   });
 
   it("should render the product discounted price if discounted", async () => {
     renderHelper(<CartProduct cartProduct={mockedDiscountedProduct} />);
 
-    expect(screen.getByText("£12.34")).toBeInTheDocument();
-    expect(screen.getByText("£6.17")).toBeInTheDocument();
+    expect(screen.getByText("£33.33")).toBeInTheDocument();
+    expect(screen.getByText("£30")).toBeInTheDocument();
   });
 
   it("should remove the product from the cart on button click", async () => {
