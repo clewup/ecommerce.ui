@@ -4,18 +4,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import renderHelper from "../../../utils/renderHelper";
 
 describe("AdvertisementsBanner", () => {
-  it("should render the component", () => {
+  it("should render the component with the expected values", () => {
     const { container } = renderHelper(<AdvertisementsBanner />);
-    const component = container.querySelector(
-      "#advertisement-banner"
-    ) as Element;
-
-    expect(component).toBeInTheDocument();
-  });
-
-  it("should render three advertisements", () => {
-    const { container } = renderHelper(<AdvertisementsBanner />);
-    const advertisements = document.querySelectorAll("#advertisement-tile");
+    const advertisements = container.querySelectorAll("#advertisement-tile");
 
     expect(advertisements).toHaveLength(3);
   });

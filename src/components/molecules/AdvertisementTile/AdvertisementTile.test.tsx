@@ -1,10 +1,9 @@
-import { fireEvent, render } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import AdvertisementTile from "./AdvertisementTile";
-import { IAdvertisement } from "../../../types/IAdvertisement";
 import renderHelper from "../../../utils/renderHelper";
 import { mockedAdvertisement } from "../../../data/mockData/advertisementData";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
@@ -14,52 +13,20 @@ jest.mock("react-router-dom", () => ({
 const mockedUseNavigate = jest.fn();
 
 describe("AdvertisementTile", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(
-      <AdvertisementTile advertisement={mockedAdvertisement} />
-    );
-    const component = container.querySelector("#advertisement-tile") as Element;
+  it("should render the component with the expected values", async () => {
+    renderHelper(<AdvertisementTile advertisement={mockedAdvertisement} />);
 
-    expect(component).toBeInTheDocument();
+    expect(screen.getByText("ADVERTISEMENT_TITLE")).toBeInTheDocument();
+    expect(screen.getByText("ADVERTISEMENT_CAPTION")).toBeInTheDocument();
+    expect(screen.getByText("DISCOVER", { selector: 'button[type="button"]' }));
   });
 
-  it("should render the advertisement title", () => {
-    const { container } = renderHelper(
-      <AdvertisementTile advertisement={mockedAdvertisement} />
+  it("should navigate to the store on button click", async () => {
+    renderHelper(<AdvertisementTile advertisement={mockedAdvertisement} />);
+
+    userEvent.click(
+      screen.getByText("DISCOVER", { selector: 'button[type="button"]' })
     );
-    const title = container.querySelector(".subheading") as Element;
-
-    expect(title).toBeInTheDocument();
-    expect(title).toHaveTextContent("ADVERTISEMENT_TITLE");
-  });
-
-  it("should render the advertisement caption", () => {
-    const { container } = renderHelper(
-      <AdvertisementTile advertisement={mockedAdvertisement} />
-    );
-    const caption = container.querySelector(".text") as Element;
-
-    expect(caption).toBeInTheDocument();
-    expect(caption).toHaveTextContent("ADVERTISEMENT_CAPTION");
-  });
-
-  it("should render the discover button", () => {
-    const { container } = renderHelper(
-      <AdvertisementTile advertisement={mockedAdvertisement} />
-    );
-    const button = container.querySelector('[type="button"]') as Element;
-
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveTextContent("DISCOVER");
-  });
-
-  it("should navigate to the store on button click", () => {
-    const { container } = renderHelper(
-      <AdvertisementTile advertisement={mockedAdvertisement} />
-    );
-    const button = container.querySelector('[type="button"]') as Element;
-
-    fireEvent.click(button);
 
     expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith("store");

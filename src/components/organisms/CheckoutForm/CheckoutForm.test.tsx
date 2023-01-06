@@ -1,9 +1,10 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import CheckoutForm from "./CheckoutForm";
 import { mockedUseCheckout } from "../../../data/mockData/useCheckoutData";
 import React from "react";
 import { mockedError } from "../../../data/mockData/errorData";
 import renderHelper from "../../../utils/renderHelper";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("../../../hooks/useCheckout", () => {
   return {
@@ -15,32 +16,21 @@ jest.mock("../../../hooks/useCheckout", () => {
 });
 
 describe("CheckoutForm", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(<CheckoutForm />);
-    const component = container.querySelector("#checkout-form") as Element;
+  it("should render the component with the expected values", () => {
+    renderHelper(<CheckoutForm />);
 
-    expect(component).toBeInTheDocument();
-  });
-
-  it("should render the tabs", () => {
-    const { container } = renderHelper(<CheckoutForm />);
-    const tabs = container.querySelector('[role="tablist"]');
-
-    expect(tabs).toBeInTheDocument();
+    expect(screen.getByRole("tablist")).toBeInTheDocument();
   });
 
   it("should update the tab index on tab click", () => {
     const { container } = renderHelper(<CheckoutForm />);
-    const tabs = container.querySelectorAll('[role="tab"]');
-    const billingTab = tabs[1] as Element;
 
-    fireEvent.click(billingTab);
+    userEvent.click(screen.getAllByRole("tab")[1] as Element);
 
-    const deliveryDetails = container.querySelector("#delivery-details");
-    const billingDetails = container.querySelector("#billing-details");
-
-    expect(billingDetails).toBeInTheDocument();
-    expect(deliveryDetails).not.toBeInTheDocument();
+    expect(container.querySelector("#billing-details")).toBeInTheDocument();
+    expect(
+      container.querySelector("#delivery-details")
+    ).not.toBeInTheDocument();
   });
 
   it("should render the app error when there is an error", () => {

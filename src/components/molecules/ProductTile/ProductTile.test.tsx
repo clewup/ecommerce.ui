@@ -1,7 +1,5 @@
-import { screen, render, fireEvent } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { screen } from "@testing-library/react";
 import ProductTile from "./ProductTile";
-import { AuthContext } from "../../../contexts/Auth";
 import React from "react";
 import {
   mockedDiscountedProduct,
@@ -11,6 +9,7 @@ import {
 import { mockedAuthContext } from "../../../data/mockData/authContextData";
 import { mockedUseCart } from "../../../data/mockData/useCartData";
 import renderHelper from "../../../utils/renderHelper";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("../../../hooks/useCart", () => {
   return {
@@ -28,88 +27,92 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("ProductTile", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
+  it("should render the component with the expected values", async () => {
+    renderHelper(<ProductTile product={mockedProduct} />);
 
-    const component = container.querySelector("#product-tile") as Element;
-
-    expect(component).toBeInTheDocument();
+    expect(await screen.getByRole("img")).toHaveAttribute(
+      "src",
+      "HTTPS://IMAGE_URL.JPG"
+    );
+    expect(screen.getByText("PRODUCT_NAME")).toBeInTheDocument();
+    expect(screen.getByText("PRODUCT_COLOR")).toBeInTheDocument();
+    expect(screen.getByText("£12.34")).toBeInTheDocument();
+    expect(
+      screen.getByText("Add to Cart", {
+        selector: 'button[type="button"]',
+      })
+    ).toBeInTheDocument();
   });
 
-  it("should render the product image", () => {
-    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
+  it("should render the product discounted price if discounted", async () => {
+    renderHelper(<ProductTile product={mockedDiscountedProduct} />);
 
-    const image = screen.getByRole("img") as Element;
-
-    expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute("src", "HTTPS://IMAGE_URL.JPG");
-  });
-
-  it("should render the product name", () => {
-    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
-
-    const name = container.querySelector(".product-title") as Element;
-
-    expect(name).toBeInTheDocument();
-    expect(name).toHaveTextContent("PRODUCT_NAME");
-  });
-
-  it("should render the product color", () => {
-    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
-
-    const color = container.querySelectorAll(".text")[0] as Element;
-
-    expect(color).toBeInTheDocument();
-    expect(color).toHaveTextContent("PRODUCT_COLOR");
-  });
-
-  it("should render the product price", () => {
-    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
-
-    const price = container.querySelectorAll(".text")[1] as Element;
-
-    expect(price).toBeInTheDocument();
-    expect(price).toHaveTextContent("£12.34");
-  });
-
-  it("should render the add to cart button", () => {
-    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
-
-    const button = container.querySelector(".add-to-cart-btn") as Element;
-
-    expect(button).toBeInTheDocument();
+    expect(screen.getByText("£12.34")).toBeInTheDocument();
+    expect(screen.getByText("£6.17")).toBeInTheDocument();
   });
 
   it("should disable the add to cart button when stock equals 0", () => {
-    const { container } = renderHelper(
-      <ProductTile product={mockedOutOfStockProduct} />
-    );
+    renderHelper(<ProductTile product={mockedOutOfStockProduct} />);
 
-    const button = container.querySelector(".add-to-cart-btn") as Element;
-
-    expect(button).toBeInTheDocument();
-    expect(button).toBeDisabled();
+    expect(
+      screen.getByText("Out of Stock", {
+        selector: 'button[type="button"]',
+      })
+    ).toBeDisabled();
   });
 
   it("should add the product to the cart if logged in on button click", () => {
-    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
+    renderHelper(<ProductTile product={mockedProduct} />);
 
-    const button = container.querySelector(".add-to-cart-btn") as Element;
-
-    fireEvent.click(button);
+    userEvent.click(
+      screen.getByText("Add to Cart", {
+        selector: 'button[type="button"]',
+      })
+    );
 
     expect(mockedUseCart.addToCart).toHaveBeenCalled();
   });
 
   it("should navigate to the login page if not logged in on button click", () => {
     mockedAuthContext.isAuthenticated = false;
-    const { container } = renderHelper(<ProductTile product={mockedProduct} />);
+    renderHelper(<ProductTile product={mockedProduct} />);
 
-    const button = container.querySelector(".add-to-cart-btn") as Element;
+    userEvent.click(
+      screen.getByText("Add to Cart", {
+        selector: 'button[type="button"]',
+      })
+    );
 
-    fireEvent.click(button);
-
-    expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith("/login");
+  });
+
+  it("should render the size selector", () => {
+    renderHelper(<ProductTile product={mockedProduct} />);
+
+    expect(
+      screen.getByText("XS", {
+        selector: 'div[class*="size"]',
+      })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("S", {
+        selector: 'div[class*="size"]',
+      })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("M", {
+        selector: 'div[class*="size"]',
+      })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("L", {
+        selector: 'div[class*="size"]',
+      })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("XL", {
+        selector: 'div[class*="size"]',
+      })
+    ).toBeInTheDocument();
   });
 });

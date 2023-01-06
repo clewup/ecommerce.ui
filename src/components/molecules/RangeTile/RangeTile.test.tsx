@@ -1,13 +1,10 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import RangeTile from "./RangeTile";
 import { mockedProductContext } from "../../../data/mockData/productContextData";
-import { ProductContext } from "../../../contexts/Product";
 import { mockedRange } from "../../../data/mockData/rangeData";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "../../../styles/theme";
 import renderHelper from "../../../utils/renderHelper";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
@@ -17,46 +14,32 @@ jest.mock("react-router-dom", () => ({
 const mockedUseNavigate = jest.fn();
 
 describe("RangeTile", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(<RangeTile range={mockedRange} />);
-    const component = container.querySelector("#range-tile") as Element;
+  it("should render the component with the expected values", () => {
+    renderHelper(<RangeTile range={mockedRange} />);
 
-    expect(component).toBeInTheDocument();
-  });
-
-  it("should render the range name", () => {
-    const { container } = renderHelper(<RangeTile range={mockedRange} />);
-    const name = container.querySelector(".subheading") as Element;
-
-    expect(name).toBeInTheDocument();
-    expect(name).toHaveTextContent("RANGE_NAME");
-  });
-
-  it("should render the discover button", () => {
-    const { container } = renderHelper(<RangeTile range={mockedRange} />);
-    const button = container.querySelector('[type="button"]') as Element;
-
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveTextContent("DISCOVER");
+    expect(screen.getByText("RANGE_NAME")).toBeInTheDocument();
+    expect(
+      screen.getByText("DISCOVER", { selector: 'button[type="button"]' })
+    ).toBeInTheDocument();
   });
 
   it("should navigate to the store on button click", () => {
-    const { container } = renderHelper(<RangeTile range={mockedRange} />);
-    const button = container.querySelector('[type="button"]') as Element;
+    renderHelper(<RangeTile range={mockedRange} />);
 
-    fireEvent.click(button);
+    userEvent.click(
+      screen.getByText("DISCOVER", { selector: 'button[type="button"]' })
+    );
 
-    expect(mockedUseNavigate).toHaveBeenCalled();
     expect(mockedUseNavigate).toHaveBeenCalledWith("store");
   });
 
   it("should update the range query on click", () => {
-    const { container } = renderHelper(<RangeTile range={mockedRange} />);
-    const button = container.querySelector('[type="button"]') as Element;
+    renderHelper(<RangeTile range={mockedRange} />);
 
-    fireEvent.click(button);
+    userEvent.click(
+      screen.getByText("DISCOVER", { selector: 'button[type="button"]' })
+    );
 
-    expect(mockedProductContext.setRangeQuery).toHaveBeenCalled();
     expect(mockedProductContext.setRangeQuery).toHaveBeenCalledWith(
       "RANGE_NAME"
     );

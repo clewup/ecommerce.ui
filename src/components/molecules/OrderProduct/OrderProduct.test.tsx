@@ -8,85 +8,32 @@ import {
 import renderHelper from "../../../utils/renderHelper";
 
 describe("OrderProduct", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(
-      <OrderProduct orderProduct={mockedOrderProduct} />
+  it("should render the component with the expected values", async () => {
+    renderHelper(<OrderProduct orderProduct={mockedOrderProduct} />);
+
+    expect(await screen.getByRole("img")).toHaveAttribute(
+      "src",
+      "HTTPS://IMAGE_URL.JPG"
     );
-
-    const component = container.querySelector("#order-product") as Element;
-
-    expect(component).toBeInTheDocument();
+    expect(await screen.getByText("ORDER_PRODUCT_NAME")).toBeInTheDocument();
+    expect(await screen.getByText("ORDER_PRODUCT_COLOR")).toBeInTheDocument();
+    expect(await screen.getByText("£12.34")).toBeInTheDocument();
   });
 
-  it("should render the product image", () => {
-    const { container } = renderHelper(
-      <OrderProduct orderProduct={mockedOrderProduct} />
-    );
-
-    const image = screen.getByRole("img") as Element;
-
-    expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute("src", "HTTPS://IMAGE_URL.JPG");
-  });
-
-  it("should render the product name", () => {
-    const { container } = renderHelper(
-      <OrderProduct orderProduct={mockedOrderProduct} />
-    );
-
-    const name = container.querySelectorAll(".text")[0] as Element;
-
-    expect(name).toBeInTheDocument();
-    expect(name).toHaveTextContent("ORDER_PRODUCT_NAME");
-  });
-
-  it("should shorten the name if more than 30 characters", () => {
+  it("should shorten the name if more than 30 characters", async () => {
     mockedOrderProduct.name =
       "ORDER_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
+    renderHelper(<OrderProduct orderProduct={mockedOrderProduct} />);
 
-    const { container } = renderHelper(
-      <OrderProduct orderProduct={mockedOrderProduct} />
-    );
-
-    const name = container.querySelectorAll(".text")[0] as Element;
-
-    expect(name).toBeInTheDocument();
-    expect(name).toHaveTextContent("ORDER_PRODUCT_NAME_MORE_THAN_T...");
+    expect(
+      await screen.getByText("ORDER_PRODUCT_NAME_MORE_THAN_T...")
+    ).toBeInTheDocument();
   });
 
-  it("should render the product color", () => {
-    const { container } = renderHelper(
-      <OrderProduct orderProduct={mockedOrderProduct} />
-    );
+  it("should render the product discounted price if discounted", async () => {
+    renderHelper(<OrderProduct orderProduct={mockedDiscountedOrderProduct} />);
 
-    const color = container.querySelectorAll(".text")[1] as Element;
-
-    expect(color).toBeInTheDocument();
-    expect(color).toHaveTextContent("ORDER_PRODUCT_COLOR");
-  });
-
-  it("should render the product price", () => {
-    const { container } = renderHelper(
-      <OrderProduct orderProduct={mockedOrderProduct} />
-    );
-
-    const price = container.querySelectorAll(".text")[2] as Element;
-
-    expect(price).toBeInTheDocument();
-    expect(price).toHaveTextContent("£12.34");
-  });
-
-  it("should render the product discounted price if discounted", () => {
-    const { container } = renderHelper(
-      <OrderProduct orderProduct={mockedDiscountedOrderProduct} />
-    );
-
-    const discountedPrice = container.querySelectorAll(".text")[2] as Element;
-    const price = container.querySelectorAll(".text")[3];
-
-    expect(discountedPrice).toBeInTheDocument();
-    expect(price).toBeInTheDocument();
-    expect(discountedPrice).toHaveTextContent("£12.34");
-    expect(price).toHaveTextContent("£6.17");
+    expect(await screen.getByText("£12.34")).toBeInTheDocument();
+    expect(await screen.getByText("£6.17")).toBeInTheDocument();
   });
 });

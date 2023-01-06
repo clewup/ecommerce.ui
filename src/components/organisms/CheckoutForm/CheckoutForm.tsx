@@ -3,9 +3,9 @@ import { Form, Formik, FormikProps } from "formik";
 import useCheckout from "../../../hooks/useCheckout";
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "@mui/material";
-import DeliveryDetails from "./DeliveryDetails/DeliveryDetails";
-import BillingDetails from "./BillingDetails/BillingDetails";
-import PurchaseComplete from "./PurchaseComplete/PurchaseComplete";
+import DeliveryDetails from "../../molecules/DeliveryDetails/DeliveryDetails";
+import BillingDetails from "../../molecules/BillingDetails/BillingDetails";
+import PurchaseComplete from "../../molecules/PurchaseComplete/PurchaseComplete";
 import AppError from "../../molecules/AppError/AppError";
 import { ICheckoutFormValues } from "../../../types/IOrder";
 

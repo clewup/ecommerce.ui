@@ -1,9 +1,9 @@
 import "./purchase-complete.scss";
-import Subheading from "../../../atoms/Subheading/Subheading";
-import { IOrder } from "../../../../types/IOrder";
-import OrderProduct from "../../../molecules/OrderProduct/OrderProduct";
-import Loader from "../../../atoms/Loader/Loader";
-import Text from "../../../atoms/Text/Text";
+import Subheading from "../../atoms/Subheading/Subheading";
+import { IOrder } from "../../../types/IOrder";
+import OrderProduct from "../OrderProduct/OrderProduct";
+import Loader from "../../atoms/Loader/Loader";
+import Text from "../../atoms/Text/Text";
 
 interface IProps {
   order: IOrder;

@@ -1,12 +1,12 @@
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import CartProduct from "./CartProduct";
-import { BrowserRouter as Router } from "react-router-dom";
 import {
   mockedCartProduct,
   mockedDiscountedCartProduct,
 } from "../../../data/mockData/cartProductData";
 import { mockedUseCart } from "../../../data/mockData/useCartData";
 import renderHelper from "../../../utils/renderHelper";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("../../../hooks/useCart", () => {
   return {
@@ -18,101 +18,40 @@ jest.mock("../../../hooks/useCart", () => {
 });
 
 describe("CartProduct", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(
-      <CartProduct cartProduct={mockedCartProduct} />
-    );
-    const component = container.querySelector("#cart-product") as Element;
+  it("should render the component with the expected values", async () => {
+    renderHelper(<CartProduct cartProduct={mockedCartProduct} />);
 
-    expect(component).toBeInTheDocument();
+    expect(screen.getByText("CART_PRODUCT_NAME")).toBeInTheDocument();
+    expect(screen.getByRole("img")).toHaveAttribute(
+      "src",
+      "HTTPS://IMAGE_URL.JPG"
+    );
+    expect(screen.getByText("CART_PRODUCT_COLOR")).toBeInTheDocument();
+    expect(screen.getByText("£12.34")).toBeInTheDocument();
+    expect(screen.getByTestId("ClearIcon")).toBeInTheDocument();
   });
 
-  it("should render the product image", () => {
-    const { container } = renderHelper(
-      <CartProduct cartProduct={mockedCartProduct} />
-    );
-    const image = screen.getByRole("img") as Element;
-
-    expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute("src", "HTTPS://IMAGE_URL.JPG");
-  });
-
-  it("should render the product name", () => {
-    const { container } = renderHelper(
-      <CartProduct cartProduct={mockedCartProduct} />
-    );
-    const name = container.querySelectorAll(".text")[0] as Element;
-
-    expect(name).toBeInTheDocument();
-    expect(name).toHaveTextContent("CART_PRODUCT_NAME");
-  });
-
-  it("should shorten the name if more than 30 characters", () => {
+  it("should shorten the name if more than 30 characters", async () => {
     mockedCartProduct.name =
       "CART_PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
+    renderHelper(<CartProduct cartProduct={mockedCartProduct} />);
 
-    const { container } = renderHelper(
-      <CartProduct cartProduct={mockedCartProduct} />
-    );
-    const name = container.querySelectorAll(".text")[0] as Element;
-
-    expect(name).toBeInTheDocument();
-    expect(name).toHaveTextContent("CART_PRODUCT_NAME_MORE_THAN_TH...");
+    expect(
+      screen.getByText("CART_PRODUCT_NAME_MORE_THAN_TH...")
+    ).toBeInTheDocument();
   });
 
-  it("should render the product color", () => {
-    const { container } = renderHelper(
-      <CartProduct cartProduct={mockedCartProduct} />
-    );
-    const color = container.querySelectorAll(".text")[1] as Element;
+  it("should render the product discounted price if discounted", async () => {
+    renderHelper(<CartProduct cartProduct={mockedDiscountedCartProduct} />);
 
-    expect(color).toBeInTheDocument();
-    expect(color).toHaveTextContent("CART_PRODUCT_COLOR");
+    expect(screen.getByText("£12.34")).toBeInTheDocument();
+    expect(screen.getByText("£6.17")).toBeInTheDocument();
   });
 
-  it("should render the product price", () => {
-    const { container } = renderHelper(
-      <CartProduct cartProduct={mockedCartProduct} />
-    );
-    const price = container.querySelectorAll(".text")[2] as Element;
+  it("should remove the product from the cart on button click", async () => {
+    renderHelper(<CartProduct cartProduct={mockedCartProduct} />);
 
-    expect(price).toBeInTheDocument();
-    expect(price).toHaveTextContent("£12.34");
-  });
-
-  it("should render the product discounted price if discounted", () => {
-    const { container } = renderHelper(
-      <CartProduct cartProduct={mockedDiscountedCartProduct} />
-    );
-    const discountedPrice = container.querySelectorAll(".text")[2] as Element;
-    const price = container.querySelectorAll(".text")[3] as Element;
-
-    expect(discountedPrice).toBeInTheDocument();
-    expect(price).toBeInTheDocument();
-    expect(discountedPrice).toHaveTextContent("£12.34");
-    expect(price).toHaveTextContent("£6.17");
-  });
-
-  it("should render the remove from cart button", () => {
-    const { container } = renderHelper(
-      <CartProduct cartProduct={mockedCartProduct} />
-    );
-    const button = container.querySelector(
-      ".cart-product-remove-btn"
-    ) as Element;
-
-    expect(button).toBeInTheDocument();
-  });
-
-  it("should remove the product from the cart on button click", () => {
-    const { container } = renderHelper(
-      <CartProduct cartProduct={mockedCartProduct} />
-    );
-    const button = container.querySelector(
-      ".cart-product-remove-btn"
-    ) as Element;
-
-    fireEvent.click(button);
+    userEvent.click(screen.getByTestId("ClearIcon"));
 
     expect(mockedUseCart.removeFromCart).toHaveBeenCalled();
   });

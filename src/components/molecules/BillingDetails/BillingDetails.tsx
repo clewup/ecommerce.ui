@@ -1,10 +1,10 @@
 import "./billing-details.scss";
 import { Field, FormikProps } from "formik";
-import Input from "../../../atoms/Input/Input";
-import Checkbox from "../../../atoms/Checkbox/Checkbox";
+import Input from "../../atoms/Input/Input";
+import Checkbox from "../../atoms/Checkbox/Checkbox";
 import { Button } from "@mui/material";
 import React from "react";
-import { ICheckoutFormValues } from "../../../../types/IOrder";
+import { ICheckoutFormValues } from "../../../types/IOrder";
 
 interface IProps {
   formik: FormikProps<ICheckoutFormValues>;
