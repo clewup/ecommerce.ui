@@ -24,7 +24,7 @@ jest.mock("../../../hooks/useCart", () => {
 });
 
 describe("CartProduct", () => {
-  it("should render the component with the expected values", async () => {
+  it("should render the component with the expected values", () => {
     renderHelper(<CartProduct cartProduct={mockedProduct} />);
 
     expect(screen.getByText("PRODUCT_NAME")).toBeInTheDocument();
@@ -37,7 +37,7 @@ describe("CartProduct", () => {
     expect(screen.getByTestId("ClearIcon")).toBeInTheDocument();
   });
 
-  it("should shorten the name if more than 30 characters", async () => {
+  it("should shorten the name if more than 30 characters", () => {
     mockedProduct.name = "PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
     renderHelper(<CartProduct cartProduct={mockedProduct} />);
 
@@ -46,14 +46,14 @@ describe("CartProduct", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the product discounted price if discounted", async () => {
+  it("should render the product discounted price if discounted", () => {
     renderHelper(<CartProduct cartProduct={mockedDiscountedProduct} />);
 
     expect(screen.getByText("£33.33")).toBeInTheDocument();
     expect(screen.getByText("£30")).toBeInTheDocument();
   });
 
-  it("should remove the product from the cart on button click", async () => {
+  it("should remove the product from the cart on button click", () => {
     renderHelper(<CartProduct cartProduct={mockedProduct} />);
 
     userEvent.click(screen.getByTestId("ClearIcon"));

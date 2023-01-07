@@ -1,19 +1,11 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import ValuesBanner from "./ValuesBanner";
 import renderHelper from "../../../utils/renderHelper";
 
 describe("ValuesBanner", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(<ValuesBanner />);
-    const component = container.querySelector("#values-banner") as Element;
+  it("should render the component with the expected values", () => {
+    renderHelper(<ValuesBanner />);
 
-    expect(component).toBeInTheDocument();
-  });
-
-  it("should render the values", () => {
-    const { container } = renderHelper(<ValuesBanner />);
-    const values = container.querySelectorAll("#value-tile");
-
-    expect(values).toHaveLength(5);
+    expect(screen.getAllByRole("img")).toHaveLength(5);
   });
 });

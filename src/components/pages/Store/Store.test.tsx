@@ -1,9 +1,10 @@
-import { fireEvent } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import Store from "./Store";
 import React from "react";
 import renderHelper from "../../../utils/renderHelper";
 import { IProduct, mockedProducts } from "../../../types/IProduct";
 import { AxiosError } from "axios";
+import userEvent from "@testing-library/user-event";
 
 const mockedUseProductFilter = {
   products: mockedProducts,
@@ -28,42 +29,24 @@ const mockedUseStateFilterOpen: any = (initState: any) => [
 ];
 
 describe("Store", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(<Store />);
-    const component = container.querySelector("#store") as Element;
+  it("should render the component with the expected values", () => {
+    renderHelper(<Store />);
 
-    expect(component).toBeInTheDocument();
-  });
-
-  it("should render the products", () => {
-    const { container } = renderHelper(<Store />);
-    const products = container.querySelector("#products") as Element;
-
-    expect(products).toBeInTheDocument();
-  });
-
-  it("should render the filter button", () => {
-    const { container } = renderHelper(<Store />);
-    const filterButton = container.querySelector('[type="button"]') as Element;
-
-    expect(filterButton).toBeInTheDocument();
+    expect(screen.getAllByText("PRODUCT_NAME")).toHaveLength(3);
+    expect(
+      screen.getByText("Filters", { selector: 'button[type="button"]' })
+    ).toBeInTheDocument();
+    expect(screen.getByText("Showing 3 results.")).toBeInTheDocument();
   });
 
   it("should open the product filter on filter button click", () => {
     jest.spyOn(React, "useState").mockImplementation(mockedUseStateFilterOpen);
-    const { container } = renderHelper(<Store />);
-    const filterButton = container.querySelector('[type="button"]') as Element;
+    renderHelper(<Store />);
 
-    fireEvent.click(filterButton);
+    userEvent.click(
+      screen.getByText("Filters", { selector: 'button[type="button"]' })
+    );
 
     expect(mockedSetFilterOpen).toHaveBeenCalled();
-  });
-
-  it("should render the total amount of queried products", () => {
-    jest.spyOn(React, "useState").mockImplementation(mockedUseStateFilterOpen);
-    const { container } = renderHelper(<Store />);
-    const results = container.querySelectorAll(".text")[0] as Element;
-
-    expect(results).toHaveTextContent("Showing 3 results.");
   });
 });

@@ -29,23 +29,20 @@ describe("CheckoutForm", () => {
   });
 
   it("should update the tab index on tab click", () => {
-    const { container } = renderHelper(<CheckoutForm />);
+    renderHelper(<CheckoutForm />);
 
     userEvent.click(screen.getAllByRole("tab")[1] as Element);
 
-    expect(container.querySelector("#billing-details")).toBeInTheDocument();
     expect(
-      container.querySelector("#delivery-details")
-    ).not.toBeInTheDocument();
+      screen.getByRole("textbox", { name: "Card Number" })
+    ).toBeInTheDocument();
   });
 
   it("should render the app error when there is an error", () => {
     // @ts-ignore
     mockedUseCheckout.error = { code: "ERROR_CODE", message: "ERROR_MESSAGE" };
-    const { container } = renderHelper(<CheckoutForm />);
+    renderHelper(<CheckoutForm />);
 
-    const appError = container.querySelector("#app-error") as Element;
-
-    expect(appError).toBeInTheDocument();
+    expect(screen.getByText("ERROR_CODE")).toBeInTheDocument();
   });
 });

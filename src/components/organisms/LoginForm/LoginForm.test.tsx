@@ -21,7 +21,7 @@ jest.mock("../../../hooks/useLogin", () => {
 });
 
 describe("LoginForm", () => {
-  it("should render the component with the expected values", () => {
+  it("should render the component with the expected fields and values", () => {
     renderHelper(
       <LoginForm
         isLoading={mockedUseLogin.isLoading}

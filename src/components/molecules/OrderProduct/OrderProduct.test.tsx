@@ -7,31 +7,31 @@ import {
 } from "../../../types/IProduct";
 
 describe("OrderProduct", () => {
-  it("should render the component with the expected values", async () => {
+  it("should render the component with the expected values", () => {
     renderHelper(<OrderProduct orderProduct={mockedProduct} />);
 
-    expect(await screen.getByRole("img")).toHaveAttribute(
+    expect(screen.getByRole("img")).toHaveAttribute(
       "src",
       "HTTPS://IMAGE_URL.JPG"
     );
-    expect(await screen.getByText("PRODUCT_NAME")).toBeInTheDocument();
-    expect(await screen.getByText("PRODUCT_COLOR")).toBeInTheDocument();
-    expect(await screen.getByText("£33.33")).toBeInTheDocument();
+    expect(screen.getByText("PRODUCT_NAME")).toBeInTheDocument();
+    expect(screen.getByText("PRODUCT_COLOR")).toBeInTheDocument();
+    expect(screen.getByText("£33.33")).toBeInTheDocument();
   });
 
-  it("should shorten the name if more than 30 characters", async () => {
+  it("should shorten the name if more than 30 characters", () => {
     mockedProduct.name = "PRODUCT_NAME_MORE_THAN_THIRTY_CHARACTERS_LONG";
     renderHelper(<OrderProduct orderProduct={mockedProduct} />);
 
     expect(
-      await screen.getByText("PRODUCT_NAME_MORE_THAN_THIRTY_...")
+      screen.getByText("PRODUCT_NAME_MORE_THAN_THIRTY_...")
     ).toBeInTheDocument();
   });
 
-  it("should render the product discounted price if discounted", async () => {
+  it("should render the product discounted price if discounted", () => {
     renderHelper(<OrderProduct orderProduct={mockedDiscountedProduct} />);
 
-    expect(await screen.getByText("£33.33")).toBeInTheDocument();
-    expect(await screen.getByText("£30")).toBeInTheDocument();
+    expect(screen.getByText("£33.33")).toBeInTheDocument();
+    expect(screen.getByText("£30")).toBeInTheDocument();
   });
 });

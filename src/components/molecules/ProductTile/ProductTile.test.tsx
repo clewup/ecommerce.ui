@@ -32,10 +32,10 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("ProductTile", () => {
-  it("should render the component with the expected values", async () => {
+  it("should render the component with the expected values", () => {
     renderHelper(<ProductTile product={mockedProduct} />);
 
-    expect(await screen.getByRole("img")).toHaveAttribute(
+    expect(screen.getByRole("img")).toHaveAttribute(
       "src",
       "HTTPS://IMAGE_URL.JPG"
     );
@@ -49,7 +49,7 @@ describe("ProductTile", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the product discounted price if discounted", async () => {
+  it("should render the product discounted price if discounted", () => {
     renderHelper(<ProductTile product={mockedDiscountedProduct} />);
 
     expect(screen.getByText("£33.33")).toBeInTheDocument();

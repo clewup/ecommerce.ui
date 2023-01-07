@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import SaleProducts from "./SaleProducts";
 import renderHelper from "../../../utils/renderHelper";
 import { mockedProducts } from "../../../types/IProduct";
@@ -22,31 +22,23 @@ jest.mock("../../../hooks/useStatistics", () => {
 });
 
 describe("SaleProducts", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(<SaleProducts />);
-    const component = container.querySelector("#sale-products") as Element;
+  it("should render the component with the expected values", () => {
+    renderHelper(<SaleProducts />);
 
-    expect(component).toBeInTheDocument();
+    expect(screen.getAllByText("PRODUCT_NAME")).toHaveLength(3);
   });
 
   it("should fetch the sale products", () => {
-    const { container } = renderHelper(<SaleProducts />);
+    renderHelper(<SaleProducts />);
+
     expect(mockedUseStatistics.getMostDiscounted).toHaveBeenCalled();
-  });
-
-  it("should render the products", () => {
-    const { container } = renderHelper(<SaleProducts />);
-    const products = container.querySelectorAll("#product-tile");
-
-    expect(products).toHaveLength(3);
   });
 
   it("should render the loader when loading", () => {
     mockedUseStatistics.isLoading = true;
-    const { container } = renderHelper(<SaleProducts />);
-    const loader = container.querySelector("#loader") as Element;
+    renderHelper(<SaleProducts />);
 
-    expect(loader).toBeInTheDocument();
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
   });
 
   it("should render the app error when there is an error", () => {
@@ -55,9 +47,8 @@ describe("SaleProducts", () => {
       code: "ERROR_CODE",
       message: "ERROR_MESSAGE",
     };
-    const { container } = renderHelper(<SaleProducts />);
-    const appError = container.querySelector("#app-error") as Element;
+    renderHelper(<SaleProducts />);
 
-    expect(appError).toBeInTheDocument();
+    expect(screen.getByText("ERROR_CODE")).toBeInTheDocument();
   });
 });

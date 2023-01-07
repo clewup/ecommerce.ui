@@ -27,36 +27,30 @@ jest.mock("../../../hooks/useProductFilter", () => {
 });
 
 describe("ProductFilter", () => {
-  it("should render the component with the expected inputs", async () => {
+  it("should render the component with the expected filters", () => {
     renderHelper(<ProductFilter toggleDrawer={mockToggleDrawer} />);
 
     // Search
-    expect(
-      await screen.getByRole("textbox", { name: "Search" })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Search" })).toBeInTheDocument();
     // Sort By, Category, Subcategory, Range
-    expect(
-      await screen.getAllByRole("button", { name: "Select" })
-    ).toHaveLength(4);
+    expect(screen.getAllByRole("button", { name: "Select" })).toHaveLength(4);
     // Price
-    expect(await screen.getAllByRole("slider", { name: "Price" })).toHaveLength(
-      2
-    );
+    expect(screen.getAllByRole("slider", { name: "Price" })).toHaveLength(2);
     // On Sale
     expect(
-      await screen.getAllByRole("checkbox", { name: "controlled" })[0]
+      screen.getAllByRole("checkbox", { name: "controlled" })[0]
     ).toBeInTheDocument();
     // In Stock
     expect(
-      await screen.getAllByRole("checkbox", { name: "controlled" })[1]
+      screen.getAllByRole("checkbox", { name: "controlled" })[1]
     ).toBeInTheDocument();
   });
 
-  it("should update the search query on value input and 'enter' key down", async () => {
+  it("should update the search query on value input and 'enter' key down", () => {
     renderHelper(<ProductFilter toggleDrawer={mockToggleDrawer} />);
 
     userEvent.type(
-      await screen.getByRole("textbox", { name: "Search" }),
+      screen.getByRole("textbox", { name: "Search" }),
       "PRODUCT_FILTER_INPUT"
     );
     userEvent.keyboard("{Enter}");
@@ -64,31 +58,31 @@ describe("ProductFilter", () => {
     expect(mockedProductContext.setSearchQuery).toHaveBeenCalled();
   });
 
-  it("should update the sale query on click", async () => {
+  it("should update the sale query on click", () => {
     renderHelper(<ProductFilter toggleDrawer={mockToggleDrawer} />);
 
     userEvent.click(
-      (await screen.getAllByRole("checkbox", {
+      screen.getAllByRole("checkbox", {
         name: "controlled",
-      })[0]) as Element
+      })[0] as Element
     );
 
     expect(mockedProductContext.setSaleQuery).toHaveBeenCalled();
   });
 
-  it("should update the sale query on click", async () => {
+  it("should update the sale query on click", () => {
     renderHelper(<ProductFilter toggleDrawer={mockToggleDrawer} />);
 
     userEvent.click(
-      (await screen.getAllByRole("checkbox", {
+      screen.getAllByRole("checkbox", {
         name: "controlled",
-      })[1]) as Element
+      })[1] as Element
     );
 
     expect(mockedProductContext.setStockQuery).toHaveBeenCalled();
   });
 
-  it("should render the app error when there is an error", async () => {
+  it("should render the app error when there is an error", () => {
     // @ts-ignore
     mockedUseProductFilter.error = {
       code: "ERROR_CODE",
@@ -96,7 +90,7 @@ describe("ProductFilter", () => {
     };
     renderHelper(<ProductFilter toggleDrawer={mockToggleDrawer} />);
 
-    expect(await screen.getByText("ERROR_CODE")).toBeInTheDocument();
-    expect(await screen.getByText("ERROR_MESSAGE")).toBeInTheDocument();
+    expect(screen.getByText("ERROR_CODE")).toBeInTheDocument();
+    expect(screen.getByText("ERROR_MESSAGE")).toBeInTheDocument();
   });
 });

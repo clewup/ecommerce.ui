@@ -28,9 +28,9 @@ jest.mock("react-router-dom", () => ({
 
 describe("CartProducts", () => {
   it("should render the component with the expected values", () => {
-    const { container } = renderHelper(<CartProducts />);
+    renderHelper(<CartProducts />);
 
-    expect(container.querySelectorAll("#cart-product")).toHaveLength(3);
+    expect(screen.getAllByText("PRODUCT_NAME")).toHaveLength(3);
     expect(
       screen.getByText("CHECKOUT", { selector: 'button[type="submit"]' })
     ).toBeInTheDocument();

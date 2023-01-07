@@ -1,165 +1,100 @@
-import { screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, fireEvent, waitFor, act } from "@testing-library/react";
 import React from "react";
 import UserForm from "./UserForm";
-import { Formik } from "formik";
 import renderHelper from "../../../utils/renderHelper";
 import { mockedUser } from "types/IUser";
-
-const mockedOnSubmit = jest.fn();
-
-type TestElement = Document | Element | Window | Node;
-function hasInputValue(e: TestElement, inputValue: string) {
-  return screen.getByDisplayValue(inputValue) === e;
-}
+import userEvent from "@testing-library/user-event";
 
 describe("UserForm", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(
-      <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
-        {(formik) => {
-          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
-        }}
-      </Formik>
+  it("should render the component with the expected fields and values", () => {
+    renderHelper(<UserForm user={mockedUser} updateUser={jest.fn()} />);
+
+    expect(screen.getByRole("textbox", { name: "First Name" })).toHaveValue(
+      "USER_FIRST_NAME"
     );
-
-    const component = container.querySelector("#user-form") as Element;
-
-    expect(component).toBeInTheDocument();
-  });
-
-  it("should render with pre populated user information", () => {
-    const { container } = renderHelper(
-      <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
-        {(formik) => {
-          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
-        }}
-      </Formik>
+    expect(screen.getByRole("textbox", { name: "Last Name" })).toHaveValue(
+      "USER_LAST_NAME"
     );
-
-    const firstName = container.querySelector('[name="firstName"]') as Element;
-    const lastName = container.querySelector('[name="lastName"]') as Element;
-    const email = container.querySelector('[name="email"]') as Element;
-
-    expect(firstName).toBeInTheDocument();
-    expect(firstName).toHaveValue("USER_FIRST_NAME");
-    expect(lastName).toBeInTheDocument();
-    expect(lastName).toHaveValue("USER_LAST_NAME");
-    expect(email).toBeInTheDocument();
-    expect(email).toHaveValue("USER_EMAIL");
+    expect(screen.getByRole("textbox", { name: "Email" })).toHaveValue(
+      "USER_EMAIL"
+    );
+    expect(screen.getByText("USER_LINE_ONE")).toBeInTheDocument();
+    expect(screen.getByText("USER_LINE_TWO")).toBeInTheDocument();
+    expect(screen.getByText("USER_LINE_THREE")).toBeInTheDocument();
+    expect(screen.getByText("USER_POSTCODE")).toBeInTheDocument();
+    expect(screen.getByText("USER_CITY")).toBeInTheDocument();
+    expect(screen.getByText("USER_COUNTY")).toBeInTheDocument();
+    expect(screen.getByText("USER_COUNTRY")).toBeInTheDocument();
   });
 
   it("should render the inputs disabled if isEditing equals false", () => {
-    const { container } = renderHelper(
-      <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
-        {(formik) => {
-          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
-        }}
-      </Formik>
-    );
+    renderHelper(<UserForm user={mockedUser} updateUser={jest.fn()} />);
 
-    const firstName = container.querySelector('[name="firstName"]') as Element;
-    const lastName = container.querySelector('[name="lastName"]') as Element;
-    const email = container.querySelector('[name="email"]') as Element;
-
-    expect(firstName).toBeInTheDocument();
-    expect(firstName).toBeDisabled();
-    expect(lastName).toBeInTheDocument();
-    expect(lastName).toBeDisabled();
-    expect(email).toBeInTheDocument();
-    expect(email).toBeDisabled();
+    expect(screen.getByRole("textbox", { name: "First Name" })).toBeDisabled();
+    expect(screen.getByRole("textbox", { name: "Last Name" })).toBeDisabled();
+    expect(screen.getByRole("textbox", { name: "Email" })).toBeDisabled();
   });
 
   it("should enable the inputs when the edit button is clicked", () => {
-    const { container } = renderHelper(
-      <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
-        {(formik) => {
-          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
-        }}
-      </Formik>
+    renderHelper(<UserForm user={mockedUser} updateUser={jest.fn()} />);
+
+    userEvent.click(
+      screen.getByText("Edit", { selector: 'button[type="button"]' })
     );
 
-    const editButton = container.querySelector('[type="button"]') as Element;
-    const firstName = container.querySelector('[name="firstName"]') as Element;
-    const lastName = container.querySelector('[name="lastName"]') as Element;
-    const email = container.querySelector('[name="email"]') as Element;
-
-    fireEvent.click(editButton);
-
-    expect(firstName).toBeInTheDocument();
-    expect(firstName).toBeEnabled();
-    expect(lastName).toBeInTheDocument();
-    expect(lastName).toBeEnabled();
-    expect(email).toBeInTheDocument();
-    expect(email).toBeEnabled();
+    expect(screen.getByRole("textbox", { name: "First Name" })).toBeEnabled();
+    expect(screen.getByRole("textbox", { name: "Last Name" })).toBeEnabled();
+    expect(screen.getByRole("textbox", { name: "Email" })).toBeEnabled();
   });
 
   it("should keep the save button disabled when there are no value changes", () => {
-    const { container } = renderHelper(
-      <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
-        {(formik) => {
-          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
-        }}
-      </Formik>
+    renderHelper(<UserForm user={mockedUser} updateUser={jest.fn()} />);
+
+    userEvent.click(
+      screen.getByText("Edit", { selector: 'button[type="button"]' })
     );
 
-    const editButton = container.querySelector('[type="button"]') as Element;
-    const saveButton = container.querySelector('[type="submit"]') as Element;
-
-    fireEvent.click(editButton);
-
-    expect(saveButton).toBeDisabled();
+    expect(
+      screen.getByText("Save", { selector: 'button[type="submit"]' })
+    ).toBeDisabled();
   });
 
   it("should enable the save button when there are value changes", () => {
-    const { container } = renderHelper(
-      <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
-        {(formik) => {
-          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
-        }}
-      </Formik>
+    renderHelper(<UserForm user={mockedUser} updateUser={jest.fn()} />);
+
+    userEvent.click(
+      screen.getByText("Edit", { selector: 'button[type="button"]' })
     );
 
-    const editButton = container.querySelector('[type="button"]') as Element;
-    const saveButton = container.querySelector('[type="submit"]') as Element;
-    const firstName = container.querySelector('[name="firstName"]') as Element;
-
-    waitFor(() => {
-      fireEvent.click(editButton);
-    });
-    waitFor(() =>
-      fireEvent.change(firstName, {
-        target: { value: "USER_FIRST_NAME_MORE" },
-      })
+    userEvent.type(
+      screen.getByRole("textbox", { name: "First Name" }),
+      "EDITED_FIRST_NAME"
     );
 
-    expect(hasInputValue(firstName, "USER_FIRST_NAME_MORE")).toBe(true);
-    expect(saveButton).toBeEnabled();
+    expect(
+      screen.getByText("Save", { selector: 'button[type="submit"]' })
+    ).toBeEnabled();
   });
 
   it("should submit the form on save", () => {
-    const { container } = renderHelper(
-      <Formik initialValues={mockedUser} onSubmit={mockedOnSubmit}>
-        {(formik) => {
-          return <UserForm user={mockedUser} updateUser={jest.fn()} />;
-        }}
-      </Formik>
+    const mockedUpdateUser = jest.fn();
+    renderHelper(<UserForm user={mockedUser} updateUser={mockedUpdateUser} />);
+
+    userEvent.click(
+      screen.getByText("Edit", { selector: 'button[type="button"]' })
     );
 
-    const editButton = container.querySelector('[type="button"]') as Element;
-    const saveButton = container.querySelector('[type="submit"]') as Element;
-    const firstName = container.querySelector('[name="firstName"]') as Element;
-
-    waitFor(() => fireEvent.click(editButton));
-    waitFor(() =>
-      fireEvent.change(firstName, {
-        target: { value: "USER_FIRST_NAME_MORE" },
-      })
+    userEvent.type(
+      screen.getByRole("textbox", { name: "First Name" }),
+      "EDITED_FIRST_NAME"
     );
-    waitFor(() => fireEvent.click(saveButton));
+
+    userEvent.click(
+      screen.getByText("Save", { selector: 'button[type="submit"]' })
+    );
 
     waitFor(() => {
-      expect(mockedOnSubmit).toHaveBeenCalled();
-      expect(mockedOnSubmit).toHaveBeenCalledWith(mockedUser);
+      expect(mockedUpdateUser).toHaveBeenCalledWith(mockedUser);
     });
   });
 });

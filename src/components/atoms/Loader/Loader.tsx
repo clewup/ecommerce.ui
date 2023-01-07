@@ -9,7 +9,7 @@ interface IProps {
 
 const Loader: React.FC<IProps> = ({ color = colors.LIGHT_GREY }) => {
   return (
-    <div id={"loader"}>
+    <div id={"loader"} data-testid={"loader"}>
       <HashLoader color={color} loading={true} size={75} />
     </div>
   );

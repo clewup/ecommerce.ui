@@ -9,8 +9,8 @@ const mockedSetTabIndex = jest.fn();
 const mockedOnSubmit = jest.fn();
 
 describe("DeliveryDetails", () => {
-  it("should render the component with the expected values", () => {
-    const { container } = renderHelper(
+  it("should render the component with the expected fields", () => {
+    renderHelper(
       <Formik initialValues={checkoutInitialValues} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return (

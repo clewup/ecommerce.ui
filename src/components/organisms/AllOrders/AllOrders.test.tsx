@@ -37,16 +37,16 @@ describe("AllOrders", () => {
 
   it("should render the loader when loading", () => {
     mockedUseOrder.isLoading = true;
-    const { container } = renderHelper(<AllOrders />);
+    renderHelper(<AllOrders />);
 
-    expect(container.querySelector("#loader")).toBeInTheDocument();
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
   });
 
   it("should render the app error when there is an error", () => {
     // @ts-ignore
     mockedUseOrder.error = { code: "ERROR_CODE", message: "ERROR_MESSAGE" };
-    const { container } = renderHelper(<AllOrders />);
+    renderHelper(<AllOrders />);
 
-    expect(container.querySelector("#app-error")).toBeInTheDocument();
+    expect(screen.getByText("ERROR_CODE")).toBeInTheDocument();
   });
 });

@@ -49,7 +49,7 @@ jest.mock("../../../hooks/useImageUpload", () => {
 });
 
 describe("ProductForm", () => {
-  it("should render the component with the expected values", () => {
+  it("should render the component with the expected fields and values", () => {
     renderHelper(<ProductForm />);
 
     expect(

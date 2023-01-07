@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import TrendingProducts from "./TrendingProducts";
 import renderHelper from "../../../utils/renderHelper";
@@ -24,31 +24,23 @@ jest.mock("../../../hooks/useStatistics", () => {
 });
 
 describe("TrendingProducts", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(<TrendingProducts />);
-    const component = container.querySelector("#trending-products") as Element;
+  it("should render the component with the expected values", () => {
+    renderHelper(<TrendingProducts />);
 
-    expect(component).toBeInTheDocument();
+    expect(screen.getAllByText("PRODUCT_NAME")).toHaveLength(3);
   });
 
   it("should fetch the popular products", () => {
-    const { container } = renderHelper(<TrendingProducts />);
+    renderHelper(<TrendingProducts />);
+
     expect(mockedUseStatistics.getMostPopular).toHaveBeenCalled();
-  });
-
-  it("should render the products", () => {
-    const { container } = renderHelper(<TrendingProducts />);
-    const products = container.querySelectorAll("#product-tile");
-
-    expect(products).toHaveLength(3);
   });
 
   it("should render the loader when loading", () => {
     mockedUseStatistics.isLoading = true;
-    const { container } = renderHelper(<TrendingProducts />);
-    const loader = container.querySelector("#loader") as Element;
+    renderHelper(<TrendingProducts />);
 
-    expect(loader).toBeInTheDocument();
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
   });
 
   it("should render the app error when there is an error", () => {
@@ -57,9 +49,8 @@ describe("TrendingProducts", () => {
       code: "ERROR_CODE",
       message: "ERROR_MESSAGE",
     };
-    const { container } = renderHelper(<TrendingProducts />);
-    const appError = container.querySelector("#app-error") as Element;
+    renderHelper(<TrendingProducts />);
 
-    expect(appError).toBeInTheDocument();
+    expect(screen.getByText("ERROR_CODE")).toBeInTheDocument();
   });
 });

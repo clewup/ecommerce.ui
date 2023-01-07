@@ -24,32 +24,25 @@ describe("PurchaseComplete", () => {
   });
 
   it("should render the order cart items", () => {
-    const { container } = renderHelper(
+    renderHelper(
       <Formik initialValues={checkoutInitialValues} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return <PurchaseComplete order={mockedOrder} isLoading={false} />;
         }}
       </Formik>
     );
-    const orderCartItems = container.querySelector(
-      ".order-cart-items"
-    ) as Element;
-    const orderProducts = container.querySelectorAll("#order-product");
 
-    expect(orderCartItems).toBeInTheDocument();
-    expect(orderProducts).toHaveLength(3);
+    expect(screen.getAllByText("PRODUCT_NAME")).toHaveLength(3);
   });
 
   it("should render the loader when loading", () => {
-    const { container } = renderHelper(
+    renderHelper(
       <Formik initialValues={checkoutInitialValues} onSubmit={mockedOnSubmit}>
         {(formik) => {
           return <PurchaseComplete order={{} as IOrder} isLoading={true} />;
         }}
       </Formik>
     );
-    const loader = container.querySelector("#loader") as Element;
-
-    expect(loader).toBeInTheDocument();
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
   });
 });

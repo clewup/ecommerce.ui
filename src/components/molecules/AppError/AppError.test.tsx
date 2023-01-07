@@ -3,7 +3,7 @@ import AppError from "./AppError";
 import renderHelper from "../../../utils/renderHelper";
 
 describe("AppError", () => {
-  it("should render the component with the expected values", async () => {
+  it("should render the component with the expected values", () => {
     renderHelper(
       <AppError error={{ code: "ERROR_CODE", message: "ERROR_MESSAGE" }} />
     );

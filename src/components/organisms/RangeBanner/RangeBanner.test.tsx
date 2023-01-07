@@ -1,20 +1,16 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import RangeBanner from "./RangeBanner";
 import renderHelper from "../../../utils/renderHelper";
 
 describe("RangeBanner", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(<RangeBanner />);
-    const component = container.querySelector("#range-banner");
+  it("should render the component with the expected values", () => {
+    renderHelper(<RangeBanner />);
 
-    expect(component).toBeInTheDocument();
-  });
-
-  it("should render three ranges", () => {
-    const { container } = renderHelper(<RangeBanner />);
-    const ranges = container.querySelectorAll("#range-tile");
-
-    expect(ranges).toHaveLength(3);
+    expect(
+      screen.getAllByText("DISCOVER", {
+        selector: 'button[type="button"]',
+      })
+    ).toHaveLength(3);
   });
 });

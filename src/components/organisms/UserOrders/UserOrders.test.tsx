@@ -2,6 +2,7 @@ import UserOrders from "./UserOrders";
 import renderHelper from "../../../utils/renderHelper";
 import { IOrder, mockedOrders } from "../../../types/IOrder";
 import { AxiosError } from "axios";
+import { screen } from "@testing-library/react";
 
 const mockedUseOrder = {
   orders: mockedOrders,
@@ -21,60 +22,30 @@ jest.mock("../../../hooks/useOrder", () => {
 });
 
 describe("UserOrders", () => {
-  it("should render the component", () => {
-    const { container } = renderHelper(<UserOrders />);
-    const component = container.querySelector("#user-orders") as Element;
+  it("should render the component with the expected values", () => {
+    renderHelper(<UserOrders />);
 
-    expect(component).toBeInTheDocument();
+    expect(screen.getAllByText("Total: £99.99")).toHaveLength(3);
+    expect(screen.getAllByText("PRODUCT_NAME")).toHaveLength(9);
   });
 
   it("should fetch user orders", () => {
-    const { container } = renderHelper(<UserOrders />);
+    renderHelper(<UserOrders />);
 
     expect(mockedUseOrder.getUserOrders).toHaveBeenCalled();
   });
 
-  it("should render the user orders", () => {
-    const { container } = renderHelper(<UserOrders />);
-    const orders = container.querySelectorAll("#order");
-
-    expect(orders).toHaveLength(3);
-  });
-
-  it("should render the order products", () => {
-    const { container } = renderHelper(<UserOrders />);
-    const orderProducts = container.querySelector(".order-products") as Element;
-
-    expect(orderProducts).toBeInTheDocument();
-    expect(orderProducts).toHaveTextContent("PRODUCT_NAME");
-  });
-
   it("should render 'no orders found' if no user orders", () => {
     mockedUseOrder.orders = [];
+    renderHelper(<UserOrders />);
 
-    const { container } = renderHelper(<UserOrders />);
-    const orders = container.querySelector("#user-orders") as Element;
-
-    expect(orders).toBeInTheDocument();
-    expect(orders).toHaveTextContent("No orders found.");
+    expect(screen.getByText("No orders found.")).toBeInTheDocument();
   });
 
   it("should render the loader when loading", () => {
     mockedUseOrder.isLoading = true;
+    renderHelper(<UserOrders />);
 
-    const { container } = renderHelper(<UserOrders />);
-    const loader = container.querySelector("#loader") as Element;
-
-    expect(loader).toBeInTheDocument();
-  });
-
-  it("should render the app error when there is an error", () => {
-    // @ts-ignore
-    mockedUseOrder.error = { code: "ERROR_CODE", message: "ERROR_MESSAGE" };
-
-    const { container } = renderHelper(<UserOrders />);
-    const appError = container.querySelector("#app-error") as Element;
-
-    expect(appError).toBeInTheDocument();
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
   });
 });

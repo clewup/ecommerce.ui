@@ -13,7 +13,7 @@ jest.mock("react-router-dom", () => ({
 const mockedUseNavigate = jest.fn();
 
 describe("AdvertisementTile", () => {
-  it("should render the component with the expected values", async () => {
+  it("should render the component with the expected values", () => {
     renderHelper(<AdvertisementTile advertisement={mockedAdvertisement} />);
 
     expect(screen.getByText("ADVERTISEMENT_TITLE")).toBeInTheDocument();
@@ -21,7 +21,7 @@ describe("AdvertisementTile", () => {
     expect(screen.getByText("DISCOVER", { selector: 'button[type="button"]' }));
   });
 
-  it("should navigate to the store on button click", async () => {
+  it("should navigate to the store on button click", () => {
     renderHelper(<AdvertisementTile advertisement={mockedAdvertisement} />);
 
     userEvent.click(
