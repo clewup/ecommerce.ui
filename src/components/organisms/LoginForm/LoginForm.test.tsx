@@ -2,8 +2,6 @@ import { screen, waitFor } from "@testing-library/react";
 import LoginForm from "./LoginForm";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
-import { AxiosError } from "axios";
-import { ILogin } from "../../../types/ILogin";
 
 const mockedUseLogin = {
   isLoading: false,

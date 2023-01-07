@@ -1,7 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import AllOrders from "./AllOrders";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "../../../styles/theme";
 import renderHelper from "../../../utils/renderHelper";
 import { mockedOrders } from "../../../types/IOrder";
 

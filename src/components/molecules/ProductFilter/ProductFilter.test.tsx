@@ -1,7 +1,6 @@
 import { screen } from "@testing-library/react";
 import ProductFilter from "./ProductFilter";
 import React from "react";
-import { ProductContext } from "../../../contexts/Product";
 import renderHelper, {
   mockedProductContext,
 } from "../../../utils/renderHelper";

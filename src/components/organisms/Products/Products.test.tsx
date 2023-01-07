@@ -1,5 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { screen } from "@testing-library/react";
 import Products from "./Products";
 import renderHelper from "../../../utils/renderHelper";
 import { mockedProducts } from "../../../types/IProduct";

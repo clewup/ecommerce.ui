@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import CartProducts from "./CartProducts";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";

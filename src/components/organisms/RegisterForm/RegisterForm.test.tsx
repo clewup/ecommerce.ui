@@ -1,5 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { Formik } from "formik";
+import { screen, waitFor } from "@testing-library/react";
 import RegisterForm from "./RegisterForm";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";

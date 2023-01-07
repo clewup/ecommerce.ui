@@ -1,9 +1,7 @@
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { screen } from "@testing-library/react";
 import TrendingProducts from "./TrendingProducts";
 import renderHelper from "../../../utils/renderHelper";
-import { IProduct, mockedProducts } from "../../../types/IProduct";
-import { AxiosError } from "axios";
+import { mockedProducts } from "../../../types/IProduct";
 
 const mockedUseStatistics = {
   popularProducts: mockedProducts,

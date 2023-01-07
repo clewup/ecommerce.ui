@@ -1,7 +1,6 @@
 import UserOrders from "./UserOrders";
 import renderHelper from "../../../utils/renderHelper";
-import { IOrder, mockedOrders } from "../../../types/IOrder";
-import { AxiosError } from "axios";
+import { mockedOrders } from "../../../types/IOrder";
 import { screen } from "@testing-library/react";
 
 const mockedUseOrder = {

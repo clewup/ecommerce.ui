@@ -1,4 +1,4 @@
-import { fireEvent, getByTestId, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import Product from "./Product";
 import React from "react";
 import renderHelper, { mockedAuthContext } from "../../../utils/renderHelper";

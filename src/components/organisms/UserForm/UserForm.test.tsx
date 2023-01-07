@@ -1,4 +1,4 @@
-import { screen, fireEvent, waitFor, act } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import React from "react";
 import UserForm from "./UserForm";
 import renderHelper from "../../../utils/renderHelper";

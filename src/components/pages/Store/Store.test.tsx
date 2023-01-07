@@ -1,9 +1,8 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import Store from "./Store";
 import React from "react";
 import renderHelper from "../../../utils/renderHelper";
-import { IProduct, mockedProducts } from "../../../types/IProduct";
-import { AxiosError } from "axios";
+import { mockedProducts } from "../../../types/IProduct";
 import userEvent from "@testing-library/user-event";
 
 const mockedUseProductFilter = {

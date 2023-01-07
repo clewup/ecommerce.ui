@@ -1,18 +1,12 @@
 import {
-  fireEvent,
-  render,
   screen,
-  waitFor,
-  act,
+
+
 } from "@testing-library/react";
-import { Formik } from "formik";
 import React from "react";
 import ProductForm from "./ProductForm";
 import renderHelper from "../../../utils/renderHelper";
-import userEvent from "@testing-library/user-event";
 import { mockedProduct } from "../../../types/IProduct";
-import { AxiosError } from "axios";
-import { productInitialValues } from "./utils/schema";
 
 const mockedUseProduct = {
   product: mockedProduct,

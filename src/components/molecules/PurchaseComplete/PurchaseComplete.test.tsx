@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { Formik } from "formik";
 import PurchaseComplete from "./PurchaseComplete";
 import { IOrder, mockedOrder } from "../../../types/IOrder";
