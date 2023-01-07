@@ -3,8 +3,6 @@ import { apiUrls } from "../enums/apiUrls";
 import { apiEndpoints } from "../enums/apiEndpoints";
 
 const GetMostPopularProducts = (amount: number) => {
-  return axios.get(
-    `${apiUrls.ECOMMERCE}${apiEndpoints.STATISTICS_MOST_POPULAR(amount)}`
-  );
+  return axios.get(`${apiUrls.ECOMMERCE}${apiEndpoints.MOST_POPULAR(amount)}`);
 };
 export default GetMostPopularProducts;

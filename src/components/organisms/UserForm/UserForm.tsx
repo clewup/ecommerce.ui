@@ -1,19 +1,30 @@
 import { Field, Form, Formik } from "formik";
-import { IUser } from "../../../types/IUser";
+import { IUser } from "../../../interfaces/IUser";
 import React, { useState } from "react";
 import "./user-form.scss";
 import Text from "../../atoms/Text/Text";
 import Input from "../../atoms/Input/Input";
 import { Button } from "@mui/material";
 import { userValidationSchema } from "./utils/schema";
+import AppError from "../../molecules/AppError/AppError";
 
 interface IProps {
-  user: IUser;
+  user: IUser | undefined;
   updateUser: (user: IUser) => void;
 }
 
 const UserForm: React.FC<IProps> = ({ user, updateUser }) => {
   const [isEditing, setEditing] = useState(false);
+
+  if (!user)
+    return (
+      <AppError
+        error={{
+          code: "UNAUTHORIZED",
+          message: "You do not have permission to view this page.",
+        }}
+      />
+    );
 
   return (
     <Formik

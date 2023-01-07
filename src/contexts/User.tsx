@@ -1,24 +1,24 @@
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import { IUser } from "../types/IUser";
+import { IUser } from "../interfaces/IUser";
 
 interface IProps {
   children: JSX.Element;
 }
 
 interface IUserContextProps {
-  user: IUser;
-  setUser: Dispatch<SetStateAction<IUser>>;
+  user: IUser | undefined;
+  setUser: Dispatch<SetStateAction<IUser | undefined>>;
 }
 
 const initialUserContextProps: IUserContextProps = {
-  user: {} as IUser,
+  user: undefined,
   setUser: (() => undefined) as Dispatch<any>,
 };
 
 const UserContext = createContext<IUserContextProps>(initialUserContextProps);
 
 const UserProvider = ({ children }: IProps) => {
-  const [user, setUser] = useState<IUser>({} as IUser);
+  const [user, setUser] = useState<IUser>();
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

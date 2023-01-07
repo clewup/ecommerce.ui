@@ -1,4 +1,4 @@
-import { IRange } from "../types/IRange";
+import { IRange } from "../interfaces/IRange";
 
 export const rangeData: IRange[] = [
   {

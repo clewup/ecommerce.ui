@@ -7,11 +7,12 @@ import DeliveryDetails from "../../molecules/DeliveryDetails/DeliveryDetails";
 import BillingDetails from "../../molecules/BillingDetails/BillingDetails";
 import PurchaseComplete from "../../molecules/PurchaseComplete/PurchaseComplete";
 import AppError from "../../molecules/AppError/AppError";
-import { ICheckoutFormValues } from "../../../types/IOrder";
 import {
   checkoutInitialValues,
   checkoutValidationSchema,
 } from "./utils/schema";
+import { ICheckout } from "../../../interfaces/IOrder";
+import Loader from "../../atoms/Loader/Loader";
 
 const CheckoutForm = () => {
   const { submitCheckout, order, isLoading, error } = useCheckout();
@@ -22,7 +23,7 @@ const CheckoutForm = () => {
   };
 
   useEffect(() => {
-    if (order.id) {
+    if (order && order.id) {
       setTabIndex(2);
     }
   }, [order]);
@@ -36,29 +37,33 @@ const CheckoutForm = () => {
         <Tab label="Billing" />
         <Tab label="Complete" disabled />
       </Tabs>
-      <Formik
-        initialValues={checkoutInitialValues}
-        validationSchema={checkoutValidationSchema}
-        onSubmit={(values) => {
-          submitCheckout(values);
-        }}
-      >
-        {(formik: FormikProps<ICheckoutFormValues>) => {
-          return (
-            <Form>
-              {tabIndex === 0 && (
-                <DeliveryDetails formik={formik} setTabIndex={setTabIndex} />
-              )}
-              {tabIndex === 1 && (
-                <BillingDetails formik={formik} setTabIndex={setTabIndex} />
-              )}
-              {tabIndex === 2 && (
-                <PurchaseComplete order={order} isLoading={isLoading} />
-              )}
-            </Form>
-          );
-        }}
-      </Formik>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Formik
+          initialValues={checkoutInitialValues}
+          validationSchema={checkoutValidationSchema}
+          onSubmit={(values) => {
+            submitCheckout(values);
+          }}
+        >
+          {(formik: FormikProps<ICheckout>) => {
+            return (
+              <Form>
+                {tabIndex === 0 && (
+                  <DeliveryDetails formik={formik} setTabIndex={setTabIndex} />
+                )}
+                {tabIndex === 1 && (
+                  <BillingDetails formik={formik} setTabIndex={setTabIndex} />
+                )}
+                {tabIndex === 2 && (
+                  <PurchaseComplete order={order} isLoading={isLoading} />
+                )}
+              </Form>
+            );
+          }}
+        </Formik>
+      )}
     </div>
   );
 };

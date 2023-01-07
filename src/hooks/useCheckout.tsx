@@ -1,15 +1,14 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
-import { ICheckoutFormValues, IOrder } from "../types/IOrder";
+import { ICheckout, IOrder } from "../interfaces/IOrder";
 import postOrder from "../api/PostOrder";
 import { AxiosError } from "axios";
 import { CartContext } from "../contexts/Cart";
-import { ICart } from "../types/ICart";
 import { createGuid } from "../utils/createGuid";
 
 interface IUseCheckoutProps {
-  submitCheckout: (values: ICheckoutFormValues) => void;
-  order: IOrder;
+  submitCheckout: (values: ICheckout) => void;
+  order: IOrder | undefined;
   isLoading: boolean;
   error: AxiosError | null;
 }
@@ -17,11 +16,13 @@ interface IUseCheckoutProps {
 const useCheckout = (): IUseCheckoutProps => {
   const { user } = useContext(UserContext);
   const { cart, setCart } = useContext(CartContext);
-  const [order, setOrder] = useState<IOrder>({} as IOrder);
+  const [order, setOrder] = useState<IOrder>();
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
-  const submitCheckout = (values: ICheckoutFormValues) => {
+  const submitCheckout = (values: ICheckout) => {
+    if (!cart) return;
+
     const order: IOrder = {
       id: createGuid(),
       userId: user?.id!,
@@ -46,7 +47,7 @@ const useCheckout = (): IUseCheckoutProps => {
     postOrder(order)
       .then((res) => {
         setOrder(res.data);
-        setCart({} as ICart);
+        setCart(undefined);
       })
       .catch((err) => setError(err))
       .finally(() => setLoading(false));

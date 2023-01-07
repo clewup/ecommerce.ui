@@ -3,10 +3,10 @@ import { Field, FormikProps } from "formik";
 import Input from "../../atoms/Input/Input";
 import React from "react";
 import { Button } from "@mui/material";
-import { ICheckoutFormValues } from "../../../types/IOrder";
+import { ICheckout } from "../../../interfaces/IOrder";
 
 interface IProps {
-  formik: FormikProps<ICheckoutFormValues>;
+  formik: FormikProps<ICheckout>;
   setTabIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 

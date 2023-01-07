@@ -7,7 +7,7 @@ import {
   mockedDiscountedProduct,
   mockedOutOfStockProduct,
   mockedProduct,
-} from "../../../types/IProduct";
+} from "../../organisms/Products/data/mockData";
 
 const mockedUseCart = {
   getCart: jest.fn(),

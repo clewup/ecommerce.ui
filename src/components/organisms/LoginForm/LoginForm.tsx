@@ -7,7 +7,7 @@ import { LoadingButton } from "@mui/lab";
 import { Button } from "@mui/material";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import { ILogin } from "../../../types/ILogin";
+import { ILogin } from "../../../interfaces/ILogin";
 import { loginInitialValues, loginValidationSchema } from "./utils/schema";
 
 interface IProps {

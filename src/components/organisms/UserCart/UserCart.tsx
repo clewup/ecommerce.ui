@@ -1,4 +1,4 @@
-import "./cart-products.scss";
+import "./user-cart.scss";
 import Subheading from "../../atoms/Subheading/Subheading";
 import CartProduct from "../../molecules/CartProduct/CartProduct";
 import useCart from "../../../hooks/useCart";
@@ -11,7 +11,7 @@ import Loader from "../../atoms/Loader/Loader";
 import { AuthContext } from "../../../contexts/Auth";
 import Text from "../../atoms/Text/Text";
 
-const CartProducts = () => {
+const UserCart = () => {
   const navigate = useNavigate();
   const { cart, isLoading } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthContext);
@@ -25,7 +25,7 @@ const CartProducts = () => {
   }, []);
 
   return (
-    <div id={"cart-products"}>
+    <div id={"user-cart"}>
       <Subheading align={"center"}>Cart</Subheading>
       {isLoading ? (
         <Loader />
@@ -71,4 +71,4 @@ const CartProducts = () => {
     </div>
   );
 };
-export default CartProducts;
+export default UserCart;

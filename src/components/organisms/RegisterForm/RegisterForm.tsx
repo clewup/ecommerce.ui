@@ -1,6 +1,6 @@
 import "./register-form.scss";
 import { Field, Form, Formik } from "formik";
-import { IRegister } from "../../../types/IRegister";
+import { IRegister } from "../../../interfaces/IRegister";
 import Input from "../../atoms/Input/Input";
 import Text from "../../atoms/Text/Text";
 import { LoadingButton } from "@mui/lab";

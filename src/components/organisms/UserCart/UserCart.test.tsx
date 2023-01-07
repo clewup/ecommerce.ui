@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import CartProducts from "./CartProducts";
+import UserCart from "./UserCart";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
 
@@ -26,9 +26,9 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedUseNavigate,
 }));
 
-describe("CartProducts", () => {
+describe("UserCart", () => {
   it("should render the component with the expected values", () => {
-    renderHelper(<CartProducts />);
+    renderHelper(<UserCart />);
 
     expect(screen.getAllByText("PRODUCT_NAME")).toHaveLength(3);
     expect(
@@ -37,7 +37,7 @@ describe("CartProducts", () => {
   });
 
   it("should navigate to checkout on button click", () => {
-    renderHelper(<CartProducts />);
+    renderHelper(<UserCart />);
 
     userEvent.click(
       screen.getByText("CHECKOUT", { selector: 'button[type="submit"]' })

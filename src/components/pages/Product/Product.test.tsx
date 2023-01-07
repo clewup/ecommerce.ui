@@ -2,8 +2,8 @@ import { screen } from "@testing-library/react";
 import Product from "./Product";
 import React from "react";
 import renderHelper, { mockedAuthContext } from "../../../utils/renderHelper";
-import { mockedProduct } from "../../../types/IProduct";
 import userEvent from "@testing-library/user-event";
+import { mockedProduct } from "../../organisms/Products/data/mockData";
 
 const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({

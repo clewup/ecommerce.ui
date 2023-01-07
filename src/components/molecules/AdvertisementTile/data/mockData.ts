@@ -1,8 +1,4 @@
-export interface IAdvertisement {
-  title: string;
-  caption?: string;
-  image: string;
-}
+import { IAdvertisement } from "../../../../interfaces/IAdvertisement";
 
 export const mockedAdvertisement: IAdvertisement = {
   title: "ADVERTISEMENT_TITLE",

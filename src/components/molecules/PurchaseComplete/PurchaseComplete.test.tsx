@@ -1,9 +1,10 @@
 import { screen } from "@testing-library/react";
 import { Formik } from "formik";
 import PurchaseComplete from "./PurchaseComplete";
-import { IOrder, mockedOrder } from "../../../types/IOrder";
+import { IOrder } from "../../../interfaces/IOrder";
 import renderHelper from "../../../utils/renderHelper";
 import { checkoutInitialValues } from "../../organisms/CheckoutForm/utils/schema";
+import { mockedOrder } from "../../organisms/UserOrders/data/mockData";
 
 const mockedOnSubmit = jest.fn();
 
@@ -39,7 +40,7 @@ describe("PurchaseComplete", () => {
     renderHelper(
       <Formik initialValues={checkoutInitialValues} onSubmit={mockedOnSubmit}>
         {(formik) => {
-          return <PurchaseComplete order={{} as IOrder} isLoading={true} />;
+          return <PurchaseComplete order={undefined} isLoading={true} />;
         }}
       </Formik>
     );

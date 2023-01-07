@@ -1,4 +1,4 @@
-import { ICart } from "../types/ICart";
+import { ICart } from "../interfaces/ICart";
 import { useContext, useState } from "react";
 import { CartContext } from "../contexts/Cart";
 import { UserContext } from "../contexts/User";
@@ -8,7 +8,7 @@ import putCart from "../api/PutCart";
 import postCart from "../api/PostCart";
 import { Guid } from "guid-typescript";
 import { createGuid } from "../utils/createGuid";
-import { IProduct } from "../types/IProduct";
+import { IProduct } from "../interfaces/IProduct";
 
 interface IUseCartProps {
   getCart: () => void;
@@ -28,7 +28,7 @@ const useCart = (): IUseCartProps => {
       setLoading(true);
       getUserCart()
         .then((res) => {
-          if (res.status === 204) setCart({} as ICart);
+          if (res.status === 204) setCart(undefined);
           else setCart(res.data);
         })
         .catch((err) => setError(err))
@@ -37,7 +37,7 @@ const useCart = (): IUseCartProps => {
   };
 
   const addToCart = (product: IProduct) => {
-    if (cart.id) {
+    if (cart && cart.id) {
       const updatedCart: ICart = cart;
       if (updatedCart.products.some((prod) => prod.id === product.id)) {
         // Update the cart.
@@ -73,7 +73,7 @@ const useCart = (): IUseCartProps => {
   };
 
   const removeFromCart = (product: IProduct) => {
-    if (cart.id) {
+    if (cart && cart.id) {
       const updatedCart = cart;
       updatedCart.products = cart.products.filter(
         (prod) => prod.id !== product.id

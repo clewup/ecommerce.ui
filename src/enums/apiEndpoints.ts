@@ -20,8 +20,10 @@ export const apiEndpoints = {
   USER_CART: "cart/user",
   ORDER: "order",
   USER_ORDERS: "order/user",
-  STATISTICS_MOST_POPULAR: (amount: number) =>
-    `statistics/popular?amount=${amount}`,
-  STATISTICS_MOST_DISCOUNTED: (amount: number) =>
-    `statistics/discounted?amount=${amount}`,
+  MOST_POPULAR: (amount: number) => `statistics/popular?amount=${amount}`,
+  MOST_DISCOUNTED: (amount: number) => `statistics/discounted?amount=${amount}`,
+  TRACK_ORDER: (trackingNumber: Guid) => `shipping/${trackingNumber}`,
+  SHIP_ORDER: "shipping",
+  EXTEND_ORDER_ARRIVAL: (trackingNumber: Guid, days: number) =>
+    `shipping/${trackingNumber}/extend/${days}`,
 };

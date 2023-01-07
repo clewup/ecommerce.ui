@@ -3,7 +3,7 @@ import CheckoutForm from "./CheckoutForm";
 import React from "react";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
-import { mockedOrder } from "../../../types/IOrder";
+import { mockedOrder } from "../UserOrders/data/mockData";
 
 const mockedUseCheckout = {
   submitCheckout: jest.fn(),

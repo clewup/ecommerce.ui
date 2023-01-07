@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IProduct } from "../../../types/IProduct";
+import { IProduct } from "../../../interfaces/IProduct";
 import ProductTile from "../../molecules/ProductTile/ProductTile";
 import Subheading from "../../atoms/Subheading/Subheading";
 import Text from "../../atoms/Text/Text";

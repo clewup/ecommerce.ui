@@ -17,10 +17,12 @@ import {
   Button,
 } from "@mui/material";
 import OrderProduct from "../../molecules/OrderProduct/OrderProduct";
-import { IOrder } from "../../../types/IOrder";
+import { IOrder } from "../../../interfaces/IOrder";
+import useShipping from "../../../hooks/useShipping";
 
 const AllOrders = () => {
   const { orders, isLoading, error, getAllOrders } = useOrder();
+  const { trackedOrder, isShipped, trackOrder, shipOrder } = useShipping();
 
   const [openModal, setOpenModal] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<IOrder>();
@@ -30,7 +32,16 @@ const AllOrders = () => {
     // eslint-disable-next-line
   }, []);
 
-  const handleOpen = () => setOpenModal(true);
+  useEffect(() => {
+    if (selectedOrder?.trackingNumber) {
+      trackOrder(selectedOrder.trackingNumber);
+    }
+  }, [selectedOrder]);
+
+  const handleOpen = (order: IOrder) => {
+    setSelectedOrder(order);
+    setOpenModal(true);
+  };
   const handleClose = () => setOpenModal(false);
 
   if (error) return <AppError error={error} />;
@@ -66,8 +77,7 @@ const AllOrders = () => {
                   <TableCell>
                     <Button
                       onClick={() => {
-                        setSelectedOrder(order);
-                        handleOpen();
+                        handleOpen(order);
                       }}
                     >
                       VIEW
@@ -104,7 +114,7 @@ const AllOrders = () => {
             <Text>{selectedOrder?.deliveryAddress?.county}</Text>
             <Text>{selectedOrder?.deliveryAddress?.country}</Text>
           </div>
-          <div>
+          <div className={"order-products"}>
             {selectedOrder?.products.map((orderProduct) => {
               return (
                 <div key={String(orderProduct.id)}>
@@ -113,6 +123,19 @@ const AllOrders = () => {
               );
             })}
           </div>
+          {(!selectedOrder?.trackingNumber || !trackedOrder) && !isShipped ? (
+            <Button
+              size={"large"}
+              type={"button"}
+              variant={"contained"}
+              color={"success"}
+              onClick={() => shipOrder(selectedOrder!)}
+            >
+              Ship Order
+            </Button>
+          ) : (
+            <Text>Estimated Arrival: {trackedOrder?.arrivalDate}</Text>
+          )}
         </Box>
       </Modal>
     </div>

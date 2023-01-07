@@ -3,7 +3,7 @@ import React from "react";
 import AdvertisementTile from "./AdvertisementTile";
 import renderHelper from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
-import { mockedAdvertisement } from "../../../types/IAdvertisement";
+import { mockedAdvertisement } from "./data/mockData";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),

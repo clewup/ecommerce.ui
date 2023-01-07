@@ -1,7 +1,7 @@
 import UserOrders from "./UserOrders";
 import renderHelper from "../../../utils/renderHelper";
-import { mockedOrders } from "../../../types/IOrder";
 import { screen } from "@testing-library/react";
+import { mockedOrders } from "./data/mockData";
 
 const mockedUseOrder = {
   orders: mockedOrders,

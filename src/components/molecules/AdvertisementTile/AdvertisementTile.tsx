@@ -2,7 +2,7 @@ import "./advertisement-tile.scss";
 import Text from "../../atoms/Text/Text";
 import { Button } from "@mui/material";
 import Subheading from "../../atoms/Subheading/Subheading";
-import { IAdvertisement } from "../../../types/IAdvertisement";
+import { IAdvertisement } from "../../../interfaces/IAdvertisement";
 import React from "react";
 import {
   fontSpacing,

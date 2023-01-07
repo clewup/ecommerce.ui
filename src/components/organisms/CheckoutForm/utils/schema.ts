@@ -1,7 +1,7 @@
 import * as Yup from "yup";
-import { ICheckoutFormValues } from "../../../../types/IOrder";
+import { ICheckout } from "../../../../interfaces/IOrder";
 
-export const checkoutInitialValues: ICheckoutFormValues = {
+export const checkoutInitialValues: ICheckout = {
   firstName: "",
   lastName: "",
   email: "",

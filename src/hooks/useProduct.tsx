@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IProduct } from "../types/IProduct";
+import { IProduct } from "../interfaces/IProduct";
 import { Guid } from "guid-typescript";
 import getProductById from "../api/GetProductById";
 import { AxiosError } from "axios";
@@ -7,7 +7,7 @@ import postProduct from "../api/PostProduct";
 import { formatProduct } from "../components/organisms/ProductForm/utils/formatters";
 
 interface IUseProductProps {
-  product: IProduct;
+  product: IProduct | undefined;
   isLoading: boolean;
   error: AxiosError | null;
   getProduct: (id: Guid) => void;
@@ -15,7 +15,7 @@ interface IUseProductProps {
 }
 
 const useProduct = (): IUseProductProps => {
-  const [product, setProduct] = useState<IProduct>({} as IProduct);
+  const [product, setProduct] = useState<IProduct>();
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 

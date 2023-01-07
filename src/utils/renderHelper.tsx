@@ -6,10 +6,10 @@ import { AuthContext } from "../contexts/Auth";
 import { ProductContext } from "../contexts/Product";
 import { CartContext } from "../contexts/Cart";
 import { UserContext } from "../contexts/User";
-import { IClaim } from "../types/IClaim";
-import { mockedCart } from "../types/ICart";
+import { IClaim } from "../interfaces/IClaim";
 import { queryDefaultValues } from "../enums/defaultValues";
-import { mockedUser } from "../types/IUser";
+import { mockedCart } from "../components/organisms/UserCart/data/mockData";
+import { mockedUser } from "../components/organisms/UserForm/data/mockData";
 
 /*
 Provides contexts for unit tests.

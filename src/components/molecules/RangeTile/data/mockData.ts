@@ -1,7 +1,4 @@
-export interface IRange {
-  name: string;
-  image: string;
-}
+import { IRange } from "../../../../interfaces/IRange";
 
 export const mockedRange: IRange = {
   name: "RANGE_NAME",

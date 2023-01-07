@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IProduct } from "../types/IProduct";
+import { IProduct } from "../interfaces/IProduct";
 import { AxiosError } from "axios";
 import getMostDiscountedProducts from "../api/GetMostDiscountedProducts";
 import getMostPopularProducts from "../api/GetMostPopularProducts";

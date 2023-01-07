@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import { IClaim } from "../types/IClaim";
+import { IClaim } from "../interfaces/IClaim";
 
 interface IProps {
   children: JSX.Element;

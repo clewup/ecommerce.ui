@@ -1,4 +1,4 @@
-import { IUser } from "../types/IUser";
+import { IUser } from "../interfaces/IUser";
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
 import { AxiosError } from "axios";

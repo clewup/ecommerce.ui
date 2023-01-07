@@ -2,8 +2,8 @@ import { screen } from "@testing-library/react";
 import Store from "./Store";
 import React from "react";
 import renderHelper from "../../../utils/renderHelper";
-import { mockedProducts } from "../../../types/IProduct";
 import userEvent from "@testing-library/user-event";
+import { mockedProducts } from "../../organisms/Products/data/mockData";
 
 const mockedUseProductFilter = {
   products: mockedProducts,

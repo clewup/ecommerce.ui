@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { IOrder } from "../types/IOrder";
+import { IOrder } from "../interfaces/IOrder";
 import { AxiosError } from "axios";
 import GetUserOrders from "../api/GetUserOrders";
 import { Guid } from "guid-typescript";
 import GetAllOrders from "../api/GetAllOrders";
 
-interface IUseOrderProps {
+interface IUseOrder {
   orders: IOrder[];
   isLoading: boolean;
   error: AxiosError | null;
@@ -13,7 +13,7 @@ interface IUseOrderProps {
   getAllOrders: () => void;
 }
 
-const useOrder = (): IUseOrderProps => {
+const useOrder = (): IUseOrder => {
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);

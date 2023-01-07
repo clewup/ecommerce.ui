@@ -1,11 +1,11 @@
 import "./cart.scss";
-import CartProducts from "../../organisms/CartProducts/CartProducts";
+import UserCart from "../../organisms/UserCart/UserCart";
 import Wrapper from "../../atoms/Wrapper/Wrapper";
 
 const Cart = () => {
   return (
     <Wrapper id={"cart"}>
-      <CartProducts />
+      <UserCart />
     </Wrapper>
   );
 };

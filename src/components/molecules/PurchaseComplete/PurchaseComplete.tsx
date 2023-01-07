@@ -1,19 +1,19 @@
 import "./purchase-complete.scss";
 import Subheading from "../../atoms/Subheading/Subheading";
-import { IOrder } from "../../../types/IOrder";
+import { IOrder } from "../../../interfaces/IOrder";
 import OrderProduct from "../OrderProduct/OrderProduct";
 import Loader from "../../atoms/Loader/Loader";
 import Text from "../../atoms/Text/Text";
 
 interface IProps {
-  order: IOrder;
+  order: IOrder | undefined;
   isLoading: boolean;
 }
 
 const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
   return (
     <div id={"purchase-complete"}>
-      {isLoading ? (
+      {isLoading || !order ? (
         <Loader />
       ) : (
         <>

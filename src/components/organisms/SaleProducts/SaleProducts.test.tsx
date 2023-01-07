@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import SaleProducts from "./SaleProducts";
 import renderHelper from "../../../utils/renderHelper";
-import { mockedProducts } from "../../../types/IProduct";
+import { mockedProducts } from "../Products/data/mockData";
 
 const mockedUseStatistics = {
   popularProducts: mockedProducts,

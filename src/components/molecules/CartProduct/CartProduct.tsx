@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../../../contexts/Cart";
 import { useNavigate } from "react-router-dom";
 import Text from "../../atoms/Text/Text";
-import { IProduct } from "../../../types/IProduct";
+import { IProduct } from "../../../interfaces/IProduct";
 
 interface IProps {
   cartProduct: IProduct;

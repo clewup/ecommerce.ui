@@ -5,7 +5,7 @@ import renderHelper, {
   mockedProductContext,
 } from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
-import { mockedRange } from "../../../types/IRange";
+import { mockedRange } from "./data/mockData";
 
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),

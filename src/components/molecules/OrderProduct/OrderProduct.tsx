@@ -1,7 +1,7 @@
 import "./order-product.scss";
 import React from "react";
 import Text from "../../atoms/Text/Text";
-import { IProduct } from "../../../types/IProduct";
+import { IProduct } from "../../../interfaces/IProduct";
 
 interface IProps {
   orderProduct: IProduct;

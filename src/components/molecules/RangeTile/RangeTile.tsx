@@ -3,7 +3,7 @@ import Subheading from "../../atoms/Subheading/Subheading";
 import React, { useContext } from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { IRange } from "../../../types/IRange";
+import { IRange } from "../../../interfaces/IRange";
 import { ProductContext } from "../../../contexts/Product";
 import { colors } from "../../../styles/colors";
 import { ScaleAnimation } from "../../../lib/FramerMotion/animations";

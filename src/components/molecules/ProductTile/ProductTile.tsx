@@ -1,5 +1,5 @@
 import "./product-tile.scss";
-import { IProduct, ISize } from "../../../types/IProduct";
+import { IProduct, ISize } from "../../../interfaces/IProduct";
 import React, { useContext, useEffect, useState } from "react";
 import useCart from "../../../hooks/useCart";
 import { ShoppingCart as AddToCartIcon } from "@mui/icons-material";

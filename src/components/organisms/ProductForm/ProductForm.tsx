@@ -1,6 +1,6 @@
 import "./product-form.scss";
 import { Field, Form, Formik, FormikHelpers, FormikProps } from "formik";
-import { IProduct } from "../../../types/IProduct";
+import { IProduct } from "../../../interfaces/IProduct";
 import Input from "../../atoms/Input/Input";
 import { Button, Snackbar } from "@mui/material";
 import React, { useContext, useEffect } from "react";

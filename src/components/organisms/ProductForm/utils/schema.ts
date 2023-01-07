@@ -1,10 +1,10 @@
-import { IProduct, ISize } from "../../../../types/IProduct";
+import { IProduct, ISize } from "../../../../interfaces/IProduct";
 import { productSizes } from "../../../../enums/productSizes";
 import { createGuid } from "../../../../utils/createGuid";
 import * as Yup from "yup";
 
 const sizeInitialValues: ISize[] = [];
-Object.values(productSizes).map((size) => {
+Object.values(productSizes).forEach((size) => {
   sizeInitialValues.push({
     size: size,
     stock: 0,

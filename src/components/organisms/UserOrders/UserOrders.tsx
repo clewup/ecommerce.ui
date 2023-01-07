@@ -1,12 +1,12 @@
 import "./user-orders.scss";
 import useOrder from "../../../hooks/useOrder";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../contexts/User";
 import AppError from "../../molecules/AppError/AppError";
 import Loader from "../../atoms/Loader/Loader";
 import Text from "../../atoms/Text/Text";
 import Order from "../../molecules/Order/Order";
-import { IOrder } from "../../../types/IOrder";
+import { IOrder } from "../../../interfaces/IOrder";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const UserOrders = () => {

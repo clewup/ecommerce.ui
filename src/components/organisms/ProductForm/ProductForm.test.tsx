@@ -1,12 +1,8 @@
-import {
-  screen,
-
-
-} from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import React from "react";
 import ProductForm from "./ProductForm";
 import renderHelper from "../../../utils/renderHelper";
-import { mockedProduct } from "../../../types/IProduct";
+import { mockedProduct } from "../Products/data/mockData";
 
 const mockedUseProduct = {
   product: mockedProduct,

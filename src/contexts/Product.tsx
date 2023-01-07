@@ -1,6 +1,6 @@
 import React, { createContext, Dispatch, useState } from "react";
 import { queryDefaultValues } from "../enums/defaultValues";
-import { ILinkedSubcategory } from "../types/ILinkedSubcategory";
+import { ILinkedSubcategory } from "../interfaces/ILinkedSubcategory";
 
 interface IProps {
   children: JSX.Element;

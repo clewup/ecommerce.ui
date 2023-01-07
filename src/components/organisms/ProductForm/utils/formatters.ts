@@ -1,4 +1,4 @@
-import { IProduct } from "../../../../types/IProduct";
+import { IProduct } from "../../../../interfaces/IProduct";
 
 export const formatProduct = (values: IProduct, images: string[]) => {
   return {

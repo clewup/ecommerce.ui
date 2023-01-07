@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import React from "react";
 import ValueTile from "./ValueTile";
 import renderHelper from "../../../utils/renderHelper";
-import { mockedValue } from "../../../types/IValue";
+import { mockedValue } from "./data/mockData";
 
 describe("ValueTile", () => {
   it("should render the component with the expected values", () => {

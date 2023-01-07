@@ -2,8 +2,8 @@ import { screen, waitFor } from "@testing-library/react";
 import React from "react";
 import UserForm from "./UserForm";
 import renderHelper from "../../../utils/renderHelper";
-import { mockedUser } from "types/IUser";
 import userEvent from "@testing-library/user-event";
+import { mockedUser } from "./data/mockData";
 
 describe("UserForm", () => {
   it("should render the component with the expected fields and values", () => {

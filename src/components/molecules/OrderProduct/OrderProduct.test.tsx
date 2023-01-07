@@ -4,7 +4,7 @@ import renderHelper from "../../../utils/renderHelper";
 import {
   mockedDiscountedProduct,
   mockedProduct,
-} from "../../../types/IProduct";
+} from "../../organisms/Products/data/mockData";
 
 describe("OrderProduct", () => {
   it("should render the component with the expected values", () => {

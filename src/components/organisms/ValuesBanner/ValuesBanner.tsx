@@ -1,6 +1,6 @@
 import "./values-banner.scss";
 import ValueTile from "../../molecules/ValueTile/ValueTile";
-import { valueData } from "../../../data/valueData";
+import { valueData } from "./data/valueData";
 
 const ValuesBanner = () => {
   return (

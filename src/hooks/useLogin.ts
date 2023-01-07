@@ -1,10 +1,10 @@
-import { ILogin } from "../types/ILogin";
+import { ILogin } from "../interfaces/ILogin";
 import postLogin from "../api/PostLogin";
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
 import { AuthContext } from "../contexts/Auth";
 import { AxiosError, AxiosResponse } from "axios";
-import { IAccessToken } from "../types/IAccessToken";
+import { IAccessToken } from "../interfaces/IAccessToken";
 import useAuth from "./useAuth";
 
 interface IUseLoginProps {

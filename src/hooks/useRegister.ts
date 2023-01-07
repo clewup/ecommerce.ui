@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IRegister } from "../types/IRegister";
+import { IRegister } from "../interfaces/IRegister";
 import postRegister from "../api/PostRegister";
 import { AxiosError } from "axios";
 import useLogin from "./useLogin";

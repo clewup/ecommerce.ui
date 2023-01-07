@@ -5,7 +5,7 @@ import renderHelper, {
   mockedProductContext,
 } from "../../../utils/renderHelper";
 import userEvent from "@testing-library/user-event";
-import { mockedProducts } from "../../../types/IProduct";
+import { mockedProducts } from "../../organisms/Products/data/mockData";
 
 const mockToggleDrawer = jest.fn().mockReturnValue(true);
 

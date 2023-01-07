@@ -1,7 +1,7 @@
 import jwt from "jwt-decode";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/Auth";
-import { IClaim } from "../types/IClaim";
+import { IClaim } from "../interfaces/IClaim";
 
 interface IUseAuthProps {
   decodeAccessToken: (accessToken: string) => void;

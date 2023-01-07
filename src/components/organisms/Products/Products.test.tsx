@@ -1,8 +1,8 @@
 import { screen } from "@testing-library/react";
 import Products from "./Products";
 import renderHelper from "../../../utils/renderHelper";
-import { mockedProducts } from "../../../types/IProduct";
 import { AxiosError } from "axios";
+import { mockedProducts } from "./data/mockData";
 
 describe("products", () => {
   it("should render the component with the expected values", () => {

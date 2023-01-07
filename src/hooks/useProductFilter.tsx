@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AxiosError } from "axios";
 import { ProductContext } from "../contexts/Product";
-import { IProduct } from "../types/IProduct";
+import { IProduct } from "../interfaces/IProduct";
 import getProductsSearch from "../api/GetProductsSearch";
 import { queryDefaultValues } from "../enums/defaultValues";
 

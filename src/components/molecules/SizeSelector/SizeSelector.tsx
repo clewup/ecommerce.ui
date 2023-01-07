@@ -1,4 +1,4 @@
-import { ISize } from "../../../types/IProduct";
+import { ISize } from "../../../interfaces/IProduct";
 import React, { SetStateAction } from "react";
 import "./size-selector.scss";
 import classnames from "classnames";

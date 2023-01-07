@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 import {
   mockedDiscountedProduct,
   mockedProduct,
-} from "../../../types/IProduct";
+} from "../../organisms/Products/data/mockData";
 
 const mockedUseCart = {
   getCart: jest.fn(),

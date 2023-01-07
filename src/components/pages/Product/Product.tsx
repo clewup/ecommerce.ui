@@ -16,7 +16,7 @@ import { CartContext } from "../../../contexts/Cart";
 import useCart from "../../../hooks/useCart";
 import Text from "../../atoms/Text/Text";
 import { subheadingSize } from "../../../enums/typography";
-import { IProduct } from "../../../types/IProduct";
+import { IProduct } from "../../../interfaces/IProduct";
 
 const Product = () => {
   const { id } = useParams();
@@ -42,7 +42,7 @@ const Product = () => {
     const recentlyViewed = localStorage.rvp;
 
     // If there is already an existing recently viewed array, modify it.
-    if (recentlyViewed && Object.values(product).length) {
+    if (recentlyViewed && product) {
       let products: IProduct[] = JSON.parse(recentlyViewed);
 
       products = products.splice(0, 3);
@@ -51,7 +51,7 @@ const Product = () => {
       localStorage.rvp = JSON.stringify(products);
 
       // If no recently viewed array, create one.
-    } else if (Object.values(product).length) {
+    } else if (product) {
       const products = [product];
 
       localStorage.rvp = JSON.stringify(products);
@@ -62,7 +62,7 @@ const Product = () => {
 
   return (
     <Wrapper id={"product"}>
-      {isProductLoading || !product.id ? (
+      {isProductLoading || !product || !product.id ? (
         <Loader />
       ) : (
         <>

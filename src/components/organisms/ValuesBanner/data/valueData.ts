@@ -1,4 +1,4 @@
-import { IValue } from "../types/IValue";
+import { IValue } from "../../../../interfaces/IValue";
 
 export const valueData: IValue[] = [
   {

@@ -1,4 +1,4 @@
-import { IAdvertisement } from "../types/IAdvertisement";
+import { IAdvertisement } from "../interfaces/IAdvertisement";
 
 export const advertisementData: IAdvertisement[] = [
   {

@@ -1,6 +1,6 @@
 import ProductTile from "../../molecules/ProductTile/ProductTile";
 import "./products.scss";
-import { IProduct } from "../../../types/IProduct";
+import { IProduct } from "../../../interfaces/IProduct";
 import AppError from "../../molecules/AppError/AppError";
 import React, { useEffect, useState } from "react";
 import { AxiosError } from "axios";

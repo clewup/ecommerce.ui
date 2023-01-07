@@ -4,21 +4,21 @@ import React, {
   SetStateAction,
   useState,
 } from "react";
-import { ICart } from "../types/ICart";
+import { ICart } from "../interfaces/ICart";
 
 interface IProps {
   children: JSX.Element;
 }
 
 interface ICartContextProps {
-  cart: ICart;
-  setCart: Dispatch<SetStateAction<ICart>>;
+  cart: ICart | undefined;
+  setCart: Dispatch<SetStateAction<ICart | undefined>>;
   isLoading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const initialCartContextProps: ICartContextProps = {
-  cart: {} as ICart,
+  cart: undefined,
   setCart: (() => undefined) as Dispatch<any>,
   isLoading: false,
   setLoading: (() => undefined) as Dispatch<any>,
@@ -27,7 +27,7 @@ const initialCartContextProps: ICartContextProps = {
 const CartContext = createContext<ICartContextProps>(initialCartContextProps);
 
 const CartProvider = ({ children }: IProps) => {
-  const [cart, setCart] = useState<ICart>({} as ICart);
+  const [cart, setCart] = useState<ICart>();
   const [isLoading, setLoading] = useState(false);
 
   return (

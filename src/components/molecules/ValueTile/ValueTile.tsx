@@ -2,7 +2,7 @@ import "./value-tile.scss";
 import Text from "../../atoms/Text/Text";
 import { textSize } from "../../../enums/typography";
 import React from "react";
-import { IValue } from "../../../types/IValue";
+import { IValue } from "../../../interfaces/IValue";
 
 interface IProps {
   value: IValue;

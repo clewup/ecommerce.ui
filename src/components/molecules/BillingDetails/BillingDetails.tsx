@@ -4,10 +4,10 @@ import Input from "../../atoms/Input/Input";
 import Checkbox from "../../atoms/Checkbox/Checkbox";
 import { Button } from "@mui/material";
 import React from "react";
-import { ICheckoutFormValues } from "../../../types/IOrder";
+import { ICheckout } from "../../../interfaces/IOrder";
 
 interface IProps {
-  formik: FormikProps<ICheckoutFormValues>;
+  formik: FormikProps<ICheckout>;
   setTabIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
