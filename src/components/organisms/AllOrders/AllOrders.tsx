@@ -36,6 +36,7 @@ const AllOrders = () => {
     if (selectedOrder?.trackingNumber) {
       trackOrder(selectedOrder.trackingNumber);
     }
+    // eslint-disable-next-line
   }, [selectedOrder]);
 
   const handleOpen = (order: IOrder) => {

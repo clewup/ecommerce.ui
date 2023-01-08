@@ -1,10 +1,9 @@
 import "./purchase-complete.scss";
 import Subheading from "../../atoms/Subheading/Subheading";
 import { IOrder } from "../../../interfaces/IOrder";
-import OrderProduct from "../OrderProduct/OrderProduct";
 import Loader from "../../atoms/Loader/Loader";
-import Text from "../../atoms/Text/Text";
 import Order from "../Order/Order";
+import React from "react";
 
 interface IProps {
   order: IOrder | undefined;
@@ -18,7 +17,9 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
         <Loader />
       ) : (
         <>
-          <Subheading align={"center"}>Your order is complete!</Subheading>
+          <Subheading align={"center"} padding={"0rem"} margin={"0 0 2rem 0"}>
+            Your order is complete!
+          </Subheading>
           <Order order={order} />
         </>
       )}

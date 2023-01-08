@@ -1,6 +1,7 @@
 import { Guid } from "guid-typescript";
 import { IProduct } from "../../../../interfaces/IProduct";
 import { createGuid } from "../../../../utils/createGuid";
+import { productSizes } from "../../../../enums/productSizes";
 
 export const mockedProduct: IProduct = {
   id: createGuid(),
@@ -8,34 +9,11 @@ export const mockedProduct: IProduct = {
   description: "PRODUCT_DESCRIPTION",
   color: "PRODUCT_COLOR",
   images: ["HTTPS://IMAGE_URL.JPG"] as string[],
-
   category: "PRODUCT_CATEGORY",
   subcategory: "PRODUCT_SUBCATEGORY",
   range: "PRODUCT_RANGE",
-
-  oneSize: false,
-  sizes: [
-    {
-      size: "XSmall",
-      stock: 10,
-    },
-    {
-      size: "Small",
-      stock: 10,
-    },
-    {
-      size: "Medium",
-      stock: 10,
-    },
-    {
-      size: "Large",
-      stock: 10,
-    },
-    {
-      size: "XLarge",
-      stock: 10,
-    },
-  ],
+  size: productSizes.XSMALL,
+  stock: 10,
   price: 33.33,
   discount: 0,
 };
@@ -48,12 +26,7 @@ export const mockedDiscountedProduct: IProduct = {
 
 export const mockedOutOfStockProduct: IProduct = {
   ...mockedProduct,
-  sizes: [
-    {
-      size: "XSmall",
-      stock: 0,
-    },
-  ],
+  stock: 0,
 };
 
 export const mockedProducts: IProduct[] = [

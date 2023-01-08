@@ -196,19 +196,19 @@ const ProductForm = () => {
                     onChange={formik.handleChange}
                   />
 
-                  {formik.initialValues.sizes.map((size, index) => {
-                    return (
-                      <div key={size.size}>
-                        <Field
-                          name={`sizes.${index}.stock`}
-                          component={Input}
-                          label={size.size}
-                          onChange={formik.handleChange}
-                          disabled={formik.values.oneSize === true}
-                        />
-                      </div>
-                    );
-                  })}
+                  <Field
+                    name={"size"}
+                    component={Input}
+                    label={"Size"}
+                    onChange={formik.handleChange}
+                  />
+
+                  <Field
+                    name={"stock"}
+                    component={Input}
+                    label={"Stock"}
+                    onChange={formik.handleChange}
+                  />
 
                   <Field
                     name={"color"}

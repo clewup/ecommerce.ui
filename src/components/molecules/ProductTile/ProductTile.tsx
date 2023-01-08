@@ -1,6 +1,6 @@
 import "./product-tile.scss";
-import { IProduct, ISize } from "../../../interfaces/IProduct";
-import React, { useContext, useEffect, useState } from "react";
+import { IProduct } from "../../../interfaces/IProduct";
+import React, { useContext } from "react";
 import useCart from "../../../hooks/useCart";
 import { ShoppingCart as AddToCartIcon } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -9,11 +9,11 @@ import { CartContext } from "../../../contexts/Cart";
 import { LoadingButton } from "@mui/lab";
 import Carousel from "react-material-ui-carousel";
 import Text from "../../atoms/Text/Text";
-import SizeSelector from "../SizeSelector/SizeSelector";
 import {
   BounceAnimation,
   ScaleAnimation,
 } from "../../../lib/FramerMotion/animations";
+import { productSizes } from "../../../enums/productSizes";
 
 interface IProps {
   product: IProduct;
@@ -24,22 +24,6 @@ const ProductTile: React.FC<IProps> = ({ product }) => {
   const { isLoading } = useContext(CartContext);
   const { addToCart } = useCart();
   const navigate = useNavigate();
-
-  const [isOutOfStock, setOutOfStock] = useState(false);
-  const [selectedSize, setSelectedSize] = useState<ISize | undefined>(
-    product.sizes?.filter((size) => size.stock > 0)[0]
-  );
-
-  useEffect(() => {
-    if (product.sizes && product.oneSize === false) {
-      let outOfStockCount = 0;
-
-      product.sizes.forEach((size) => {
-        if (size.stock === 0) outOfStockCount += 1;
-      });
-      setOutOfStock(outOfStockCount === product.sizes.length);
-    }
-  }, [product.oneSize, product.sizes]);
 
   return (
     <div id={"product-tile"}>
@@ -75,12 +59,8 @@ const ProductTile: React.FC<IProps> = ({ product }) => {
           )}
         </div>
         <div className={"product-actions"}>
-          {product.oneSize === false ? (
-            <SizeSelector
-              sizes={product.sizes}
-              selectedSize={selectedSize}
-              setSelectedSize={setSelectedSize}
-            />
+          {product.size !== productSizes.ONESIZE ? (
+            <Text>{product.size}</Text>
           ) : (
             <div className={"one-size"}>
               <Text>One Size</Text>
@@ -93,13 +73,13 @@ const ProductTile: React.FC<IProps> = ({ product }) => {
               type={"button"}
               variant={"contained"}
               loading={isLoading}
-              disabled={isOutOfStock}
+              disabled={product.stock === 0}
               className={"add-to-cart-btn"}
               onClick={() => {
                 !isAuthenticated ? navigate("/login") : addToCart(product);
               }}
             >
-              {!isOutOfStock ? (
+              {product.stock > 0 ? (
                 <>
                   <AddToCartIcon />
                   Add to Cart

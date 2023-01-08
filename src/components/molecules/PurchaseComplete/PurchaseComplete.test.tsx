@@ -21,7 +21,7 @@ describe("PurchaseComplete", () => {
     expect(
       screen.getByText("831AAFCB-F559-4B5D-9F43-0A0389D653C8")
     ).toBeInTheDocument();
-    expect(screen.getByText("£99.99")).toBeInTheDocument();
+    expect(screen.getByText("Total: £99.99")).toBeInTheDocument();
   });
 
   it("should render the order cart items", () => {

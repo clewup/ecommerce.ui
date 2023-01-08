@@ -90,34 +90,4 @@ describe("ProductTile", () => {
 
     expect(mockedUseNavigate).toHaveBeenCalledWith("/login");
   });
-
-  it("should render the size selector", () => {
-    renderHelper(<ProductTile product={mockedProduct} />);
-
-    expect(
-      screen.getByText("XS", {
-        selector: 'div[class*="size"]',
-      })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("S", {
-        selector: 'div[class*="size"]',
-      })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("M", {
-        selector: 'div[class*="size"]',
-      })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("L", {
-        selector: 'div[class*="size"]',
-      })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("XL", {
-        selector: 'div[class*="size"]',
-      })
-    ).toBeInTheDocument();
-  });
 });

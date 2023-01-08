@@ -1,7 +1,8 @@
 export const productSizes = {
-  XSMALL: "XSmall",
-  SMALL: "Small",
-  MEDIUM: "Medium",
-  LARGE: "Large",
-  XLARGE: "XLarge",
+  ONESIZE: "ONESIZE",
+  XSMALL: "XSMALL",
+  SMALL: "SMALL",
+  MEDIUM: "MEDIUM",
+  LARGE: "LARGE",
+  XLARGE: "XLARGE",
 };

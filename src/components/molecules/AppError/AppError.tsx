@@ -13,7 +13,7 @@ interface IProps {
 
 const AppError: React.FC<IProps> = ({ error }) => {
   return (
-    <Wrapper id={"app-error"}>
+    <Wrapper id={"error"}>
       <div className={"app-error"}>
         <div className={"error-icon"}>
           <ErrorOutlineIcon fontSize={"inherit"} />

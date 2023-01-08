@@ -1,15 +1,6 @@
-import { IProduct, ISize } from "../../../../interfaces/IProduct";
-import { productSizes } from "../../../../enums/productSizes";
+import { IProduct } from "../../../../interfaces/IProduct";
 import { createGuid } from "../../../../utils/createGuid";
 import * as Yup from "yup";
-
-const sizeInitialValues: ISize[] = [];
-Object.values(productSizes).forEach((size) => {
-  sizeInitialValues.push({
-    size: size,
-    stock: 0,
-  });
-});
 
 export const productInitialValues: IProduct = {
   id: createGuid(),
@@ -17,13 +8,11 @@ export const productInitialValues: IProduct = {
   description: "",
   color: "",
   images: [],
-
   category: "",
   subcategory: "",
   range: "",
-
-  oneSize: false,
-  sizes: sizeInitialValues,
+  size: "",
+  stock: 0,
   price: 0,
   discount: 0,
 };

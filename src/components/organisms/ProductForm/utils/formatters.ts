@@ -7,13 +7,11 @@ export const formatProduct = (values: IProduct, images: string[]) => {
     description: values.description,
     color: values.color,
     images: images,
-
     category: values.category,
     subcategory: values.subcategory,
     range: values.range,
-
-    oneSize: values.oneSize,
-    sizes: values.sizes,
+    size: values.size,
+    stock: values.stock,
     price: values.price,
     discount: values.discount,
   } as IProduct;

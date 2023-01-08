@@ -1,7 +1,7 @@
 import { Guid } from "guid-typescript";
 import { IOrder } from "../interfaces/IOrder";
 import { IPackage } from "../interfaces/IPackage";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import getTrackOrder from "../api/GetTrackOrder";
 import { AxiosError } from "axios";
 import postShipOrder from "../api/PostShipOrder";

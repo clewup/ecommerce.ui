@@ -63,11 +63,8 @@ describe("ProductForm", () => {
     expect(
       screen.getByRole("checkbox", { name: "controlled" })
     ).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: "XSmall" })).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: "Small" })).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: "Medium" })).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: "Large" })).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: "XLarge" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Size" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Stock" })).toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "Color" })).toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "Price" })).toBeInTheDocument();
     expect(
