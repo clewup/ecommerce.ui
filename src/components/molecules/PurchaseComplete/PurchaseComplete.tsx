@@ -4,6 +4,7 @@ import { IOrder } from "../../../interfaces/IOrder";
 import OrderProduct from "../OrderProduct/OrderProduct";
 import Loader from "../../atoms/Loader/Loader";
 import Text from "../../atoms/Text/Text";
+import Order from "../Order/Order";
 
 interface IProps {
   order: IOrder | undefined;
@@ -18,17 +19,7 @@ const PurchaseComplete: React.FC<IProps> = ({ order, isLoading }) => {
       ) : (
         <>
           <Subheading align={"center"}>Your order is complete!</Subheading>
-          <Text className={"order-details"}>{String(order.id)}</Text>
-          <div className={"order-cart-items"}>
-            {order?.products.map((orderProduct) => {
-              return (
-                <div key={String(orderProduct.id)}>
-                  <OrderProduct orderProduct={orderProduct} />
-                </div>
-              );
-            })}
-            <Text className={"order-total"}>£{order?.total}</Text>
-          </div>
+          <Order order={order} />
         </>
       )}
     </div>

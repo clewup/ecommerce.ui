@@ -22,7 +22,7 @@ import useShipping from "../../../hooks/useShipping";
 
 const AllOrders = () => {
   const { orders, isLoading, error, getAllOrders } = useOrder();
-  const { trackedOrder, isShipped, trackOrder, shipOrder } = useShipping();
+  const { trackingInformation, trackOrder, shipOrder } = useShipping();
 
   const [openModal, setOpenModal] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<IOrder>();
@@ -42,7 +42,10 @@ const AllOrders = () => {
     setSelectedOrder(order);
     setOpenModal(true);
   };
-  const handleClose = () => setOpenModal(false);
+  const handleClose = () => {
+    setSelectedOrder(undefined);
+    setOpenModal(false);
+  };
 
   if (error) return <AppError error={error} />;
 
@@ -123,18 +126,33 @@ const AllOrders = () => {
               );
             })}
           </div>
-          {(!selectedOrder?.trackingNumber || !trackedOrder) && !isShipped ? (
+          {!selectedOrder?.trackingNumber || !trackingInformation ? (
             <Button
               size={"large"}
               type={"button"}
               variant={"contained"}
-              color={"success"}
+              color={"_black"}
               onClick={() => shipOrder(selectedOrder!)}
             >
               Ship Order
             </Button>
           ) : (
-            <Text>Estimated Arrival: {trackedOrder?.arrivalDate}</Text>
+            <div className={"tracking-information"}>
+              <Text>
+                Shipped:{" "}
+                {trackingInformation &&
+                  new Date(
+                    trackingInformation.shippedDate
+                  ).toLocaleDateString()}
+              </Text>
+              <Text>
+                Estimated Arrival:{" "}
+                {trackingInformation &&
+                  new Date(
+                    trackingInformation.arrivalDate
+                  ).toLocaleDateString()}
+              </Text>
+            </div>
           )}
         </Box>
       </Modal>

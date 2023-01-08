@@ -31,4 +31,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+
+  .tracking-information {
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -8,9 +8,7 @@ import postShipOrder from "../api/PostShipOrder";
 import putExtendOrderArrival from "../api/PutExtendOrderArrival";
 
 interface IUseShipping {
-  trackedOrder: IPackage | undefined;
-  isShipped: boolean;
-  isExtended: boolean;
+  trackingInformation: IPackage | undefined;
   isLoading: boolean;
   error: AxiosError | null;
   trackOrder: (trackingNumber: Guid) => void;
@@ -19,16 +17,14 @@ interface IUseShipping {
 }
 
 const useShipping = (): IUseShipping => {
-  const [trackedOrder, setTrackedOrder] = useState<IPackage>();
-  const [isShipped, setShipped] = useState(false);
-  const [isExtended, setExtended] = useState(false);
+  const [trackingInformation, setTrackingInformation] = useState<IPackage>();
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
   const trackOrder = (trackingNumber: Guid) => {
     setLoading(true);
     getTrackOrder(trackingNumber)
-      .then((res) => setTrackedOrder(res.data))
+      .then((res) => setTrackingInformation(res.data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   };
@@ -36,9 +32,7 @@ const useShipping = (): IUseShipping => {
   const shipOrder = (order: IOrder) => {
     setLoading(true);
     postShipOrder(order)
-      .then((res) => {
-        res.status === 200 && setShipped(true);
-      })
+      .then((res) => setTrackingInformation(res.data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   };
@@ -46,17 +40,13 @@ const useShipping = (): IUseShipping => {
   const extendArrival = (trackingNumber: Guid, days: number) => {
     setLoading(true);
     putExtendOrderArrival(trackingNumber, days)
-      .then((res) => {
-        res.status === 200 && setExtended(true);
-      })
+      .then((res) => setTrackingInformation(res.data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   };
 
   return {
-    trackedOrder,
-    isShipped,
-    isExtended,
+    trackingInformation,
     isLoading,
     error,
     trackOrder,

@@ -5,5 +5,4 @@ export interface IPackage {
   trackingNumber: Guid;
   shippedDate: Date;
   arrivalDate: Date;
-  order: IOrder;
 }
