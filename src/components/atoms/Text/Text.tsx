@@ -15,6 +15,7 @@ interface IProps {
   align?: CSS.Property.TextAlign;
   padding?: string;
   margin?: string;
+  bold?: boolean;
 }
 
 const Text: React.FC<IProps> = React.forwardRef(
@@ -30,6 +31,7 @@ const Text: React.FC<IProps> = React.forwardRef(
       align,
       padding,
       margin,
+      bold,
     },
     ref
   ) => (
@@ -45,6 +47,7 @@ const Text: React.FC<IProps> = React.forwardRef(
         textAlign: align,
         padding: padding,
         margin: margin,
+        fontWeight: bold ? "bold" : 100,
       }}
     >
       {children}

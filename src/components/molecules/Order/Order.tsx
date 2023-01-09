@@ -3,26 +3,27 @@ import Text from "../../atoms/Text/Text";
 import OrderProduct from "../OrderProduct/OrderProduct";
 import { IOrder } from "../../../interfaces/IOrder";
 import React, { useState } from "react";
-import { Box, Button, Modal } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import useShipping from "../../../hooks/useShipping";
 import Loader from "../../atoms/Loader/Loader";
+import Modal from "../../atoms/Modal/Modal";
 
 interface IProps {
   order: IOrder;
 }
 
 const Order: React.FC<IProps> = ({ order }) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const { trackingInformation, trackOrder } = useShipping();
 
   const handleOpen = () => {
-    setOpenModal(true);
+    setModalOpen(true);
 
     if (order.trackingNumber) {
       trackOrder(order.trackingNumber);
     }
   };
-  const handleClose = () => setOpenModal(false);
+  const handleClose = () => setModalOpen(false);
 
   return (
     <div id={`order`}>
@@ -51,13 +52,8 @@ const Order: React.FC<IProps> = ({ order }) => {
         TRACK
       </Button>
 
-      <Modal
-        open={openModal}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className={"order-tracking-modal"}>
+      <Modal isOpen={isModalOpen} onClose={handleClose}>
+        <>
           <div>
             <Text className={"order-id"}>ID: {order.id}</Text>
             <Text>
@@ -99,7 +95,7 @@ const Order: React.FC<IProps> = ({ order }) => {
               </>
             )}
           </div>
-        </Box>
+        </>
       </Modal>
     </div>
   );

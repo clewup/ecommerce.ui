@@ -8,6 +8,7 @@ import AppError from "../../molecules/AppError/AppError";
 import { AuthContext } from "../../../contexts/Auth";
 import { roles } from "../../../enums/roles";
 import { useNavigate } from "react-router-dom";
+import PromotionBuilder from "../../organisms/PromotionBuilder/PromotionBuilder";
 
 const Admin = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -36,9 +37,11 @@ const Admin = () => {
       <Tabs value={tabIndex} onChange={handleTabChange} centered>
         <Tab label="Orders" />
         <Tab label="Add Product" />
+        <Tab label="Promotion Builder" />
       </Tabs>
       {tabIndex === 0 && <AllOrders />}
       {tabIndex === 1 && <ProductForm />}
+      {tabIndex === 2 && <PromotionBuilder />}
     </Wrapper>
   );
 };

@@ -12,19 +12,19 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Modal,
   Box,
   Button,
 } from "@mui/material";
 import OrderProduct from "../../molecules/OrderProduct/OrderProduct";
 import { IOrder } from "../../../interfaces/IOrder";
 import useShipping from "../../../hooks/useShipping";
+import Modal from "../../atoms/Modal/Modal";
 
 const AllOrders = () => {
   const { orders, isLoading, error, getAllOrders } = useOrder();
   const { trackingInformation, trackOrder, shipOrder } = useShipping();
 
-  const [openModal, setOpenModal] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<IOrder>();
 
   useEffect(() => {
@@ -41,11 +41,11 @@ const AllOrders = () => {
 
   const handleOpen = (order: IOrder) => {
     setSelectedOrder(order);
-    setOpenModal(true);
+    setModalOpen(true);
   };
   const handleClose = () => {
     setSelectedOrder(undefined);
-    setOpenModal(false);
+    setModalOpen(false);
   };
 
   if (error) return <AppError error={error} />;
@@ -94,13 +94,8 @@ const AllOrders = () => {
         </TableContainer>
       )}
 
-      <Modal
-        open={openModal}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className={"order-details-modal"}>
+      <Modal isOpen={isModalOpen} onClose={handleClose}>
+        <>
           <div>
             <Text className={"order-id"}>ID: {selectedOrder?.id}</Text>
             <Text>User ID: {selectedOrder?.userId}</Text>
@@ -155,7 +150,7 @@ const AllOrders = () => {
               </Text>
             </div>
           )}
-        </Box>
+        </>
       </Modal>
     </div>
   );

@@ -1,0 +1,14 @@
+#promotion-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .promotion-date-range {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .promotion-actions {
+    padding: 3rem 0 1rem 0;
+  }
+}

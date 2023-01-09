@@ -38,14 +38,6 @@ const UserForm: React.FC<IProps> = ({ user, updateUser }) => {
         return (
           <Form>
             <div id={"user-form"}>
-              <div className={"user-avatar"}>
-                <img
-                  src={
-                    "https://durantarms.co.uk/wp-content/plugins/divi-pixel/includes/modules/Testimonial/avatar.png"
-                  }
-                  alt={String(user.id)}
-                />
-              </div>
               <div className={"contact-info"}>
                 <Field
                   name={"firstName"}
