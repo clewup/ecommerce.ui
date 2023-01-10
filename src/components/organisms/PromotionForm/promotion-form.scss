@@ -6,9 +6,12 @@
   .promotion-date-range {
     display: flex;
     gap: 2rem;
+    padding: 2rem 0;
   }
 
+  .date-range-text {
+    padding: 2rem 0;
+  }
   .promotion-actions {
-    padding: 3rem 0 1rem 0;
   }
 }

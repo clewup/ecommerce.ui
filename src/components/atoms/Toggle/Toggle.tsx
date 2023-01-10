@@ -17,7 +17,7 @@ const Toggle: React.FC<IProps> = ({
   form,
   label,
   disabled = false,
-  isChecked = false,
+  isChecked,
   onChange,
   onClick,
 }) => {
@@ -26,8 +26,7 @@ const Toggle: React.FC<IProps> = ({
       {...field}
       error={form?.touched[field.name] && form?.errors[field.name]}
       disabled={disabled}
-      defaultChecked={isChecked}
-      control={<Switch />}
+      control={<Switch defaultChecked={isChecked} />}
       label={label}
       onChange={onChange}
       onClick={onClick}

@@ -1,24 +1,34 @@
 import { Field, Form, Formik, FormikProps } from "formik";
-import { promotionInitialValues } from "./utils/schema";
+import {
+  promotionInitialValues,
+  promotionValidationSchema,
+} from "./utils/schema";
 import usePromotion from "../../../hooks/usePromotion";
 import Input from "../../atoms/Input/Input";
-import React, { SyntheticEvent, useRef, useState } from "react";
-import { Button, TextField } from "@mui/material";
+import React, { useEffect, useRef } from "react";
+import { Button } from "@mui/material";
 import "./promotion-form.scss";
 import TextArea from "../../atoms/TextArea/TextArea";
 import Subheading from "../../atoms/Subheading/Subheading";
 import AppError from "../../molecules/AppError/AppError";
-import moment, { Moment } from "moment";
-import { DesktopDatePicker } from "@mui/x-date-pickers";
+import { Moment } from "moment";
 import DatePicker from "../../atoms/DatePicker/DatePicker";
 import Toggle from "../../atoms/Toggle/Toggle";
 import { IPromotion } from "../../../interfaces/IPromotion";
+import { formatDateRangeText } from "./utils/formatters";
+import Text from "../../atoms/Text/Text";
+import Select from "../../atoms/Select/Select";
+import useDiscount from "../../../hooks/useDiscount";
+import { textSize } from "../../../enums/typography";
 
 const PromotionForm = () => {
   const formRef = useRef<FormikProps<IPromotion> | null>(null);
   const { promotion, isLoading, error, createPromotion } = usePromotion();
+  const { discounts, getDiscounts } = useDiscount();
 
-  if (error) return <AppError error={error} />;
+  useEffect(() => {
+    getDiscounts();
+  }, []);
 
   const handleDateChange = (field: string, value: Date | null) => {
     formRef.current?.setFieldValue(field, value);
@@ -33,9 +43,12 @@ const PromotionForm = () => {
     }
   };
 
+  if (error) return <AppError error={error} />;
+
   return (
     <Formik
       initialValues={promotionInitialValues}
+      validationSchema={promotionValidationSchema}
       onSubmit={(values) => createPromotion(values)}
       innerRef={formRef}
     >
@@ -69,16 +82,17 @@ const PromotionForm = () => {
                   handleDateChange("startDate", value.toDate())
                 }
                 value={formik.values.startDate}
-                disabled={formik.values.startDate === null}
+                disabled={!formik.values.startDate}
               />
 
               <Field
                 name={"startDate"}
-                component={Toggle}
                 label={"Any"}
+                isChecked={!formik.values.startDate}
                 onClick={(e: any) =>
                   handleToggle("startDate", e.target.checked)
                 }
+                component={Toggle}
               />
 
               <Field
@@ -89,16 +103,31 @@ const PromotionForm = () => {
                   handleDateChange("endDate", value.toDate())
                 }
                 value={formik.values.endDate}
-                disabled={formik.values.endDate === null}
+                disabled={!formik.values.endDate}
               />
 
               <Field
                 name={"startDate"}
-                component={Toggle}
                 label={"Any"}
+                isChecked={!formik.values.endDate}
                 onClick={(e: any) => handleToggle("endDate", e.target.checked)}
+                component={Toggle}
               />
             </div>
+
+            <Field
+              name={"discountId"}
+              label={"Discount"}
+              options={discounts}
+              component={Select}
+            />
+
+            <Text className={"date-range-text"} size={textSize.LARGE} bold>
+              {formatDateRangeText(
+                formik.values.startDate,
+                formik.values.endDate
+              )}
+            </Text>
 
             <div className={"promotion-actions"}>
               <Button
