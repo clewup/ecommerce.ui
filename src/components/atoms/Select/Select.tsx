@@ -37,47 +37,45 @@ const Select: React.FC<IProps> = ({
   selectText = "Select",
 }) => {
   return (
-    <>
-      <Tooltip
-        placement="right"
-        title={
-          form?.touched[field.name] &&
-          form?.errors[field.name] &&
-          String(form?.errors[field.name])
-        }
-      >
-        <>
-          <InputLabel>{label}</InputLabel>
-          <SelectInput
-            {...field}
-            disabled={disabled}
-            value={value ?? value}
-            onChange={onChange ?? onChange}
-            error={form?.touched[field.name] && form?.errors[field.name]}
-            sx={{
-              marginTop: 1,
-              marginBottom: 1,
-              backgroundColor: colors.WHITE,
-              textAlign: "center",
-              width: width ?? "100%",
-            }}
-          >
-            <MenuItem value={"select"}>{selectText}</MenuItem>
-            {options?.map((option: ISelectOption) => {
-              return (
-                <MenuItem
-                  key={option.value}
-                  value={option.value}
-                  data-testid="select-option"
-                >
-                  {option.label}
-                </MenuItem>
-              );
-            })}
-          </SelectInput>
-        </>
-      </Tooltip>
-    </>
+    <Tooltip
+      placement="right"
+      title={
+        form?.touched[field.name] &&
+        form?.errors[field.name] &&
+        String(form?.errors[field.name])
+      }
+    >
+      <>
+        <InputLabel>{label}</InputLabel>
+        <SelectInput
+          {...field}
+          disabled={disabled}
+          value={value ?? value}
+          onChange={onChange ?? onChange}
+          error={form?.touched[field.name] && form?.errors[field.name]}
+          sx={{
+            marginTop: 1,
+            marginBottom: 1,
+            backgroundColor: colors.WHITE,
+            textAlign: "center",
+            width: width ?? "100%",
+          }}
+        >
+          <MenuItem value={"select"}>{selectText}</MenuItem>
+          {options?.map((option: ISelectOption) => {
+            return (
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                data-testid="select-option"
+              >
+                {option.label}
+              </MenuItem>
+            );
+          })}
+        </SelectInput>
+      </>
+    </Tooltip>
   );
 };
 export default Select;

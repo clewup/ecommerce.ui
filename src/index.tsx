@@ -10,6 +10,8 @@ import { AuthProvider } from "./contexts/Auth";
 import { CartProvider } from "./contexts/Cart";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./styles/theme";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -21,7 +23,9 @@ root.render(
         <ProductProvider>
           <CartProvider>
             <ThemeProvider theme={theme}>
-              <App />
+              <LocalizationProvider dateAdapter={AdapterMoment}>
+                <App />
+              </LocalizationProvider>
             </ThemeProvider>
           </CartProvider>
         </ProductProvider>
