@@ -1,3 +1,6 @@
+import { IDiscount } from "../../../../interfaces/IDiscount";
+import { ISelectOption } from "../../../atoms/Select/Select";
+
 export const formatDateRangeText = (
   startDate?: Date | null,
   endDate?: Date | null
@@ -14,4 +17,19 @@ export const formatDateRangeText = (
   if (!startDate && !endDate) {
     return `Always active`;
   }
+};
+
+export const formatDiscountSelectOptions = (
+  discounts: IDiscount[] | undefined
+) => {
+  let formattedOptions: ISelectOption[] = [];
+
+  discounts?.forEach((discount) => {
+    formattedOptions.push({
+      label: discount.name,
+      value: discount.id,
+    });
+  });
+
+  return formattedOptions;
 };

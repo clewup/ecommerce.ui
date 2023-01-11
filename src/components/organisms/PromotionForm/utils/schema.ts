@@ -6,15 +6,12 @@ export const promotionInitialValues: IPromotion = {
   id: createGuid(),
   name: "",
   description: "",
-  startDate: undefined,
-  endDate: undefined,
-  discount: undefined,
+  startDate: null,
+  endDate: null,
+  discountId: undefined,
 };
 
 export const promotionValidationSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   description: Yup.string().required("Required"),
-  startDate: Yup.date().notRequired(),
-  endDate: Yup.date().notRequired(),
-  discountId: Yup.string().required("Required"),
 });

@@ -1,0 +1,19 @@
+@import '/src/styles/borders';
+
+#discount-manager {
+  display: flex;
+  gap: 2rem;
+
+  .all-discounts {
+    width: 200px;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .discount-tile {
+      border:$border-light;
+      padding: 0.5rem 0;
+    }
+  }
+}

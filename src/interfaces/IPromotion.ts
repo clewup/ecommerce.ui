@@ -5,7 +5,8 @@ export interface IPromotion {
   id: Guid;
   name: string;
   description: string;
-  startDate?: Date | null;
-  endDate?: Date | null;
+  startDate: string | null;
+  endDate: string | null;
+  discountId?: Guid;
   discount?: IDiscount;
 }

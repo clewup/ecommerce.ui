@@ -6,31 +6,31 @@ import Loader from "../../atoms/Loader/Loader";
 import PromotionTile from "../../molecules/PromotionTile/PromotionTile";
 import Text from "../../atoms/Text/Text";
 import PromotionForm from "../PromotionForm/PromotionForm";
-import { IOrder } from "../../../interfaces/IOrder";
 import Modal from "../../atoms/Modal/Modal";
 import { mockedPromotions } from "./data/mockData";
 import AppError from "../../molecules/AppError/AppError";
 import { textSize } from "../../../enums/typography";
+import DiscountManager from "../DiscountManager/DiscountManager";
+import { IPromotion } from "../../../interfaces/IPromotion";
 
 const PromotionBuilder = () => {
   const {
-    //activePromotions,
-    //promotions,
+    activePromotions,
+    promotions,
     isLoading,
     error,
     getActivePromotions,
     getPromotions,
   } = usePromotion();
 
-  const activePromotions = mockedPromotions;
-  const promotions = mockedPromotions;
-
   useEffect(() => {
     getActivePromotions();
     getPromotions();
   }, []);
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isPromotionModalOpen, setPromotionModalOpen] = useState(false);
+  const [isDiscountModalOpen, setDiscountModalOpen] = useState(false);
+  const [selectedPromotion, setSelectedPromotion] = useState<IPromotion>();
 
   if (error) return <AppError error={error} />;
 
@@ -42,13 +42,24 @@ const PromotionBuilder = () => {
           type={"button"}
           variant={"contained"}
           color={"info"}
-          onClick={() => setModalOpen(true)}
+          onClick={() => setDiscountModalOpen(true)}
+        >
+          Manage Discounts
+        </Button>
+        <Button
+          size={"large"}
+          type={"button"}
+          variant={"contained"}
+          color={"info"}
+          onClick={() => setPromotionModalOpen(true)}
         >
           Add Promotion
         </Button>
       </div>
       {isLoading ? (
-        <Loader />
+        <div className={"promotions-loader"}>
+          <Loader />
+        </div>
       ) : (
         <>
           <div className={"active-promotions"}>
@@ -58,7 +69,11 @@ const PromotionBuilder = () => {
             {activePromotions?.map((promotion) => {
               return (
                 <div key={String(promotion.id)}>
-                  <PromotionTile promotion={promotion} />
+                  <PromotionTile
+                    promotion={promotion}
+                    setPromotionModalOpen={setPromotionModalOpen}
+                    setSelectedPromotion={setSelectedPromotion}
+                  />
                 </div>
               );
             })}
@@ -71,14 +86,28 @@ const PromotionBuilder = () => {
             {promotions?.map((promotion) => {
               return (
                 <div key={String(promotion.id)}>
-                  <PromotionTile promotion={promotion} />
+                  <PromotionTile
+                    promotion={promotion}
+                    setPromotionModalOpen={setPromotionModalOpen}
+                    setSelectedPromotion={setSelectedPromotion}
+                  />
                 </div>
               );
             })}
           </div>
 
-          <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-            <PromotionForm />
+          <Modal
+            isOpen={isDiscountModalOpen}
+            onClose={() => setDiscountModalOpen(false)}
+          >
+            <DiscountManager />
+          </Modal>
+
+          <Modal
+            isOpen={isPromotionModalOpen}
+            onClose={() => setPromotionModalOpen(false)}
+          >
+            <PromotionForm selectedPromotion={selectedPromotion} />
           </Modal>
         </>
       )}

@@ -7,9 +7,10 @@ import {
 } from "@mui/material";
 import React from "react";
 import { colors } from "../../../styles/colors";
+import { Guid } from "guid-typescript";
 
 export interface ISelectOption {
-  value: string;
+  value: string | Guid;
   label: string;
 }
 
@@ -65,8 +66,8 @@ const Select: React.FC<IProps> = ({
           {options?.map((option: ISelectOption) => {
             return (
               <MenuItem
-                key={option.value}
-                value={option.value}
+                key={option.value as string}
+                value={option.value as string}
                 data-testid="select-option"
               >
                 {option.label}

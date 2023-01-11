@@ -1,0 +1,9 @@
+#discount-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .discount-actions {
+    padding: 1rem 0;
+  }
+}

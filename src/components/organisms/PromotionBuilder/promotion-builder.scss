@@ -4,9 +4,16 @@
   width: 50vw;
   padding-bottom: 5rem;
 
+  .promotions-loader {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 0;
+  }
+
   .promotion-builder-header {
     display: flex;
     justify-content: flex-end;
+    gap: 1rem;
   }
 
   .active-promotions {

@@ -15,13 +15,20 @@ import { Moment } from "moment";
 import DatePicker from "../../atoms/DatePicker/DatePicker";
 import Toggle from "../../atoms/Toggle/Toggle";
 import { IPromotion } from "../../../interfaces/IPromotion";
-import { formatDateRangeText } from "./utils/formatters";
+import {
+  formatDateRangeText,
+  formatDiscountSelectOptions,
+} from "./utils/formatters";
 import Text from "../../atoms/Text/Text";
 import Select from "../../atoms/Select/Select";
 import useDiscount from "../../../hooks/useDiscount";
 import { textSize } from "../../../enums/typography";
 
-const PromotionForm = () => {
+interface IProps {
+  selectedPromotion?: IPromotion;
+}
+
+const PromotionForm: React.FC<IProps> = ({ selectedPromotion }) => {
   const formRef = useRef<FormikProps<IPromotion> | null>(null);
   const { promotion, isLoading, error, createPromotion } = usePromotion();
   const { discounts, getDiscounts } = useDiscount();
@@ -31,7 +38,16 @@ const PromotionForm = () => {
   }, []);
 
   const handleDateChange = (field: string, value: Date | null) => {
-    formRef.current?.setFieldValue(field, value);
+    let formattedDate = value;
+
+    if (field === "startDate" && value) {
+      formattedDate = new Date(value?.setHours(0, 0, 0, 0));
+    }
+    if (field === "endDate" && value) {
+      formattedDate = new Date(value?.setHours(23, 59, 59, 999));
+    }
+
+    formRef.current?.setFieldValue(field, formattedDate);
   };
 
   const handleToggle = (field: string, isChecked: boolean) => {
@@ -47,7 +63,7 @@ const PromotionForm = () => {
 
   return (
     <Formik
-      initialValues={promotionInitialValues}
+      initialValues={selectedPromotion ?? promotionInitialValues}
       validationSchema={promotionValidationSchema}
       onSubmit={(values) => createPromotion(values)}
       innerRef={formRef}
@@ -118,14 +134,17 @@ const PromotionForm = () => {
             <Field
               name={"discountId"}
               label={"Discount"}
-              options={discounts}
+              options={formatDiscountSelectOptions(discounts)}
               component={Select}
+              onChange={formik.handleChange}
             />
 
             <Text className={"date-range-text"} size={textSize.LARGE} bold>
               {formatDateRangeText(
-                formik.values.startDate,
-                formik.values.endDate
+                formik.values.startDate
+                  ? new Date(formik.values.startDate)
+                  : null,
+                formik.values.endDate ? new Date(formik.values.endDate) : null
               )}
             </Text>
 
@@ -137,7 +156,7 @@ const PromotionForm = () => {
                 color={"success"}
                 disabled={!formik.isValid || !formik.dirty}
               >
-                Add Promotion
+                Save
               </Button>
             </div>
           </Form>
