@@ -23,6 +23,7 @@ import Text from "../../atoms/Text/Text";
 import Select from "../../atoms/Select/Select";
 import useDiscount from "../../../hooks/useDiscount";
 import { textSize } from "../../../enums/typography";
+import Loader from "../../atoms/Loader/Loader";
 
 interface IProps {
   selectedPromotion?: IPromotion;
@@ -30,7 +31,7 @@ interface IProps {
 
 const PromotionForm: React.FC<IProps> = ({ selectedPromotion }) => {
   const formRef = useRef<FormikProps<IPromotion> | null>(null);
-  const { promotion, isLoading, error, createPromotion } = usePromotion();
+  const { isLoading, error, createPromotion, updatePromotion } = usePromotion();
   const { discounts, getDiscounts } = useDiscount();
 
   useEffect(() => {
@@ -65,100 +66,113 @@ const PromotionForm: React.FC<IProps> = ({ selectedPromotion }) => {
     <Formik
       initialValues={selectedPromotion ?? promotionInitialValues}
       validationSchema={promotionValidationSchema}
-      onSubmit={(values) => createPromotion(values)}
+      onSubmit={(values) =>
+        selectedPromotion ? updatePromotion(values) : createPromotion(values)
+      }
       innerRef={formRef}
     >
       {(formik) => {
-        console.log(formik.values);
         return (
           <Form id={"promotion-form"}>
-            <Subheading>Add/Edit Promotion</Subheading>
-            <Field
-              name={"name"}
-              component={Input}
-              label={"Name"}
-              onChange={formik.handleChange}
-              value={formik.values.name}
-            />
+            {isLoading ? (
+              <div className={"promotion-form-loader"}>
+                <Loader />
+              </div>
+            ) : (
+              <>
+                <Subheading>Add/Edit Promotion</Subheading>
+                <Field
+                  name={"name"}
+                  component={Input}
+                  label={"Name"}
+                  onChange={formik.handleChange}
+                  value={formik.values.name}
+                />
 
-            <Field
-              name={"description"}
-              component={TextArea}
-              label={"Description"}
-              onChange={formik.handleChange}
-              value={formik.values.description}
-            />
+                <Field
+                  name={"description"}
+                  component={TextArea}
+                  label={"Description"}
+                  onChange={formik.handleChange}
+                  value={formik.values.description}
+                />
 
-            <div className={"promotion-date-range"}>
-              <Field
-                name={"startDate"}
-                component={DatePicker}
-                label={"Start Date"}
-                onChange={(value: Moment) =>
-                  handleDateChange("startDate", value.toDate())
-                }
-                value={formik.values.startDate}
-                disabled={!formik.values.startDate}
-              />
+                <div className={"promotion-date-range"}>
+                  <Field
+                    name={"startDate"}
+                    component={DatePicker}
+                    label={"Start Date"}
+                    onChange={(value: Moment) =>
+                      handleDateChange("startDate", value.toDate())
+                    }
+                    value={formik.values.startDate}
+                    disabled={!formik.values.startDate}
+                  />
 
-              <Field
-                name={"startDate"}
-                label={"Any"}
-                isChecked={!formik.values.startDate}
-                onClick={(e: any) =>
-                  handleToggle("startDate", e.target.checked)
-                }
-                component={Toggle}
-              />
+                  <Field
+                    name={"startDate"}
+                    label={"Any"}
+                    isChecked={!formik.values.startDate}
+                    onClick={(e: any) =>
+                      handleToggle("startDate", e.target.checked)
+                    }
+                    component={Toggle}
+                  />
 
-              <Field
-                name={"endDate"}
-                component={DatePicker}
-                label={"End Date"}
-                onChange={(value: Moment) =>
-                  handleDateChange("endDate", value.toDate())
-                }
-                value={formik.values.endDate}
-                disabled={!formik.values.endDate}
-              />
+                  <Field
+                    name={"endDate"}
+                    component={DatePicker}
+                    label={"End Date"}
+                    onChange={(value: Moment) =>
+                      handleDateChange("endDate", value.toDate())
+                    }
+                    value={formik.values.endDate}
+                    disabled={!formik.values.endDate}
+                  />
 
-              <Field
-                name={"startDate"}
-                label={"Any"}
-                isChecked={!formik.values.endDate}
-                onClick={(e: any) => handleToggle("endDate", e.target.checked)}
-                component={Toggle}
-              />
-            </div>
+                  <Field
+                    name={"startDate"}
+                    label={"Any"}
+                    isChecked={!formik.values.endDate}
+                    onClick={(e: any) =>
+                      handleToggle("endDate", e.target.checked)
+                    }
+                    component={Toggle}
+                  />
+                </div>
 
-            <Field
-              name={"discountId"}
-              label={"Discount"}
-              options={formatDiscountSelectOptions(discounts)}
-              component={Select}
-              onChange={formik.handleChange}
-            />
+                <Field
+                  name={"discountId"}
+                  label={"Discount"}
+                  options={formatDiscountSelectOptions(discounts)}
+                  component={Select}
+                  onChange={formik.handleChange}
+                />
 
-            <Text className={"date-range-text"} size={textSize.LARGE} bold>
-              {formatDateRangeText(
-                formik.values.startDate
-                  ? new Date(formik.values.startDate)
-                  : null,
-                formik.values.endDate ? new Date(formik.values.endDate) : null
-              )}
-            </Text>
+                <Text className={"date-range-text"} size={textSize.LARGE} bold>
+                  {formatDateRangeText(
+                    formik.values.startDate
+                      ? new Date(formik.values.startDate)
+                      : null,
+                    formik.values.endDate
+                      ? new Date(formik.values.endDate)
+                      : null
+                  )}
+                </Text>
 
-            <div className={"promotion-actions"}>
-              <Button
-                size={"large"}
-                type={"submit"}
-                variant={"contained"}
-                color={"success"}
-                disabled={!formik.isValid || !formik.dirty}
-              >
-                Save
-              </Button>
-            </div>
+                <div className={"promotion-actions"}>
+                  <Button
+                    size={"large"}
+                    type={"submit"}
+                    variant={"contained"}
+                    color={"success"}
+                    disabled={!formik.isValid || !formik.dirty}
+                  >
+                    Save
+                  </Button>
+                </div>
+              </>
+            )}
           </Form>
         );
       }}

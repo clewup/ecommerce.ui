@@ -49,7 +49,7 @@ const LoginForm: React.FC<IProps> = ({ isLoading, error, loginUser }) => {
               <div className={"login-action-buttons"}>
                 <Button
                   type={"button"}
-                  color={"_black"}
+                  color={"success"}
                   onClick={() => navigate("/register")}
                 >
                   Register

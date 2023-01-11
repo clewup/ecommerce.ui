@@ -3,6 +3,10 @@
   flex-direction: column;
   gap: 1rem;
 
+  .promotion-form-loader {
+    justify-content: center;
+  }
+
   .promotion-date-range {
     display: flex;
     gap: 2rem;

@@ -12,6 +12,8 @@ import AppError from "../../molecules/AppError/AppError";
 import { textSize } from "../../../enums/typography";
 import DiscountManager from "../DiscountManager/DiscountManager";
 import { IPromotion } from "../../../interfaces/IPromotion";
+import Input from "../../atoms/Input/Input";
+import { filterPromotions } from "./utils/formatters";
 
 const PromotionBuilder = () => {
   const {
@@ -21,6 +23,7 @@ const PromotionBuilder = () => {
     error,
     getActivePromotions,
     getPromotions,
+    deletePromotion,
   } = usePromotion();
 
   useEffect(() => {
@@ -31,30 +34,48 @@ const PromotionBuilder = () => {
   const [isPromotionModalOpen, setPromotionModalOpen] = useState(false);
   const [isDiscountModalOpen, setDiscountModalOpen] = useState(false);
   const [selectedPromotion, setSelectedPromotion] = useState<IPromotion>();
+  const [filteredPromotions, setFilteredPromotions] = useState(promotions);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    if (promotions && searchQuery !== "") {
+      const searchResults = filterPromotions(promotions, searchQuery);
+      setFilteredPromotions(searchResults);
+    } else {
+      setFilteredPromotions(promotions);
+    }
+  }, [searchQuery, promotions]);
 
   if (error) return <AppError error={error} />;
 
   return (
     <div id={"promotion-builder"}>
       <div className={"promotion-builder-header"}>
-        <Button
-          size={"large"}
-          type={"button"}
-          variant={"contained"}
-          color={"info"}
-          onClick={() => setDiscountModalOpen(true)}
-        >
-          Manage Discounts
-        </Button>
-        <Button
-          size={"large"}
-          type={"button"}
-          variant={"contained"}
-          color={"info"}
-          onClick={() => setPromotionModalOpen(true)}
-        >
-          Add Promotion
-        </Button>
+        <Input
+          placeholder={"Search Promotions"}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <div className={"promotion-builder-header-actions"}>
+          <Button
+            size={"large"}
+            type={"button"}
+            variant={"contained"}
+            color={"info"}
+            onClick={() => setDiscountModalOpen(true)}
+          >
+            Manage Discounts
+          </Button>
+          <Button
+            size={"large"}
+            type={"button"}
+            variant={"contained"}
+            color={"info"}
+            onClick={() => setPromotionModalOpen(true)}
+          >
+            Add Promotion
+          </Button>
+        </div>
       </div>
       {isLoading ? (
         <div className={"promotions-loader"}>
@@ -73,6 +94,7 @@ const PromotionBuilder = () => {
                     promotion={promotion}
                     setPromotionModalOpen={setPromotionModalOpen}
                     setSelectedPromotion={setSelectedPromotion}
+                    deletePromotion={deletePromotion}
                   />
                 </div>
               );
@@ -83,13 +105,14 @@ const PromotionBuilder = () => {
             <Text size={textSize.XLARGE} bold>
               All Promotions
             </Text>
-            {promotions?.map((promotion) => {
+            {filteredPromotions?.map((promotion) => {
               return (
                 <div key={String(promotion.id)}>
                   <PromotionTile
                     promotion={promotion}
                     setPromotionModalOpen={setPromotionModalOpen}
                     setSelectedPromotion={setSelectedPromotion}
+                    deletePromotion={deletePromotion}
                   />
                 </div>
               );

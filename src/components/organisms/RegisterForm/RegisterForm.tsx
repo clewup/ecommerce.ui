@@ -82,7 +82,7 @@ const RegisterForm: React.FC<IProps> = ({ isLoading, error, registerUser }) => {
                 </LoadingButton>
                 <Button
                   type={"submit"}
-                  color={"_black"}
+                  color={"success"}
                   onClick={() => navigate("/login")}
                 >
                   Login

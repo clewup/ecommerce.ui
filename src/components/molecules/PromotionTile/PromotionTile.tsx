@@ -4,11 +4,14 @@ import Text from "../../atoms/Text/Text";
 import "./promotion-tile.scss";
 import { Button } from "@mui/material";
 import { formatDateRangeText } from "../../organisms/PromotionForm/utils/formatters";
+import { Guid } from "guid-typescript";
+import deletePromotion from "../../../api/DeletePromotion";
 
 interface IProps {
   promotion: IPromotion;
   setPromotionModalOpen: React.Dispatch<SetStateAction<boolean>>;
   setSelectedPromotion: React.Dispatch<SetStateAction<IPromotion | undefined>>;
+  deletePromotion: (id: Guid) => void;
 }
 
 const PromotionTile: React.FC<IProps> = ({
@@ -42,7 +45,13 @@ const PromotionTile: React.FC<IProps> = ({
         >
           Edit
         </Button>
-        <Button size={"large"} type={"button"} variant={"text"} color={"error"}>
+        <Button
+          size={"large"}
+          type={"button"}
+          variant={"text"}
+          color={"error"}
+          onClick={() => deletePromotion(promotion.id)}
+        >
           Delete
         </Button>
       </div>

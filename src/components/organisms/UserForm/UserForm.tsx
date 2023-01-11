@@ -140,7 +140,7 @@ const UserForm: React.FC<IProps> = ({ user, updateUser }) => {
               <div className={"user-footer"}>
                 <Button
                   variant={"contained"}
-                  color={"_black"}
+                  color={"info"}
                   size={"large"}
                   onClick={() => {
                     if (isEditing) {

@@ -45,7 +45,7 @@ const Order: React.FC<IProps> = ({ order }) => {
         size={"large"}
         type={"button"}
         variant={"contained"}
-        color={"_black"}
+        color={"success"}
         onClick={handleOpen}
         disabled={!order.trackingNumber}
       >
